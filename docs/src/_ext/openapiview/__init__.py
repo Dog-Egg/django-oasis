@@ -34,9 +34,9 @@ class OpenAPIView(Directive):
                     **extra_config,
                 },
                 insert_head="""
-                <script src="/_static/iframeResizer.contentWindow.min.js"></script>
-                <script src="/_static/swagger-ui-bundle.js"></script>
-                <link rel="stylesheet" href="/_static/swagger-ui.css" />
+                <script src="./_static/iframeResizer.contentWindow.min.js"></script>
+                <script src="./_static/swagger-ui-bundle.js"></script>
+                <link rel="stylesheet" href="./_static/swagger-ui.css" />
                 """,
                 env="sphinx",
             )
@@ -44,7 +44,7 @@ class OpenAPIView(Directive):
             iframe_id = "id_" + uuid.uuid4().hex[:8]
             iframe = f"""
             <iframe id="{iframe_id}" srcdoc="{escape(html)}" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
-            <script src="/_static/iframeResizer.min.js"></script>
+            <script src="./_static/iframeResizer.min.js"></script>
             <script>
                 iFrameResize({{checkOrigin: false}}, '#{iframe_id}')
             </script>
