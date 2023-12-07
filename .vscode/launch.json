@@ -10,7 +10,8 @@
       "request": "launch",
       "program": ".venv/bin/sphinx-build",
       "purpose": ["debug-test"],
-      "args": ["-b", "html", "docs/src", "docs/_build", "-T", "-a", "-E"]
+      "args": ["-b", "html", "docs/src", "docs/_build", "-T", "-a", "-E"],
+      "justMyCode": false,
     },
     {
       "name": "Python: Debug Tests",

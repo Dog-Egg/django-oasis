@@ -8,12 +8,13 @@ import django
 from django.apps import apps
 from django.conf import settings
 from docutils import nodes
-from docutils.parsers.rst import Directive, directives
+from docutils.parsers.rst import directives
+from sphinx.util.docutils import SphinxDirective
 
 from django_oasis.docs import _get_swagger_ui_html
 
 
-class OpenAPIView(Directive):
+class OpenAPIView(SphinxDirective):
     has_content = True
     option_spec = {
         "docexpansion": directives.unchanged,
@@ -28,15 +29,22 @@ class OpenAPIView(Directive):
             if "docexpansion" in self.options:
                 extra_config["docExpansion"] = self.options["docexpansion"]
 
+            def getsrc(filename):
+                relpath = os.path.relpath(
+                    self.env.srcdir, os.path.dirname(self.get_source_info()[0])
+                )
+                result = os.path.join(relpath, filename)
+                return result
+
             html = _get_swagger_ui_html(
                 {
                     "spec": parse_module(module),
                     **extra_config,
                 },
-                insert_head="""
-                <script src="./_static/iframeResizer.contentWindow.min.js"></script>
-                <script src="./_static/swagger-ui-bundle.js"></script>
-                <link rel="stylesheet" href="./_static/swagger-ui.css" />
+                insert_head=f"""
+                <script src="{getsrc('_static/iframeResizer.contentWindow.min.js')}"></script>
+                <script src="{getsrc('_static/swagger-ui-bundle.js')}"></script>
+                <link rel="stylesheet" href="{getsrc('_static/swagger-ui.css')}" />
                 """,
                 env="sphinx",
             )
@@ -44,7 +52,7 @@ class OpenAPIView(Directive):
             iframe_id = "id_" + uuid.uuid4().hex[:8]
             iframe = f"""
             <iframe id="{iframe_id}" srcdoc="{escape(html)}" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
-            <script src="./_static/iframeResizer.min.js"></script>
+            <script src="{getsrc('_static/iframeResizer.min.js')}"></script>
             <script>
                 iFrameResize({{checkOrigin: false}}, '#{iframe_id}')
             </script>
