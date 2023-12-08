@@ -55,10 +55,12 @@ class Pagination(Parameter, metaclass=abc.ABCMeta):
 
 class PagePagination(Pagination):
     """
+    使用从 URL 参数获取 ``page`` 和 ``page_size`` 参数对 QuerySet 对象进行分页。
+
     :param schema: 提供分页列表中的数据结构。
     """
 
-    def __init__(self, schema: t.Union[schema.Schema, t.Type[schema.Schema]], /):
+    def __init__(self, schema: t.Union[schema.Schema, t.Type[schema.Schema]]):
         super().__init__()
         self.__schema = schema
 

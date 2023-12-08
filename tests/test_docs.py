@@ -2,6 +2,7 @@
 加载模块，获取提取路由并设置到 django 路由表中。
 """
 
+import datetime
 import functools
 from importlib import import_module
 
@@ -36,19 +37,21 @@ def load_openapi_module(module_name):
     return decorator
 
 
-# @load_openapi_module("docs.src.main.pagination.pagination_customization")
-# @pytest.mark.django_db
-# def test_pagination_customization(client):
-#     from docs.src.main.pagination import pagination_customization as module
+@load_openapi_module("docs.src.pagination.PagePagination")
+@pytest.mark.django_db
+def test_pagination_customization(client):
+    from docs.src.pagination import PagePagination as module
 
-#     module.Book.objects.bulk_create([module.Book(title="三体", author="老刘")] * 30)
+    module.Book.objects.bulk_create([module.Book(title="三体", author="老刘")] * 30)
 
-#     response = client.get("/books")
-#     assert response.status_code == 200
-#     assert response.json() == {
-#         "items": [{"author": "老刘", "id": i, "title": "三体"} for i in range(1, 21)],
-#         "total": 30,
-#     }
+    response = client.get("/books")
+    assert response.status_code == 200
+    assert response.json() == {
+        "page": 1,
+        "page_size": 20,
+        "results": [{"author": "老刘", "id": i, "title": "三体"} for i in range(1, 21)],
+        "count": 30,
+    }
 
 
 @load_openapi_module("docs.src.examples.restful")
