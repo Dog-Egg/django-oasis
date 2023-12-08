@@ -8,6 +8,7 @@ API 参考
 .. automodule:: django_oasis.parameter
     :members:
     :imported-members:
+    :exclude-members: Body
 
 .. automodule:: django_oasis.auth
     :members:

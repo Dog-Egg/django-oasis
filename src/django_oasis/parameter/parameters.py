@@ -236,6 +236,8 @@ class MediaType:
 
 class Body(RequestData):
     """
+    声明 HTTP 请求体数据，默认数据格式类型为 JSON。
+
     :param content_type: 请求体内容类型，默认是: application/json。也可以设置为列表，以支持多种请求体类型。
     """
 
