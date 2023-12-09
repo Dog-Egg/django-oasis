@@ -108,17 +108,19 @@ def test_restful(client):
     assert module.Book.objects.filter(id=1).first() is None
 
 
-# @load_openapi_module("docs.src.main.auth.example")
-# def test_auth(client, django_user_model, admin_client):
-#     resp = client.get("/to/path")
-#     assert resp.status_code == 401
+@load_openapi_module("docs.src.auth.auth")
+def test_auth(client, django_user_model, admin_client):
+    resp = client.get("/to/path")
+    assert resp.status_code == 401
+    assert resp.json() == {"reason": "Unauthorized", "status_code": 401}
 
-#     user = django_user_model.objects.create(
-#         username="someone", password="something"
-#     )  # 普通用户
-#     client.force_login(user)
-#     resp = client.get("/to/path")
-#     assert resp.status_code == 403
+    user = django_user_model.objects.create(
+        username="someone", password="something"
+    )  # 普通用户
+    client.force_login(user)
+    resp = client.get("/to/path")
+    assert resp.status_code == 403
+    assert resp.json() == {"reason": "Forbidden", "status_code": 403}
 
-#     resp = admin_client.get("/to/path")
-#     assert resp.status_code == 200
+    resp = admin_client.get("/to/path")
+    assert resp.status_code == 200

@@ -20,13 +20,13 @@ Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地�
 
 示例中定义了一个 ``BookModel``，并使用 Oasis 编写两个接口，为其实现 "查" 和 "增" 的功能。
 
-.. literalinclude:: ./index_demo.py
+.. literalinclude:: ./demo.py
 
 以上定义的接口会被 Oasis 处理并转换为 Django 的视图函数和路由，这使其能够成为 Django 项目的一部分。并且还为接口生成了 OAS，将 OAS 导入文档生成工具 (如 SwaggerUI)，便可对外展示接口文档了。
 
 这是由上面示例生成的 Swagger 文档：
 
-.. openapiview:: ./index_demo.py
+.. openapiview:: ./demo.py
 
 
 功能说明
@@ -56,6 +56,7 @@ Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地�
     request_path/index
     request_body/index
     pagination/index
+    auth/index
     schema/index
     api
 

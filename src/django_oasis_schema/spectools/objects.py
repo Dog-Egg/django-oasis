@@ -108,7 +108,8 @@ class OpenAPISpec:
         self.__paths[path] = pathitem
 
     def set_security_scheme(self, key, obj):
-        self.__security_schemes[key] = obj
+        if key not in self.__security_schemes:
+            self.__security_schemes[key] = obj
 
     def to_dict(self):
         return clean(
