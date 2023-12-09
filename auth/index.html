@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="请求体" href="../request_body/index.html" /><link rel="prev" title="请求参数" href="../request_parameters/index.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Schema" href="../schema/index.html" /><link rel="prev" title="分页" href="../pagination/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
-        <title>路径参数 - Django-Oasis 0.1.dev20231209114639 文档</title>
+        <title>用户认证 - Django-Oasis 0.1.dev20231209114639 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -158,10 +158,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../quickstart/index.html">开始</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guide/index.html">指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../request_parameters/index.html">请求参数</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">路径参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../request_path/index.html">路径参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../request_body/index.html">请求体</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pagination/index.html">分页</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../auth/index.html">用户认证</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">用户认证</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../schema/index.html">Schema</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../schema/model.html">Model Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../schema/validation.html">验证数据</a></li>
@@ -207,24 +207,22 @@
         </div>
         <article role="main">
           <section id="id1">
-<h1>路径参数<a class="headerlink" href="#id1" title="此标题的永久链接">#</a></h1>
-<p>Oasis 使用 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3#path-templating">路径模版</a> 来获取路径参数。即使用由大括号 ({}) 分隔的模板表达式，将 URL 路径的一部分标记为可使用路径参数进行替换。</p>
-<p>路径参数会以同名关键字参数的形式传递给 API 类的 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 方法，如下例：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span>
+<h1>用户认证<a class="headerlink" href="#id1" title="此标题的永久链接">#</a></h1>
+<p>仅需使用 <a class="reference internal" href="../api.html#django_oasis.Operation" title="django_oasis.Operation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Operation</span></code></a> 并设置 auth 参数即可实现认证。</p>
+<p>以下代码示例会验证请求是否具有“管理员权限”。若用户未登录，将返回 HTTP 401 响应；若用户已登录但非管理员，将返回 HTTP 403 响应。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Resource</span>
+<span class="kn">from</span> <span class="nn">django_oasis.auth</span> <span class="kn">import</span> <span class="n">IsAdministrator</span>
 
 
-<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/pets/</span><span class="si">{pet_id}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/to/path&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pet_id</span><span class="p">):</span>
-        <span class="o">...</span>
-
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="hll">    <span class="nd">@Operation</span><span class="p">(</span><span class="n">auth</span><span class="o">=</span><span class="n">IsAdministrator</span><span class="p">)</span>
+</span>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="o">...</span>
 </pre></div>
 </div>
-<p>这里在 URL 路径上标记了一个名为 <code class="docutils literal notranslate"><span class="pre">pet_id</span></code> 的路径参数，在处理请求时，API 类也将接收到同名的关键字参数。</p>
 
-            <iframe id="id_efcabf60" srcdoc="
+            <iframe id="id_c6d795cf" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -259,7 +257,7 @@
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
-&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/pets/{pet_id}&quot;: {&quot;get&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;pet_id&quot;, &quot;in&quot;: &quot;path&quot;, &quot;required&quot;: true, &quot;schema&quot;: {&quot;type&quot;: &quot;string&quot;}, &quot;style&quot;: &quot;simple&quot;, &quot;explode&quot;: false}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}}}}}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/to/path&quot;: {&quot;get&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;security&quot;: [{&quot;__auth__&quot;: []}]}}}, &quot;components&quot;: {&quot;securitySchemes&quot;: {&quot;__auth__&quot;: {&quot;type&quot;: &quot;apiKey&quot;, &quot;name&quot;: &quot;sessionid&quot;, &quot;in&quot;: &quot;cookie&quot;}}}}}&lt;/script&gt;
 &lt;script&gt;
     var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
 
@@ -303,156 +301,105 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_efcabf60')
+                iFrameResize({checkOrigin: false}, '#id_c6d795cf')
             </script>
-            <section id="id3">
-<h2>参数类型<a class="headerlink" href="#id3" title="此标题的永久链接">#</a></h2>
-<p>为路径参数声明数据类型及验证规则只需为 <a class="reference internal" href="../api.html#django_oasis.Resource" title="django_oasis.Resource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Resource</span></code></a> 设置 <code class="docutils literal notranslate"><span class="pre">param_schemas</span></code>。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
-
-
-<span class="nd">@Resource</span><span class="p">(</span>
-    <span class="s2">&quot;/pets/</span><span class="si">{pet_id}</span><span class="s2">&quot;</span><span class="p">,</span>
-<span class="hll">    <span class="n">param_schemas</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;pet_id&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">()},</span>
-</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pet_id</span><span class="p">):</span>
-        <span class="o">...</span>
-
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="o">...</span>
-</pre></div>
+            <section id="id2">
+<h2>内置认证类<a class="headerlink" href="#id2" title="此标题的永久链接">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>以下认证类是建立在使用 django.contrib.auth 包作为项目的用户验证系统。如果你的项目使用了自定义的用户验证，请查看 <a class="reference internal" href="#custom-auth"><span class="std std-ref">自定义认证</span></a>。</p>
 </div>
-<p>Schema 对象会对对应的路径参数执行反序列化；如果反序列化失败，会返回 HTTP 404 响应。</p>
+<span class="target" id="module-django_oasis.auth"></span><dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.auth.HasPermission">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">HasPermission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.auth.HasPermission" title="永久链接至目标">#</a></dt>
+<dd><p>验证用户是否拥有某权限。内部调用 <a class="reference external" href="https://docs.djangoproject.com/zh-hans/5.0/ref/contrib/auth/#django.contrib.auth.models.User.has_perm">has_perm</a> 方法。</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>perm</strong> – 描述权限的字符串，格式是 “&lt;app label&gt;.&lt;permission codename&gt;”。</p>
+</dd>
+</dl>
+</dd></dl>
 
-            <iframe id="id_25555be5" srcdoc="
-&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;/&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;/&gt;
-    &lt;meta name=&quot;description&quot; content=&quot;SwaggerUI&quot;/&gt;
-    &lt;title&gt;Swagger UI&lt;/title&gt;
-    &lt;style&gt;
-        body {
-            margin: 0;
-        }
-        body::before, body::after {
-            content: &quot;&quot;;
-            display: table;
-        }
-        .footer {
-            margin-bottom: 25px;
-            color: #cccccc;
-            font-size: 12px;
-            display: flex;
-        }
-        .footer .powered-by {
-            float: right;
-        }
-    &lt;/style&gt;
-    
-    
-                &lt;script src=&quot;../_static/iframeResizer.contentWindow.min.js&quot;&gt;&lt;/script&gt;
-                &lt;script src=&quot;../_static/swagger-ui-bundle.js&quot;&gt;&lt;/script&gt;
-                &lt;link rel=&quot;stylesheet&quot; href=&quot;../_static/swagger-ui.css&quot; /&gt;
-                
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
-&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/pets/{pet_id}&quot;: {&quot;get&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;pet_id&quot;, &quot;in&quot;: &quot;path&quot;, &quot;required&quot;: true, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;style&quot;: &quot;simple&quot;, &quot;explode&quot;: false}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}}}}}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
-&lt;script&gt;
-    var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.auth.IsAdministrator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">IsAdministrator</span></span><a class="headerlink" href="#django_oasis.auth.IsAdministrator" title="永久链接至目标">#</a></dt>
+<dd><p>验证用户是否为管理员。</p>
+</dd></dl>
 
-    // 设置默认配置
-    Object.assign(config, {
-        dom_id: &#x27;#swagger-ui&#x27;,
-        deepLinking: true,
-        onComplete: onComplete,
-        defaultModelRendering: &quot;model&quot;,
-        defaultModelExpandDepth: 2,
-    });
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.auth.IsAuthenticated">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">IsAuthenticated</span></span><a class="headerlink" href="#django_oasis.auth.IsAuthenticated" title="永久链接至目标">#</a></dt>
+<dd><p>验证用户是否登录。</p>
+</dd></dl>
 
-    function onComplete() {
-        var title = ui.specSelectors.info().toJS().title;
-        document.title = title.concat(&#x27; | Swagger UI&#x27;);
-    }
-&lt;/script&gt;
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.auth.IsSuperuser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">IsSuperuser</span></span><a class="headerlink" href="#django_oasis.auth.IsSuperuser" title="永久链接至目标">#</a></dt>
+<dd><p>验证用户是否为超级管理员。</p>
+</dd></dl>
 
-&lt;script&gt;
-    // 在 Sphinx 内使用时拦截请求
-    Object.assign(config, {
-        requestInterceptor: function (request) {
-            return request;
-        },
-        responseInterceptor: function (response) {
-            response.text = &quot;该文档示例并不具备发起真实请求的能力，请自行拷贝代码进行测试。&quot;;
-            return response;
-        }
-    });
-&lt;/script&gt;
-
-
-    &lt;script&gt;
-        window.onload = function () {
-            window.ui = SwaggerUIBundle(Object.assign({}, config));
-        };
-    &lt;/script&gt;
-
-
-&lt;/body&gt;
-&lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
-            <script src="../_static/iframeResizer.min.js"></script>
-            <script>
-                iFrameResize({checkOrigin: false}, '#id_25555be5')
-            </script>
-            </section>
-<section id="path">
-<h2>Path 类型<a class="headerlink" href="#path" title="此标题的永久链接">#</a></h2>
-<p>在获取路径参数时，默认是不匹配 <strong>‘/’</strong> 的。</p>
-<p>而 <a class="reference internal" href="../api.html#django_oasis.schema.Path" title="django_oasis.schema.Path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schema.Path</span></code></a> 用于匹配非空字段，包括路径分隔符 <strong>‘/’</strong>。它允许你匹配完整的 URL 路径而不是只匹配 URL 的一部分。</p>
-<p>如下例，当请求路径为 <code class="docutils literal notranslate"><span class="pre">/files/image/picture.png</span></code> 时，获取的路径参数 <code class="docutils literal notranslate"><span class="pre">filepath</span></code> 为 <code class="docutils literal notranslate"><span class="pre">image/picture.png</span></code>。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
-
-
-<span class="nd">@Resource</span><span class="p">(</span>
-    <span class="s2">&quot;/files/</span><span class="si">{filepath}</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="n">param_schemas</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;filepath&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Path</span><span class="p">()},</span>
-<span class="p">)</span>
-<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
-        <span class="o">...</span>
-
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="o">...</span>
-</pre></div>
-</div>
 </section>
+<section id="custom-auth">
+<span id="id3"></span><h2>自定义认证<a class="headerlink" href="#custom-auth" title="此标题的永久链接">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.auth.BaseAuth">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">BaseAuth</span></span><a class="headerlink" href="#django_oasis.auth.BaseAuth" title="永久链接至目标">#</a></dt>
+<dd><p>认证基类。</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="django_oasis.auth.BaseAuth.__openapispec__">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__openapispec__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spec</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.auth.BaseAuth.__openapispec__" title="永久链接至目标">#</a></dt>
+<dd><p>需自行实现该方法，该方法为 OpenAPISpec 对象能识别的方法。</p>
+<p>需要通过 <code class="docutils literal notranslate"><span class="pre">spec.set_security_scheme</span></code> 方法为 OAS <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3#componentsSecuritySchemes">securitySchemes</a> 字段设置值。</p>
+<p>并且返回值将用于设置 OAS <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3#operationSecurity">Operation security</a> 字段。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="django_oasis.auth.BaseAuth.check_auth">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.auth.BaseAuth.check_auth" title="永久链接至目标">#</a></dt>
+<dd><p>需自行实现该方法，用于判断请求认证是否成功。如果认证失败，需要抛出异常来停止请求的继续处理。</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Django <a class="reference external" href="https://docs.djangoproject.com/zh-hans/5.0/ref/request-response/#httprequest-objects">HttpRequest</a> 对象。</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <section id="id4">
-<h2>参数样式<a class="headerlink" href="#id4" title="此标题的永久链接">#</a></h2>
-<p>路径参数同样支持参数样式，通过 <code class="docutils literal notranslate"><span class="pre">param_styles</span></code> 进行设置。参数样式遵照 OpenAPI 规范的定义，请参照 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3#style-values">样式值</a> 和 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3#style-examples">样式示例</a> 进行设置。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
-<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">Style</span>
+<h3>示例1<a class="headerlink" href="#id4" title="此标题的永久链接">#</a></h3>
+<p>假设项目使用了 django.contrib.auth 作为用户认证系统，并且改用 HTTP Basic 作为认证方式。你需要自行实现认证类：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Resource</span>
+<span class="kn">from</span> <span class="nn">django_oasis.auth</span> <span class="kn">import</span> <span class="n">BaseAuth</span>
+<span class="kn">from</span> <span class="nn">django_oasis.exceptions</span> <span class="kn">import</span> <span class="n">UnauthorizedError</span>
 
 
-<span class="nd">@Resource</span><span class="p">(</span>
-    <span class="s2">&quot;/color/</span><span class="si">{colors}</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="n">param_schemas</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;colors&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">]))</span>
-    <span class="p">},</span>
-<span class="hll">    <span class="n">param_styles</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;colors&quot;</span><span class="p">:</span> <span class="n">Style</span><span class="p">(</span><span class="s2">&quot;simple&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)},</span>  <span class="c1"># 这是默认样式</span>
-</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">IsOurUser</span><span class="p">(</span><span class="n">BaseAuth</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">check_auth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="c1"># 若用户未登录，抛出 UnauthorizedError，这将返回 HTTP 401 响应。</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">UnauthorizedError</span>
+
+    <span class="k">def</span> <span class="nf">__openapispec__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">spec</span><span class="o">.</span><span class="n">set_security_scheme</span><span class="p">(</span>
+            <span class="s2">&quot;fooName&quot;</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;http&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;scheme&quot;</span><span class="p">:</span> <span class="s2">&quot;basic&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">[{</span><span class="s2">&quot;fooName&quot;</span><span class="p">:</span> <span class="p">[]}]</span>
+
+
+<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/to/path&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
-        <span class="o">...</span>
-
+    <span class="nd">@Operation</span><span class="p">(</span><span class="n">auth</span><span class="o">=</span><span class="n">IsOurUser</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="o">...</span>
 </pre></div>
 </div>
-<p>此示例请求路径如果为 <code class="docutils literal notranslate"><span class="pre">/color/blue,red</span></code>，则获取的 <code class="docutils literal notranslate"><span class="pre">colors</span></code> 值为 <code class="docutils literal notranslate"><span class="pre">['blue',</span> <span class="pre">'red']</span></code>。</p>
 
-            <iframe id="id_4962583e" srcdoc="
+            <iframe id="id_57c1a55f" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -487,7 +434,7 @@
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
-&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/color/{colors}&quot;: {&quot;get&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;colors&quot;, &quot;in&quot;: &quot;path&quot;, &quot;required&quot;: true, &quot;schema&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;items&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;enum&quot;: [&quot;blue&quot;, &quot;red&quot;, &quot;yellow&quot;]}}, &quot;style&quot;: &quot;simple&quot;, &quot;explode&quot;: false}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}}}}}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/to/path&quot;: {&quot;get&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;security&quot;: [{&quot;fooName&quot;: []}]}}}, &quot;components&quot;: {&quot;securitySchemes&quot;: {&quot;fooName&quot;: {&quot;type&quot;: &quot;http&quot;, &quot;scheme&quot;: &quot;basic&quot;}}}}}&lt;/script&gt;
 &lt;script&gt;
     var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
 
@@ -531,9 +478,10 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_4962583e')
+                iFrameResize({checkOrigin: false}, '#id_57c1a55f')
             </script>
             </section>
+</section>
 </section>
 
         </article>
@@ -541,23 +489,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../request_body/index.html">
+          <a class="next-page" href="../schema/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">请求体</div>
+                <div class="title">Schema</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../request_parameters/index.html">
+          <a class="prev-page" href="../pagination/index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">请求参数</div>
+                <div class="title">分页</div>
                 
               </div>
             </a>
@@ -591,10 +539,23 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">路径参数</a><ul>
-<li><a class="reference internal" href="#id3">参数类型</a></li>
-<li><a class="reference internal" href="#path">Path 类型</a></li>
-<li><a class="reference internal" href="#id4">参数样式</a></li>
+<li><a class="reference internal" href="#">用户认证</a><ul>
+<li><a class="reference internal" href="#id2">内置认证类</a><ul>
+<li><a class="reference internal" href="#django_oasis.auth.HasPermission"><code class="docutils literal notranslate"><span class="pre">HasPermission</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.auth.IsAdministrator"><code class="docutils literal notranslate"><span class="pre">IsAdministrator</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.auth.IsAuthenticated"><code class="docutils literal notranslate"><span class="pre">IsAuthenticated</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.auth.IsSuperuser"><code class="docutils literal notranslate"><span class="pre">IsSuperuser</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-auth">自定义认证</a><ul>
+<li><a class="reference internal" href="#django_oasis.auth.BaseAuth"><code class="docutils literal notranslate"><span class="pre">BaseAuth</span></code></a><ul>
+<li><a class="reference internal" href="#django_oasis.auth.BaseAuth.__openapispec__"><code class="docutils literal notranslate"><span class="pre">BaseAuth.__openapispec__()</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.auth.BaseAuth.check_auth"><code class="docutils literal notranslate"><span class="pre">BaseAuth.check_auth()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">示例1</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
