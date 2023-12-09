@@ -1,4 +1,3 @@
-import os
 import pathlib
 import sys
 
@@ -14,6 +13,7 @@ sys.path.extend(
 
 # Project information
 project = "Django-Oasis"
+release = __import__("django_oasis").__version__
 
 # General configuration
 extensions = [
