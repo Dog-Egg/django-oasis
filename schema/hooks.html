@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="API 参考" href="../api.html" /><link rel="prev" title="验证数据" href="validation.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
-        <title>Hooks - Django-Oasis 0.1.dev20231212030539 文档</title>
+        <title>Hooks - Django-Oasis 0.1.dev20231212122009 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231212030539 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231212122009 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231212030539 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231212122009 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -209,6 +209,10 @@
         <article role="main">
           <section id="hooks">
 <h1>Hooks<a class="headerlink" href="#hooks" title="此标题的永久链接">#</a></h1>
+<p>Hook 并不是 Schema 实现的核心，它最初的目的是为了让 class 类和一些紧密相关的函数(不是指 method)以更加美观的方式组织在一起。但后来发现它非常灵活，以致于它可以代替实现很多 Schema 的功能。</p>
+<p>使用用法: hook 是以装饰器的形式定义在 Schema 类的方法上的。</p>
+<section id="hook">
+<h2>可用的 Hook<a class="headerlink" href="#hook" title="此标题的永久链接">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="django_oasis.schema.validator">
 <span class="sig-prename descclassname"><span class="pre">django_oasis.schema.</span></span><span class="sig-name descname"><span class="pre">validator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.schema.validator" title="永久链接至目标">#</a></dt>
@@ -221,6 +225,53 @@
 </dd></dl>
 
 <p>关于 <a class="reference internal" href="#django_oasis.schema.validator" title="django_oasis.schema.validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validator</span></code></a> 的使用可在 <a class="reference internal" href="validation.html"><span class="doc">验证数据</span></a> 一章中查看。</p>
+</section>
+<section id="id1">
+<h2>Hook 的特点<a class="headerlink" href="#id1" title="此标题的永久链接">#</a></h2>
+<section id="id2">
+<h3>不可调用<a class="headerlink" href="#id2" title="此标题的永久链接">#</a></h3>
+<p>虽然 hook 修饰的是类的方法，但是该方法并不像普通方法一样可以被调用。即无法使用 <code class="docutils literal notranslate"><span class="pre">&lt;class_name&gt;.&lt;method_name&gt;</span></code> 的方式进行调用。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MySchema</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Schema</span><span class="p">):</span>
+
+    <span class="nd">@schema</span><span class="o">.</span><span class="n">validator</span>
+    <span class="k">def</span> <span class="nf">hook_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MySchema</span><span class="o">.</span><span class="n">hook_fn</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="gr">AttributeError</span>: <span class="n">type object &#39;MySchema&#39; has no attribute &#39;hook_fn&#39;</span>
+</pre></div>
+</div>
+<p>这样做的目的是为了避免同名污染，你可以放心地为你的 hook 函数取任何函数名，它不会覆盖掉已有的同名方法。</p>
+</section>
+<section id="id3">
+<h3>不可重写<a class="headerlink" href="#id3" title="此标题的永久链接">#</a></h3>
+<p>hook 函数虽然是方法，但是它并不能在子类中被重写。</p>
+</section>
+<section id="id4">
+<h3>可继承<a class="headerlink" href="#id4" title="此标题的永久链接">#</a></h3>
+<p>父类的 hook 会继承给子类。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">firstname</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">write_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">lastname</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">write_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">fullname</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+
+    <span class="nd">@schema</span><span class="o">.</span><span class="n">serialization_fget</span><span class="p">(</span><span class="n">fullname</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get_fullname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;firstname&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lastname&#39;</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">Actor</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="n">works</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">List</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Actor</span><span class="p">()</span><span class="o">.</span><span class="n">serialize</span><span class="p">({</span><span class="s1">&#39;firstname&#39;</span><span class="p">:</span> <span class="s1">&#39;赵&#39;</span><span class="p">,</span> <span class="s1">&#39;lastname&#39;</span><span class="p">:</span> <span class="s1">&#39;四&#39;</span><span class="p">,</span> <span class="s1">&#39;works&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;乡村爱情&#39;</span><span class="p">]})</span>
+<span class="go">{&#39;fullname&#39;: &#39;赵四&#39;, &#39;works&#39;: [&#39;乡村爱情&#39;]}</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
         </article>
@@ -279,7 +330,16 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Hooks</a><ul>
+<li><a class="reference internal" href="#hook">可用的 Hook</a><ul>
 <li><a class="reference internal" href="#django_oasis.schema.validator"><code class="docutils literal notranslate"><span class="pre">validator()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Hook 的特点</a><ul>
+<li><a class="reference internal" href="#id2">不可调用</a></li>
+<li><a class="reference internal" href="#id3">不可重写</a></li>
+<li><a class="reference internal" href="#id4">可继承</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -291,7 +351,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=7ec9b7cc"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=0cceb57e"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
