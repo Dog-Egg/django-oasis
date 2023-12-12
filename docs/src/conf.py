@@ -49,5 +49,5 @@ language = "zh_CN"
 intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
 
 # Extension autodoc
-# autodoc_typehints = "description"
+autodoc_typehints = "description"
 # autodoc_typehints_description_target = "documented_params"

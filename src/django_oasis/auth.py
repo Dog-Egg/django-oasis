@@ -9,7 +9,7 @@ from django_oasis_schema.spectools.objects import OpenAPISpec
 
 class BaseAuth:
     """
-    认证基类。
+    认证基类。如需自定义认证类，需继承该类，并实现其抽象方法。
     """
 
     @abc.abstractmethod

@@ -46,66 +46,11 @@ def serialization_fget(field: t.Union[Schema, str]):
     return decorator
 
 
-def validator(field=None):
+def validator(field: t.Union[Schema, str, None] = None):
     """
-    定义验证函数。
+    挂载验证函数。它会在调用验证时，执行其验证函数。
 
-    .. code-block::
-        :emphasize-lines: 5
-
-        >>> from django_oasis import schema
-
-        >>> class PositiveInteger(schema.Integer):
-        ...     \"""正整数\"""
-        ...     @schema.validator
-        ...     def validate(self, value):
-        ...         if value <= 0:
-        ...             raise schema.ValidationError('不是一个正整数')
-
-        >>> PositiveInteger().deserialize(-1)
-        Traceback (most recent call last):
-            ...
-        django_oasis_schema.exceptions.ValidationError: [{'msgs': ['不是一个正整数']}]
-
-    如下是在 `Model` 中使用 `validator` 验证日期的正确性。
-
-    .. code-block::
-        :emphasize-lines: 5
-
-        >>> class MySchema(schema.Model):
-        ...     start_date = schema.Date()
-        ...     end_date = schema.Date()
-        ...
-        ...     @schema.validator()
-        ...     def validate_date(self, data):
-        ...         if data['start_date'] > data['end_date']:
-        ...             raise schema.ValidationError('开始日期不能大于结束日期')
-
-        >>> MySchema().deserialize({'start_date': '2000-01-01', 'end_date': '1999-01-01'})
-        Traceback (most recent call last):
-            ...
-        django_oasis_schema.exceptions.ValidationError: [{'msgs': ['开始日期不能大于结束日期']}]
-
-    :param field: 字段或字段名，将验证函数应用于该字段。
-
-        .. code-block::
-            :emphasize-lines: 7
-
-            >>> from django_oasis import schema
-
-            >>> class Person(schema.Model):
-            ...     name = schema.String()
-            ...     age = schema.Integer()
-            ...
-            ...     @schema.validator(age)
-            ...     def validate_age(self, value):
-            ...         if value < 0:
-            ...             raise schema.ValidationError('年龄不能小于0')
-
-            >>> Person().deserialize({'name': '张三', 'age': -1})
-            Traceback (most recent call last):
-                ...
-            django_oasis_schema.exceptions.ValidationError: [{'msgs': ['年龄不能小于0'], 'loc': ['age']}]
+    :param field: 该参数用于验证 `Model` 字段。当设置为字段或字段名时，会将其验证函数应用于该字段，而不是 Model 自身。
     """
 
     def decorator(method, field=None):
