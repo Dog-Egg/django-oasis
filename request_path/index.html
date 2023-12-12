@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="请求体" href="../request_body/index.html" /><link rel="prev" title="请求参数" href="../request_parameters/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
-        <title>路径参数 - Django-Oasis 0.1.dev20231209114639 文档</title>
+        <title>路径参数 - Django-Oasis 0.1.dev20231212030539 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231209114639 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231212030539 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231209114639 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231212030539 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -165,6 +165,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../schema/index.html">Schema</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../schema/model.html">Model Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../schema/validation.html">验证数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../schema/hooks.html">Hooks</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API 参考</a></li>
@@ -224,7 +225,7 @@
 </div>
 <p>这里在 URL 路径上标记了一个名为 <code class="docutils literal notranslate"><span class="pre">pet_id</span></code> 的路径参数，在处理请求时，API 类也将接收到同名的关键字参数。</p>
 
-            <iframe id="id_efcabf60" srcdoc="
+            <iframe id="id_517d27c4" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -303,7 +304,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_efcabf60')
+                iFrameResize({checkOrigin: false}, '#id_517d27c4')
             </script>
             <section id="id3">
 <h2>参数类型<a class="headerlink" href="#id3" title="此标题的永久链接">#</a></h2>
@@ -325,7 +326,7 @@
 </div>
 <p>Schema 对象会对对应的路径参数执行反序列化；如果反序列化失败，会返回 HTTP 404 响应。</p>
 
-            <iframe id="id_25555be5" srcdoc="
+            <iframe id="id_f5189014" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -404,7 +405,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_25555be5')
+                iFrameResize({checkOrigin: false}, '#id_f5189014')
             </script>
             </section>
 <section id="path">
@@ -452,7 +453,7 @@
 </div>
 <p>此示例请求路径如果为 <code class="docutils literal notranslate"><span class="pre">/color/blue,red</span></code>，则获取的 <code class="docutils literal notranslate"><span class="pre">colors</span></code> 值为 <code class="docutils literal notranslate"><span class="pre">['blue',</span> <span class="pre">'red']</span></code>。</p>
 
-            <iframe id="id_4962583e" srcdoc="
+            <iframe id="id_6a4aeacb" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -531,7 +532,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_4962583e')
+                iFrameResize({checkOrigin: false}, '#id_6a4aeacb')
             </script>
             </section>
 </section>
@@ -606,7 +607,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=23613fd2"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=7ec9b7cc"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>

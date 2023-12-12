@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Schema" href="../schema/index.html" /><link rel="prev" title="分页" href="../pagination/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
-        <title>用户认证 - Django-Oasis 0.1.dev20231209114639 文档</title>
+        <title>用户认证 - Django-Oasis 0.1.dev20231212030539 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231209114639 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231212030539 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231209114639 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231212030539 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -165,6 +165,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../schema/index.html">Schema</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../schema/model.html">Model Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../schema/validation.html">验证数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../schema/hooks.html">Hooks</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API 参考</a></li>
@@ -222,7 +223,7 @@
 </pre></div>
 </div>
 
-            <iframe id="id_c6d795cf" srcdoc="
+            <iframe id="id_11169598" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -301,7 +302,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_c6d795cf')
+                iFrameResize({checkOrigin: false}, '#id_11169598')
             </script>
             <section id="id2">
 <h2>内置认证类<a class="headerlink" href="#id2" title="此标题的永久链接">#</a></h2>
@@ -311,11 +312,11 @@
 </div>
 <span class="target" id="module-django_oasis.auth"></span><dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.auth.HasPermission">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">HasPermission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.auth.HasPermission" title="永久链接至目标">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">HasPermission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.auth.HasPermission" title="永久链接至目标">#</a></dt>
 <dd><p>验证用户是否拥有某权限。内部调用 <a class="reference external" href="https://docs.djangoproject.com/zh-hans/5.0/ref/contrib/auth/#django.contrib.auth.models.User.has_perm">has_perm</a> 方法。</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>perm</strong> – 描述权限的字符串，格式是 “&lt;app label&gt;.&lt;permission codename&gt;”。</p>
+<dd class="field-odd"><p><strong>perm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 描述权限的字符串，格式是 “&lt;app label&gt;.&lt;permission codename&gt;”。</p>
 </dd>
 </dl>
 </dd></dl>
@@ -344,7 +345,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.auth.BaseAuth">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">BaseAuth</span></span><a class="headerlink" href="#django_oasis.auth.BaseAuth" title="永久链接至目标">#</a></dt>
-<dd><p>认证基类。</p>
+<dd><p>认证基类。如需自定义认证类，需继承该类，并实现其抽象方法。</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="django_oasis.auth.BaseAuth.__openapispec__">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__openapispec__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spec</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.auth.BaseAuth.__openapispec__" title="永久链接至目标">#</a></dt>
@@ -399,7 +400,7 @@
 </pre></div>
 </div>
 
-            <iframe id="id_57c1a55f" srcdoc="
+            <iframe id="id_a1463a78" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -478,7 +479,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_57c1a55f')
+                iFrameResize({checkOrigin: false}, '#id_a1463a78')
             </script>
             </section>
 </section>
@@ -567,7 +568,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=23613fd2"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=7ec9b7cc"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>

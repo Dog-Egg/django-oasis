@@ -10,11 +10,9 @@ API 参考
     :imported-members:
     :exclude-members: Body
 
-.. automodule:: django_oasis.auth
-    :members:
-
 .. automodule:: django_oasis.schema
     :members:
     :imported-members:
+    :exclude-members: validator
 
 .. |AsField| replace:: **\*仅作为字段时有效\***

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="API 参考" href="../api.html" /><link rel="prev" title="Model Schema" href="model.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Hooks" href="hooks.html" /><link rel="prev" title="Model Schema" href="model.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
-        <title>验证数据 - Django-Oasis 0.1.dev20231209114639 文档</title>
+        <title>验证数据 - Django-Oasis 0.1.dev20231212030539 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231209114639 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231212030539 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231209114639 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231212030539 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -165,6 +165,7 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Schema</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="model.html">Model Schema</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">验证数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks.html">Hooks</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API 参考</a></li>
@@ -200,7 +201,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -208,6 +209,110 @@
         <article role="main">
           <section id="id1">
 <h1>验证数据<a class="headerlink" href="#id1" title="此标题的永久链接">#</a></h1>
+<p>Schema 提供能多种验证方式。以下将以 “验证一个数是否为正整数” 为例，逐一介绍各个验证方式。</p>
+<section id="use-validators">
+<span id="id2"></span><h2>使用参数<a class="headerlink" href="#use-validators" title="此标题的永久链接">#</a></h2>
+<p>这是最简单的验证方式。只需定义验证函数，并以参数的形式传递给 Schema 对象。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
+
+<span class="k">def</span> <span class="nf">validate_positive_integer</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;验证函数。&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">schema</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;这不是一个正整数.&#39;</span><span class="p">)</span>
+
+
+<span class="n">obj</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">validate_positive_integer</span><span class="p">])</span>
+
+<span class="n">obj</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>    <span class="c1"># 错误，将抛出异常。</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+django_oasis_schema.exceptions.ValidationError: [{&#39;msgs&#39;: [&#39;这不是一个正整数.&#39;]}]
+</pre></div>
+</div>
+</section>
+<section id="hook">
+<h2>使用 Hook<a class="headerlink" href="#hook" title="此标题的永久链接">#</a></h2>
+<p><a class="reference internal" href="hooks.html#django_oasis.schema.validator" title="django_oasis.schema.validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schema.validator</span></code></a> 是一个专门挂载验证函数的 hook。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>关于什么是 hook，详细请查看 <a class="reference internal" href="hooks.html"><span class="doc">Hooks</span></a> 章节。</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PositiveInteger</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">):</span>
+
+    <span class="nd">@schema</span><span class="o">.</span><span class="n">validator</span>
+    <span class="k">def</span> <span class="nf">validate_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">schema</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;不是一个正整数&#39;</span><span class="p">)</span>
+
+<span class="n">PositiveInteger</span><span class="p">()</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+django_oasis_schema.exceptions.ValidationError: [{&#39;msgs&#39;: [&#39;不是一个正整数.&#39;]}]
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">小技巧</p>
+<p>validator hook 也是可以有多个的。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PositiveEvenInteger</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;正偶数：既要是正数，也要是偶数。&quot;&quot;&quot;</span>
+
+    <span class="nd">@schema</span><span class="o">.</span><span class="n">validator</span>
+    <span class="k">def</span> <span class="nf">validate_value1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">schema</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;不是一个整数&#39;</span><span class="p">)</span>
+
+    <span class="nd">@schema</span><span class="o">.</span><span class="n">validator</span>
+    <span class="k">def</span> <span class="nf">validate_value2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">schema</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;不是一个偶数&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PositiveEvenInteger</span><span class="p">()</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="gr">django_oasis_schema.exceptions.ValidationError</span>: <span class="n">[{&#39;msgs&#39;: [&#39;不是一个整数&#39;, &#39;不是一个偶数&#39;]}]</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>参数和 validator hook 可同时使用，它们的验证函数都会被执行。</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PositiveInteger</span><span class="p">(</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">validate_positive_integer</span><span class="p">])</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="gr">django_oasis_schema.exceptions.ValidationError</span>: <span class="n">[{&#39;msgs&#39;: [&#39;不是一个正整数&#39;, &#39;这不是一个正整数.&#39;]}]</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="model">
+<h2>Model 验证<a class="headerlink" href="#model" title="此标题的永久链接">#</a></h2>
+<p>Model 是有字段的，除了要验证 Model 本身外，还必须有能力验证其字段。当然，可以像 <a class="reference internal" href="#use-validators"><span class="std std-ref">使用参数</span></a> 给字段传入验证函数，这很简单，就不再介绍了。</p>
+<p>这里任然要介绍 <a class="reference internal" href="hooks.html#django_oasis.schema.validator" title="django_oasis.schema.validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schema.validator</span></code></a> 这个 hook。它不仅能验证 Model 本身外，还能验证字段。只需要将字段传给这个 hook，它就会将其验证函数应用于该字段的验证。</p>
+<p>举个例子，以下 Student 类的 <code class="docutils literal notranslate"><span class="pre">age</span></code> 字段需要验证其大于或等于 0。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">age</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+
+    <span class="nd">@schema</span><span class="o">.</span><span class="n">validator</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="c1"># 传入了字段 age</span>
+    <span class="k">def</span> <span class="nf">validate_age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">schema</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;年龄必需大于0。&#39;</span><span class="p">)</span>
+
+<span class="c1"># 年龄错误，将抛出异常</span>
+<span class="n">Student</span><span class="p">()</span><span class="o">.</span><span class="n">deserialize</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;李华&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">18</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+django_oasis_schema.exceptions.ValidationError: [{&#39;msgs&#39;: [&#39;年龄必需大于0。&#39;], &#39;loc&#39;: [&#39;age&#39;]}]
+</pre></div>
+</div>
+</section>
 </section>
 
         </article>
@@ -215,12 +320,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../api.html">
+          <a class="next-page" href="hooks.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">API 参考</div>
+                <div class="title">Hooks</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -253,13 +358,34 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">验证数据</a><ul>
+<li><a class="reference internal" href="#use-validators">使用参数</a></li>
+<li><a class="reference internal" href="#hook">使用 Hook</a></li>
+<li><a class="reference internal" href="#model">Model 验证</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=23613fd2"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=7ec9b7cc"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>

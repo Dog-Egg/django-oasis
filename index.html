@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="开始" href="quickstart/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
-        <title>Django-Oasis 0.1.dev20231209114639 文档</title>
+        <title>Django-Oasis 0.1.dev20231212030539 文档</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">Django-Oasis 0.1.dev20231209114639 文档</div></a>
+      <a href="#"><div class="brand">Django-Oasis 0.1.dev20231212030539 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231209114639 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231212030539 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -165,6 +165,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="schema/index.html">Schema</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="schema/model.html">Model Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="schema/validation.html">验证数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema/hooks.html">Hooks</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API 参考</a></li>
@@ -257,7 +258,7 @@
 <p>以上定义的接口会被 Oasis 处理并转换为 Django 的视图函数和路由，这使其能够成为 Django 项目的一部分。并且还为接口生成了 OAS，将 OAS 导入文档生成工具 (如 SwaggerUI)，便可对外展示接口文档了。</p>
 <p>这是由上面示例生成的 Swagger 文档：</p>
 
-            <iframe id="id_d18e0555" srcdoc="
+            <iframe id="id_b73769c0" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -336,7 +337,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_d18e0555')
+                iFrameResize({checkOrigin: false}, '#id_b73769c0')
             </script>
             </section>
 <section id="id4">
@@ -417,12 +418,6 @@
 <li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.parameter.Query"><code class="docutils literal notranslate"><span class="pre">Query</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.parameter.QueryItem"><code class="docutils literal notranslate"><span class="pre">QueryItem</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.parameter.Style"><code class="docutils literal notranslate"><span class="pre">Style</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.auth.BaseAuth"><code class="docutils literal notranslate"><span class="pre">BaseAuth</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.auth.DjangoAuthBase"><code class="docutils literal notranslate"><span class="pre">DjangoAuthBase</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.auth.HasPermission"><code class="docutils literal notranslate"><span class="pre">HasPermission</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.auth.IsAdministrator"><code class="docutils literal notranslate"><span class="pre">IsAdministrator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.auth.IsAuthenticated"><code class="docutils literal notranslate"><span class="pre">IsAuthenticated</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.auth.IsSuperuser"><code class="docutils literal notranslate"><span class="pre">IsSuperuser</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.schema.Any"><code class="docutils literal notranslate"><span class="pre">Any</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.schema.AnyOf"><code class="docutils literal notranslate"><span class="pre">AnyOf</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.schema.Boolean"><code class="docutils literal notranslate"><span class="pre">Boolean</span></code></a></li>
@@ -440,7 +435,6 @@
 <li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.schema.String"><code class="docutils literal notranslate"><span class="pre">String</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.schema.ValidationError"><code class="docutils literal notranslate"><span class="pre">ValidationError</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.schema.serialization_fget"><code class="docutils literal notranslate"><span class="pre">serialization_fget()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#django_oasis.schema.validator"><code class="docutils literal notranslate"><span class="pre">validator()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -518,7 +512,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=23613fd2"></script>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=7ec9b7cc"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/scripts/furo.js?v=32e29ea5"></script>
