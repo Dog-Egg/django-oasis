@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="分页" href="../pagination/index.html" /><link rel="prev" title="路径参数" href="../request_path/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
-        <title>请求体 - Django-Oasis 0.1.dev20231214141652 文档</title>
+        <title>请求体 - Django-Oasis 0.1.dev20231214154841 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231214141652 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231214154841 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231214141652 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231214154841 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -209,8 +209,123 @@
         <article role="main">
           <section id="id1">
 <h1>请求体<a class="headerlink" href="#id1" title="此标题的永久链接">#</a></h1>
+<section id="json">
+<h2>JSON 格式<a class="headerlink" href="#json" title="此标题的永久链接">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.parameter.JsonData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">JsonData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.JsonData" title="永久链接至目标">#</a></dt>
+<dd><p>声明请求体数据，要求以 JSON 格式提交。</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>schema</strong> (<a class="reference internal" href="../api.html#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="../api.html#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em>, </em><a class="reference internal" href="../api.html#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>代码示例：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
+<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">JsonData</span>
+
+
+<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/to/path&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+<span class="hll">        <span class="n">data</span><span class="o">=</span><span class="n">JsonData</span><span class="p">(</span>
+</span><span class="hll">            <span class="p">{</span>
+</span><span class="hll">                <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">(),</span>
+</span><span class="hll">                <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span>
+</span><span class="hll">            <span class="p">}</span>
+</span><span class="hll">        <span class="p">),</span>
+</span>    <span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+
+            <iframe id="id_15820b8e" srcdoc="
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;/&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;/&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;SwaggerUI&quot;/&gt;
+    &lt;title&gt;Swagger UI&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            margin: 0;
+        }
+        body::before, body::after {
+            content: &quot;&quot;;
+            display: table;
+        }
+        .footer {
+            margin-bottom: 25px;
+            color: #cccccc;
+            font-size: 12px;
+            display: flex;
+        }
+        .footer .powered-by {
+            float: right;
+        }
+    &lt;/style&gt;
+    
+    
+                &lt;script src=&quot;../_static/iframeResizer.contentWindow.min.js&quot;&gt;&lt;/script&gt;
+                &lt;script src=&quot;../_static/swagger-ui-bundle.js&quot;&gt;&lt;/script&gt;
+                &lt;link rel=&quot;stylesheet&quot; href=&quot;../_static/swagger-ui.css&quot; /&gt;
+                
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;JsonData&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/to/path&quot;: {&quot;post&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;a&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;b&quot;: {&quot;type&quot;: &quot;string&quot;}}, &quot;required&quot;: [&quot;a&quot;, &quot;b&quot;]}}}}}}}}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
+&lt;script&gt;
+    var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
+
+    // 设置默认配置
+    Object.assign(config, {
+        dom_id: &#x27;#swagger-ui&#x27;,
+        deepLinking: true,
+        onComplete: onComplete,
+        defaultModelRendering: &quot;model&quot;,
+        defaultModelExpandDepth: 2,
+    });
+
+    function onComplete() {
+        var title = ui.specSelectors.info().toJS().title;
+        document.title = title.concat(&#x27; | Swagger UI&#x27;);
+    }
+&lt;/script&gt;
+
+&lt;script&gt;
+    // 在 Sphinx 内使用时拦截请求
+    Object.assign(config, {
+        requestInterceptor: function (request) {
+            return request;
+        },
+        responseInterceptor: function (response) {
+            response.text = &quot;该文档示例并不具备发起真实请求的能力，请自行拷贝代码进行测试。&quot;;
+            return response;
+        }
+    });
+&lt;/script&gt;
+
+
+    &lt;script&gt;
+        window.onload = function () {
+            window.ui = SwaggerUIBundle(Object.assign({}, config));
+        };
+    &lt;/script&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
+            <script src="../_static/iframeResizer.min.js"></script>
+            <script>
+                iFrameResize({checkOrigin: false}, '#id_15820b8e')
+            </script>
+            </section>
 <section id="id2">
-<h2>表单数据<a class="headerlink" href="#id2" title="此标题的永久链接">#</a></h2>
+<h2>表单格式<a class="headerlink" href="#id2" title="此标题的永久链接">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.parameter.FormData">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">FormData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.FormData" title="永久链接至目标">#</a></dt>
@@ -243,7 +358,7 @@
 </div>
 <p>当 POST 表单为 <code class="docutils literal notranslate"><span class="pre">a=1&amp;b=1</span></code> 时，form 值等于 <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">'1',</span> <span class="pre">'b':</span> <span class="pre">1}</span></code>。</p>
 
-            <iframe id="id_50721c40" srcdoc="
+            <iframe id="id_809e70ab" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -322,7 +437,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_50721c40')
+                iFrameResize({checkOrigin: false}, '#id_809e70ab')
             </script>
             <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.parameter.FormItem">
@@ -352,7 +467,7 @@
 </div>
 <p>当 POST 表单为 <code class="docutils literal notranslate"><span class="pre">a=1&amp;b=1</span></code> 时，a 值等于 <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code>，b 值等于 <code class="docutils literal notranslate"><span class="pre">1</span></code>。</p>
 
-            <iframe id="id_34f21cd2" srcdoc="
+            <iframe id="id_7e5df137" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -431,7 +546,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_34f21cd2')
+                iFrameResize({checkOrigin: false}, '#id_7e5df137')
             </script>
             </section>
 <section id="body">
@@ -467,7 +582,7 @@
 </pre></div>
 </div>
 
-            <iframe id="id_c687f7c3" srcdoc="
+            <iframe id="id_55ba8649" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -546,7 +661,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_c687f7c3')
+                iFrameResize({checkOrigin: false}, '#id_55ba8649')
             </script>
             </section>
 </section>
@@ -607,7 +722,11 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">请求体</a><ul>
-<li><a class="reference internal" href="#id2">表单数据</a><ul>
+<li><a class="reference internal" href="#json">JSON 格式</a><ul>
+<li><a class="reference internal" href="#django_oasis.parameter.JsonData"><code class="docutils literal notranslate"><span class="pre">JsonData</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">表单格式</a><ul>
 <li><a class="reference internal" href="#django_oasis.parameter.FormData"><code class="docutils literal notranslate"><span class="pre">FormData</span></code></a></li>
 <li><a class="reference internal" href="#django_oasis.parameter.FormItem"><code class="docutils literal notranslate"><span class="pre">FormItem</span></code></a></li>
 </ul>
@@ -627,7 +746,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8d2ebbb5"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=bed6772c"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>

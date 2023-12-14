@@ -1,8 +1,21 @@
 请求体
 ======
 
+JSON 格式
+---------
 
-表单数据
+.. autoclass:: django_oasis.parameter.JsonData
+
+代码示例：
+
+.. literalinclude:: jsondata.py
+    :lines: 1-16
+    :emphasize-lines: 9-14
+.. openapiview:: jsondata.py
+    :docexpansion: full
+
+
+表单格式
 --------
 
 .. autoclass:: django_oasis.parameter.FormData
