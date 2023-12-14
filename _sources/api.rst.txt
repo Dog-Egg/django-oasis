@@ -8,7 +8,7 @@ API 参考
 .. automodule:: django_oasis.parameter
     :members:
     :imported-members:
-    :exclude-members: Body, FormData
+    :exclude-members: Body, FormData, FormItem
 
 .. automodule:: django_oasis.schema
     :members:
