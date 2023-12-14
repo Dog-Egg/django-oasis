@@ -36,26 +36,6 @@ class Skip(t.Generic[T]):
         return self._obj
 
 
-class InfoObjectSchema(schemas.Model):
-    title = schemas.String()
-    version = schemas.String()
-    description = schemas.String(required=False)
-    termsOfService = schemas.String(required=False)
-    contact = schemas.Model.from_dict(
-        {
-            "name": schemas.String(required=False),
-            "url": schemas.String(required=False),
-            "email": schemas.String(required=False),
-        }
-    )(required=False)
-    license = schemas.Model.from_dict(
-        {
-            "name": schemas.String(),
-            "url": schemas.String(required=False),
-        }
-    )(required=False)
-
-
 def clean(data: T) -> T:
     """
     >>> clean([{}, 0, None, [None], 1])
@@ -97,7 +77,7 @@ class OpenAPISpec:
 
     def __init__(self, *, info):
         self.__paths = {}
-        self.__info = InfoObjectSchema().deserialize(info)
+        self.__info = info
         self.__security_schemes = {}
 
     @property

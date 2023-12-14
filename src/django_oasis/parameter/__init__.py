@@ -3,6 +3,7 @@ import typing as _t
 from .parameters import Body as __B
 from .parameters import Cookie as __C
 from .parameters import CookieItem as __CI
+from .parameters import FormData as __FD
 from .parameters import Header as __H
 from .parameters import HeaderItem as __HI
 from .parameters import Query as __Q
@@ -16,3 +17,4 @@ Body = _t.cast(_t.Any, __B)
 QueryItem = _t.cast(_t.Any, __QI)
 CookieItem = _t.cast(_t.Any, __CI)
 HeaderItem = _t.cast(_t.Any, __HI)
+FormData = _t.cast(_t.Any, __FD)

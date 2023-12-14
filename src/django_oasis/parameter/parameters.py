@@ -6,7 +6,9 @@ import typing as t
 
 from django.http import HttpRequest
 from django.utils.datastructures import MultiValueDict
+from django.utils.functional import cached_property
 
+import django_oasis_schema.typing as st
 from django_oasis import schema as _schema
 from django_oasis.exceptions import (
     BadRequestError,
@@ -290,6 +292,59 @@ def _like_post_request(request):
         yield request
     finally:
         request.method = method
+
+
+class RequestBodyContent(RequestData):
+    location = "body"
+    content_type: str
+
+    def __init__(self, schema) -> None:
+        self._schema = make_schema(schema)
+
+    def __openapispec__(self, spec):
+        return {
+            "requestBody": {
+                "required": True,
+                "content": {
+                    self.content_type: {
+                        "schema": spec.parse(self._schema),
+                    }
+                },
+            }
+        }
+
+    def parse_request(self, request: HttpRequest):
+        if request.content_type != self.content_type:
+            raise UnsupportedMediaTypeError
+        return super().parse_request(request)
+
+
+class JsonData(RequestBodyContent):
+    content_type = "application/json"
+
+
+class FormData(RequestBodyContent):
+    """要求请求体以表单形式提交。"""
+
+    def __init__(self, schema: st.LikeModel, /, **kwargs) -> None:
+        super().__init__(schema, **kwargs)
+        assert isinstance(self._schema, _schema.Model)
+        self._schema = t.cast(_schema.Model, self._schema)
+
+    @cached_property
+    def content_type(self):
+        for field in self._schema._fields.values():
+            if isinstance(field, _schema.File):
+                return "multipart/form-data"
+        return "application/x-www-form-urlencoded"
+
+    def _parse_request(self, request: HttpRequest):
+        data = {}
+        for field in self._schema._fields.values():
+            k = field._alias
+            if k in request.POST:
+                data[k] = request.POST[k]
+        return self._schema.deserialize(data)
 
 
 class RequestParamItem(Parameter):

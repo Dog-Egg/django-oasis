@@ -5,7 +5,6 @@ import inspect
 import os
 import sys
 import typing as t
-from collections import defaultdict
 from http import HTTPStatus
 
 import django.urls
@@ -29,6 +28,7 @@ from django_oasis.parameter.parameters import (
 )
 from django_oasis.spec import utils as _spec
 from django_oasis_schema.spectools.objects import OpenAPISpec
+from django_oasis_schema.spectools.utils import clean_commonmark
 from django_oasis_schema.utils import make_instance, make_model_schema, make_schema
 
 
@@ -70,11 +70,14 @@ class OpenAPI:
     def __init__(
         self,
         *,
+        title: str = "API Document",
         name: t.Optional[str] = None,
+        description: str = "",
     ):
         self.__spec = OpenAPISpec(
             info={
-                "title": "API Document",
+                "title": title,
+                "description": clean_commonmark(description),
                 "version": "0.1.0",
             }
         )

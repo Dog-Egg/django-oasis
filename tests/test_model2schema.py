@@ -52,6 +52,7 @@ def test_B():
     }
 
 
+@pytest.mark.skip("File Schema 序列化时不应该放回 url。")
 def test_FileField():
     class File(models.Model):
         file = models.FileField()

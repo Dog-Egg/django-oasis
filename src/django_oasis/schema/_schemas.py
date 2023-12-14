@@ -19,7 +19,7 @@ class File(schema.Schema):
         data_format = "binary"
 
     def _serialize(self, obj):
-        return obj.url
+        raise NotImplementedError
 
 
 class Datetime(schema.Datetime):

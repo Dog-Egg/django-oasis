@@ -1,5 +1,12 @@
 from django_oasis import schema
-from django_oasis.parameter.parameters import Cookie, Path, Query, QueryItem, Style
+from django_oasis.parameter.parameters import (
+    Cookie,
+    FormData,
+    Path,
+    Query,
+    QueryItem,
+    Style,
+)
 
 
 class Color(schema.Model):
@@ -143,3 +150,18 @@ def test_path_simple_true_object():
     ).parse_kwargs({"color": "R=100,G=200,B=150"}) == {
         "color": {"B": 150, "G": 200, "R": 100}
     }
+
+
+def test_FormData_parse_request(rf):
+    request = rf.post(
+        "/",
+        data="a=1&b=1",
+        content_type="application/x-www-form-urlencoded",
+    )
+    result = FormData(
+        {
+            "a": schema.String(),
+            "b": schema.Integer(),
+        }
+    ).parse_request(request)
+    assert result == {"a": "1", "b": 1}
