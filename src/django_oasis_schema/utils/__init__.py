@@ -38,7 +38,13 @@ def make_model_schema(obj) -> "schema.Model":
     return obj
 
 
-def make_schema(obj) -> "schema.Schema":
+def make_schema(
+    obj: typing.Union[
+        "schema.Schema",
+        typing.Type["schema.Schema"],
+        typing.Dict[str, "schema.Schema"],
+    ]
+) -> "schema.Schema":
     if isinstance(obj, dict):
         return make_model_schema(obj)
     obj = make_instance(obj)

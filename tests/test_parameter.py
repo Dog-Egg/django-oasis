@@ -3,6 +3,7 @@ from django_oasis.parameter.parameters import (
     Cookie,
     FormData,
     FormItem,
+    JsonData,
     Path,
     Query,
     QueryItem,
@@ -181,3 +182,15 @@ def test_FormData_parse_request(rf):
         }
     ).parse_request(request)
     assert result == {"a": "1", "b": 1}
+
+
+def test_JsonData_parse_request(rf):
+    request = rf.post(
+        "/",
+        data={"a": "1", "b": "2"},
+        content_type="application/json",
+    )
+    result = JsonData({"a": schema.Integer(), "b": schema.String()}).parse_request(
+        request
+    )
+    assert result == {"a": 1, "b": "2"}

@@ -8,6 +8,7 @@ from .parameters import (
     FormItem,
     Header,
     HeaderItem,
+    JsonData,
     Query,
     QueryItem,
 )
@@ -22,3 +23,4 @@ CookieItem = _t.cast(_t.Any, CookieItem)
 HeaderItem = _t.cast(_t.Any, HeaderItem)
 FormData = _t.cast(_t.Any, FormData)
 FormItem = _t.cast(_t.Any, FormItem)
+JsonData = _t.cast(_t.Any, JsonData)

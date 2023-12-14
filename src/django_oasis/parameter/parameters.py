@@ -8,7 +8,6 @@ from django.http import HttpRequest
 from django.utils.datastructures import MultiValueDict
 from django.utils.functional import cached_property
 
-import django_oasis_schema.typing as st
 from django_oasis import schema as _schema
 from django_oasis.exceptions import (
     BadRequestError,
@@ -298,7 +297,7 @@ class RequestBodyContent(RequestData):
     location = "body"
     content_type: str
 
-    def __init__(self, schema: st.LikeModel) -> None:
+    def __init__(self, schema) -> None:
         self._schema = make_schema(schema)
 
     def __openapispec__(self, spec):
@@ -320,13 +319,40 @@ class RequestBodyContent(RequestData):
 
 
 class JsonData(RequestBodyContent):
+    """声明请求体数据，要求以 JSON 格式提交。"""
+
     content_type = "application/json"
+
+    def __init__(
+        self,
+        schema: t.Union[
+            _schema.Schema,
+            t.Type[_schema.Schema],
+            t.Dict[str, _schema.Schema],
+        ],
+    ) -> None:
+        super().__init__(schema)
+
+    def _parse_request(self, request):
+        try:
+            data = json.loads(request.body)
+        except (json.JSONDecodeError, TypeError):
+            raise BadRequestError("Invalid JSON data.")
+        return self._schema.deserialize(data)
 
 
 class FormData(RequestBodyContent):
     """声明请求体数据，要求以表单格式提交。"""
 
-    def __init__(self, schema: st.LikeModel, /) -> None:
+    def __init__(
+        self,
+        schema: t.Union[
+            _schema.Model,
+            t.Type[_schema.Model],
+            t.Dict[str, _schema.Schema],
+        ],
+        /,
+    ) -> None:
         super().__init__(schema)
         assert isinstance(self._schema, _schema.Model)
         self._schema = t.cast(_schema.Model, self._schema)
