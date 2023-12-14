@@ -2,6 +2,7 @@ from django_oasis import schema
 from django_oasis.parameter.parameters import (
     Cookie,
     FormData,
+    FormItem,
     Path,
     Query,
     QueryItem,
@@ -86,6 +87,21 @@ def test_QueryItem(rf):
     item = QueryItem(schema.Integer)
     item.setitemname("a")
     assert item.parse_request(rf.get("/?a=1")) == 1
+
+
+def test_FormItem(rf):
+    item = FormItem(schema.Integer)
+    item.setitemname("b")
+    assert (
+        item.parse_request(
+            rf.post(
+                "/",
+                "a=1&b=2",
+                content_type="application/x-www-form-urlencoded",
+            )
+        )
+        == 2
+    )
 
 
 def test_cookie_form_false_string__default(rf):

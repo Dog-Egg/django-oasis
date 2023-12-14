@@ -298,7 +298,7 @@ class RequestBodyContent(RequestData):
     location = "body"
     content_type: str
 
-    def __init__(self, schema) -> None:
+    def __init__(self, schema: st.LikeModel) -> None:
         self._schema = make_schema(schema)
 
     def __openapispec__(self, spec):
@@ -324,10 +324,10 @@ class JsonData(RequestBodyContent):
 
 
 class FormData(RequestBodyContent):
-    """要求请求体以表单形式提交。"""
+    """声明请求体数据，要求以表单格式提交。"""
 
-    def __init__(self, schema: st.LikeModel, /, **kwargs) -> None:
-        super().__init__(schema, **kwargs)
+    def __init__(self, schema: st.LikeModel, /) -> None:
+        super().__init__(schema)
         assert isinstance(self._schema, _schema.Model)
         self._schema = t.cast(_schema.Model, self._schema)
 
@@ -347,41 +347,55 @@ class FormData(RequestBodyContent):
         return self._schema.deserialize(data)
 
 
-class RequestParamItem(Parameter):
-    _executor: t.Type[RequestParameter]
+class BaseItem(Parameter):
+    def __init__(self, schema: t.Union[_schema.Schema, t.Type[_schema.Schema]]) -> None:
+        self._schema = make_instance(schema)
+
+    def parse_request(self, request: HttpRequest):
+        result: dict = self._paramobj.parse_request(request)
+        return result.popitem()[1]
+
+    def __openapispec__(self, spec):
+        return spec.parse(self._paramobj)
+
+    def setitemname(self, name: str):
+        self._paramobj = self._make_param_instance(name)
+
+    def _make_param_instance(self, name: str):
+        raise NotImplementedError
+
+
+class ParamItem(BaseItem):
+    _paramclass: t.Type[RequestParameter]
 
     def __init__(
         self,
         schema: t.Union[_schema.Schema, t.Type[_schema.Schema]],
         style: t.Optional[Style] = None,
-    ):
-        self.__schema = make_instance(schema)
+    ) -> None:
+        super().__init__(schema)
         self.__style = style
 
-    def __init_subclass__(cls, executor, **kwargs):
-        cls._executor = executor
-        super().__init_subclass__(**kwargs)
-
-    def setitemname(self, name: str):
-        self.__p = self._executor(
-            {name: self.__schema}, {name: self.__style} if self.__style else None
+    def _make_param_instance(self, name):
+        return self._paramclass(
+            {name: self._schema}, {name: self.__style} if self.__style else None
         )
 
-    def parse_request(self, request: HttpRequest):
-        result: dict = self.__p.parse_request(request)
-        return result.popitem()[1]
 
-    def __openapispec__(self, spec):
-        return spec.parse(self.__p)
+class QueryItem(ParamItem):
+    _paramclass = Query
 
 
-class QueryItem(RequestParamItem, executor=Query):
-    pass
+class HeaderItem(ParamItem):
+    _paramclass = Header
 
 
-class HeaderItem(RequestParamItem, executor=Header):
-    pass
+class CookieItem(ParamItem):
+    _paramclass = Cookie
 
 
-class CookieItem(RequestParamItem, executor=Cookie):
-    pass
+class FormItem(BaseItem):
+    """这是 `FormData` 的变体，用于声明表单中的一个键，而不是整个表单。"""
+
+    def _make_param_instance(self, name: str):
+        return FormData({name: self._schema})

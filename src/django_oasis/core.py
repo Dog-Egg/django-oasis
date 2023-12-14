@@ -21,10 +21,10 @@ from django_oasis.exceptions import (
     RequestValidationError,
 )
 from django_oasis.parameter.parameters import (
+    BaseItem,
     Parameter,
     Path,
     RequestParameter,
-    RequestParamItem,
 )
 from django_oasis.spec import utils as _spec
 from django_oasis_schema.spectools.objects import OpenAPISpec
@@ -372,7 +372,7 @@ class Operation:
     def __parse_parameters(self, handler):
         for name, parameter in inspect.signature(handler).parameters.items():
             param = parameter.default
-            if isinstance(param, RequestParamItem):
+            if isinstance(param, BaseItem):
                 param.setitemname(name)
 
             if isinstance(param, Parameter):
