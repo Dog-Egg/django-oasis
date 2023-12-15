@@ -194,3 +194,15 @@ def test_JsonData_parse_request(rf):
         request
     )
     assert result == {"a": 1, "b": "2"}
+
+
+def test_upload_file(rf):
+    from django.core.files.uploadedfile import InMemoryUploadedFile, SimpleUploadedFile
+
+    video = SimpleUploadedFile("file.mp4", b"file_content", content_type="video/mp4")
+    request = rf.post("/", data={"file": video})
+    result = FormData({"file": schema.File()}).parse_request(request)
+    file = result["file"]
+    assert isinstance(file, InMemoryUploadedFile)
+    assert file.read() == b"file_content"
+    assert file.content_type == "video/mp4"

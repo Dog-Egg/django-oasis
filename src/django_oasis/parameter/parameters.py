@@ -368,8 +368,12 @@ class FormData(RequestBodyContent):
         data = {}
         for field in self._schema._fields.values():
             k = field._alias
-            if k in request.POST:
-                data[k] = request.POST[k]
+            if isinstance(field, _schema.File):
+                target = request.FILES
+            else:
+                target = request.POST
+            if k in target:
+                data[k] = target[k]
         return self._schema.deserialize(data)
 
 
