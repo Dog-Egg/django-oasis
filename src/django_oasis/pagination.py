@@ -7,10 +7,10 @@ from django.http import HttpRequest
 from django.utils.functional import cached_property
 
 from django_oasis import schema
-from django_oasis.parameter.parameters import Parameter, Query, RequestParameter
+from django_oasis.parameter.parameters import MountPoint, Query, RequestParameter
 
 
-class Pagination(Parameter, metaclass=abc.ABCMeta):
+class Pagination(MountPoint, metaclass=abc.ABCMeta):
     """分页器抽象基类"""
 
     __reqarg: t.Any

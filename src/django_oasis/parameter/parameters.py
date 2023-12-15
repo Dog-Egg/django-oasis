@@ -102,7 +102,7 @@ class Path:
         return result
 
 
-class Parameter(abc.ABC):
+class MountPoint(abc.ABC):
     def setup(self, operation):
         pass
 
@@ -111,7 +111,7 @@ class Parameter(abc.ABC):
         pass
 
 
-class RequestData(Parameter, abc.ABC):
+class RequestData(MountPoint, abc.ABC):
     location: str
 
     def parse_request(self, request: HttpRequest) -> t.Any:
@@ -377,7 +377,7 @@ class FormData(RequestBodyContent):
         return self._schema.deserialize(data)
 
 
-class BaseItem(Parameter):
+class BaseItem(MountPoint):
     def __init__(self, schema: t.Union[_schema.Schema, t.Type[_schema.Schema]]) -> None:
         self._schema = make_instance(schema)
 

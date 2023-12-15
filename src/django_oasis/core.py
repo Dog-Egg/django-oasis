@@ -22,7 +22,7 @@ from django_oasis.exceptions import (
 )
 from django_oasis.parameter.parameters import (
     BaseItem,
-    Parameter,
+    MountPoint,
     Path,
     RequestParameter,
 )
@@ -361,7 +361,7 @@ class Operation:
         self.__self_auth: t.Optional[BaseAuth] = (
             None if auth is None else make_instance(auth)
         )
-        self.__parameters: t.Dict[str, Parameter] = {}
+        self.__mountpoints: t.Dict[str, MountPoint] = {}
         self._resource: Resource = None  # type: ignore
         self._view_decorators = view_decorators or []
 
@@ -375,13 +375,13 @@ class Operation:
             if isinstance(param, BaseItem):
                 param.setitemname(name)
 
-            if isinstance(param, Parameter):
+            if isinstance(param, MountPoint):
                 param.setup(self)
-                self.__parameters[name] = param
+                self.__mountpoints[name] = param
 
     def __parse_request(self, request):
         kwargs = {}
-        for name, param in self.__parameters.items():
+        for name, param in self.__mountpoints.items():
             kwargs[name] = param.parse_request(request)
         return kwargs
 
@@ -434,6 +434,6 @@ class Operation:
                     },
                     "security": self.__auth and spec.Skip(spec.parse(self.__auth)),
                 },
-                *(spec.parse(p) for p in self.__parameters.values()),
+                *(spec.parse(p) for p in self.__mountpoints.values()),
             ],
         )
