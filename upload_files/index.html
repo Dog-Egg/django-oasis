@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="用户认证" href="../auth/index.html" /><link rel="prev" title="上传文件" href="../upload_files/index.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="分页" href="../pagination/index.html" /><link rel="prev" title="请求体" href="../request_body/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
-        <title>分页 - Django-Oasis 0.1.dev20231215125458 文档</title>
+        <title>上传文件 - Django-Oasis 0.1.dev20231215125458 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -160,8 +160,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../request_parameters/index.html">请求参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../request_path/index.html">路径参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../request_body/index.html">请求体</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../upload_files/index.html">上传文件</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">分页</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">上传文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pagination/index.html">分页</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../auth/index.html">用户认证</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../schema/index.html">Schema</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../schema/model.html">Model Schema</a></li>
@@ -202,46 +202,36 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
           <section id="id1">
-<h1>分页<a class="headerlink" href="#id1" title="此标题的永久链接">#</a></h1>
-<p>Oasis 提供了对 Django QuerySet 对象进行数据分页的方法。</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="django_oasis.pagination.PagePagination">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.pagination.</span></span><span class="sig-name descname"><span class="pre">PagePagination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.pagination.PagePagination" title="永久链接至目标">#</a></dt>
-<dd><p>使用从 URL 参数获取 <code class="docutils literal notranslate"><span class="pre">page</span></code> 和 <code class="docutils literal notranslate"><span class="pre">page_size</span></code> 参数对 QuerySet 对象进行分页。</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>schema</strong> (<a class="reference internal" href="../api.html#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="../api.html#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>) – 提供分页列表中的数据结构。</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p>代码示例：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
-
-<span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">model2schema</span>
-<span class="kn">from</span> <span class="nn">django_oasis.pagination</span> <span class="kn">import</span> <span class="n">PagePagination</span>
+<h1>上传文件<a class="headerlink" href="#id1" title="此标题的永久链接">#</a></h1>
+<p>上传文件需要用到 <a class="reference internal" href="../request_body/index.html#django_oasis.parameter.FormData" title="django_oasis.parameter.FormData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormData</span></code></a> 或者 <a class="reference internal" href="../request_body/index.html#django_oasis.parameter.FormItem" title="django_oasis.parameter.FormItem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormItem</span></code></a>，并使用 <a class="reference internal" href="../api.html#django_oasis.schema.File" title="django_oasis.schema.File"><code class="xref py py-obj docutils literal notranslate"><span class="pre">File</span></code></a> 来声明文件类型。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>文件上传需要使用表单，而不能使用 JSON。与普通的表单提交不同，普通表单提交时 content-type 为 application/x-www-form-urlencoded，但是上传文件需要使用 multipart/form-data。这只是顺便一说，了解就行，Oasis 会自动判断使用哪种表单类型。</p>
+</div>
+<p>示例代码：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
+<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormItem</span>
 
 
-<span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;书名&quot;</span><span class="p">)</span>
-    <span class="n">author</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;作者&quot;</span><span class="p">)</span>
-
-
-<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/books&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">BookListAPI</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pagination</span><span class="o">=</span><span class="n">PagePagination</span><span class="p">(</span><span class="n">model2schema</span><span class="p">(</span><span class="n">Book</span><span class="p">))):</span>
-        <span class="k">return</span> <span class="n">pagination</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/upload&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UploadAPI</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+<span class="hll">        <span class="n">file</span><span class="o">=</span><span class="n">FormItem</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">File</span><span class="p">),</span>
+</span>    <span class="p">):</span>
+        <span class="o">...</span>
 </pre></div>
 </div>
+<p>接收到的 file 值为一个 <a class="reference external" href="https://docs.djangoproject.com/zh-hans/5.0/ref/files/uploads/#django.core.files.uploadedfile.InMemoryUploadedFile">InMemoryUploadedFile</a> 对象。</p>
 
-            <iframe id="id_2bcc2e6c" srcdoc="
+            <iframe id="id_16bdd404" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -276,7 +266,7 @@
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
-&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/books&quot;: {&quot;get&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;page&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 1, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}, {&quot;name&quot;: &quot;page_size&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 20, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;page&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;page_size&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;results&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;items&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;id&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;ID&quot;, &quot;readOnly&quot;: true}, &quot;title&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4e66\u540d&quot;, &quot;maxLength&quot;: 10}, &quot;author&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4f5c\u8005&quot;, &quot;maxLength&quot;: 20}}, &quot;required&quot;: [&quot;title&quot;, &quot;author&quot;]}}, &quot;count&quot;: {&quot;type&quot;: &quot;integer&quot;}}, &quot;required&quot;: [&quot;page&quot;, &quot;page_size&quot;, &quot;results&quot;, &quot;count&quot;]}}}}}}}}}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;Upload File&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/upload&quot;: {&quot;post&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;multipart/form-data&quot;: {&quot;schema&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;file&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;format&quot;: &quot;binary&quot;}}, &quot;required&quot;: [&quot;file&quot;]}}}}}}}}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
 &lt;script&gt;
     var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
 
@@ -320,7 +310,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_2bcc2e6c')
+                iFrameResize({checkOrigin: false}, '#id_16bdd404')
             </script>
             </section>
 
@@ -329,23 +319,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../auth/index.html">
+          <a class="next-page" href="../pagination/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">用户认证</div>
+                <div class="title">分页</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../upload_files/index.html">
+          <a class="prev-page" href="../request_body/index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">上传文件</div>
+                <div class="title">请求体</div>
                 
               </div>
             </a>
@@ -367,27 +357,8 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">分页</a><ul>
-<li><a class="reference internal" href="#django_oasis.pagination.PagePagination"><code class="docutils literal notranslate"><span class="pre">PagePagination</span></code></a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

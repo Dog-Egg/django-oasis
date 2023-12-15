@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="分页" href="../pagination/index.html" /><link rel="prev" title="路径参数" href="../request_path/index.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="上传文件" href="../upload_files/index.html" /><link rel="prev" title="路径参数" href="../request_path/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
-        <title>请求体 - Django-Oasis 0.1.dev20231214154841 文档</title>
+        <title>请求体 - Django-Oasis 0.1.dev20231215125458 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231214154841 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231215125458 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231214154841 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231215125458 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -160,6 +160,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../request_parameters/index.html">请求参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../request_path/index.html">路径参数</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">请求体</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upload_files/index.html">上传文件</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pagination/index.html">分页</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../auth/index.html">用户认证</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../schema/index.html">Schema</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -242,7 +243,7 @@
 </pre></div>
 </div>
 
-            <iframe id="id_15820b8e" srcdoc="
+            <iframe id="id_45bfb28d" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -321,7 +322,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_15820b8e')
+                iFrameResize({checkOrigin: false}, '#id_45bfb28d')
             </script>
             </section>
 <section id="id2">
@@ -358,7 +359,7 @@
 </div>
 <p>当 POST 表单为 <code class="docutils literal notranslate"><span class="pre">a=1&amp;b=1</span></code> 时，form 值等于 <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">'1',</span> <span class="pre">'b':</span> <span class="pre">1}</span></code>。</p>
 
-            <iframe id="id_809e70ab" srcdoc="
+            <iframe id="id_50a492fa" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -437,7 +438,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_809e70ab')
+                iFrameResize({checkOrigin: false}, '#id_50a492fa')
             </script>
             <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.parameter.FormItem">
@@ -467,7 +468,7 @@
 </div>
 <p>当 POST 表单为 <code class="docutils literal notranslate"><span class="pre">a=1&amp;b=1</span></code> 时，a 值等于 <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code>，b 值等于 <code class="docutils literal notranslate"><span class="pre">1</span></code>。</p>
 
-            <iframe id="id_7e5df137" srcdoc="
+            <iframe id="id_d710c975" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -546,7 +547,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_7e5df137')
+                iFrameResize({checkOrigin: false}, '#id_d710c975')
             </script>
             </section>
 <section id="body">
@@ -582,7 +583,7 @@
 </pre></div>
 </div>
 
-            <iframe id="id_55ba8649" srcdoc="
+            <iframe id="id_f6f17cfb" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -661,7 +662,7 @@
 &lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_55ba8649')
+                iFrameResize({checkOrigin: false}, '#id_f6f17cfb')
             </script>
             </section>
 </section>
@@ -671,12 +672,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../pagination/index.html">
+          <a class="next-page" href="../upload_files/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">分页</div>
+                <div class="title">上传文件</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -746,7 +747,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=bed6772c"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c1b1a4c1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
