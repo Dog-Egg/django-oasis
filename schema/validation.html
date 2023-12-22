@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Hooks" href="hooks.html" /><link rel="prev" title="Model Schema" href="model.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
-        <title>验证数据 - Django-Oasis 0.1.dev20231215125458 文档</title>
+        <title>验证数据 - Django-Oasis 0.1.dev20231222040005 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231215125458 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231222040005 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231215125458 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231222040005 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -240,6 +240,7 @@ django_oasis_schema.exceptions.ValidationError: [{&#39;msgs&#39;: [&#39;这不�
 <p class="admonition-title">备注</p>
 <p>关于什么是 hook，详细请查看 <a class="reference internal" href="hooks.html"><span class="doc">Hooks</span></a> 章节。</p>
 </div>
+<p>如下示例所见，使用 <a class="reference internal" href="hooks.html#django_oasis.schema.validator" title="django_oasis.schema.validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validator</span></code></a> hook 后便无需传递验证函数，因为被修饰的验证函数会挂载到 Schema 的校验函数列表中。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PositiveInteger</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">):</span>
 
     <span class="nd">@schema</span><span class="o">.</span><span class="n">validator</span>
@@ -252,7 +253,7 @@ django_oasis_schema.exceptions.ValidationError: [{&#39;msgs&#39;: [&#39;这不�
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
     ...
-django_oasis_schema.exceptions.ValidationError: [{&#39;msgs&#39;: [&#39;不是一个正整数.&#39;]}]
+django_oasis_schema.exceptions.ValidationError: [{&#39;msgs&#39;: [&#39;不是一个正整数&#39;]}]
 </pre></div>
 </div>
 <div class="admonition tip">
@@ -281,7 +282,7 @@ django_oasis_schema.exceptions.ValidationError: [{&#39;msgs&#39;: [&#39;不是�
 </div>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>参数和 validator hook 可同时使用，它们的验证函数都会被执行。</p>
+<p>参数和 validator hook 可同时使用，它们的验证函数会合并后执行。</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PositiveInteger</span><span class="p">(</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">validate_positive_integer</span><span class="p">])</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="w">    </span><span class="o">...</span>
@@ -386,7 +387,7 @@ django_oasis_schema.exceptions.ValidationError: [{&#39;msgs&#39;: [&#39;年龄�
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c1b1a4c1"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2938f569"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>

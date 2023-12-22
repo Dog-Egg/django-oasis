@@ -41,6 +41,8 @@ Schema 提供能多种验证方式。以下将以 “验证一个数是否为正
 .. note::
     关于什么是 hook，详细请查看 :doc:`hooks` 章节。
 
+如下示例所见，使用 `validator <django_oasis.schema.validator>` hook 后便无需传递验证函数，因为被修饰的验证函数会挂载到 Schema 的校验函数列表中。
+
 .. testcode::
 
     class PositiveInteger(schema.Integer):
@@ -56,7 +58,7 @@ Schema 提供能多种验证方式。以下将以 “验证一个数是否为正
 
     Traceback (most recent call last):
         ...
-    django_oasis_schema.exceptions.ValidationError: [{'msgs': ['不是一个正整数.']}]
+    django_oasis_schema.exceptions.ValidationError: [{'msgs': ['不是一个正整数']}]
 
 .. tip::
     validator hook 也是可以有多个的。
@@ -86,7 +88,7 @@ Schema 提供能多种验证方式。以下将以 “验证一个数是否为正
 
 
 .. note::
-    参数和 validator hook 可同时使用，它们的验证函数都会被执行。
+    参数和 validator hook 可同时使用，它们的验证函数会合并后执行。
 
     .. doctest::
 
