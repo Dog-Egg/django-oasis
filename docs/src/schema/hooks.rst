@@ -1,9 +1,44 @@
 Hooks
 =====
 
-Hook 并不是 Schema 实现的核心，它最初的目的是为了让 class 类和一些紧密相关的函数(不是指 method)以更加美观的方式组织在一起。但后来发现它非常灵活，以致于它可以代替实现很多 Schema 的功能。
+Hook 可以让 Schema 更加灵活好用，虽然它并不是实现的核心。它最初的目的是为了让 class 类和一些紧密相关的函数(不是指 method)以更加美观的方式组织在一起。
 
-使用用法: hook 是以装饰器的形式定义在 Schema 类的方法上的。
+
+如下例所示，``validate_age`` 是与 ``User`` 相关的验证函数，但它却被定义在了全局域上，虽然毫无问题，但是代码结构并不好看。就好像只属于我的物品却被放在了公共展示柜里。
+
+.. code-block::
+    :emphasize-lines: 7
+
+    def validate_age(value):
+        if value < 0:
+            raise schema.ValidationError('年龄不能小于0。')
+
+    class User(schema.Model):
+        name = schema.String()
+        age = schema.Integer(validators=[validate_age])
+
+
+使用 hook 后，相关代码变得更加紧密，并且效果一样。
+
+.. code-block::
+
+    class User(schema.Model):
+        name = schema.String()
+        age = schema.Integer()
+
+        @schema.validator(age)
+        def validate_age(self, value):
+            if value < 0:
+                raise schema.ValidationError('年龄不能小于0。')
+
+
+
+由于 hook 被设计的很简单，所以它非常灵活，以致于可以代替实现很多 Schema 的功能。
+
+使用用法
+--------
+
+hook 是以装饰器的形式定义在 Schema 类的方法上的。
 
 .. testsetup:: *
 
