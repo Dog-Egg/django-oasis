@@ -7,7 +7,6 @@ Hook 可以让 Schema 更加灵活好用，虽然它并不是实现的核心。�
 如下例所示，``validate_age`` 是与 ``User`` 相关的验证函数，但它却被定义在了全局域上，虽然毫无问题，但是代码结构并不好看。就好像只属于我的物品却被放在了公共展示柜里。
 
 .. code-block::
-    :emphasize-lines: 7
 
     def validate_age(value):
         if value < 0:
@@ -21,12 +20,13 @@ Hook 可以让 Schema 更加灵活好用，虽然它并不是实现的核心。�
 使用 hook 后，相关代码变得更加紧密，并且效果一样。
 
 .. code-block::
+    :emphasize-lines: 5
 
     class User(schema.Model):
         name = schema.String()
         age = schema.Integer()
 
-        @schema.validator(age)
+        @schema.validator(age)  # 这是一个 hook
         def validate_age(self, value):
             if value < 0:
                 raise schema.ValidationError('年龄不能小于0。')

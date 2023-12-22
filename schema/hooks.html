@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="API 参考" href="../api.html" /><link rel="prev" title="验证数据" href="validation.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
-        <title>Hooks - Django-Oasis 0.1.dev20231222040005 文档</title>
+        <title>Hooks - Django-Oasis 0.1.dev20231222040335 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231222040005 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231222040335 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231222040005 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231222040335 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -218,16 +218,16 @@
 
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-<span class="hll">    <span class="n">age</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">validate_age</span><span class="p">])</span>
-</span></pre></div>
+    <span class="n">age</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">validate_age</span><span class="p">])</span>
+</pre></div>
 </div>
 <p>使用 hook 后，相关代码变得更加紧密，并且效果一样。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">age</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
 
-    <span class="nd">@schema</span><span class="o">.</span><span class="n">validator</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">validate_age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="hll">    <span class="nd">@schema</span><span class="o">.</span><span class="n">validator</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>  <span class="c1"># 这是一个 hook</span>
+</span>    <span class="k">def</span> <span class="nf">validate_age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">schema</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;年龄不能小于0。&#39;</span><span class="p">)</span>
 </pre></div>
@@ -378,7 +378,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2938f569"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8f6f090d"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
