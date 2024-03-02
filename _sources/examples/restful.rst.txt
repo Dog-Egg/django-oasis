@@ -1,6 +1,6 @@
 RESTful 风格
 -------------
 
-.. literalinclude:: ./restful.py
+.. myliteralinclude:: ./restful.py
 
 .. openapiview:: ./restful.py

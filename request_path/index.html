@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="请求体" href="../request_body/index.html" /><link rel="prev" title="请求参数" href="../request_parameters/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
-        <title>路径参数 - Django-Oasis 0.1.dev20240302150030 文档</title>
+        <title>路径参数 - Django-Oasis 0.1.dev20240302151603 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240302150030 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240302151603 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240302150030 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240302151603 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -212,6 +212,8 @@
 <h1>路径参数<a class="headerlink" href="#id1" title="此标题的永久链接">#</a></h1>
 <p>Oasis 使用 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3#path-templating">路径模版</a> 来获取路径参数。即使用由大括号 ({}) 分隔的模板表达式，将 URL 路径的一部分标记为可使用路径参数进行替换。</p>
 <p>路径参数会以同名关键字参数的形式传递给 API 类的 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 方法，如下例：</p>
+<div class="literal-block-wrapper docutils container" id="id-76a70856">
+<div class="code-block-caption"><span class="caption-text">example.py</span><a class="headerlink" href="#id-76a70856" title="此代码块的永久链接">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span>
 
 
@@ -224,13 +226,14 @@
         <span class="o">...</span>
 </pre></div>
 </div>
+</div>
 <p>这里在 URL 路径上标记了一个名为 <code class="docutils literal notranslate"><span class="pre">pet_id</span></code> 的路径参数，在处理请求时，API 类也将接收到同名的关键字参数。</p>
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-76a70856">example.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_4ac2630a" srcdoc="
+                <iframe id="id_79228ccd" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -310,11 +313,13 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_4ac2630a')
+                iFrameResize({checkOrigin: false}, '#id_79228ccd')
             </script>
             <section id="id3">
 <h2>参数类型<a class="headerlink" href="#id3" title="此标题的永久链接">#</a></h2>
 <p>为路径参数声明数据类型及验证规则只需为 <a class="reference internal" href="../api.html#django_oasis.Resource" title="django_oasis.Resource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Resource</span></code></a> 设置 <code class="docutils literal notranslate"><span class="pre">param_schemas</span></code>。</p>
+<div class="literal-block-wrapper docutils container" id="id-9f348dcd">
+<div class="code-block-caption"><span class="caption-text">example2.py</span><a class="headerlink" href="#id-9f348dcd" title="此代码块的永久链接">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
 
 
@@ -330,13 +335,14 @@
         <span class="o">...</span>
 </pre></div>
 </div>
+</div>
 <p>Schema 对象会对对应的路径参数执行反序列化；如果反序列化失败，会返回 HTTP 404 响应。</p>
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-9f348dcd">example2.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_61eee9e5" srcdoc="
+                <iframe id="id_d8601f8a" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -416,7 +422,7 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_61eee9e5')
+                iFrameResize({checkOrigin: false}, '#id_d8601f8a')
             </script>
             </section>
 <section id="path">
@@ -424,6 +430,8 @@
 <p>在获取路径参数时，默认是不匹配 <strong>‘/’</strong> 的。</p>
 <p>而 <a class="reference internal" href="../api.html#django_oasis.schema.Path" title="django_oasis.schema.Path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schema.Path</span></code></a> 用于匹配非空字段，包括路径分隔符 <strong>‘/’</strong>。它允许你匹配完整的 URL 路径而不是只匹配 URL 的一部分。</p>
 <p>如下例，当请求路径为 <code class="docutils literal notranslate"><span class="pre">/files/image/picture.png</span></code> 时，获取的路径参数 <code class="docutils literal notranslate"><span class="pre">filepath</span></code> 为 <code class="docutils literal notranslate"><span class="pre">image/picture.png</span></code>。</p>
+<div class="literal-block-wrapper docutils container" id="id-612d0818">
+<div class="code-block-caption"><span class="caption-text">example3.py</span><a class="headerlink" href="#id-612d0818" title="此代码块的永久链接">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
 
 
@@ -439,10 +447,13 @@
         <span class="o">...</span>
 </pre></div>
 </div>
+</div>
 </section>
 <section id="id4">
 <h2>参数样式<a class="headerlink" href="#id4" title="此标题的永久链接">#</a></h2>
 <p>路径参数同样支持参数样式，通过 <code class="docutils literal notranslate"><span class="pre">param_styles</span></code> 进行设置。参数样式遵照 OpenAPI 规范的定义，请参照 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3#style-values">样式值</a> 和 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3#style-examples">样式示例</a> 进行设置。</p>
+<div class="literal-block-wrapper docutils container" id="id-571f035f">
+<div class="code-block-caption"><span class="caption-text">example4.py</span><a class="headerlink" href="#id-571f035f" title="此代码块的永久链接">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">Style</span>
 
@@ -462,13 +473,14 @@
         <span class="o">...</span>
 </pre></div>
 </div>
+</div>
 <p>此示例请求路径如果为 <code class="docutils literal notranslate"><span class="pre">/color/blue,red</span></code>，则获取的 <code class="docutils literal notranslate"><span class="pre">colors</span></code> 值为 <code class="docutils literal notranslate"><span class="pre">['blue',</span> <span class="pre">'red']</span></code>。</p>
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-571f035f">example4.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_11ecf063" srcdoc="
+                <iframe id="id_53657665" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -548,7 +560,7 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_11ecf063')
+                iFrameResize({checkOrigin: false}, '#id_53657665')
             </script>
             </section>
 </section>
@@ -623,7 +635,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=1a867e96"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=14053223"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>

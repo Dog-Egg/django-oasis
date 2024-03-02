@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="分页" href="../pagination/index.html" /><link rel="prev" title="请求体" href="../request_body/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
-        <title>上传文件 - Django-Oasis 0.1.dev20240302150030 文档</title>
+        <title>上传文件 - Django-Oasis 0.1.dev20240302151603 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240302150030 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240302151603 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240302150030 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240302151603 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -216,6 +216,8 @@
 <p>文件上传需要使用表单，而不能使用 JSON。与普通的表单提交不同，普通表单提交时 content-type 为 application/x-www-form-urlencoded，但是上传文件需要使用 multipart/form-data。这只是顺便一说，了解就行，Oasis 会自动判断使用哪种表单类型。</p>
 </div>
 <p>示例代码：</p>
+<div class="literal-block-wrapper docutils container" id="id-4550b9de">
+<div class="code-block-caption"><span class="caption-text">uploadfile.py</span><a class="headerlink" href="#id-4550b9de" title="此代码块的永久链接">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormItem</span>
 
@@ -229,13 +231,14 @@
         <span class="o">...</span>
 </pre></div>
 </div>
+</div>
 <p>接收到的 file 值为一个 <a class="reference external" href="https://docs.djangoproject.com/zh-hans/5.0/ref/files/uploads/#django.core.files.uploadedfile.InMemoryUploadedFile">InMemoryUploadedFile</a> 对象。</p>
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-4550b9de">uploadfile.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_b9c8f8c6" srcdoc="
+                <iframe id="id_21b8f2be" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -315,7 +318,7 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_b9c8f8c6')
+                iFrameResize({checkOrigin: false}, '#id_21b8f2be')
             </script>
             </section>
 
@@ -368,7 +371,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=1a867e96"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=14053223"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>

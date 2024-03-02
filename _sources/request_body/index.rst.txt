@@ -8,7 +8,7 @@ JSON 格式
 
 代码示例：
 
-.. literalinclude:: jsondata.py
+.. myliteralinclude:: jsondata.py
     :lines: 1-16
     :emphasize-lines: 9-14
 .. openapiview:: jsondata.py
@@ -22,7 +22,7 @@ JSON 格式
 
 代码示例：
 
-.. literalinclude:: ./formdata.py
+.. myliteralinclude:: ./formdata.py
     :lines: 1-16
     :emphasize-lines: 9-14
 
@@ -36,7 +36,7 @@ JSON 格式
 
 代码示例：
 
-.. literalinclude:: ./formitem.py
+.. myliteralinclude:: ./formitem.py
     :lines: 1-12
 
 当 POST 表单为 ``a=1&b=1`` 时，a 值等于 ``"1"``，b 值等于 ``1``。
@@ -52,7 +52,7 @@ Body
 
 代码示例：
 
-.. literalinclude:: ./body.py
+.. myliteralinclude:: ./body.py
     :emphasize-lines: 12
 
 .. openapiview:: ./body.py

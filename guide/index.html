@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="请求参数" href="../request_parameters/index.html" /><link rel="prev" title="开始" href="../quickstart/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
-        <title>指南 - Django-Oasis 0.1.dev20240302150030 文档</title>
+        <title>指南 - Django-Oasis 0.1.dev20240302151603 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240302150030 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240302151603 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240302150030 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240302151603 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -230,6 +230,8 @@
 <section id="id3">
 <h2>请求操作<a class="headerlink" href="#id3" title="此标题的永久链接">#</a></h2>
 <p>下例展示了所有支持的请求操作。</p>
+<div class="literal-block-wrapper docutils container" id="id-ddbf852a">
+<div class="code-block-caption"><span class="caption-text">operations.py</span><a class="headerlink" href="#id-ddbf852a" title="此代码块的永久链接">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span>
 
 
@@ -260,12 +262,13 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;TRACE Operation&quot;&quot;&quot;</span>
 </pre></div>
 </div>
+</div>
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-ddbf852a">operations.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_b4a70875" srcdoc="
+                <iframe id="id_676ae15a" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -345,13 +348,15 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_b4a70875')
+                iFrameResize({checkOrigin: false}, '#id_676ae15a')
             </script>
             </section>
 <section id="request">
 <h2>Request 对象<a class="headerlink" href="#request" title="此标题的永久链接">#</a></h2>
 <p>在使用 Oasis 开发时，大多数时候都不需要直接使用到 Request 对象，所以请求操作并不像 Django 视图函数一样会接收到 Request 对象。</p>
 <p>所以 Oasis 做了如下规定: 只有定义了 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 方法的 API 类才会接收到 Request 对象，且 Request 对象会以第一个位置参数的形式传递给 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 方法。该 Request 对象为 Django 的 <a class="reference external" href="https://docs.djangoproject.com/en/4.2/ref/request-response/#httprequest-objects">HttpRequest</a> 对象。</p>
+<div class="literal-block-wrapper docutils container" id="id-bf101b63">
+<div class="code-block-caption"><span class="caption-text">request_object.py</span><a class="headerlink" href="#id-bf101b63" title="此代码块的永久链接">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span>
 
 
@@ -364,6 +369,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span>
         <span class="c1"># do something ...</span>
 </pre></div>
+</div>
 </div>
 </section>
 </section>
@@ -438,7 +444,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=1a867e96"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=14053223"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
