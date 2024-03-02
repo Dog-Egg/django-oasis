@@ -5,7 +5,7 @@
 
 以下代码示例会验证请求是否具有“管理员权限”。若用户未登录，将返回 HTTP 401 响应；若用户已登录但非管理员，将返回 HTTP 403 响应。
 
-.. literalinclude:: ./auth.py
+.. myliteralinclude:: ./auth.py
     :emphasize-lines: 7
 
 .. openapiview:: ./auth.py
@@ -36,5 +36,5 @@
 
 假设项目使用了 django.contrib.auth 作为用户认证系统，并且改用 HTTP Basic 作为认证方式。你需要自行实现认证类：
 
-.. literalinclude:: ./custom_auth.py
+.. myliteralinclude:: ./custom_auth.py
 .. openapiview:: ./custom_auth.py

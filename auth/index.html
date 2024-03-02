@@ -5,8 +5,8 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Schema" href="../schema/index.html" /><link rel="prev" title="分页" href="../pagination/index.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
-        <title>用户认证 - Django-Oasis 0.1.dev20231222040335 文档</title>
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
+        <title>用户认证 - Django-Oasis 0.1.dev20240302150030 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20231222040335 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240302150030 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20231222040335 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240302150030 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -212,6 +212,8 @@
 <h1>用户认证<a class="headerlink" href="#id1" title="此标题的永久链接">#</a></h1>
 <p>仅需使用 <a class="reference internal" href="../api.html#django_oasis.Operation" title="django_oasis.Operation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Operation</span></code></a> 并设置 auth 参数即可实现认证。</p>
 <p>以下代码示例会验证请求是否具有“管理员权限”。若用户未登录，将返回 HTTP 401 响应；若用户已登录但非管理员，将返回 HTTP 403 响应。</p>
+<div class="literal-block-wrapper docutils container" id="id-640f99c4">
+<div class="code-block-caption"><span class="caption-text">auth.py</span><a class="headerlink" href="#id-640f99c4" title="此代码块的永久链接">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.auth</span> <span class="kn">import</span> <span class="n">IsAdministrator</span>
 
@@ -223,8 +225,13 @@
         <span class="o">...</span>
 </pre></div>
 </div>
+</div>
 
-            <iframe id="id_44c4e89c" srcdoc="
+            <div style="border: 1px solid var(--color-background-border);">
+                <div class="code-block-caption">
+                    <span class="caption-text">由 <a href="#id-640f99c4">auth.py</a> 解析获得</span>
+                </div>
+                <iframe id="id_50c3e5ba" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -300,10 +307,11 @@
 
 
 &lt;/body&gt;
-&lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
+&lt;/html&gt;" frameborder="0" style="min-width: 100%; display: block;"></iframe>
+            </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_44c4e89c')
+                iFrameResize({checkOrigin: false}, '#id_50c3e5ba')
             </script>
             <section id="id2">
 <h2>内置认证类<a class="headerlink" href="#id2" title="此标题的永久链接">#</a></h2>
@@ -371,6 +379,8 @@
 <section id="id4">
 <h3>示例1<a class="headerlink" href="#id4" title="此标题的永久链接">#</a></h3>
 <p>假设项目使用了 django.contrib.auth 作为用户认证系统，并且改用 HTTP Basic 作为认证方式。你需要自行实现认证类：</p>
+<div class="literal-block-wrapper docutils container" id="id-48967861">
+<div class="code-block-caption"><span class="caption-text">custom_auth.py</span><a class="headerlink" href="#id-48967861" title="此代码块的永久链接">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.auth</span> <span class="kn">import</span> <span class="n">BaseAuth</span>
 <span class="kn">from</span> <span class="nn">django_oasis.exceptions</span> <span class="kn">import</span> <span class="n">UnauthorizedError</span>
@@ -400,8 +410,13 @@
         <span class="o">...</span>
 </pre></div>
 </div>
+</div>
 
-            <iframe id="id_4ee0e6cb" srcdoc="
+            <div style="border: 1px solid var(--color-background-border);">
+                <div class="code-block-caption">
+                    <span class="caption-text">由 <a href="#id-48967861">custom_auth.py</a> 解析获得</span>
+                </div>
+                <iframe id="id_afc77196" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -477,10 +492,11 @@
 
 
 &lt;/body&gt;
-&lt;/html&gt;" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
+&lt;/html&gt;" frameborder="0" style="min-width: 100%; display: block;"></iframe>
+            </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_4ee0e6cb')
+                iFrameResize({checkOrigin: false}, '#id_afc77196')
             </script>
             </section>
 </section>
@@ -569,7 +585,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8f6f090d"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=1a867e96"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
