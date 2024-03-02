@@ -13,6 +13,8 @@ from sphinx.util.docutils import SphinxDirective
 
 from django_oasis.docs import _get_swagger_ui_html
 
+from ..utils import generate_id
+
 
 class OpenAPIView(SphinxDirective):
     has_content = True
@@ -22,7 +24,7 @@ class OpenAPIView(SphinxDirective):
 
     def run(self):
         try:
-            filename = self.state.document.settings.env.relfn2path(self.content[0])[1]
+            rel_filename, filename = self.env.relfn2path(self.content[0])
             module = import_module_from_file(filename)
 
             extra_config = {}
@@ -51,7 +53,12 @@ class OpenAPIView(SphinxDirective):
 
             iframe_id = "id_" + uuid.uuid4().hex[:8]
             iframe = f"""
-            <iframe id="{iframe_id}" srcdoc="{escape(html)}" frameborder="0" style="border: 1px solid #ddd; min-width: 100%;"></iframe>
+            <div style="border: 1px solid var(--color-background-border);">
+                <div class="code-block-caption">
+                    <span class="caption-text">由 <a href="#{generate_id(rel_filename)}">{os.path.split(filename)[1]}</a> 解析获得</span>
+                </div>
+                <iframe id="{iframe_id}" srcdoc="{escape(html)}" frameborder="0" style="min-width: 100%; display: block;"></iframe>
+            </div>
             <script src="{getsrc('_static/iframeResizer.min.js')}"></script>
             <script>
                 iFrameResize({{checkOrigin: false}}, '#{iframe_id}')

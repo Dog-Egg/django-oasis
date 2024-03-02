@@ -1,7 +1,7 @@
 {
     "files.exclude": {
         "**/__pycache__": true,
-        ".tox": true,
+        ".tox": false,
         "**/.pytest_cache": true,
         ".venv/": true,
         "**/*.egg-info": true,
@@ -20,7 +20,10 @@
             "source.organizeImports": "explicit"
         },
     },
-    "isort.args":["--profile", "black"],
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
     "python.formatting.provider": "black",
     "python.analysis.extraPaths": [
         "./src"

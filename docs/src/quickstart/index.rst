@@ -72,7 +72,7 @@ cd 到一个你想放置你代码的目录，然后运行以下命令：
 
 然后编写如下 API，它像 Django 的视图函数一样，负责处理请求并返回响应。
 
-.. literalinclude:: ./views.py
+.. myliteralinclude:: ./views.py
     :caption: myapp/views.py
 
 

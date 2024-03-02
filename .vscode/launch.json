@@ -6,19 +6,31 @@
   "configurations": [
     {
       "name": "Debug: DocDev",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "program": ".venv/bin/sphinx-build",
-      "purpose": ["debug-test"],
-      "args": ["-b", "html", "docs/src", "docs/_build", "-T", "-a", "-E"],
+      "purpose": [
+        "debug-test"
+      ],
+      "args": [
+        "-b",
+        "html",
+        "docs/src",
+        "docs/_build",
+        "-T",
+        "-a",
+        "-E"
+      ],
       "justMyCode": false,
     },
     {
       "name": "Python: Debug Tests",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "program": "${file}",
-      "purpose": ["debug-test"],
+      "purpose": [
+        "debug-test"
+      ],
       "justMyCode": false
     }
   ]
