@@ -20,7 +20,7 @@ Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地�
 
 示例中定义了一个 ``BookModel``，并使用 Oasis 编写两个接口，为其实现 "查" 和 "增" 的功能。
 
-.. literalinclude:: ./demo.py
+.. myliteralinclude:: ./demo.py
 
 以上定义的接口会被 Oasis 处理并转换为 Django 的视图函数和路由，这使其能够成为 Django 项目的一部分。并且还为接口生成了 OAS，将 OAS 导入文档生成工具 (如 SwaggerUI)，便可对外展示接口文档了。
 
@@ -36,12 +36,6 @@ Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地�
 * Oasis 并不是生成文档，而是生成 OAS，OAS 可以用来做 API 文档和自动化测试使用。而且在整个开发过程中，几乎不需要手写 OAS。
 * Oasis 内置了一个简单配置的 `swagger-ui <https://github.com/swagger-api/swagger-ui>`_，仅需几行代码即可查看自己的接口文档。而且 Oasis 是以 HTTP 接口的形式暴露 OAS 数据，所以你也可以选择自己喜欢的 API 可视化工具，或者自动化测试工具。
 * Schema 是 Oasis 实现的核心，它负责定义数据结构，验证数据，并提供序列化及反序列化功能。接下来的文档会有较多的内容说明 Schema 的功能。
-
-
-关于文档
---------
-
-后面文档中的 HTTP API 示例下基本都会跟随一个 Swagger 文档展示，该 Swagger 文档也是使用 Oasis 解析示例代码获得的，这可以帮助你更直观地查看示例代码被解析为 OAS 后的效果。
 
 
 内容目录

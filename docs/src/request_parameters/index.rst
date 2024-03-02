@@ -16,7 +16,7 @@
 
 Oasis 可以直接通过声明获取请求参数，并且为参数执行反序列化和验证，如下例：
 
-.. literalinclude:: ./declare_params.py
+.. myliteralinclude:: ./declare_params.py
     :emphasize-lines: 5-7,12
 
 如示例所见，参数的声明由 2 个部分组成：
@@ -67,7 +67,7 @@ Oasis 可以直接通过声明获取请求参数，并且为参数执行反序�
 
 `Query <django_oasis.parameter.Query>`, `Cookie <django_oasis.parameter.Cookie>`, `Header <django_oasis.parameter.Header>` 支持分组声明，这可以实现对参数的分组需要。
 
-.. literalinclude:: ./param_groups.py
+.. myliteralinclude:: ./param_groups.py
     :emphasize-lines: 9-10
 
 ``q1`` 和 ``q2`` 即把 URL 参数拆分为了两组。
@@ -91,7 +91,7 @@ Oasis 可以直接通过声明获取请求参数，并且为参数执行反序�
 
 下面示例将展示参数样式的设置方法。
 
-.. literalinclude:: ./param_style.py
+.. myliteralinclude:: ./param_style.py
     :emphasize-lines: 14-17
 
 此示例对应的 URL 参数如果为 ``?a=1&a=2&b=1,2``，则所得的 ``query = {'a': ['1', '2'], 'b': ['1', '2']}``。
@@ -106,7 +106,7 @@ Oasis 可以直接通过声明获取请求参数，并且为参数执行反序�
 
 如果你需要对单个参数项进行声明，可以使用 `QueryItem <django_oasis.parameter.QueryItem>`, `CookieItem <django_oasis.parameter.CookieItem>` 和 `HeaderItem <django_oasis.parameter.HeaderItem>`。
 
-.. literalinclude:: ./paramitem.py
+.. myliteralinclude:: ./paramitem.py
 
 .. note::
     像 ``QueryItem`` 本身并不参与实际功能，它只是被转换为了 ``Query`` 的形式。所以上面代码等效于：

@@ -7,7 +7,7 @@ Oasis 提供了对 Django QuerySet 对象进行数据分页的方法。
 
 代码示例：
 
-.. literalinclude:: ./PagePagination.py
+.. myliteralinclude:: ./PagePagination.py
 
 .. openapiview:: ./PagePagination.py
     :docexpansion: full

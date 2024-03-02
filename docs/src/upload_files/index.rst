@@ -8,7 +8,7 @@
 
 示例代码：
 
-.. literalinclude:: ./uploadfile.py
+.. myliteralinclude:: ./uploadfile.py
     :lines: 1-11
     :emphasize-lines: 9
 

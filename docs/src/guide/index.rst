@@ -27,7 +27,7 @@
 
 下例展示了所有支持的请求操作。
 
-.. literalinclude:: ./operations.py
+.. myliteralinclude:: ./operations.py
 
 .. openapiview:: ./operations.py
 
@@ -39,4 +39,4 @@ Request 对象
 
 所以 Oasis 做了如下规定: 只有定义了 ``__init__`` 方法的 API 类才会接收到 Request 对象，且 Request 对象会以第一个位置参数的形式传递给 ``__init__`` 方法。该 Request 对象为 Django 的 `HttpRequest <https://docs.djangoproject.com/en/4.2/ref/request-response/#httprequest-objects>`_ 对象。
 
-.. literalinclude:: ./request_object.py
+.. myliteralinclude:: ./request_object.py
