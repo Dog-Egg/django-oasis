@@ -35,3 +35,12 @@ def test_Datetime__USE_TZ__False(settings):
             raise
 
     assert schema.Datetime().deserialize("2022-01-01") == datetime.datetime(2022, 1, 1)
+
+
+def test_Url():
+    with pytest.raises(schema.ValidationError):
+        try:
+            schema.Url().deserialize("string")
+        except schema.ValidationError as e:
+            assert e.format_errors() == [{"msgs": ["Enter a valid URL."]}]
+            raise

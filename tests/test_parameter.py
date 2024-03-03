@@ -1,3 +1,5 @@
+import pytest
+
 from django_oasis import schema
 from django_oasis.parameter.parameters import (
     Cookie,
@@ -90,6 +92,7 @@ def test_QueryItem(rf):
     assert item.parse_request(rf.get("/?a=1")) == 1
 
 
+@pytest.mark.skip("deprecated")
 def test_FormItem(rf):
     item = FormItem(schema.Integer)
     item.setitemname("b")

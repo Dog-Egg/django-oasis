@@ -43,12 +43,10 @@ def test_hook__unique_within_a_single_class():
             a = schema.String()
 
             @schema.serialization_fget(a)
-            def get_a(self):
-                ...
+            def get_a(self): ...
 
             @schema.serialization_fget(a)
-            def get_a2(self):
-                ...
+            def get_a2(self): ...
 
 
 def test_String__pattern():

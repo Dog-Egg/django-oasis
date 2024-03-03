@@ -1,10 +1,13 @@
 from django.conf import settings
+from django.core.validators import URLValidator
 
 import django_oasis_schema as schema
+from django_oasis.utils.django import django_validator_wraps
 
 __all__ = (
     "Path",
     "File",
+    "Url",
     "Datetime",
 )
 
@@ -26,3 +29,9 @@ class Datetime(schema.Datetime):
     def __init__(self, **kwargs):
         kwargs.setdefault("with_tz", settings.USE_TZ)
         super().__init__(**kwargs)
+
+
+class Url(schema.String):
+    @schema.validator
+    def _validate_url(self, value):
+        django_validator_wraps(URLValidator())(value)
