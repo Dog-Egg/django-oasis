@@ -34,17 +34,6 @@ JSON 格式
 
 .. autoclass:: django_oasis.parameter.FormItem
 
-代码示例：
-
-.. myliteralinclude:: ./formitem.py
-    :lines: 1-12
-
-当 POST 表单为 ``a=1&b=1`` 时，a 值等于 ``"1"``，b 值等于 ``1``。
-
-.. openapiview:: ./formitem.py
-    :docexpansion: full
-
-
 Body
 ----
 
