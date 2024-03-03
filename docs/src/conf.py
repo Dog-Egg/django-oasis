@@ -1,5 +1,8 @@
 import pathlib
 import sys
+import warnings
+
+warnings.filterwarnings("default", category=DeprecationWarning)
 
 BASE_DIR = pathlib.Path(__file__).resolve().parent
 

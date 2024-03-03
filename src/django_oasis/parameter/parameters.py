@@ -3,6 +3,7 @@ import contextlib
 import json
 import re
 import typing as t
+import warnings
 
 from django.http import HttpRequest
 from django.utils.datastructures import MultiValueDict
@@ -425,7 +426,17 @@ class CookieItem(ParamItem):
 
 
 class FormItem(BaseItem):
-    """这是 `FormData` 的变体，用于声明表单中的一个键，而不是整个表单。"""
+    """这是 `FormData` 的变体，用于声明表单中的一个键，而不是整个表单。
+
+    .. deprecated:: 0.1
+        同时设置多个 FormItem 时，若其中包含 schema.File，会导致 content_type 不一致。改用 `FormData` 替代，该 API 因不符合程序设计将被删除。
+    """
+
+    def __init__(self, *args, **kwargs):
+        warnings.warn(
+            "FormItem 存在设计缺陷，请改用 FormData。", DeprecationWarning, stacklevel=2
+        )
+        super().__init__(*args, **kwargs)
 
     def _make_param_instance(self, name: str):
         return FormData({name: self._schema})
