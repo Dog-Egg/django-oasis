@@ -1,6 +1,7 @@
 import functools
 import inspect
 import typing as t
+import warnings
 
 from .schemas import Schema
 from .utils.hook import set_hook
@@ -8,12 +9,14 @@ from .utils.hook import set_hook
 __all__ = (
     "serialization_fget",
     "validator",
+    "as_getter",
+    "as_validator",
 )
 
 
-def serialization_fget(field: t.Union[Schema, str]):
+def as_getter(field: t.Union[Schema, str]):
     """
-    自定义 `Model` 序列化时字段取值。默认是对 `Mapping <collections.abc.Mapping>` 取索引，对其它对象取属性名。
+    自定义 `Model` 字段序列化时的取值函数。默认是对 `Mapping <collections.abc.Mapping>` 取索引，对其它对象取属性名。
 
     :param field: 字段或字段名，将取值函数应用于该字段。
 
@@ -25,7 +28,7 @@ def serialization_fget(field: t.Union[Schema, str]):
         >>> class Person(schema.Model):
         ...     fullname = schema.String()
         ...
-        ...     @schema.serialization_fget(fullname)
+        ...     @schema.as_getter(fullname)
         ...     def get_fullname(self, data):
         ...         return data['firstname'] + data['lastname']
 
@@ -46,7 +49,7 @@ def serialization_fget(field: t.Union[Schema, str]):
     return decorator
 
 
-def validator(field_or_method: t.Union[Schema, str, None, t.Callable] = None, /):
+def as_validator(field_or_method: t.Union[Schema, str, None, t.Callable] = None, /):
     """
     挂载验证函数。它会在调用验证时，执行其验证函数。
 
@@ -65,3 +68,21 @@ def validator(field_or_method: t.Union[Schema, str, None, t.Callable] = None, /)
     if inspect.isfunction(field_or_method):
         return decorator(field_or_method)
     return functools.partial(decorator, field=field_or_method)
+
+
+def serialization_fget(*args, **kwargs):
+    warnings.warn(
+        f"Use {as_getter.__name__!r} instead of {serialization_fget.__name__!r}.",
+        DeprecationWarning,
+        stacklevel=2,
+    )
+    return as_getter(*args, **kwargs)
+
+
+def validator(*args, **kwargs):
+    warnings.warn(
+        f"Use {as_validator.__name__!r} instead of {validator.__name__!r}.",
+        DeprecationWarning,
+        stacklevel=2,
+    )
+    return as_validator(*args, **kwargs)

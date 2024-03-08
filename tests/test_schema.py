@@ -42,10 +42,10 @@ def test_hook__unique_within_a_single_class():
         class A(schema.Model):
             a = schema.String()
 
-            @schema.serialization_fget(a)
+            @schema.as_getter(a)
             def get_a(self): ...
 
-            @schema.serialization_fget(a)
+            @schema.as_getter(a)
             def get_a2(self): ...
 
 

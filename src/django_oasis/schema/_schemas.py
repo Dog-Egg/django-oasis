@@ -32,6 +32,6 @@ class Datetime(schema.Datetime):
 
 
 class Url(schema.String):
-    @schema.validator
+    @schema.as_validator
     def _validate_url(self, value):
         django_validator_wraps(URLValidator())(value)
