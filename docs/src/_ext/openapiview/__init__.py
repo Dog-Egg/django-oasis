@@ -113,6 +113,7 @@ def setup(app):
                 },
             },
         ],
+        USE_TZ=False,  # django 5.0 之后该值默认为 True
     )
     django.setup()
 
