@@ -1,11 +1,9 @@
-import functools
-
 from django.core.exceptions import ValidationError as DjangoValidationError
 
 from django_oasis import schema
 
 
-def django_validator_wraps(fn):
+class django_validator_wraps:
     """把 Django 的验证器包装成 Schema 验证器，验证失败将抛出 `ValidationError <django_oasis.schema.ValidationError>` 异常对象。
 
     .. doctest::
@@ -21,13 +19,21 @@ def django_validator_wraps(fn):
         Traceback (most recent call last):
             ...
         django_oasis_schema.exceptions.ValidationError: [{'msgs': ['Enter a valid email address.']}]
+
+        >>> repr(validate)
+        '<django_validator_wraps: django.core.validators.EmailValidator>'
     """
 
-    @functools.wraps(fn)
-    def wrapper(*args, **kwargs):
+    def __init__(self, validator) -> None:
+        self._wrapped = validator
+
+    def __call__(self, *args, **kwargs):
         try:
-            return fn(*args, **kwargs)
+            return self._wrapped(*args, **kwargs)
         except DjangoValidationError as exc:
             raise schema.ValidationError(list(exc)[0]) from exc
 
-    return wrapper
+    def __repr__(self) -> str:
+        c = self._wrapped.__class__
+        wrapped = c.__module__ + "." + c.__name__
+        return f"<django_validator_wraps: {wrapped}>"

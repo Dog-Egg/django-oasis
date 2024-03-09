@@ -5,6 +5,10 @@ authors = [{ name = "Lee", email = "294622946@qq.com" }]
 dependencies = ["python-dateutil"]
 
 
+[project.optional-dependencies]
+test = ["pytest", "pytest-django", "django"]
+doctest = ["sphinx", "django"]
+
 [project.urls]
 Homepage = "https://dog-egg.github.io/django-oasis/"
 Repository = "https://github.com/Dog-Egg/django-oasis"

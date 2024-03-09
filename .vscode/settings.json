@@ -3,7 +3,7 @@
         "**/__pycache__": true,
         ".tox": false,
         "**/.pytest_cache": true,
-        ".venv/": true,
+        ".venv/": false,
         "**/*.egg-info": true,
     },
     "python.terminal.activateEnvironment": true,

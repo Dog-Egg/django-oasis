@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+import django
 import pytest
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db import models
@@ -17,16 +18,28 @@ class A(models.Model):
     FileField = models.FileField()
 
 
+def assert_parse_model_id(value, other):
+    # django 5.0 版本后为 IntegerField 设置了 MinValueValidator、MaxValueValidator 两个验证器。
+    _schema, args = value
+    args: dict
+    assert _schema is schema.Integer
+    if django.VERSION >= (5, 0):
+        assert (
+            str(args.pop("validators"))
+            == "[<django_validator_wraps: django.core.validators.MinValueValidator>, <django_validator_wraps: django.core.validators.MaxValueValidator>]"
+        )
+    assert args == other
+
+
 def test_A():
     result = parse(A)
 
-    assert result["id"] == (
-        schema.Integer,
-        {"description": "ID", "read_only": True, "required": False},
+    assert_parse_model_id(
+        result["id"], {"description": "ID", "read_only": True, "required": False}
     )
     assert result["CharField"] == (schema.String, {"max_length": 12})
-    assert result["IntegerField"] == (schema.Integer, {})
-    assert result["SmallIntegerField"] == (schema.Integer, {})
+    assert_parse_model_id(result["IntegerField"], {})
+    assert_parse_model_id(result["SmallIntegerField"], {})
     assert result["JSONField"] == (schema.Any, {})
     assert result["FileField"] == (schema.File, {})
 
@@ -38,18 +51,14 @@ class B(models.Model):
 
 
 def test_B():
-    assert parse(B) == {
-        "id": (
-            schema.Integer,
-            {"description": "ID", "read_only": True, "required": False},
-        ),
-        "a1_id": (
-            schema.Integer,
-            {},
-        ),
-        "a2_id": (schema.Integer, {"nullable": True, "description": "A"}),
-        "a3_id": (schema.Integer, {"nullable": True, "default": None}),
-    }
+    result = parse(B)
+    assert_parse_model_id(
+        result["id"],
+        {"description": "ID", "read_only": True, "required": False},
+    )
+    assert result["a1_id"] == (schema.Integer, {})
+    assert result["a2_id"] == (schema.Integer, {"nullable": True, "description": "A"})
+    assert result["a3_id"] == (schema.Integer, {"nullable": True, "default": None})
 
 
 @pytest.mark.skip("File Schema 序列化时不应该放回 url。")
