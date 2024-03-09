@@ -26,7 +26,7 @@ Hook 可以让 Schema 更加灵活好用，虽然它并不是实现的核心。�
         name = schema.String()
         age = schema.Integer()
 
-        @schema.validator(age)  # 这是一个 hook
+        @schema.as_validator(age)  # 这是一个 hook
         def validate_age(self, value):
             if value < 0:
                 raise schema.ValidationError('年龄不能小于0。')
@@ -48,9 +48,7 @@ hook 是以装饰器的形式定义在 Schema 类的方法上的。
 可用的 Hook
 -----------
 
-.. autofunction:: django_oasis.schema.validator
-
-关于 `validator <django_oasis.schema.validator>` 的使用可在 :doc:`validation` 一章中查看。
+关于 `validator <django_oasis.schema.as_validator>` 的使用可在 :doc:`validation` 一章中查看。
 
 
 Hook 的特点
@@ -65,7 +63,7 @@ Hook 的特点
 
     class MySchema(schema.Schema):
 
-        @schema.validator
+        @schema.as_validator
         def hook_fn(self, value):
             ...
 
@@ -97,7 +95,7 @@ hook 函数虽然是方法，但是它并不能在子类中被重写。
         lastname = schema.String(write_only=True)
         fullname = schema.String()
 
-        @schema.serialization_fget(fullname)
+        @schema.as_getter(fullname)
         def get_fullname(self, data):
             return data['firstname'] + data['lastname']
 

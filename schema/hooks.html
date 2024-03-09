@@ -226,7 +226,7 @@
     <span class="n">name</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
     <span class="n">age</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
 
-<span class="hll">    <span class="nd">@schema</span><span class="o">.</span><span class="n">validator</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>  <span class="c1"># 这是一个 hook</span>
+<span class="hll">    <span class="nd">@schema</span><span class="o">.</span><span class="n">as_validator</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>  <span class="c1"># 这是一个 hook</span>
 </span>    <span class="k">def</span> <span class="nf">validate_age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">schema</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;年龄不能小于0。&#39;</span><span class="p">)</span>
@@ -239,12 +239,7 @@
 </section>
 <section id="hook">
 <h2>可用的 Hook<a class="headerlink" href="#hook" title="此标题的永久链接">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="django_oasis.schema.validator">
-<span class="sig-prename descclassname"><span class="pre">django_oasis.schema.</span></span><span class="sig-name descname"><span class="pre">validator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.schema.validator" title="永久链接至目标">#</a></dt>
-<dd></dd></dl>
-
-<p>关于 <a class="reference internal" href="#django_oasis.schema.validator" title="django_oasis.schema.validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validator</span></code></a> 的使用可在 <a class="reference internal" href="validation.html"><span class="doc">验证数据</span></a> 一章中查看。</p>
+<p>关于 <a class="reference internal" href="../api.html#django_oasis.schema.as_validator" title="django_oasis.schema.as_validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validator</span></code></a> 的使用可在 <a class="reference internal" href="validation.html"><span class="doc">验证数据</span></a> 一章中查看。</p>
 </section>
 <section id="id2">
 <h2>Hook 的特点<a class="headerlink" href="#id2" title="此标题的永久链接">#</a></h2>
@@ -253,7 +248,7 @@
 <p>虽然 hook 修饰的是类的方法，但是该方法并不像普通方法一样可以被调用。即无法使用 <code class="docutils literal notranslate"><span class="pre">&lt;class_name&gt;.&lt;method_name&gt;</span></code> 的方式进行调用。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MySchema</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Schema</span><span class="p">):</span>
 
-    <span class="nd">@schema</span><span class="o">.</span><span class="n">validator</span>
+    <span class="nd">@schema</span><span class="o">.</span><span class="n">as_validator</span>
     <span class="k">def</span> <span class="nf">hook_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="o">...</span>
 </pre></div>
@@ -278,7 +273,7 @@
     <span class="n">lastname</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">write_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">fullname</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
 
-    <span class="nd">@schema</span><span class="o">.</span><span class="n">serialization_fget</span><span class="p">(</span><span class="n">fullname</span><span class="p">)</span>
+    <span class="nd">@schema</span><span class="o">.</span><span class="n">as_getter</span><span class="p">(</span><span class="n">fullname</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">get_fullname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;firstname&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lastname&#39;</span><span class="p">]</span>
 
@@ -351,10 +346,7 @@
             <ul>
 <li><a class="reference internal" href="#">Hooks</a><ul>
 <li><a class="reference internal" href="#id1">使用用法</a></li>
-<li><a class="reference internal" href="#hook">可用的 Hook</a><ul>
-<li><a class="reference internal" href="#django_oasis.schema.validator"><code class="docutils literal notranslate"><span class="pre">validator()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#hook">可用的 Hook</a></li>
 <li><a class="reference internal" href="#id2">Hook 的特点</a><ul>
 <li><a class="reference internal" href="#id3">不可调用</a></li>
 <li><a class="reference internal" href="#id4">不可重写</a></li>

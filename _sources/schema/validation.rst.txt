@@ -36,18 +36,18 @@ Schema 提供能多种验证方式。以下将以 “验证一个数是否为正
 使用 Hook
 ---------
 
-`schema.validator <django_oasis.schema.validator>` 是一个专门挂载验证函数的 hook。
+`schema.as_validator <django_oasis.schema.as_validator>` 是一个专门挂载验证函数的 hook。
 
 .. note::
     关于什么是 hook，详细请查看 :doc:`hooks` 章节。
 
-如下示例所见，使用 `validator <django_oasis.schema.validator>` hook 后便无需传递验证函数，因为被修饰的验证函数会挂载到 Schema 的校验函数列表中。
+如下示例所见，使用 `as_validator <django_oasis.schema.as_validator>` hook 后便无需传递验证函数，因为被修饰的验证函数会挂载到 Schema 的校验函数列表中。
 
 .. testcode::
 
     class PositiveInteger(schema.Integer):
 
-        @schema.validator
+        @schema.as_validator
         def validate_value(self, value):
             if value <= 0:
                 raise schema.ValidationError('不是一个正整数')
@@ -68,12 +68,12 @@ Schema 提供能多种验证方式。以下将以 “验证一个数是否为正
         class PositiveEvenInteger(schema.Integer):
             """正偶数：既要是正数，也要是偶数。"""
 
-            @schema.validator
+            @schema.as_validator
             def validate_value1(self, value):
                 if value <= 0:
                     raise schema.ValidationError('不是一个整数')
 
-            @schema.validator
+            @schema.as_validator
             def validate_value2(self, value):
                 if value % 2 != 0:
                     raise schema.ValidationError('不是一个偶数')
@@ -103,7 +103,7 @@ Model 验证
 
 Model 是有字段的，除了要验证 Model 本身外，还必须有能力验证其字段。当然，可以像 :ref:`use_validators` 给字段传入验证函数，这很简单，就不再介绍了。
 
-这里任然要介绍 `schema.validator <django_oasis.schema.validator>` 这个 hook。它不仅能验证 Model 本身外，还能验证字段。只需要将字段传给这个 hook，它就会将其验证函数应用于该字段的验证。
+这里任然要介绍 `schema.as_validator <django_oasis.schema.as_validator>` 这个 hook。它不仅能验证 Model 本身外，还能验证字段。只需要将字段传给这个 hook，它就会将其验证函数应用于该字段的验证。
 
 举个例子，以下 Student 类的 ``age`` 字段需要验证其大于或等于 0。
 
@@ -113,7 +113,7 @@ Model 是有字段的，除了要验证 Model 本身外，还必须有能力验�
         name = schema.String()
         age = schema.Integer()
 
-        @schema.validator(age) # 传入了字段 age
+        @schema.as_validator(age) # 传入了字段 age
         def validate_age(self, value):
             if value < 0:
                 raise schema.ValidationError('年龄必需大于0。')

@@ -210,7 +210,7 @@
         <article role="main">
           <section id="id1">
 <h1>上传文件<a class="headerlink" href="#id1" title="此标题的永久链接">#</a></h1>
-<p>上传文件需要用到 <a class="reference internal" href="../request_body/index.html#django_oasis.parameter.FormData" title="django_oasis.parameter.FormData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormData</span></code></a> 或者 <a class="reference internal" href="../request_body/index.html#django_oasis.parameter.FormItem" title="django_oasis.parameter.FormItem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormItem</span></code></a>，并使用 <a class="reference internal" href="../api.html#django_oasis.schema.File" title="django_oasis.schema.File"><code class="xref py py-obj docutils literal notranslate"><span class="pre">File</span></code></a> 来声明文件类型。</p>
+<p>上传文件需要用到 <a class="reference internal" href="../request_body/index.html#django_oasis.parameter.FormData" title="django_oasis.parameter.FormData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormData</span></code></a>，并使用 <a class="reference internal" href="../api.html#django_oasis.schema.File" title="django_oasis.schema.File"><code class="xref py py-obj docutils literal notranslate"><span class="pre">File</span></code></a> 来声明文件类型。</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>文件上传需要使用表单，而不能使用 JSON。与普通的表单提交不同，普通表单提交时 content-type 为 application/x-www-form-urlencoded，但是上传文件需要使用 multipart/form-data。这只是顺便一说，了解就行，Oasis 会自动判断使用哪种表单类型。</p>
@@ -219,26 +219,26 @@
 <div class="literal-block-wrapper docutils container" id="id-4550b9de">
 <div class="code-block-caption"><span class="caption-text">uploadfile.py</span><a class="headerlink" href="#id-4550b9de" title="此代码块的永久链接">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
-<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormItem</span>
+<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormData</span>
 
 
 <span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/upload&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">UploadAPI</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-<span class="hll">        <span class="n">file</span><span class="o">=</span><span class="n">FormItem</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">File</span><span class="p">),</span>
-</span>    <span class="p">):</span>
-        <span class="o">...</span>
+<span class="hll">        <span class="n">data</span><span class="o">=</span><span class="n">FormData</span><span class="p">(</span>
+</span>            <span class="p">{</span>
+                <span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">File</span><span class="p">(),</span>
 </pre></div>
 </div>
 </div>
-<p>接收到的 file 值为一个 <a class="reference external" href="https://docs.djangoproject.com/zh-hans/5.0/ref/files/uploads/#django.core.files.uploadedfile.InMemoryUploadedFile">InMemoryUploadedFile</a> 对象。</p>
+<p>接收到的 <code class="docutils literal notranslate"><span class="pre">data['file']</span></code> 值为一个 <a class="reference external" href="https://docs.djangoproject.com/zh-hans/5.0/ref/files/uploads/#django.core.files.uploadedfile.InMemoryUploadedFile">InMemoryUploadedFile</a> 对象。</p>
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-4550b9de">uploadfile.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_2149bfd4" srcdoc="
+                <iframe id="id_615623e8" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -318,7 +318,7 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_2149bfd4')
+                iFrameResize({checkOrigin: false}, '#id_615623e8')
             </script>
             </section>
 
