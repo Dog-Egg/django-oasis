@@ -1,4 +1,0 @@
--r packaging.txt
-
-furo
-sphinx
