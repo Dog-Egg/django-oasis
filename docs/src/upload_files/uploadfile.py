@@ -1,14 +1,17 @@
 from django_oasis import Resource, schema
-from django_oasis.parameter import FormItem
+from django_oasis.parameter import FormData
 
 
 @Resource("/upload")
 class UploadAPI:
     def post(
         self,
-        file=FormItem(schema.File),
-    ):
-        ...
+        data=FormData(
+            {
+                "file": schema.File(),
+            }
+        ),
+    ): ...
 
 
 from django_oasis import OpenAPI

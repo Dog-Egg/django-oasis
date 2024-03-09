@@ -99,22 +99,24 @@ def import_module_from_file(path):
     return module
 
 
-def setup(app):
-    settings.configure(
-        TEMPLATES=[
-            {
-                "BACKEND": "django.template.backends.django.DjangoTemplates",
-                "DIRS": ["templates"],
-                "APP_DIRS": True,
-                "OPTIONS": {
-                    "context_processors": [
-                        "django.template.context_processors.debug",
-                    ],
-                },
+settings.configure(
+    TEMPLATES=[
+        {
+            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "DIRS": ["templates"],
+            "APP_DIRS": True,
+            "OPTIONS": {
+                "context_processors": [
+                    "django.template.context_processors.debug",
+                ],
             },
-        ],
-        USE_TZ=False,  # django 5.0 之后该值默认为 True
-    )
+        },
+    ],
+    USE_TZ=False,  # django 5.0 之后该值默认为 True
+)
+
+
+def setup(app):
     django.setup()
 
     app.add_directive("openapiview", OpenAPIView)
