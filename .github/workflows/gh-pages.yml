@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/gh-pages.yml'
-      - 'docs/**'
+      - ".github/workflows/gh-pages.yml"
+      - "docs/**"
 
 jobs:
   deploy:
@@ -21,7 +21,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.8'
+          python-version: "3.8"
 
       - name: Upgrade pip
         run: |
@@ -41,7 +41,7 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
-        run: python3 -m pip install -r ./requirements/doc.txt
+        run: python3 -m pip install .[docbuild]
 
       - run: sphinx-build docs/src site
 
