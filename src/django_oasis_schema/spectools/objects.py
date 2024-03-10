@@ -35,6 +35,9 @@ class Skip(t.Generic[T]):
     def __call__(self) -> T:
         return self._obj
 
+    def __repr__(self) -> str:
+        return f"skip: {self._obj!r}"
+
 
 def clean(data: T) -> T:
     """
@@ -98,7 +101,8 @@ class OpenAPISpec:
                 "info": self.__info,
                 "paths": self.__paths,
                 "components": {
-                    "securitySchemes": self.__security_schemes,
+                    "securitySchemes": self.__security_schemes
+                    and Skip(self.__security_schemes),
                 },
             }
         )

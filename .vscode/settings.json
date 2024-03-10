@@ -30,5 +30,8 @@
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+        "-vv"
+    ],
     "todo-tree.tree.scanMode": "workspace only"
 }

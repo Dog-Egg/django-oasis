@@ -85,9 +85,9 @@ class OpenAPI:
         self.__urls: t.List[django.urls.URLPattern] = []
         self.__spec_endpoint = "/apispec_%s" % (name or get_openapi_name())
         self.__append_url(self.__spec_endpoint, self.spec_view)
-        self.__error_handlers: t.Dict[
-            t.Type[Exception], t.Callable
-        ] = DEFAULT_ERROR_HANDLERS.copy()
+        self.__error_handlers: t.Dict[t.Type[Exception], t.Callable] = (
+            DEFAULT_ERROR_HANDLERS.copy()
+        )
 
     @property
     def title(self):
@@ -362,12 +362,14 @@ class Operation:
             None if auth is None else make_instance(auth)
         )
         self.__mountpoints: t.Dict[str, MountPoint] = {}
-        self._resource: Resource = None  # type: ignore
+        self._resource: t.Optional[Resource] = None
         self._view_decorators = view_decorators or []
 
     @property
     def __auth(self):
-        return self._resource._default_auth or self.__self_auth
+        if self._resource and self._resource._default_auth:
+            return self._resource._default_auth
+        return self.__self_auth
 
     def __parse_parameters(self, handler):
         for name, parameter in inspect.signature(handler).parameters.items():
@@ -405,7 +407,7 @@ class Operation:
             rv = self.response_schema.serialize(rv)
         return rv, self.__status_code
 
-    def __openapispec__(self, spec: OpenAPISpec, tags):
+    def __openapispec__(self, spec: OpenAPISpec, tags=None):
         if not self.__include_in_spec:
             return
 
@@ -416,7 +418,7 @@ class Operation:
                     "summary": self.__summary,
                     "description": self.__description,
                     "tags": [
-                        *self._resource._tags,
+                        *(self._resource._tags if self._resource else []),
                         *self.__tags,
                         *(tags or []),
                     ],
