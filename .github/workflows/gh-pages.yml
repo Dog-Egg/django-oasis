@@ -41,7 +41,7 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
-        run: python3 -m pip install .[docbuild]
+        run: python3 -m pip install -e .[docbuild]
 
       - run: sphinx-build docs/src site
 
