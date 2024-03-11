@@ -10,6 +10,7 @@ from dateutil.parser import isoparse
 from . import _validators
 from .constants import EMPTY
 from .exceptions import ValidationError
+from .spectools.objects import ReferenceFlag
 from .spectools.utils import default_as_none
 from .utils import make_instance
 from .utils.hook import HookClassMeta, get_hook, iter_hooks
@@ -340,9 +341,11 @@ class Schema(Field, metaclass=SchemaMeta):
     def __openapispec__(self, spec):
         return dict(
             type=self.meta["data_type"],
-            default=None
-            if (self._default is EMPTY or callable(self._default))
-            else self._default,
+            default=(
+                None
+                if (self._default is EMPTY or callable(self._default))
+                else self._default
+            ),
             # # # example=None if self.example is EMPTY else _spec.Skip(
             # # #     self.example() if callable(self.example) else self.example),
             description=self._description or None,
@@ -395,7 +398,7 @@ EXCLUDE = "exclude"
 ERROR = "error"
 
 
-class Model(Schema, metaclass=ModelMeta):
+class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
     """
     :param required_fields: 覆盖原有的必需字段的配置。设为空列表则所有字段为非必需，也可设为 ``"__all__"`` 指定所有字段为必需。
 

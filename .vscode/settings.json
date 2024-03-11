@@ -3,7 +3,7 @@
         "**/__pycache__": true,
         ".tox": false,
         "**/.pytest_cache": true,
-        ".venv/": false,
+        ".venv/": true,
         "**/*.egg-info": true,
     },
     "python.terminal.activateEnvironment": true,
@@ -12,7 +12,7 @@
         "docs/src/_static": true,
         "src/django_oasis/templates/_static": true,
     },
-    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.typeCheckingMode": "off",
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true,

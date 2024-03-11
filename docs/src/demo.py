@@ -13,7 +13,8 @@ class BookModel(models.Model):
 
 # Oasis 并不能直接理解 Django Model 中的定义，
 # 所以需要将 BookModel 转换成 Schema。
-BookSchema = model2schema(BookModel)
+class BookSchema(model2schema(BookModel)):
+    pass
 
 
 # 可以先将以下代码理解为 Django 中基于类的视图。

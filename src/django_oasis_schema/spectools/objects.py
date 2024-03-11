@@ -1,7 +1,5 @@
 import typing as t
-from typing import Any
-
-from django_oasis_schema import schemas
+from collections import Counter
 
 _CLEARN_INVALID_VALUES: t.List[t.Any] = [None, {}, []]
 
@@ -44,6 +42,10 @@ def clean(data: T) -> T:
     >>> clean([{}, 0, None, [None], 1])
     [0, 1]
     """
+    if isinstance(data, ReferenceObject):
+        # 还原
+        data = data.jumps()
+
     if isinstance(data, Skip):
         return data()
 
@@ -83,6 +85,9 @@ class OpenAPISpec:
         self.__info = info
         self.__security_schemes = {}
 
+        self._components__schemas = {}
+        self._reference_counter = Counter()
+
     @property
     def title(self):
         return self.__info["title"]
@@ -103,12 +108,45 @@ class OpenAPISpec:
                 "components": {
                     "securitySchemes": self.__security_schemes
                     and Skip(self.__security_schemes),
+                    "schemas": self._components__schemas,
                 },
             }
         )
 
     def parse(self, obj, **kwargs):
         try:
-            return getattr(obj, "__openapispec__")(self, **kwargs)
+            definition = getattr(obj, "__openapispec__")(self, **kwargs)
         except TypeError as e:
             raise RuntimeError(obj, e)
+
+        if isinstance(obj, ReferenceFlag):
+            self._reference_counter.update([obj.__class__])
+            return ReferenceObject(definition, obj.__class__, self)
+        return definition
+
+
+class ReferenceFlag:
+    """用于统计 Schema 使用量的。
+    同一类实例化对象数量超过一个，将使用 Reference Object ($ref) 进行引用。"""
+
+
+class ReferenceObject:
+    def __init__(self, definition: dict, klass: type, spec: OpenAPISpec) -> None:
+        self.__definition = definition
+        self.__klass = klass
+        self.__spec = spec
+
+    def jumps(self):
+        if self.__spec._reference_counter[self.__klass] >= 2:
+            required = self.__definition.pop("required")
+
+            schema_full_name = self.__klass.__module__ + "." + self.__klass.__qualname__
+            self.__spec._components__schemas[schema_full_name] = {
+                "title": self.__klass.__name__,
+                **self.__definition,
+            }
+            ref = {"$ref": f"#/components/schemas/{schema_full_name}"}
+            if required:
+                return {"allOf": [ref, {"required": required}]}
+            return ref
+        return self.__definition
