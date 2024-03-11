@@ -137,16 +137,17 @@ class ReferenceObject:
         self.__spec = spec
 
     def jumps(self):
+        definition = self.__definition.copy()
         if self.__spec._reference_counter[self.__klass] >= 2:
-            required = self.__definition.pop("required")
+            required = definition.pop("required")
 
             schema_full_name = self.__klass.__module__ + "." + self.__klass.__qualname__
             self.__spec._components__schemas[schema_full_name] = {
                 "title": self.__klass.__name__,
-                **self.__definition,
+                **definition,
             }
             ref = {"$ref": f"#/components/schemas/{schema_full_name}"}
             if required:
                 return {"allOf": [ref, {"required": required}]}
             return ref
-        return self.__definition
+        return definition

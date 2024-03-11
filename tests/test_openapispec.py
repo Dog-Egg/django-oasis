@@ -50,59 +50,62 @@ def test_reference_object():
 
     spec = OpenAPISpec(info={})
     spec.add_path("/", spec.parse(Resource.checkout(API)))
-    assert spec.to_dict() == {
-        "components": {
-            "schemas": {
-                "tests.test_openapispec.test_reference_object.<locals>.FooSchema": {
-                    "title": "FooSchema",
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                        }
-                    },
-                },
-            },
-        },
-        "openapi": "3.0.3",
-        "paths": {
-            "/": {
-                "get": {
-                    "responses": {
-                        200: {
-                            "content": {
-                                "application/json": {
-                                    "schema": {
-                                        "items": {
-                                            "$ref": "#/components/schemas/tests.test_openapispec.test_reference_object.<locals>.FooSchema",
-                                        },
-                                        "type": "array",
-                                    },
-                                },
-                            },
-                            "description": "OK",
+
+    # 调用多次的结果应保持一致
+    for _ in range(5):
+        assert spec.to_dict() == {
+            "components": {
+                "schemas": {
+                    "tests.test_openapispec.test_reference_object.<locals>.FooSchema": {
+                        "title": "FooSchema",
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                            }
                         },
                     },
                 },
-                "post": {
-                    "responses": {
-                        200: {
-                            "content": {
-                                "application/json": {
-                                    "schema": {
-                                        "allOf": [
-                                            {
+            },
+            "openapi": "3.0.3",
+            "paths": {
+                "/": {
+                    "get": {
+                        "responses": {
+                            200: {
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "items": {
                                                 "$ref": "#/components/schemas/tests.test_openapispec.test_reference_object.<locals>.FooSchema",
                                             },
-                                            {"required": ["name"]},
-                                        ],
+                                            "type": "array",
+                                        },
                                     },
                                 },
+                                "description": "OK",
                             },
-                            "description": "OK",
+                        },
+                    },
+                    "post": {
+                        "responses": {
+                            200: {
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/components/schemas/tests.test_openapispec.test_reference_object.<locals>.FooSchema",
+                                                },
+                                                {"required": ["name"]},
+                                            ],
+                                        },
+                                    },
+                                },
+                                "description": "OK",
+                            },
                         },
                     },
                 },
             },
-        },
-    }
+        }
