@@ -218,7 +218,7 @@ class MediaType:
             except (json.JSONDecodeError, TypeError):
                 raise BadRequestError("Invalid Data")
         else:
-            combine = MultiValueDict()
+            combine: MultiValueDict = MultiValueDict()
             combine.update(request.POST)
             combine.update(request.FILES)
             if isinstance(self.__schema, _schema.Model):
@@ -356,7 +356,7 @@ class FormData(RequestBodyContent):
     ) -> None:
         super().__init__(schema)
         assert isinstance(self._schema, _schema.Model)
-        self._schema = t.cast(_schema.Model, self._schema)
+        self._schema: _schema.Model
 
     @cached_property
     def content_type(self):
@@ -367,6 +367,7 @@ class FormData(RequestBodyContent):
 
     def _parse_request(self, request: HttpRequest):
         data = {}
+        target: MultiValueDict
         for field in self._schema._fields.values():
             k = field._alias
             if isinstance(field, _schema.File):

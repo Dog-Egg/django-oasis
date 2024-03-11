@@ -3,6 +3,7 @@ name: Tests
 on:
   push:
     paths:
+      - ".github/workflows/tests.yml"
       - "src/**"
       - "docs/**"
 

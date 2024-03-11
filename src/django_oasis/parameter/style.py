@@ -72,7 +72,7 @@ class StyleHandler:
                 rv[f._alias] = data[f._alias]
         return rv
 
-    def _f4(self, data: QueryDict):
+    def _f4(self, data):
         if self.schema._alias not in data:
             return _empty
         return data[self.schema._alias].split(",")
@@ -82,12 +82,12 @@ class StyleHandler:
             return _empty
         return _split_by_comma_object(data[self.schema._alias])
 
-    def _f6(self, data: QueryDict):
+    def _f6(self, data):
         if self.schema._alias not in data:
             return _empty
         return data[self.schema._alias].split(" ")
 
-    def _f7(self, data: QueryDict):
+    def _f7(self, data):
         if self.schema._alias not in data:
             return _empty
         return data[self.schema._alias].split("|")
