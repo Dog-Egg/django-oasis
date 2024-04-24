@@ -109,5 +109,9 @@ def test_DecimalField():
     # serialize
     a = FooSchema().serialize({"a": Decimal("1"), "id": 1})["a"]
     assert a == 1 and isinstance(a, int)
+
     a = FooSchema().serialize({"a": Decimal("1.1"), "id": 1})["a"]
+    assert a == 1.1 and isinstance(a, float)
+
+    a = FooSchema().serialize({"a": 1.1, "id": 1})["a"]
     assert a == 1.1 and isinstance(a, float)

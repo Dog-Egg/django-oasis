@@ -1,3 +1,4 @@
+import decimal
 import inspect
 import typing as t
 
@@ -7,8 +8,7 @@ from django.db import models
 
 from django_oasis.utils.django import django_validator_wraps
 
-from .. import schema
-from . import _schemas
+from . import schema
 
 
 def filter_defaults(kwargs: dict):
@@ -128,6 +128,26 @@ class FileParser(Parser):
         return kwargs
 
 
+class Decimal(schema.Schema):
+    class Meta:
+        data_type = "number"
+
+    def _deserialize(self, value):
+        return decimal.Decimal(str(value))
+
+    def _serialize(self, value: decimal.Decimal):
+        if isinstance(value, (int, float)):
+            return value
+
+        exponent = value.as_tuple().exponent
+        if not isinstance(exponent, int):
+            raise ValueError("Cannot serialize decimal: %s" % value)
+        else:
+            if exponent < 0:
+                return float(value)
+            return int(value)
+
+
 MODEL_FIELD_PARSERS = {
     models.BooleanField: Parser(schema.Boolean),
     models.CharField: CharParser(),
@@ -135,7 +155,7 @@ MODEL_FIELD_PARSERS = {
     models.DateField: Parser(schema.Date),
     models.DateTimeField: Parser(schema.Datetime),
     models.FileField: FileParser(),
-    models.DecimalField: Parser(_schemas.Decimal),
+    models.DecimalField: Parser(Decimal),
     models.ForeignKey: ForeignKeyParser(),
     models.JSONField: Parser(schema.Any),
 }
