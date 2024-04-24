@@ -114,8 +114,6 @@ class OpenAPI:
             if resource is None:
                 raise ValueError("%s is not marked by %s." % (obj, Resource.__name__))
 
-        resource = copy.copy(resource)
-
         def handle_error(exc, *args, **kwargs):
             for cls in inspect.getmro(exc.__class__):
                 if cls in self.__error_handlers:
