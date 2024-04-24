@@ -519,7 +519,12 @@ class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
         """使用由字段组成的字典生成一个 `Model` 类。"""
         attrs: dict = {k: v for k, v in fields.items() if isinstance(v, Field)}
         klass = type("GeneratedSchema", (Model,), attrs)
-        return t.cast(t.Type[Model], klass)
+
+        class Schema(klass):  # type: ignore
+            def __repr__(self):
+                return repr(fields)
+
+        return Schema
 
     def _deserialize(self, value: dict):
         data = copy.copy(value)

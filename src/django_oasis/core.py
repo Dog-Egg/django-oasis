@@ -404,7 +404,12 @@ class Operation:
         kwargs = self.__parse_request(request)
         rv = handler(**kwargs)
         if not isinstance(rv, HttpResponseBase) and self.response_schema:
-            rv = self.response_schema.serialize(rv)
+            try:
+                rv = self.response_schema.serialize(rv)
+            except Exception as e:
+                raise ValueError(
+                    f"{rv} cannot be serialized by {self.response_schema}."
+                ) from e
         return rv, self.__status_code
 
     def __openapispec__(self, spec: OpenAPISpec, tags=None):

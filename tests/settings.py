@@ -1,5 +1,5 @@
 SECRET_KEY = "testing"
-ROOT_URLCONF = "tests.urls"
+ROOT_URLCONF = "tests.app.urls"
 
 DATABASES = {
     "default": {
