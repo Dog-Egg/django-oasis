@@ -45,7 +45,7 @@ def test_reference_object():
         @Operation(response_schema=schema.List(FooSchema(required_fields=[])))
         def get(self): ...
 
-        @Operation(response_schema=FooSchema)
+        @Operation(response_schema=FooSchema(description="描述"))
         def post(self): ...
 
     spec = OpenAPISpec(info={})
@@ -93,11 +93,14 @@ def test_reference_object():
                                 "content": {
                                     "application/json": {
                                         "schema": {
+                                            "description": "描述",
                                             "allOf": [
                                                 {
                                                     "$ref": "#/components/schemas/tests.test_openapispec.test_reference_object.<locals>.FooSchema",
                                                 },
-                                                {"required": ["name"]},
+                                                {
+                                                    "required": ["name"],
+                                                },
                                             ],
                                         },
                                     },
