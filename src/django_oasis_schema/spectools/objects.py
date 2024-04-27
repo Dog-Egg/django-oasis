@@ -140,17 +140,17 @@ class ReferenceObject:
         definition = self.__definition.copy()
         if self.__spec._reference_counter[self.__klass] >= 2:
             required = definition.pop("required")
-            description = definition.pop("description", None)
 
             schema_full_name = self.__klass.__module__ + "." + self.__klass.__qualname__
             self.__spec._components__schemas[schema_full_name] = {
                 "title": self.__klass.__name__,
-                **definition,
+                "type": definition.pop("type", None),
+                "properties": definition.pop("properties", None),
             }
             ref = {"$ref": f"#/components/schemas/{schema_full_name}"}
             if required:
                 return {
-                    "description": description,
+                    **definition,
                     "allOf": [ref, {"required": required}],
                 }
             return ref
