@@ -38,6 +38,8 @@ def test_securitySchemes():
 
 def test_reference_object():
     class FooSchema(schema.Model):
+        """__doc__ description"""
+
         name = schema.String()
 
     @Resource("/")
@@ -58,6 +60,7 @@ def test_reference_object():
                 "schemas": {
                     "tests.test_openapispec.test_reference_object.<locals>.FooSchema": {
                         "title": "FooSchema",
+                        "description": "__doc__ description",
                         "type": "object",
                         "properties": {
                             "name": {

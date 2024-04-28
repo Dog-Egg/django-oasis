@@ -131,21 +131,22 @@ class ReferenceFlag:
 
 
 class ReferenceObject:
-    def __init__(self, definition: dict, klass: type, spec: OpenAPISpec) -> None:
+    def __init__(self, definition: dict, cls: type, spec: OpenAPISpec) -> None:
         self.__definition = definition
-        self.__klass = klass
+        self.__cls = cls
         self.__spec = spec
 
     def dumps(self):
         definition = self.__definition.copy()
-        if self.__spec._reference_counter[self.__klass] >= 2:
+        if self.__spec._reference_counter[self.__cls] >= 2:
             required = definition.pop("required")
 
-            schema_full_name = self.__klass.__module__ + "." + self.__klass.__qualname__
+            schema_full_name = self.__cls.__module__ + "." + self.__cls.__qualname__
             self.__spec._components__schemas[schema_full_name] = {
-                "title": self.__klass.__name__,
+                "title": self.__cls.__name__,
                 "type": definition.pop("type", None),
                 "properties": definition.pop("properties", None),
+                "description": self.__cls.__doc__,
             }
             ref = {"$ref": f"#/components/schemas/{schema_full_name}"}
             if required:
