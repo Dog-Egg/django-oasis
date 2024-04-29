@@ -21,6 +21,7 @@ USE_TZ = True
 
 
 MIDDLEWARE = [
+    "django_oasis.middleware.ErrorHandlerMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
 ]

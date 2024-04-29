@@ -20,12 +20,7 @@ from django_oasis.exceptions import (
     MethodNotAllowedError,
     RequestValidationError,
 )
-from django_oasis.parameter.parameters import (
-    BaseItem,
-    MountPoint,
-    Path,
-    RequestParameter,
-)
+from django_oasis.parameter.parameters import BaseItem, MountPoint, Path
 from django_oasis.spec import utils as _spec
 from django_oasis_schema.spectools.objects import OpenAPISpec
 from django_oasis_schema.spectools.utils import clean_commonmark
@@ -188,6 +183,8 @@ class Resource:
         "trace",
     ]
 
+    _handle_error: t.Callable[[Exception, HttpRequest], HttpResponseBase]
+
     def __init__(
         self,
         path: str,
@@ -207,7 +204,6 @@ class Resource:
         self.__view_decorators = view_decorators or []
         self.__include_in_spec = include_in_spec
         self.__view_function = None
-        self._handle_error: t.Callable[[Exception, HttpRequest], HttpResponseBase] = None  # type: ignore
         self._default_auth: t.Optional[BaseAuth] = (
             None if default_auth is None else make_instance(default_auth)
         )
@@ -275,6 +271,12 @@ class Resource:
                 try:
                     rv, status_code = self.__view(request, **kwargs)
                 except Exception as exc:
+                    if (
+                        "django_oasis.middleware.ErrorHandlerMiddleware"
+                        in settings.MIDDLEWARE
+                    ):
+                        request._oasis_handle_error = self._handle_error
+                        raise
                     return self._handle_error(exc, request)
                 return self.__make_response(rv, status_code)
 
