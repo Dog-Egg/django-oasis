@@ -189,3 +189,14 @@ def test_Password_clear_value():
                 {"msgs": ["This field is required."], "loc": ["password"]}
             ]
             raise
+
+
+def test_as_getter_return_EMPTY():
+    class Schema(schema.Model):
+        field = schema.String()
+
+        @schema.as_getter(field)
+        def get_field(self, obj):
+            return schema.EMPTY
+
+    assert Schema().serialize({}) == {}

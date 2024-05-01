@@ -582,6 +582,8 @@ class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
             if field.write_only:
                 continue
             field_value = field._get_value(value)
+            if field_value is EMPTY:
+                continue
             try:
                 rv[field._alias] = field.serialize(field_value)
             except Exception as exc:
