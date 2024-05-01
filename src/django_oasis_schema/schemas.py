@@ -135,10 +135,10 @@ class Field:
     def _attr(self) -> str:
         return self.__attr or self._name
 
-    def _serialization_fget(self, data):
+    def _get_value(self, data):
         """获取待序列化的值。"""
 
-        hook = get_hook(self._model, ("serialization_fget", self._name))
+        hook = get_hook(self._model, ("as_getter", self._name))
         if hook:
             return hook(data)
 
@@ -290,11 +290,11 @@ class Schema(Field, metaclass=SchemaMeta):
         def get_validators():
             # field hook
             if self._model is not None:
-                for hook in iter_hooks(self._model, ("validator", self._name)):
+                for hook in iter_hooks(self._model, ("as_validator", self._name)):
                     yield hook
 
             # schema hook
-            for hook in iter_hooks(self, ("validator", None)):
+            for hook in iter_hooks(self, ("as_validator", None)):
                 yield hook
 
             # self
@@ -581,7 +581,7 @@ class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
         for field in self._fields.values():
             if field.write_only:
                 continue
-            field_value = field._serialization_fget(value)
+            field_value = field._get_value(value)
             try:
                 rv[field._alias] = field.serialize(field_value)
             except Exception as exc:

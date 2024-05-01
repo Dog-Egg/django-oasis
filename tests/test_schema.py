@@ -34,7 +34,7 @@ def test_hook__unique_within_a_single_class():
     with pytest.raises(
         RuntimeError,
         match=re.escape(
-            "The hook <('serialization_fget', 'a')> can only define one in class A, but find ['get_a', 'get_a2']."
+            "The hook <('as_getter', 'a')> can only define one in class A, but find ['get_a', 'get_a2']."
         ),
     ):
         # 测试 serialization_fget 在单个类中只能定义一个

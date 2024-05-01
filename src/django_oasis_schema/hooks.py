@@ -40,7 +40,7 @@ def as_getter(field: t.Union[Schema, str]):
         return set_hook(
             method,
             lambda: (
-                "serialization_fget",
+                "as_getter",
                 field._name if isinstance(field, Schema) else field,
             ),
             unique_within_a_single_class=True,
@@ -60,7 +60,7 @@ def as_validator(field_or_method: t.Union[Schema, str, None, t.Callable] = None,
         return set_hook(
             method,
             lambda: (
-                "validator",
+                "as_validator",
                 field._name if isinstance(field, Schema) else field,
             ),
         )
