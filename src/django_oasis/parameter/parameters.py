@@ -385,7 +385,7 @@ class BaseItem(MountPoint):
 
     def parse_request(self, request: HttpRequest):
         result: dict = self._paramobj.parse_request(request)
-        return result.popitem()[1]
+        return result.popitem()[1] if result else _schema.EMPTY
 
     def __openapispec__(self, spec):
         return spec.parse(self._paramobj)

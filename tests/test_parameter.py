@@ -92,6 +92,12 @@ def test_QueryItem(rf):
     assert item.parse_request(rf.get("/?a=1")) == 1
 
 
+def test_QueryItem2(rf):
+    item = QueryItem(schema.String(required=False))
+    item.setitemname("a")
+    assert item.parse_request(rf.get("/")) is schema.EMPTY
+
+
 @pytest.mark.skip("deprecated")
 def test_FormItem(rf):
     item = FormItem(schema.Integer)

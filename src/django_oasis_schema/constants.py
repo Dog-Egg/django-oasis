@@ -4,5 +4,6 @@ EMPTY = type(
     (),
     dict(
         __repr__=lambda _: "EMPTY",
+        __bool__=lambda _: False,
     ),
 )()
