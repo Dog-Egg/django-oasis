@@ -8,7 +8,7 @@ from collections.abc import Iterable, Mapping
 from dateutil.parser import isoparse
 
 from . import _validators
-from .constants import EMPTY
+from .constants import undefined
 from .exceptions import ValidationError
 from .spectools.objects import ReferenceFlag
 from .spectools.utils import default_as_none
@@ -229,7 +229,7 @@ class Schema(Field, metaclass=SchemaMeta):
         self,
         *,
         required: t.Optional[bool] = None,
-        default: t.Union[t.Any, t.Callable[[], t.Any]] = EMPTY,
+        default: t.Union[t.Any, t.Callable[[], t.Any]] = undefined,
         nullable: bool = False,
         validators: t.Optional[t.List[t.Callable[[t.Any], t.Any]]] = None,
         choices: t.Optional[t.Iterable] = None,
@@ -263,7 +263,7 @@ class Schema(Field, metaclass=SchemaMeta):
             required = self.__required
             if isinstance(required, bool):
                 return required
-            return self._default is EMPTY
+            return self._default is undefined
 
         return self._name in self._model._required_fields  # type: ignore
 
@@ -343,7 +343,7 @@ class Schema(Field, metaclass=SchemaMeta):
             type=self.meta["data_type"],
             default=(
                 None
-                if (self._default is EMPTY or callable(self._default))
+                if (self._default is undefined or callable(self._default))
                 else self._default
             ),
             # # # example=None if self.example is EMPTY else _spec.Skip(
@@ -540,12 +540,12 @@ class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
             try:
                 val = data.pop(field._alias)
             except KeyError:
-                val = EMPTY
+                val = undefined
             else:
                 if field._clear_value is not None and field._clear_value(val):
-                    val = EMPTY
+                    val = undefined
 
-            if val is EMPTY:
+            if val is undefined:
                 if field._required:
                     error.setitem_error(
                         field._alias,
@@ -553,7 +553,7 @@ class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
                     )
 
                 default = field._default
-                if default is not EMPTY:
+                if default is not undefined:
                     rv[field._attr] = default() if callable(default) else default
 
                 continue
@@ -582,7 +582,7 @@ class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
             if field.write_only:
                 continue
             field_value = field._get_value(value)
-            if field_value is EMPTY:
+            if field_value is undefined:
                 continue
             try:
                 rv[field._alias] = field.serialize(field_value)

@@ -95,7 +95,7 @@ def test_QueryItem(rf):
 def test_QueryItem2(rf):
     item = QueryItem(schema.String(required=False))
     item.setitemname("a")
-    assert item.parse_request(rf.get("/")) is schema.EMPTY
+    assert item.parse_request(rf.get("/")) is schema.undefined
 
 
 @pytest.mark.skip("deprecated")

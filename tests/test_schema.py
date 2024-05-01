@@ -191,12 +191,12 @@ def test_Password_clear_value():
             raise
 
 
-def test_as_getter_return_EMPTY():
+def test_as_getter_return_undefined():
     class Schema(schema.Model):
         field = schema.String()
 
         @schema.as_getter(field)
         def get_field(self, obj):
-            return schema.EMPTY
+            return schema.undefined
 
     assert Schema().serialize({}) == {}
