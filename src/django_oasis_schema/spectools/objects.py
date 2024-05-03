@@ -138,7 +138,10 @@ class ReferenceObject:
 
     def dumps(self):
         definition = self.__definition.copy()
-        if self.__spec._reference_counter[self.__cls] >= 2:
+        if (
+            self.__spec._reference_counter[self.__cls] >= 2
+            and "<locals>" not in self.__cls.__qualname__
+        ):
             required = definition.pop("required")
 
             schema_full_name = self.__cls.__module__ + "." + self.__cls.__qualname__

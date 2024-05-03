@@ -36,11 +36,13 @@ def test_securitySchemes():
     }
 
 
-def test_reference_object():
-    class FooSchema(schema.Model):
-        """__doc__ description"""
+class FooSchema(schema.Model):
+    """__doc__ description"""
 
-        name = schema.String()
+    name = schema.String()
+
+
+def test_reference_object():
 
     @Resource("/")
     class API:
@@ -58,7 +60,7 @@ def test_reference_object():
         assert spec.to_dict() == {
             "components": {
                 "schemas": {
-                    "tests.test_openapispec.test_reference_object.<locals>.FooSchema": {
+                    "tests.test_openapispec.FooSchema": {
                         "title": "FooSchema",
                         "description": "__doc__ description",
                         "type": "object",
@@ -80,7 +82,7 @@ def test_reference_object():
                                     "application/json": {
                                         "schema": {
                                             "items": {
-                                                "$ref": "#/components/schemas/tests.test_openapispec.test_reference_object.<locals>.FooSchema",
+                                                "$ref": "#/components/schemas/tests.test_openapispec.FooSchema",
                                             },
                                             "type": "array",
                                         },
@@ -100,7 +102,7 @@ def test_reference_object():
                                             "nullable": True,
                                             "allOf": [
                                                 {
-                                                    "$ref": "#/components/schemas/tests.test_openapispec.test_reference_object.<locals>.FooSchema",
+                                                    "$ref": "#/components/schemas/tests.test_openapispec.FooSchema",
                                                 },
                                                 {
                                                     "required": ["name"],
