@@ -1,6 +1,7 @@
 import copy
 import datetime
 import inspect
+import operator
 import re
 import typing as t
 from collections.abc import Iterable, Mapping
@@ -134,17 +135,6 @@ class Field:
     @property
     def _attr(self) -> str:
         return self.__attr or self._name
-
-    def _get_value(self, data):
-        """获取待序列化的值。"""
-
-        hook = get_hook(self._model, ("as_getter", self._name))
-        if hook:
-            return hook(data)
-
-        if isinstance(data, Mapping):
-            return data[self._attr]
-        return getattr(data, self._attr)
 
 
 def default_clear_value(value):
@@ -313,6 +303,21 @@ class Schema(Field, metaclass=SchemaMeta):
             value = self.__after_deserialization(value)
 
         return value
+
+    def _get_value(self, data):
+        """获取待序列化的值。"""
+
+        hook = get_hook(self._model, ("as_getter", self._name))
+        if hook:
+            return hook(data)
+
+        get = operator.getitem if isinstance(data, Mapping) else getattr
+        try:
+            return get(data, self._attr)
+        except (KeyError, AttributeError):
+            if self._required:
+                raise
+            return undefined
 
     @property
     def __is_field(self):

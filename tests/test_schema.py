@@ -200,3 +200,10 @@ def test_as_getter_return_undefined():
             return schema.undefined
 
     assert Schema().serialize({}) == {}
+
+
+def test_serialization_with_unrequired_field():
+    class Schema(schema.Model):
+        field = schema.String(required=False)
+
+    assert Schema().serialize({}) == {}
