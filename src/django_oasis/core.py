@@ -67,16 +67,15 @@ class OpenAPI:
         *,
         title: str = "API Document",
         name: t.Optional[str] = None,
-        description: str = "",
+        description: t.Union[str, t.Callable[[HttpRequest], str]] = "",
     ):
         self.__spec = OpenAPISpec(
             info={
                 "title": title,
-                "description": clean_commonmark(description),
                 "version": "0.1.0",
             }
         )
-
+        self.__description = description
         self.__urls: t.List[django.urls.URLPattern] = []
         self.__spec_endpoint = "/apispec_%s" % (name or get_openapi_name())
         self.__append_url(self.__spec_endpoint, self.spec_view)
@@ -138,6 +137,13 @@ class OpenAPI:
 
     def spec_view(self, request: HttpRequest):
         oas = self.get_spec()
+        if self.__description and request:
+            description = (
+                self.__description(request)
+                if inspect.isfunction(self.__description)
+                else self.__description
+            )
+            oas["info"]["description"] = clean_commonmark(description)
 
         script_name = request.path[: -len(request.path_info)]
         if script_name:

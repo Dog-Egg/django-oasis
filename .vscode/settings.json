@@ -1,7 +1,7 @@
 {
     "files.exclude": {
         "**/__pycache__": true,
-        ".tox": false,
+        ".tox": true,
         "**/.pytest_cache": true,
         ".venv/": true,
         "**/*.egg-info": true,

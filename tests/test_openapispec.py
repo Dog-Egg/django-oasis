@@ -1,5 +1,6 @@
 from django_oasis import Operation, Resource, schema
 from django_oasis.auth import BaseAuth
+from django_oasis.core import OpenAPI
 from django_oasis_schema.spectools.objects import OpenAPISpec
 
 
@@ -118,3 +119,17 @@ def test_reference_object():
                 },
             },
         }
+
+
+def test_openapi_func_description(rf):
+    import json
+
+    openapi = OpenAPI(description=lambda request: "description")
+    assert json.loads(openapi.spec_view(rf.get("/")).content) == {
+        "openapi": "3.0.3",
+        "info": {
+            "title": "API Document",
+            "version": "0.1.0",
+            "description": "description",
+        },
+    }
