@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="上传文件" href="../upload_files/index.html" /><link rel="prev" title="路径参数" href="../request_path/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
-        <title>请求体 - Django-Oasis 0.1.dev20240513082341 文档</title>
+        <title>请求体 - Django-Oasis 0.1.dev20240513122647 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -179,7 +179,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240513082341 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240513122647 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -203,7 +203,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240513082341 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240513122647 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -289,7 +289,7 @@
 <p>代码示例：</p>
 <div class="literal-block-wrapper docutils container" id="id-3443ab7f">
 <div class="code-block-caption"><span class="caption-text">jsondata.py</span><a class="headerlink" href="#id-3443ab7f" title="此代码块的永久链接">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">JsonData</span>
 
 
@@ -303,8 +303,8 @@
 </span><span class="hll">                <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span>
 </span><span class="hll">            <span class="p">}</span>
 </span><span class="hll">        <span class="p">),</span>
-</span>    <span class="p">):</span>
-        <span class="o">...</span>
+</span>    <span class="p">):</span> <span class="o">...</span>
+
 </pre></div>
 </div>
 </div>
@@ -313,7 +313,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-3443ab7f">jsondata.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_30db2f61" srcdoc="
+                <iframe id="id_67b8f7fe" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -393,7 +393,7 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_30db2f61')
+                iFrameResize({checkOrigin: false}, '#id_67b8f7fe')
             </script>
             </section>
 <section id="id2">
@@ -412,7 +412,7 @@
 <p>代码示例：</p>
 <div class="literal-block-wrapper docutils container" id="id-68e17258">
 <div class="code-block-caption"><span class="caption-text">formdata.py</span><a class="headerlink" href="#id-68e17258" title="此代码块的永久链接">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormData</span>
 
 
@@ -426,8 +426,8 @@
 </span><span class="hll">                <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">(),</span>
 </span><span class="hll">            <span class="p">}</span>
 </span><span class="hll">        <span class="p">),</span>
-</span>    <span class="p">):</span>
-        <span class="o">...</span>
+</span>    <span class="p">):</span> <span class="o">...</span>
+
 </pre></div>
 </div>
 </div>
@@ -437,7 +437,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-68e17258">formdata.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_5e670dbd" srcdoc="
+                <iframe id="id_98d81197" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -517,7 +517,7 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_5e670dbd')
+                iFrameResize({checkOrigin: false}, '#id_98d81197')
             </script>
             </section>
 <section id="body">
@@ -539,7 +539,8 @@
 <p>代码示例：</p>
 <div class="literal-block-wrapper docutils container" id="id-0838093c">
 <div class="code-block-caption"><span class="caption-text">body.py</span><a class="headerlink" href="#id-0838093c" title="此代码块的永久链接">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
+<span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">Body</span>
 
 
@@ -549,9 +550,8 @@
 
 
 <span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/to/path&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
-<span class="hll">    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">Body</span><span class="p">(</span><span class="n">BookSchema</span><span class="p">)):</span>
-</span>        <span class="o">...</span>
+<span class="hll"><span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+</span>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">Body</span><span class="p">(</span><span class="n">BookSchema</span><span class="p">)):</span> <span class="o">...</span>
 </pre></div>
 </div>
 </div>
@@ -560,7 +560,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-0838093c">body.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_abb0cd81" srcdoc="
+                <iframe id="id_733728ec" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -640,7 +640,7 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_abb0cd81')
+                iFrameResize({checkOrigin: false}, '#id_733728ec')
             </script>
             </section>
 </section>
@@ -724,7 +724,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=0b02d91f"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=3e28c28d"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>

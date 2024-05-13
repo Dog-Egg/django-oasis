@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="prev" title="API 参考" href="../api.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
-        <title>RESTful 风格 - Django-Oasis 0.1.dev20240513082341 文档</title>
+        <title>RESTful 风格 - Django-Oasis 0.1.dev20240513122647 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -179,7 +179,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240513082341 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240513122647 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -203,7 +203,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240513082341 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240513122647 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -277,7 +277,8 @@
 <div class="code-block-caption"><span class="caption-text">restful.py</span><a class="headerlink" href="#id-c1223b02" title="此代码块的永久链接">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 
-<span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">model2schema</span><span class="p">,</span> <span class="n">schema</span>
+<span class="kn">from</span> <span class="nn">django_oasis.common</span> <span class="kn">import</span> <span class="n">model2schema</span>
+<span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.exceptions</span> <span class="kn">import</span> <span class="n">NotFoundError</span>
 <span class="kn">from</span> <span class="nn">django_oasis.pagination</span> <span class="kn">import</span> <span class="n">PagePagination</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">Body</span>
@@ -351,7 +352,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-c1223b02">restful.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_ed108259" srcdoc="
+                <iframe id="id_3eda069f" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -431,7 +432,7 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_ed108259')
+                iFrameResize({checkOrigin: false}, '#id_3eda069f')
             </script>
             </section>
 
@@ -476,7 +477,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=0b02d91f"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=3e28c28d"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
