@@ -60,6 +60,61 @@ def test_auth_openapispec():
     }
 
 
+def test_django_auth_openapispec():
+    from django_oasis.auth import IsAdministrator, IsAuthenticated
+
+    @Resource("/")
+    class API:
+        @Operation(auth=IsAuthenticated)
+        def get(self): ...
+
+        @Operation(auth=IsAdministrator)
+        def post(self): ...
+
+    openapi = OpenAPI()
+    openapi.add_resource(API)
+    spec = openapi.get_spec()
+
+    assert spec["components"]["securitySchemes"] == {
+        "DjangoAuthBase": {"in": "cookie", "name": "sessionid", "type": "apiKey"}
+    }
+    assert spec["paths"]["/"] == {
+        "get": {
+            "responses": {
+                200: {
+                    "description": "OK",
+                },
+                401: {
+                    "description": "Unauthorized",
+                },
+            },
+            "security": [
+                {
+                    "DjangoAuthBase": [],
+                },
+            ],
+        },
+        "post": {
+            "responses": {
+                200: {
+                    "description": "OK",
+                },
+                401: {
+                    "description": "Unauthorized",
+                },
+                403: {
+                    "description": "Forbidden",
+                },
+            },
+            "security": [
+                {
+                    "DjangoAuthBase": [],
+                },
+            ],
+        },
+    }
+
+
 class FooSchema(schema.Model):
     """__doc__ description"""
 

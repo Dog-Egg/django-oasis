@@ -1,10 +1,11 @@
 import abc
 import typing as t
+from http import HTTPStatus
 
 from django.conf import settings
 from django.http import HttpRequest
 
-from django_oasis import exceptions
+from django_oasis.exceptions import ForbiddenError, UnauthorizedError
 
 
 class BaseAuth:
@@ -28,9 +29,12 @@ class BaseAuth:
 
     def __openapispec__(self, spec, **kwargs):
         if hasattr(self, "declare_security"):
-            security_name = self.__class__.__name__
-            spec._set_security_scheme(security_name, self.declare_security)
-            return [{security_name: []}]
+            # 遍历类的所有父类，找到第一个有 `declare_security` 属性的类。
+            for cls in self.__class__.__mro__:
+                if "declare_security" in cls.__dict__:
+                    security_name = cls.__name__
+                    spec._set_security_scheme(security_name, self.declare_security)
+                    return [{security_name: []}]
 
 
 def _get_django_auth_secrity_apikey_name():
@@ -51,18 +55,30 @@ class DjangoAuthBase(BaseAuth):
         "in": "cookie",
     }
 
+    declare_responses = {
+        UnauthorizedError.status_code: {
+            "description": HTTPStatus(UnauthorizedError.status_code).phrase,
+        },
+        ForbiddenError.status_code: {
+            "description": HTTPStatus(ForbiddenError.status_code).phrase,
+        },
+    }
+
     def _check_user(self, request):
         raise NotImplementedError
 
     def check_auth(self, request):
         if not self._check_user(request):
             if request.user.is_authenticated:
-                raise exceptions.ForbiddenError
-            raise exceptions.UnauthorizedError
+                raise ForbiddenError
+            raise UnauthorizedError
 
 
 class IsAuthenticated(DjangoAuthBase):
     """验证用户是否登录。"""
+
+    declare_responses = DjangoAuthBase.declare_responses.copy()
+    del declare_responses[ForbiddenError.status_code]
 
     def _check_user(self, request: HttpRequest):
         return request.user.is_authenticated

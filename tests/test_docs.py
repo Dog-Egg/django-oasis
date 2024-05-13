@@ -61,7 +61,9 @@ def test_restful(client):
 
     # 增
     response = client.post(
-        "/books", data={"title": "三体", "author": "刘慈欣"}, content_type="application/json"
+        "/books",
+        data={"title": "三体", "author": "刘慈欣"},
+        content_type="application/json",
     )
     assert response.status_code == 201
     assert response.json() == {"author": "刘慈欣", "id": 1, "title": "三体"}
@@ -86,7 +88,9 @@ def test_restful(client):
     assert response.status_code == 404
 
     # 改
-    response = client.put("/books/1", {"author": "老刘"}, content_type="application/json")
+    response = client.put(
+        "/books/1", {"author": "老刘"}, content_type="application/json"
+    )
     assert response.status_code == 400
     assert response.json() == {
         "validation_errors": [{"loc": ["title"], "msgs": ["This field is required."]}]
@@ -110,7 +114,7 @@ def test_restful(client):
 
 @load_openapi_module("docs.src.auth.auth")
 def test_auth(client, django_user_model, admin_client):
-    resp = client.get("/to/path")
+    resp = client.post("/to/path")
     assert resp.status_code == 401
     assert resp.json() == {"reason": "Unauthorized", "status_code": 401}
 
@@ -118,9 +122,9 @@ def test_auth(client, django_user_model, admin_client):
         username="someone", password="something"
     )  # 普通用户
     client.force_login(user)
-    resp = client.get("/to/path")
+    resp = client.post("/to/path")
     assert resp.status_code == 403
     assert resp.json() == {"reason": "Forbidden", "status_code": 403}
 
-    resp = admin_client.get("/to/path")
+    resp = admin_client.post("/to/path")
     assert resp.status_code == 200
