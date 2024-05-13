@@ -9,7 +9,7 @@ __all__ = ("reverse", "reverse_lazy")
 def reverse(viewname, *args, **kwargs):
     resource = Resource.checkout(viewname)
     if resource is not None:
-        viewname = resource.as_view()
+        viewname = resource.view_func
     return _reverse(viewname, *args, **kwargs)
 
 

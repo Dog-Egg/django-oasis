@@ -11,6 +11,7 @@ import django.urls
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from django.http.response import HttpResponseBase, JsonResponse
+from django.utils.functional import cached_property
 from django.views.decorators.csrf import csrf_exempt
 
 from django_oasis import schema
@@ -120,8 +121,7 @@ class OpenAPI:
         resource._handle_error = handle_error
 
         django_path, openapi_path = resource._path._resolve()
-        view = resource.as_view()
-        self.__append_url(prefix + django_path, view)
+        self.__append_url(prefix + django_path, resource.view_func)
         self.__spec.add_path(
             prefix + openapi_path, self.__spec.parse(resource, tags=tags)
         )
@@ -211,7 +211,6 @@ class Resource:
         self._tags: t.List = tags or []
         self.__view_decorators = view_decorators or []
         self.__include_in_spec = include_in_spec
-        self.__view_function = None
         self._default_auth: t.Optional[BaseAuth] = (
             None if default_auth is None else make_instance(default_auth)
         )
@@ -271,29 +270,26 @@ class Resource:
         except TypeError:
             return None
 
-    def as_view(self):
-        if self.__view_function is None:
+    @cached_property
+    def view_func(self):
+        @csrf_exempt
+        def view(request, **kwargs) -> HttpResponseBase:
+            try:
+                rv, status_code = self.__view(request, **kwargs)
+            except Exception as exc:
+                if (
+                    "django_oasis.middleware.ErrorHandlerMiddleware"
+                    in settings.MIDDLEWARE
+                ):
+                    request._oasis_handle_error = self._handle_error
+                    raise
+                return self._handle_error(exc, request)
+            return self.__make_response(rv, status_code)
 
-            @csrf_exempt
-            def view(request, **kwargs) -> HttpResponseBase:
-                try:
-                    rv, status_code = self.__view(request, **kwargs)
-                except Exception as exc:
-                    if (
-                        "django_oasis.middleware.ErrorHandlerMiddleware"
-                        in settings.MIDDLEWARE
-                    ):
-                        request._oasis_handle_error = self._handle_error
-                        raise
-                    return self._handle_error(exc, request)
-                return self.__make_response(rv, status_code)
+        for decorator in self.__get_view_decorators():
+            view = decorator(view)
 
-            for decorator in self.__get_view_decorators():
-                view = decorator(view)
-
-            self.__view_function = view
-
-        return self.__view_function
+        return view
 
     def __make_response(self, rv, status: int):
         if isinstance(rv, HttpResponseBase):

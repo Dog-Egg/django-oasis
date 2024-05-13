@@ -49,7 +49,7 @@ def as_getter(field: t.Union[Schema, str]):
     return decorator
 
 
-def as_validator(field_or_method: t.Union[Schema, str, None, t.Callable] = None, /):
+def as_validator(field: t.Union[Schema, str, None, t.Callable] = None, /):
     """
     挂载验证函数。它会在调用验证时，执行其验证函数。
 
@@ -65,9 +65,9 @@ def as_validator(field_or_method: t.Union[Schema, str, None, t.Callable] = None,
             ),
         )
 
-    if inspect.isfunction(field_or_method):
-        return decorator(field_or_method)
-    return functools.partial(decorator, field=field_or_method)
+    if inspect.isfunction(field):
+        return decorator(field)
+    return functools.partial(decorator, field=field)
 
 
 def serialization_fget(*args, **kwargs):
