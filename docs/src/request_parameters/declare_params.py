@@ -1,4 +1,5 @@
-from django_oasis import Resource, schema
+from django_oasis import schema
+from django_oasis.core import Resource
 from django_oasis.parameter import Query
 
 
@@ -9,5 +10,4 @@ class QuerySchema(schema.Model):
 
 @Resource("/to/path")
 class API:
-    def get(self, query=Query(QuerySchema)):
-        ...
+    def get(self, query=Query(QuerySchema)): ...

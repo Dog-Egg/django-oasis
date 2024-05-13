@@ -6,9 +6,8 @@ import django
 from django.core.validators import MaxLengthValidator
 from django.db import models
 
+from django_oasis import schema
 from django_oasis.utils.django import django_validator_wraps
-
-from . import schema
 
 
 def filter_defaults(kwargs: dict):

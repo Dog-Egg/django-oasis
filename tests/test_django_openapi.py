@@ -3,7 +3,8 @@ import re
 import pytest
 from django.core.files.uploadedfile import SimpleUploadedFile, UploadedFile
 
-from django_oasis import Resource, schema
+from django_oasis import schema
+from django_oasis.core import Resource
 from django_oasis.parameter.parameters import Body
 
 

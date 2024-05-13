@@ -1,4 +1,4 @@
-from django_oasis import Resource, schema
+from django_oasis.core import Resource, schema
 from django_oasis.parameter import JsonData
 
 
@@ -12,11 +12,10 @@ class API:
                 "b": schema.String(),
             }
         ),
-    ):
-        ...
+    ): ...
 
 
-from django_oasis import OpenAPI
+from django_oasis.core import OpenAPI
 
 openapi = OpenAPI(title="JsonData")
 openapi.add_resource(API)

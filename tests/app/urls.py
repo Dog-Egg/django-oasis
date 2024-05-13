@@ -1,6 +1,6 @@
 from django.urls import include, path
 
-from django_oasis import OpenAPI
+from django_oasis.core import OpenAPI
 
 from . import views
 

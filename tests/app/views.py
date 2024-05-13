@@ -1,4 +1,4 @@
-from django_oasis import Operation, Resource, schema
+from django_oasis.core import Operation, Resource, schema
 
 
 @Resource("/1")

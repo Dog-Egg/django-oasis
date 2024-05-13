@@ -1,6 +1,5 @@
-from django_oasis import Operation, Resource, schema
 from django_oasis.auth import BaseAuth
-from django_oasis.core import OpenAPI
+from django_oasis.core import OpenAPI, Operation, Resource, schema
 from django_oasis_schema.spectools.objects import OpenAPISpec
 
 

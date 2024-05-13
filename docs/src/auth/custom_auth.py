@@ -1,5 +1,5 @@
-from django_oasis import Operation, Resource
 from django_oasis.auth import BaseAuth
+from django_oasis.core import Operation, Resource
 from django_oasis.exceptions import UnauthorizedError
 
 
@@ -23,5 +23,4 @@ class IsOurUser(BaseAuth):
 @Resource("/to/path")
 class API:
     @Operation(auth=IsOurUser)
-    def get(self):
-        ...
+    def get(self): ...

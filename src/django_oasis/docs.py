@@ -6,7 +6,7 @@ from django.http import HttpRequest, HttpResponse, HttpResponseNotModified
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 
-from django_oasis import OpenAPI
+from django_oasis.core import OpenAPI
 
 
 def _get_swagger_ui_html(config: dict, insert_head="", env=None):

@@ -1,6 +1,7 @@
 from django.db import models
 
-from django_oasis import Resource, model2schema
+from django_oasis.common import model2schema
+from django_oasis.core import Resource
 from django_oasis.pagination import PagePagination
 
 

@@ -2,11 +2,10 @@ from decimal import Decimal
 
 import django
 import pytest
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db import models
 
-from django_oasis import model2schema, schema
-from django_oasis.model2schema import parse
+from django_oasis import schema
+from django_oasis.common._model2schema import model2schema, parse
 
 
 class A(models.Model):

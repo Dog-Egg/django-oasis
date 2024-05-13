@@ -1,6 +1,6 @@
 import typing as t
 
-from django_oasis import Resource
+from django_oasis.core import Resource
 
 
 def find_resources(module) -> t.Generator[Resource, None, None]:

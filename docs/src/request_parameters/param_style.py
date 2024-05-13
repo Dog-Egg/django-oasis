@@ -1,5 +1,6 @@
-from django_oasis import Resource, schema
-from django_oasis.parameter import Cookie, Header, Query, Style
+from django_oasis import schema
+from django_oasis.core import Resource
+from django_oasis.parameter import Query, Style
 
 
 @Resource("/to/path")
@@ -16,5 +17,4 @@ class API:
                 "b": Style("form", False),
             },
         ),
-    ):
-        ...
+    ): ...

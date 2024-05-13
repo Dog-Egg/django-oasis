@@ -1,7 +1,7 @@
 from django.urls import reverse as _reverse
 from django.utils.functional import lazy
 
-from django_oasis import Resource
+from django_oasis.core import Resource
 
 __all__ = ("reverse", "reverse_lazy")
 

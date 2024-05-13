@@ -1,7 +1,5 @@
 from django.core.exceptions import ValidationError as DjangoValidationError
 
-from django_oasis import schema
-
 
 class django_validator_wraps:
     """把 Django 的验证器包装成 Schema 验证器，验证失败将抛出 `ValidationError <django_oasis.schema.ValidationError>` 异常对象。
@@ -28,6 +26,8 @@ class django_validator_wraps:
         self._wrapped = validator
 
     def __call__(self, *args, **kwargs):
+        from django_oasis import schema
+
         try:
             return self._wrapped(*args, **kwargs)
         except DjangoValidationError as exc:

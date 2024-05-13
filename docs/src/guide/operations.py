@@ -1,4 +1,4 @@
-from django_oasis import Resource
+from django_oasis.core import Resource
 
 
 @Resource("/to/path")

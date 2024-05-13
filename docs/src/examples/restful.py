@@ -1,6 +1,7 @@
 from django.db import models
 
-from django_oasis import Operation, Resource, model2schema, schema
+from django_oasis.common import model2schema
+from django_oasis.core import Operation, Resource
 from django_oasis.exceptions import NotFoundError
 from django_oasis.pagination import PagePagination
 from django_oasis.parameter import Body

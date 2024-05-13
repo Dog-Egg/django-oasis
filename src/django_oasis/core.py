@@ -26,6 +26,8 @@ from django_oasis_schema.spectools.objects import OpenAPISpec
 from django_oasis_schema.spectools.utils import clean_commonmark
 from django_oasis_schema.utils import make_instance, make_model_schema, make_schema
 
+__all__ = ("OpenAPI", "Resource", "Operation")
+
 
 def get_openapi_name():
     frame = inspect.getframeinfo(sys._getframe(2))
