@@ -1,4 +1,5 @@
-from django_oasis import Resource, schema
+from django_oasis import schema
+from django_oasis.core import Resource
 from django_oasis.parameter import Style
 
 
@@ -10,8 +11,6 @@ from django_oasis.parameter import Style
     param_styles={"colors": Style("simple", False)},  # 这是默认样式
 )
 class API:
-    def __init__(self, request, colors):
-        ...
+    def __init__(self, request, colors): ...
 
-    def get(self):
-        ...
+    def get(self): ...

@@ -16,7 +16,7 @@ Oasis 使用 `路径模版 <https://spec.openapis.org/oas/v3.0.3#path-templating
 参数类型
 --------
 
-为路径参数声明数据类型及验证规则只需为 `Resource <django_oasis.Resource>` 设置 ``param_schemas``。
+为路径参数声明数据类型及验证规则只需为 `Resource <django_oasis.core.Resource>` 设置 ``param_schemas``。
 
 .. myliteralinclude:: ./example2.py
     :emphasize-lines: 6

@@ -1,4 +1,5 @@
-from django_oasis import Resource, schema
+from django_oasis import schema
+from django_oasis.core import Resource
 
 
 @Resource(
@@ -6,8 +7,6 @@ from django_oasis import Resource, schema
     param_schemas={"pet_id": schema.Integer()},
 )
 class API:
-    def __init__(self, request, pet_id):
-        ...
+    def __init__(self, request, pet_id): ...
 
-    def get(self):
-        ...
+    def get(self): ...

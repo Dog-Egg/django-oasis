@@ -1,7 +1,7 @@
 用户认证
 ========
 
-仅需使用 `Operation <django_oasis.Operation>` 并设置 auth 参数即可实现认证。
+仅需使用 `Operation <django_oasis.core.Operation>` 并设置 auth 参数即可实现认证。
 
 以下代码示例会验证请求是否具有“管理员权限”。若用户未登录，将返回 HTTP 401 响应；若用户已登录但非管理员，将返回 HTTP 403 响应。
 

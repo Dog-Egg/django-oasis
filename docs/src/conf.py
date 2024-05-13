@@ -36,6 +36,7 @@ nitpick_ignore = [
     ("py:class", "re.Pattern"),
     ("py:class", "django.db.models.query.QuerySet"),
     ("py:class", "django_oasis.parameter.parameters.RequestParameter"),
+    ("py:class", "django.http.request.HttpRequest"),
 ]
 
 # HTML output

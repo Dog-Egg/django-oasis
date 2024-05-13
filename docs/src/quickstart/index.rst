@@ -79,7 +79,7 @@ cd 到一个你想放置你代码的目录，然后运行以下命令：
 配置路由
 --------
 
-最后将 API 添加到 `OpenAPI <django_oasis.OpenAPI>` 实例中，并将 OpenAPI 实例的路由添加到 Django 路由配置中。
+最后将 API 添加到 `OpenAPI <django_oasis.core.OpenAPI>` 实例中，并将 OpenAPI 实例的路由添加到 Django 路由配置中。
 
 .. code-block::
     :caption: mysite/urls.py
