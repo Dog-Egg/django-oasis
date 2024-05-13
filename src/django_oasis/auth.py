@@ -1,16 +1,22 @@
 import abc
+import typing as t
 
 from django.conf import settings
 from django.http import HttpRequest
 
 from django_oasis import exceptions
-from django_oasis_schema.spectools.objects import OpenAPISpec
 
 
 class BaseAuth:
     """
     认证基类。如需自定义认证类，需继承该类，并实现其抽象方法。
     """
+
+    #: 描述认证时会产生的响应。键为 HTTP 状态码，值为 `Response Object <https://spec.openapis.org/oas/v3.0.3.html#response-object>`_。
+    declare_responses: t.Dict[int, dict]
+
+    #: 定义认证使用的安全方案。declare_security 的值为 `Security Scheme Object <https://spec.openapis.org/oas/v3.0.3.html#security-scheme-object>`_。
+    declare_security: dict
 
     @abc.abstractmethod
     def check_auth(self, request):
@@ -20,18 +26,31 @@ class BaseAuth:
         :param request: Django `HttpRequest <https://docs.djangoproject.com/zh-hans/5.0/ref/request-response/#httprequest-objects>`_ 对象。
         """
 
-    @abc.abstractmethod
     def __openapispec__(self, spec, **kwargs):
-        """
-        需自行实现该方法，该方法为 OpenAPISpec 对象能识别的方法。
+        if hasattr(self, "declare_security"):
+            security_name = self.__class__.__name__
+            spec._set_security_scheme(security_name, self.declare_security)
+            return [{security_name: []}]
 
-        需要通过 ``spec.set_security_scheme`` 方法为 OAS `securitySchemes <https://spec.openapis.org/oas/v3.0.3#componentsSecuritySchemes>`_ 字段设置值。
 
-        并且返回值将用于设置 OAS `Operation security <https://spec.openapis.org/oas/v3.0.3#operationSecurity>`_ 字段。
-        """
+def _get_django_auth_secrity_apikey_name():
+    from django.conf.global_settings import SESSION_COOKIE_NAME
+    from django.core.exceptions import ImproperlyConfigured
+
+    try:
+        return settings.SESSION_COOKIE_NAME
+    except ImproperlyConfigured:
+        return SESSION_COOKIE_NAME
 
 
 class DjangoAuthBase(BaseAuth):
+
+    declare_security = {
+        "type": "apiKey",
+        "name": _get_django_auth_secrity_apikey_name(),
+        "in": "cookie",
+    }
+
     def _check_user(self, request):
         raise NotImplementedError
 
@@ -40,18 +59,6 @@ class DjangoAuthBase(BaseAuth):
             if request.user.is_authenticated:
                 raise exceptions.ForbiddenError
             raise exceptions.UnauthorizedError
-
-    def __openapispec__(self, spec: OpenAPISpec, **kwargs):
-        key = "__auth__"
-        spec.set_security_scheme(
-            key,
-            {
-                "type": "apiKey",
-                "name": settings.SESSION_COOKIE_NAME,
-                "in": "cookie",
-            },
-        )
-        return [{key: []}]
 
 
 class IsAuthenticated(DjangoAuthBase):

@@ -420,6 +420,10 @@ class Operation:
         if not self.__include_in_spec:
             return
 
+        other_responses = {}
+        if self.__auth and hasattr(self.__auth, "declare_responses"):
+            other_responses.update(self.__auth.declare_responses)
+
         return functools.reduce(
             _spec.merge,
             [
@@ -433,6 +437,7 @@ class Operation:
                     ],
                     "deprecated": _spec.default_as_none(self.__deprecated, False),
                     "responses": {
+                        **other_responses,
                         self.__status_code: {
                             "description": self.__response_description,
                             "content": {

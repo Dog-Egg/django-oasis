@@ -29,7 +29,6 @@
 
 .. autoclass:: django_oasis.auth.BaseAuth
     :members:
-    :special-members: __openapispec__
 
 示例1
 ^^^^^

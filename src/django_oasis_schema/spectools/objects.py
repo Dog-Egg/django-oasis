@@ -1,4 +1,5 @@
 import typing as t
+import warnings
 from collections import Counter
 
 _CLEARN_INVALID_VALUES: t.List[t.Any] = [None, {}, []]
@@ -95,7 +96,15 @@ class OpenAPISpec:
     def add_path(self, path, pathitem):
         self.__paths[path] = pathitem
 
-    def set_security_scheme(self, key, obj):
+    def set_security_scheme(self, *args, **kwargs):
+        warnings.warn(
+            "set_security_scheme is deprecated, use declare_security instead",
+            category=DeprecationWarning,
+            stacklevel=2,
+        )
+        return self._set_security_scheme(*args, **kwargs)
+
+    def _set_security_scheme(self, key, obj):
         if key not in self.__security_schemes:
             self.__security_schemes[key] = obj
 

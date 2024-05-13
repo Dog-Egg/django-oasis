@@ -3,28 +3,16 @@ from django_oasis.core import OpenAPI, Operation, Resource, schema
 from django_oasis_schema.spectools.objects import OpenAPISpec
 
 
-def test_securitySchemes():
+def test_auth_openapispec():
 
     class MyAuth(BaseAuth):
-        def __openapispec__(self, spec, **kwargs):
-            spec.set_security_scheme(
-                "myauth",
-                {
-                    "type": "oauth2",
-                    "flows": {
-                        "implicit": {
-                            "authorizationUrl": "https://example.com/dialog",
-                            "scopes": {},
-                        }
-                    },
-                },
-            )
-            return [{"myauth": []}]
+        declare_responses = {
+            401: {
+                "description": "未登录",
+            }
+        }
 
-    spec = OpenAPISpec(info={})
-    spec.parse(Operation(auth=MyAuth))
-    assert spec.to_dict()["components"]["securitySchemes"] == {
-        "myauth": {
+        declare_security = {
             "type": "oauth2",
             "flows": {
                 "implicit": {
@@ -33,6 +21,42 @@ def test_securitySchemes():
                 }
             },
         }
+
+    @Resource("/")
+    class API:
+        @Operation(auth=MyAuth)
+        def get(self): ...
+
+    openapi = OpenAPI()
+    openapi.add_resource(API)
+
+    spec = openapi.get_spec()
+
+    assert spec["components"]["securitySchemes"] == {
+        "MyAuth": {
+            "type": "oauth2",
+            "flows": {
+                "implicit": {
+                    "authorizationUrl": "https://example.com/dialog",
+                    "scopes": {},
+                }
+            },
+        }
+    }
+    assert spec["paths"]["/"]["get"] == {
+        "responses": {
+            200: {
+                "description": "OK",
+            },
+            401: {
+                "description": "未登录",
+            },
+        },
+        "security": [
+            {
+                "MyAuth": [],
+            },
+        ],
     }
 
 
