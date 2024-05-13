@@ -32,8 +32,6 @@ JSON 格式
     :docexpansion: full
 
 
-.. autoclass:: django_oasis.parameter.FormItem
-
 Body
 ----
 
