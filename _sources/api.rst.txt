@@ -1,14 +1,23 @@
 API 参考
 ========
 
-.. automodule:: django_oasis
+Core
+----
+
+.. automodule:: django_oasis.core
     :members:
-    :imported-members:
+
+
+Parameter
+---------
 
 .. automodule:: django_oasis.parameter
     :members:
     :imported-members:
-    :exclude-members: Body, FormData, JsonData
+
+
+Schema
+------
 
 .. automodule:: django_oasis.schema
     :members:

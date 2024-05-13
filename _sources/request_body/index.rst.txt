@@ -4,8 +4,6 @@
 JSON 格式
 ---------
 
-.. autoclass:: django_oasis.parameter.JsonData
-
 代码示例：
 
 .. myliteralinclude:: jsondata.py
@@ -17,8 +15,6 @@ JSON 格式
 
 表单格式
 --------
-
-.. autoclass:: django_oasis.parameter.FormData
 
 代码示例：
 
@@ -34,8 +30,6 @@ JSON 格式
 
 Body
 ----
-
-.. autoclass:: django_oasis.parameter.Body
 
 代码示例：
 

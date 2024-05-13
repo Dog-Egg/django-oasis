@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="请求体" href="../request_body/index.html" /><link rel="prev" title="请求参数" href="../request_parameters/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
-        <title>路径参数 - Django-Oasis 0.1.dev20240513122647 文档</title>
+        <title>路径参数 - Django-Oasis 0.1.dev20240513130249 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -179,7 +179,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240513122647 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240513130249 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -203,7 +203,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240513122647 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240513130249 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -277,16 +277,14 @@
 <p>路径参数会以同名关键字参数的形式传递给 API 类的 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 方法，如下例：</p>
 <div class="literal-block-wrapper docutils container" id="id-76a70856">
 <div class="code-block-caption"><span class="caption-text">example.py</span><a class="headerlink" href="#id-76a70856" title="此代码块的永久链接">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 
 
 <span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/pets/</span><span class="si">{pet_id}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pet_id</span><span class="p">):</span>
-        <span class="o">...</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pet_id</span><span class="p">):</span> <span class="o">...</span>
 
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="o">...</span>
 </pre></div>
 </div>
 </div>
@@ -296,7 +294,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-76a70856">example.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_dec5086b" srcdoc="
+                <iframe id="id_3f4c1204" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -376,26 +374,25 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_dec5086b')
+                iFrameResize({checkOrigin: false}, '#id_3f4c1204')
             </script>
             <section id="id3">
 <h2>参数类型<a class="headerlink" href="#id3" title="此标题的永久链接">¶</a></h2>
-<p>为路径参数声明数据类型及验证规则只需为 <code class="xref py py-obj docutils literal notranslate"><span class="pre">Resource</span></code> 设置 <code class="docutils literal notranslate"><span class="pre">param_schemas</span></code>。</p>
+<p>为路径参数声明数据类型及验证规则只需为 <a class="reference internal" href="../api.html#django_oasis.core.Resource" title="django_oasis.core.Resource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Resource</span></code></a> 设置 <code class="docutils literal notranslate"><span class="pre">param_schemas</span></code>。</p>
 <div class="literal-block-wrapper docutils container" id="id-9f348dcd">
 <div class="code-block-caption"><span class="caption-text">example2.py</span><a class="headerlink" href="#id-9f348dcd" title="此代码块的永久链接">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
+<span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 
 
 <span class="nd">@Resource</span><span class="p">(</span>
-    <span class="s2">&quot;/pets/</span><span class="si">{pet_id}</span><span class="s2">&quot;</span><span class="p">,</span>
-<span class="hll">    <span class="n">param_schemas</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;pet_id&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">()},</span>
-</span><span class="p">)</span>
+<span class="hll">    <span class="s2">&quot;/pets/</span><span class="si">{pet_id}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span>    <span class="n">param_schemas</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;pet_id&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">()},</span>
+<span class="p">)</span>
 <span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pet_id</span><span class="p">):</span>
-        <span class="o">...</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pet_id</span><span class="p">):</span> <span class="o">...</span>
 
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="o">...</span>
 </pre></div>
 </div>
 </div>
@@ -405,7 +402,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-9f348dcd">example2.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_002f98f3" srcdoc="
+                <iframe id="id_c790f706" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -485,7 +482,7 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_002f98f3')
+                iFrameResize({checkOrigin: false}, '#id_c790f706')
             </script>
             </section>
 <section id="path">
@@ -517,7 +514,8 @@
 <p>路径参数同样支持参数样式，通过 <code class="docutils literal notranslate"><span class="pre">param_styles</span></code> 进行设置。参数样式遵照 OpenAPI 规范的定义，请参照 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3#style-values">样式值</a> 和 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3#style-examples">样式示例</a> 进行设置。</p>
 <div class="literal-block-wrapper docutils container" id="id-571f035f">
 <div class="code-block-caption"><span class="caption-text">example4.py</span><a class="headerlink" href="#id-571f035f" title="此代码块的永久链接">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
+<span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">Style</span>
 
 
@@ -525,15 +523,13 @@
     <span class="s2">&quot;/color/</span><span class="si">{colors}</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="n">param_schemas</span><span class="o">=</span><span class="p">{</span>
         <span class="s2">&quot;colors&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">]))</span>
-    <span class="p">},</span>
-<span class="hll">    <span class="n">param_styles</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;colors&quot;</span><span class="p">:</span> <span class="n">Style</span><span class="p">(</span><span class="s2">&quot;simple&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)},</span>  <span class="c1"># 这是默认样式</span>
-</span><span class="p">)</span>
+<span class="hll">    <span class="p">},</span>
+</span>    <span class="n">param_styles</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;colors&quot;</span><span class="p">:</span> <span class="n">Style</span><span class="p">(</span><span class="s2">&quot;simple&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)},</span>  <span class="c1"># 这是默认样式</span>
+<span class="p">)</span>
 <span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
-        <span class="o">...</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span> <span class="o">...</span>
 
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="o">...</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="o">...</span>
 </pre></div>
 </div>
 </div>
@@ -543,7 +539,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-571f035f">example4.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_7cc19ff0" srcdoc="
+                <iframe id="id_6d76af35" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -623,7 +619,7 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_7cc19ff0')
+                iFrameResize({checkOrigin: false}, '#id_6d76af35')
             </script>
             </section>
 </section>
@@ -698,7 +694,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=3e28c28d"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8a5229b9"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>

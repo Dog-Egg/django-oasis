@@ -17,9 +17,9 @@
             return "Hello World"
 
 * ``class GreetingAPI`` 是 API 类，它是一个普通的 Python 类，并且不需要特地继承指定的父类。
-* `Resource <django_oasis.Resource>` 和 API 类共同组成了 Oasis 的请求资源。
+* `Resource <django_oasis.core.Resource>` 和 API 类共同组成了 Oasis 的请求资源。
 * ``get`` 方法是一个请求操作，表示该请求资源可以处理 GET 请求，它是请求处理的单元。
-* 请求操作上可以使用 `Operation <django_oasis.Operation>` 装饰对象，它为请求操作提供了更丰富的功能。
+* 请求操作上可以使用 `Operation <django_oasis.core.Operation>` 装饰对象，它为请求操作提供了更丰富的功能。
 
 
 请求操作

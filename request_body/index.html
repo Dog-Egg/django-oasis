@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="上传文件" href="../upload_files/index.html" /><link rel="prev" title="路径参数" href="../request_path/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
-        <title>请求体 - Django-Oasis 0.1.dev20240513122647 文档</title>
+        <title>请求体 - Django-Oasis 0.1.dev20240513130249 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -179,7 +179,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240513122647 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240513130249 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -203,7 +203,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240513122647 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240513130249 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -275,17 +275,6 @@
 <h1>请求体<a class="headerlink" href="#id1" title="此标题的永久链接">¶</a></h1>
 <section id="json">
 <h2>JSON 格式<a class="headerlink" href="#json" title="此标题的永久链接">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="django_oasis.parameter.JsonData">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">JsonData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.JsonData" title="永久链接至目标">¶</a></dt>
-<dd><p>声明请求体数据，要求以 JSON 格式提交。</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>schema</strong> (<a class="reference internal" href="../api.html#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="../api.html#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em>, </em><a class="reference internal" href="../api.html#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
 <p>代码示例：</p>
 <div class="literal-block-wrapper docutils container" id="id-3443ab7f">
 <div class="code-block-caption"><span class="caption-text">jsondata.py</span><a class="headerlink" href="#id-3443ab7f" title="此代码块的永久链接">¶</a></div>
@@ -313,7 +302,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-3443ab7f">jsondata.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_67b8f7fe" srcdoc="
+                <iframe id="id_418625fb" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -393,22 +382,11 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_67b8f7fe')
+                iFrameResize({checkOrigin: false}, '#id_418625fb')
             </script>
             </section>
 <section id="id2">
 <h2>表单格式<a class="headerlink" href="#id2" title="此标题的永久链接">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="django_oasis.parameter.FormData">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">FormData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.FormData" title="永久链接至目标">¶</a></dt>
-<dd><p>声明请求体数据，要求以表单格式提交。</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>schema</strong> (<a class="reference internal" href="../api.html#django_oasis.schema.Model" title="django_oasis_schema.schemas.Model"><em>Model</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="../api.html#django_oasis.schema.Model" title="django_oasis_schema.schemas.Model"><em>Model</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em>, </em><a class="reference internal" href="../api.html#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
 <p>代码示例：</p>
 <div class="literal-block-wrapper docutils container" id="id-68e17258">
 <div class="code-block-caption"><span class="caption-text">formdata.py</span><a class="headerlink" href="#id-68e17258" title="此代码块的永久链接">¶</a></div>
@@ -437,7 +415,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-68e17258">formdata.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_98d81197" srcdoc="
+                <iframe id="id_6da809c9" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -517,25 +495,11 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_98d81197')
+                iFrameResize({checkOrigin: false}, '#id_6da809c9')
             </script>
             </section>
 <section id="body">
 <h2>Body<a class="headerlink" href="#body" title="此标题的永久链接">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="django_oasis.parameter.Body">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">Body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'application/json'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.Body" title="永久链接至目标">¶</a></dt>
-<dd><p>声明 HTTP 请求体数据，默认数据格式类型为 JSON。</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>content_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="（在 Python v3.12）"><em>List</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em>]</em>) – 请求体内容类型，默认是: application/json。也可以设置为列表，以支持多种请求体类型。</p></li>
-<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 <p>代码示例：</p>
 <div class="literal-block-wrapper docutils container" id="id-0838093c">
 <div class="code-block-caption"><span class="caption-text">body.py</span><a class="headerlink" href="#id-0838093c" title="此代码块的永久链接">¶</a></div>
@@ -560,7 +524,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-0838093c">body.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_733728ec" srcdoc="
+                <iframe id="id_8a1a3fa0" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -640,7 +604,7 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_733728ec')
+                iFrameResize({checkOrigin: false}, '#id_8a1a3fa0')
             </script>
             </section>
 </section>
@@ -701,18 +665,9 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">请求体</a><ul>
-<li><a class="reference internal" href="#json">JSON 格式</a><ul>
-<li><a class="reference internal" href="#django_oasis.parameter.JsonData"><code class="docutils literal notranslate"><span class="pre">JsonData</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id2">表单格式</a><ul>
-<li><a class="reference internal" href="#django_oasis.parameter.FormData"><code class="docutils literal notranslate"><span class="pre">FormData</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#body">Body</a><ul>
-<li><a class="reference internal" href="#django_oasis.parameter.Body"><code class="docutils literal notranslate"><span class="pre">Body</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#json">JSON 格式</a></li>
+<li><a class="reference internal" href="#id2">表单格式</a></li>
+<li><a class="reference internal" href="#body">Body</a></li>
 </ul>
 </li>
 </ul>
@@ -724,7 +679,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=3e28c28d"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8a5229b9"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
