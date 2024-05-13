@@ -61,16 +61,6 @@ def test_B():
     assert result["a3_id"] == (schema.Integer, {"nullable": True, "default": None})
 
 
-@pytest.mark.skip("File Schema 序列化时不应该放回 url。")
-def test_FileField():
-    class File(models.Model):
-        file = models.FileField()
-
-    FieldSchema = model2schema(File, include_fields=["file"])
-    inst = File(file=SimpleUploadedFile("123.txt", b"hello"))
-    assert FieldSchema().serialize(inst) == {"file": "/123.txt"}
-
-
 def test_include_exclude_fields():
     """测试 include_fields 中的未知字段。"""
 

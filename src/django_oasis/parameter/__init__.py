@@ -4,7 +4,6 @@ from .parameters import Body as __Body
 from .parameters import Cookie as __Cookie
 from .parameters import CookieItem as __CookieItem
 from .parameters import FormData as __FormData
-from .parameters import FormItem as __FormItem
 from .parameters import Header as __Header
 from .parameters import HeaderItem as __HeaderItem
 from .parameters import JsonData as __JsonData
@@ -20,5 +19,4 @@ QueryItem = _t.cast(_t.Any, __QueryItem)
 CookieItem = _t.cast(_t.Any, __CookieItem)
 HeaderItem = _t.cast(_t.Any, __HeaderItem)
 FormData = _t.cast(_t.Any, __FormData)
-FormItem = _t.cast(_t.Any, __FormItem)
 JsonData = _t.cast(_t.Any, __JsonData)
