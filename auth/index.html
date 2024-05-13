@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Schema" href="../schema/index.html" /><link rel="prev" title="分页" href="../pagination/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
-        <title>用户认证 - Django-Oasis 0.1.dev20240513130249 文档</title>
+        <title>用户认证 - Django-Oasis 0.1.dev20240513153458 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -179,7 +179,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240513130249 文档</div></a>
+      <a href="../index.html"><div class="brand">Django-Oasis 0.1.dev20240513153458 文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -203,7 +203,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240513130249 文档</span>
+  <span class="sidebar-brand-text">Django-Oasis 0.1.dev20240513153458 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -293,7 +293,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-640f99c4">auth.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_8e066bf1" srcdoc="
+                <iframe id="id_f37f1969" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -328,7 +328,7 @@
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
-&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/to/path&quot;: {&quot;get&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;security&quot;: [{&quot;__auth__&quot;: []}]}}}, &quot;components&quot;: {&quot;securitySchemes&quot;: {&quot;__auth__&quot;: {&quot;type&quot;: &quot;apiKey&quot;, &quot;name&quot;: &quot;sessionid&quot;, &quot;in&quot;: &quot;cookie&quot;}}}}}&lt;/script&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/to/path&quot;: {&quot;get&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;security&quot;: [{&quot;IsAdministrator&quot;: []}]}}}, &quot;components&quot;: {&quot;securitySchemes&quot;: {&quot;IsAdministrator&quot;: {&quot;type&quot;: &quot;apiKey&quot;, &quot;name&quot;: &quot;sessionid&quot;, &quot;in&quot;: &quot;cookie&quot;}}}}}&lt;/script&gt;
 &lt;script&gt;
     var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
 
@@ -373,7 +373,7 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_8e066bf1')
+                iFrameResize({checkOrigin: false}, '#id_f37f1969')
             </script>
             <section id="id2">
 <h2>内置认证类<a class="headerlink" href="#id2" title="此标题的永久链接">¶</a></h2>
@@ -390,41 +390,57 @@
 <dd class="field-odd"><p><strong>perm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 描述权限的字符串，格式是 “&lt;app label&gt;.&lt;permission codename&gt;”。</p>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="django_oasis.auth.HasPermission.declare_responses">
+<span class="sig-name descname"><span class="pre">declare_responses</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.12）"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#django_oasis.auth.HasPermission.declare_responses" title="永久链接至目标">¶</a></dt>
+<dd><p>描述认证时会产生的响应。键为 HTTP 状态码，值为 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3.html#response-object">Response Object</a>。</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.auth.IsAdministrator">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">IsAdministrator</span></span><a class="headerlink" href="#django_oasis.auth.IsAdministrator" title="永久链接至目标">¶</a></dt>
 <dd><p>验证用户是否为管理员。</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="django_oasis.auth.IsAdministrator.declare_responses">
+<span class="sig-name descname"><span class="pre">declare_responses</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.12）"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#django_oasis.auth.IsAdministrator.declare_responses" title="永久链接至目标">¶</a></dt>
+<dd><p>描述认证时会产生的响应。键为 HTTP 状态码，值为 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3.html#response-object">Response Object</a>。</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.auth.IsAuthenticated">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">IsAuthenticated</span></span><a class="headerlink" href="#django_oasis.auth.IsAuthenticated" title="永久链接至目标">¶</a></dt>
 <dd><p>验证用户是否登录。</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="django_oasis.auth.IsAuthenticated.declare_responses">
+<span class="sig-name descname"><span class="pre">declare_responses</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.12）"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#django_oasis.auth.IsAuthenticated.declare_responses" title="永久链接至目标">¶</a></dt>
+<dd><p>描述认证时会产生的响应。键为 HTTP 状态码，值为 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3.html#response-object">Response Object</a>。</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.auth.IsSuperuser">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">IsSuperuser</span></span><a class="headerlink" href="#django_oasis.auth.IsSuperuser" title="永久链接至目标">¶</a></dt>
 <dd><p>验证用户是否为超级管理员。</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="django_oasis.auth.IsSuperuser.declare_responses">
+<span class="sig-name descname"><span class="pre">declare_responses</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.12）"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#django_oasis.auth.IsSuperuser.declare_responses" title="永久链接至目标">¶</a></dt>
+<dd><p>描述认证时会产生的响应。键为 HTTP 状态码，值为 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3.html#response-object">Response Object</a>。</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
 <section id="custom-auth">
-<span id="id3"></span><h2>自定义认证<a class="headerlink" href="#custom-auth" title="此标题的永久链接">¶</a></h2>
+<span id="id6"></span><h2>自定义认证<a class="headerlink" href="#custom-auth" title="此标题的永久链接">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.auth.BaseAuth">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">BaseAuth</span></span><a class="headerlink" href="#django_oasis.auth.BaseAuth" title="永久链接至目标">¶</a></dt>
 <dd><p>认证基类。如需自定义认证类，需继承该类，并实现其抽象方法。</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="django_oasis.auth.BaseAuth.__openapispec__">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__openapispec__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spec</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.auth.BaseAuth.__openapispec__" title="永久链接至目标">¶</a></dt>
-<dd><p>需自行实现该方法，该方法为 OpenAPISpec 对象能识别的方法。</p>
-<p>需要通过 <code class="docutils literal notranslate"><span class="pre">spec.set_security_scheme</span></code> 方法为 OAS <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3#componentsSecuritySchemes">securitySchemes</a> 字段设置值。</p>
-<p>并且返回值将用于设置 OAS <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3#operationSecurity">Operation security</a> 字段。</p>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="django_oasis.auth.BaseAuth.check_auth">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.auth.BaseAuth.check_auth" title="永久链接至目标">¶</a></dt>
@@ -436,10 +452,22 @@
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="django_oasis.auth.BaseAuth.declare_responses">
+<span class="sig-name descname"><span class="pre">declare_responses</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.12）"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#django_oasis.auth.BaseAuth.declare_responses" title="永久链接至目标">¶</a></dt>
+<dd><p>描述认证时会产生的响应。键为 HTTP 状态码，值为 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3.html#response-object">Response Object</a>。</p>
 </dd></dl>
 
-<section id="id4">
-<h3>示例1<a class="headerlink" href="#id4" title="此标题的永久链接">¶</a></h3>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="django_oasis.auth.BaseAuth.declare_security">
+<span class="sig-name descname"><span class="pre">declare_security</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.12）"><span class="pre">dict</span></a></em><a class="headerlink" href="#django_oasis.auth.BaseAuth.declare_security" title="永久链接至目标">¶</a></dt>
+<dd><p>定义认证使用的安全方案。declare_security 的值为 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3.html#security-scheme-object">Security Scheme Object</a>。</p>
+</dd></dl>
+
+</dd></dl>
+
+<section id="id8">
+<h3>示例1<a class="headerlink" href="#id8" title="此标题的永久链接">¶</a></h3>
 <p>假设项目使用了 django.contrib.auth 作为用户认证系统，并且改用 HTTP Basic 作为认证方式。你需要自行实现认证类：</p>
 <div class="literal-block-wrapper docutils container" id="id-48967861">
 <div class="code-block-caption"><span class="caption-text">custom_auth.py</span><a class="headerlink" href="#id-48967861" title="此代码块的永久链接">¶</a></div>
@@ -449,20 +477,22 @@
 
 
 <span class="k">class</span> <span class="nc">IsOurUser</span><span class="p">(</span><span class="n">BaseAuth</span><span class="p">):</span>
+
+    <span class="n">declare_security</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;http&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;scheme&quot;</span><span class="p">:</span> <span class="s2">&quot;basic&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">declare_responses</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">401</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;未登录&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
     <span class="k">def</span> <span class="nf">check_auth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="c1"># 若用户未登录，抛出 UnauthorizedError，这将返回 HTTP 401 响应。</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">UnauthorizedError</span>
-
-    <span class="k">def</span> <span class="nf">__openapispec__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">spec</span><span class="o">.</span><span class="n">set_security_scheme</span><span class="p">(</span>
-            <span class="s2">&quot;fooName&quot;</span><span class="p">,</span>
-            <span class="p">{</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;http&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;scheme&quot;</span><span class="p">:</span> <span class="s2">&quot;basic&quot;</span><span class="p">,</span>
-            <span class="p">},</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="p">[{</span><span class="s2">&quot;fooName&quot;</span><span class="p">:</span> <span class="p">[]}]</span>
 
 
 <span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/to/path&quot;</span><span class="p">)</span>
@@ -477,7 +507,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">由 <a href="#id-48967861">custom_auth.py</a> 解析获得</span>
                 </div>
-                <iframe id="id_697c5ea4" srcdoc="
+                <iframe id="id_4ef9ff19" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -512,7 +542,7 @@
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
-&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/to/path&quot;: {&quot;get&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;security&quot;: [{&quot;fooName&quot;: []}]}}}, &quot;components&quot;: {&quot;securitySchemes&quot;: {&quot;fooName&quot;: {&quot;type&quot;: &quot;http&quot;, &quot;scheme&quot;: &quot;basic&quot;}}}}}&lt;/script&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/to/path&quot;: {&quot;get&quot;: {&quot;responses&quot;: {&quot;401&quot;: {&quot;description&quot;: &quot;\u672a\u767b\u5f55&quot;}, &quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;security&quot;: [{&quot;IsOurUser&quot;: []}]}}}, &quot;components&quot;: {&quot;securitySchemes&quot;: {&quot;IsOurUser&quot;: {&quot;type&quot;: &quot;http&quot;, &quot;scheme&quot;: &quot;basic&quot;}}}}}&lt;/script&gt;
 &lt;script&gt;
     var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
 
@@ -557,7 +587,7 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_697c5ea4')
+                iFrameResize({checkOrigin: false}, '#id_4ef9ff19')
             </script>
             </section>
 </section>
@@ -620,19 +650,32 @@
             <ul>
 <li><a class="reference internal" href="#">用户认证</a><ul>
 <li><a class="reference internal" href="#id2">内置认证类</a><ul>
-<li><a class="reference internal" href="#django_oasis.auth.HasPermission"><code class="docutils literal notranslate"><span class="pre">HasPermission</span></code></a></li>
-<li><a class="reference internal" href="#django_oasis.auth.IsAdministrator"><code class="docutils literal notranslate"><span class="pre">IsAdministrator</span></code></a></li>
-<li><a class="reference internal" href="#django_oasis.auth.IsAuthenticated"><code class="docutils literal notranslate"><span class="pre">IsAuthenticated</span></code></a></li>
-<li><a class="reference internal" href="#django_oasis.auth.IsSuperuser"><code class="docutils literal notranslate"><span class="pre">IsSuperuser</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.auth.HasPermission"><code class="docutils literal notranslate"><span class="pre">HasPermission</span></code></a><ul>
+<li><a class="reference internal" href="#django_oasis.auth.HasPermission.declare_responses"><code class="docutils literal notranslate"><span class="pre">HasPermission.declare_responses</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#django_oasis.auth.IsAdministrator"><code class="docutils literal notranslate"><span class="pre">IsAdministrator</span></code></a><ul>
+<li><a class="reference internal" href="#django_oasis.auth.IsAdministrator.declare_responses"><code class="docutils literal notranslate"><span class="pre">IsAdministrator.declare_responses</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#django_oasis.auth.IsAuthenticated"><code class="docutils literal notranslate"><span class="pre">IsAuthenticated</span></code></a><ul>
+<li><a class="reference internal" href="#django_oasis.auth.IsAuthenticated.declare_responses"><code class="docutils literal notranslate"><span class="pre">IsAuthenticated.declare_responses</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#django_oasis.auth.IsSuperuser"><code class="docutils literal notranslate"><span class="pre">IsSuperuser</span></code></a><ul>
+<li><a class="reference internal" href="#django_oasis.auth.IsSuperuser.declare_responses"><code class="docutils literal notranslate"><span class="pre">IsSuperuser.declare_responses</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#custom-auth">自定义认证</a><ul>
 <li><a class="reference internal" href="#django_oasis.auth.BaseAuth"><code class="docutils literal notranslate"><span class="pre">BaseAuth</span></code></a><ul>
-<li><a class="reference internal" href="#django_oasis.auth.BaseAuth.__openapispec__"><code class="docutils literal notranslate"><span class="pre">BaseAuth.__openapispec__()</span></code></a></li>
 <li><a class="reference internal" href="#django_oasis.auth.BaseAuth.check_auth"><code class="docutils literal notranslate"><span class="pre">BaseAuth.check_auth()</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.auth.BaseAuth.declare_responses"><code class="docutils literal notranslate"><span class="pre">BaseAuth.declare_responses</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.auth.BaseAuth.declare_security"><code class="docutils literal notranslate"><span class="pre">BaseAuth.declare_security</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id4">示例1</a></li>
+<li><a class="reference internal" href="#id8">示例1</a></li>
 </ul>
 </li>
 </ul>
@@ -646,7 +689,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8a5229b9"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=719ced0a"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
