@@ -350,7 +350,7 @@ class Operation:
         auth: t.Union[BaseAuth, t.Type[BaseAuth], None] = None,
         status_code: int = 200,
         view_decorators: t.Optional[list] = None,
-        declare_responses: dict = None,
+        declare_responses: t.Optional[dict] = None,
     ):
         self.__tags = tags or []
         self.__summary = summary
