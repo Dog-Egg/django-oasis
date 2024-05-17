@@ -333,6 +333,7 @@ class Operation:
     :param include_in_spec: 是否将当前操作解析到 |OAS| 中，默认为 `True`。
     :param summary: 用于设置 |OAS| 操作对象摘要。
     :param auth: 设置操作请求认证。
+    :param declare_responses: 声明可能的请求响应，用于构建 OAS。
     """
 
     def __init__(
@@ -349,6 +350,7 @@ class Operation:
         auth: t.Union[BaseAuth, t.Type[BaseAuth], None] = None,
         status_code: int = 200,
         view_decorators: t.Optional[list] = None,
+        declare_responses: dict = None,
     ):
         self.__tags = tags or []
         self.__summary = summary
@@ -359,6 +361,7 @@ class Operation:
             self.response_schema = make_schema(response_schema)
 
         self.__deprecated = deprecated
+        self.__declare_responses = declare_responses
         self.__include_in_spec = include_in_spec
         self.__status_code = status_code
         self.__response_description = HTTPStatus(status_code).phrase
@@ -423,6 +426,9 @@ class Operation:
         other_responses = {}
         if self.__auth and hasattr(self.__auth, "declare_responses"):
             other_responses.update(self.__auth.declare_responses)
+
+        if self.__declare_responses:
+            other_responses.update(self.__declare_responses)
 
         return functools.reduce(
             _spec.merge,
