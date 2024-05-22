@@ -22,6 +22,7 @@ release = __import__("django_oasis").__version__
 extensions = [
     "_ext.directives",
     "_ext.openapiview",
+    "_exts",
     "sphinx.ext.intersphinx",
     "sphinx.ext.autodoc",
     "sphinx.ext.doctest",
