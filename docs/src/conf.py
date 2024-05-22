@@ -42,6 +42,10 @@ nitpick_ignore = [
 
 # HTML output
 html_theme = "furo"
+html_logo = "../../logo.png"
+html_title = (
+    f'<div>{project}</div><span style="font-size: 14px; color: gray;">{release}</span>'
+)
 html_static_path = [
     "_static",
     str((BASE_DIR / "../../src/django_oasis/templates/_static").resolve()),
