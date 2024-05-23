@@ -16,6 +16,7 @@ import docutils
 import docutils.nodes
 import sphinx
 from django.apps import apps
+from docutils.parsers.rst import directives
 from sphinx.directives.code import LiteralInclude
 from sphinx.util.docutils import SphinxDirective
 
@@ -67,6 +68,9 @@ def print_exc(fn):
 
 
 class OasisSwaggerUI(OasisDirective):
+    option_spec = {
+        "doc-expansion": directives.unchanged,
+    }
 
     def get_urlconf(self):
         from django.urls import include, path
@@ -107,9 +111,14 @@ class OasisSwaggerUI(OasisDirective):
                 raise RuntimeError("Can't find OpenAPI spec view")
             response = client.get(url)
 
+        extra_config = {}
+        if "doc-expansion" in self.options:
+            extra_config["docExpansion"] = self.options["doc-expansion"]
+
         html = _get_swagger_ui_html(
             {
                 "spec": response.json(),
+                **extra_config,
             },
             insert_head=f"""
                 <script src="{self._rel_src('_static/iframeResizer.contentWindow.min.js')}"></script>

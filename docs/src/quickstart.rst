@@ -14,7 +14,7 @@
 使用
 ----
 
-Oasis 最终仅作为 Django 路由的一部分运行，所以它可以很轻松地在已有的 Django 项目中被添加。如果还有没有项目，可以查看 `官方文档 <https://docs.djangoproject.com/zh-hans/4.2/intro/tutorial01/#creating-a-project>`_ 进行创建。
+Oasis 是作为 Django 路由的一部分运行的，所以它可以很轻松地在已有的 Django 项目中被添加。如果还有没有项目，可以查看 `官方文档 <https://docs.djangoproject.com/zh-hans/4.2/intro/tutorial01/#creating-a-project>`_ 进行创建。
 
 
 设置应用

@@ -15,7 +15,7 @@ Request 对象
 
 因此 Oasis 做了如下规定: 只有定义了 ``__init__`` 方法的 API 类才会收到 Request 对象，且 Request 对象会以第一个位置参数的形式传递给 ``__init__`` 方法。该 Request 对象为 Django 的 `HttpRequest <https://docs.djangoproject.com/en/4.2/ref/request-response/#httprequest-objects>`_ 对象。
 
-.. oasis-literalinclude:: request_obj views.py
+.. oasis-literalinclude:: request_object views.py
 
 
 Operation 装饰类

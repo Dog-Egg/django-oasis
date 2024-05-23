@@ -1,15 +1,10 @@
-from django.db import models
-
 from django_oasis.common import model2schema
 from django_oasis.core import Operation, Resource
 from django_oasis.exceptions import NotFoundError
 from django_oasis.pagination import PagePagination
 from django_oasis.parameter import Body
 
-
-class Book(models.Model):
-    title = models.CharField(max_length=50, verbose_name="标题")
-    author = models.CharField(max_length=50, verbose_name="作者")
+from .models import Book
 
 
 class BookSchema(model2schema(Book)):

@@ -13,8 +13,6 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.sessions",
     "tests",
-    "docs.src.examples",
-    "docs.src.pagination",
 ]
 
 USE_TZ = True

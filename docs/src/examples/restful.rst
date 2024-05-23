@@ -1,6 +1,6 @@
-RESTful 风格
--------------
+RESTful
+=======
 
-.. myliteralinclude:: ./restful.py
-
-.. openapiview:: ./restful.py
+.. oasis-literalinclude:: restful models.py
+.. oasis-literalinclude:: restful views.py
+.. oasis-swaggerui:: restful
