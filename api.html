@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="RESTful 风格" href="examples/restful.html" /><link rel="prev" title="Hooks" href="schema/hooks.html" />
+<link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="RESTful" href="examples/restful.html" /><link rel="prev" title="Hooks" href="schema/hooks.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
-        <title>API 参考 - Django-Oasis0.1.dev20240522083439</title>
+        <title>API 参考 - Django-Oasis0.1.dev20240523120102</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -179,7 +179,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240522083439</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240523120102</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +206,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240522083439</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240523120102</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -221,8 +221,8 @@
 <li class="toctree-l1"><a class="reference internal" href="request_path/index.html">路径参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="request_body/index.html">请求体</a></li>
 <li class="toctree-l1"><a class="reference internal" href="upload_files/index.html">上传文件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pagination/index.html">分页</a></li>
-<li class="toctree-l1"><a class="reference internal" href="auth/index.html">用户认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pagination.html">分页</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">用户认证</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="schema/index.html">Schema</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="schema/model.html">Model Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="schema/validation.html">验证数据</a></li>
@@ -233,7 +233,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">示例</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="examples/restful.html">RESTful 风格</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/restful.html">RESTful</a></li>
 </ul>
 
 </div>
@@ -306,7 +306,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>include_in_spec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – 是否将当前操作解析到 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3">OpenAPI Specification</a> 中，默认为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>。</p></li>
 <li><p><strong>summary</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em> | </em><em>None</em>) – 用于设置 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3">OpenAPI Specification</a> 操作对象摘要。</p></li>
-<li><p><strong>auth</strong> (<a class="reference internal" href="auth/index.html#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="auth/index.html#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em>] </em><em>| </em><em>None</em>) – 设置操作请求认证。</p></li>
+<li><p><strong>auth</strong> (<a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em>] </em><em>| </em><em>None</em>) – 设置操作请求认证。</p></li>
 <li><p><strong>declare_responses</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.12）"><em>dict</em></a><em> | </em><em>None</em>) – 声明可能的请求响应，用于构建 OAS。</p></li>
 <li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em> | </em><em>None</em>) – </p></li>
 <li><p><strong>response_schema</strong> (<em>None</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Model" title="django_oasis_schema.schemas.Model"><em>Model</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>] </em><em>| </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a>) – </p></li>
@@ -326,7 +326,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 资源 URL，必须以 “/” 开头。</p></li>
 <li><p><strong>include_in_spec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – 是否将当前资源解析到 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3">OpenAPI Specification</a> 中，默认为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>。</p></li>
-<li><p><strong>default_auth</strong> (<a class="reference internal" href="auth/index.html#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="auth/index.html#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em>] </em><em>| </em><em>None</em>) – 为所属的 Operation 提供默认的 auth。</p></li>
+<li><p><strong>default_auth</strong> (<a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em>] </em><em>| </em><em>None</em>) – 为所属的 Operation 提供默认的 auth。</p></li>
 <li><p><strong>param_schemas</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>] </em><em>| </em><em>None</em>) – </p></li>
 <li><p><strong>view_decorators</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.12）"><em>list</em></a><em> | </em><em>None</em>) – </p></li>
 </ul>
@@ -474,6 +474,151 @@
 <dd><p>描述如何根据参数值的类型序列化参数值。<a class="reference external" href="https://spec.openapis.org/oas/v3.0.3#parameterStyle">查看详细说明</a></p>
 </dd></dl>
 
+</dd></dl>
+
+</section>
+<section id="module-django_oasis.pagination">
+<span id="pagination"></span><h2>Pagination<a class="headerlink" href="#module-django_oasis.pagination" title="此标题的永久链接">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.pagination.OffsetPagination">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.pagination.</span></span><span class="sig-name descname"><span class="pre">OffsetPagination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.pagination.OffsetPagination" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#django_oasis.pagination.Pagination" title="django_oasis.pagination.Pagination"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pagination</span></code></a></p>
+<p>从 URL 参数中获取 <code class="docutils literal notranslate"><span class="pre">offset</span></code> 和 <code class="docutils literal notranslate"><span class="pre">limit</span></code> 进行分页。</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>schema</strong> (<a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>) – 提供分页列表元素的数据结构。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.pagination.PagePagination">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.pagination.</span></span><span class="sig-name descname"><span class="pre">PagePagination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.pagination.PagePagination" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#django_oasis.pagination.Pagination" title="django_oasis.pagination.Pagination"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pagination</span></code></a></p>
+<p>从 URL 参数中获取 <code class="docutils literal notranslate"><span class="pre">page</span></code> 和 <code class="docutils literal notranslate"><span class="pre">page_size</span></code> 进行分页。</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>schema</strong> (<a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>) – 提供分页列表元素的数据结构。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.pagination.Pagination">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.pagination.</span></span><span class="sig-name descname"><span class="pre">Pagination</span></span><a class="headerlink" href="#django_oasis.pagination.Pagination" title="永久链接至目标">¶</a></dt>
+<dd><p>分页器抽象基类</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="django_oasis.pagination.Pagination._get_request_parameter">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_request_parameter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.pagination.Pagination._get_request_parameter" title="永久链接至目标">¶</a></dt>
+<dd><p>定义分页所需要的请求参数，获取的参数结果将传递给 <a class="reference internal" href="#django_oasis.pagination.Pagination._get_response" title="django_oasis.pagination.Pagination._get_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_get_response</span></code></a>。</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>RequestParameter</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="django_oasis.pagination.Pagination._get_response">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reqarg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.pagination.Pagination._get_response" title="永久链接至目标">¶</a></dt>
+<dd><p>获取响应数据。</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>queryset</strong> (<em>QuerySet</em>) – 调用 <a class="reference internal" href="#django_oasis.pagination.Pagination.paginate" title="django_oasis.pagination.Pagination.paginate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">paginate</span></code></a> 时获取的查询集。</p></li>
+<li><p><strong>reqarg</strong> – 使用 <a class="reference internal" href="#django_oasis.pagination.Pagination._get_request_parameter" title="django_oasis.pagination.Pagination._get_request_parameter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_get_request_parameter</span></code></a> 返回对象获取到的请求实参。</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="django_oasis.pagination.Pagination._get_response_schema">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_response_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.pagination.Pagination._get_response_schema" title="永久链接至目标">¶</a></dt>
+<dd><p>设置分页响应数据结构，用于设置所在 <a class="reference internal" href="#django_oasis.core.Operation" title="django_oasis.core.Operation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Operation</span></code></a> 的 <code class="docutils literal notranslate"><span class="pre">response_schema</span></code>。</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回类型<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="django_oasis.pagination.Pagination.paginate">
+<span class="sig-name descname"><span class="pre">paginate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.pagination.Pagination.paginate" title="永久链接至目标">¶</a></dt>
+<dd><p>对 Django 查询集进行分页，并返回结果。</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>queryset</strong> (<em>QuerySet</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="auth">
+<h2>Auth<a class="headerlink" href="#auth" title="此标题的永久链接">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.auth.BaseAuth">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">BaseAuth</span></span><a class="headerlink" href="#django_oasis.auth.BaseAuth" title="永久链接至目标">¶</a></dt>
+<dd><p>认证基类。如需自定义认证类，需继承该类，并实现其抽象方法。</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="django_oasis.auth.BaseAuth.check_auth">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.auth.BaseAuth.check_auth" title="永久链接至目标">¶</a></dt>
+<dd><p>需自行实现该方法，用于判断请求认证是否成功。如果认证失败，需要抛出异常来停止请求的继续处理。</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – Django <a class="reference external" href="https://docs.djangoproject.com/zh-hans/5.0/ref/request-response/#httprequest-objects">HttpRequest</a> 对象。</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="django_oasis.auth.BaseAuth.declare_responses">
+<span class="sig-name descname"><span class="pre">declare_responses</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.12）"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#django_oasis.auth.BaseAuth.declare_responses" title="永久链接至目标">¶</a></dt>
+<dd><p>描述认证时会产生的响应。键为 HTTP 状态码，值为 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3.html#response-object">Response Object</a>。</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="django_oasis.auth.BaseAuth.declare_security">
+<span class="sig-name descname"><span class="pre">declare_security</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.12）"><span class="pre">dict</span></a></em><a class="headerlink" href="#django_oasis.auth.BaseAuth.declare_security" title="永久链接至目标">¶</a></dt>
+<dd><p>定义认证使用的安全方案。declare_security 的值为 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3.html#security-scheme-object">Security Scheme Object</a>。</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>以下认证类是建立在使用 django.contrib.auth 包作为项目的用户验证系统。如果你的项目使用了自定义的用户验证，请查看 <a class="reference internal" href="auth.html#custom-auth"><span class="std std-ref">自定义认证</span></a>。</p>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.auth.IsAuthenticated">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">IsAuthenticated</span></span><a class="headerlink" href="#django_oasis.auth.IsAuthenticated" title="永久链接至目标">¶</a></dt>
+<dd><p>验证用户是否登录。</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.auth.IsAdministrator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">IsAdministrator</span></span><a class="headerlink" href="#django_oasis.auth.IsAdministrator" title="永久链接至目标">¶</a></dt>
+<dd><p>验证用户是否为管理员。</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.auth.IsSuperuser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">IsSuperuser</span></span><a class="headerlink" href="#django_oasis.auth.IsSuperuser" title="永久链接至目标">¶</a></dt>
+<dd><p>验证用户是否为超级管理员。</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.auth.HasPermission">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.auth.</span></span><span class="sig-name descname"><span class="pre">HasPermission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.auth.HasPermission" title="永久链接至目标">¶</a></dt>
+<dd><p>验证用户是否拥有某权限。内部调用 <a class="reference external" href="https://docs.djangoproject.com/zh-hans/5.0/ref/contrib/auth/#django.contrib.auth.models.User.has_perm">has_perm</a> 方法。</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>perm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 描述权限的字符串，格式是 “&lt;app label&gt;.&lt;permission codename&gt;”。</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -904,7 +1049,7 @@
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">RESTful 风格</div>
+                <div class="title">RESTful</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -976,6 +1121,31 @@
 </li>
 </ul>
 </li>
+<li><a class="reference internal" href="#module-django_oasis.pagination">Pagination</a><ul>
+<li><a class="reference internal" href="#django_oasis.pagination.OffsetPagination"><code class="docutils literal notranslate"><span class="pre">OffsetPagination</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.pagination.PagePagination"><code class="docutils literal notranslate"><span class="pre">PagePagination</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.pagination.Pagination"><code class="docutils literal notranslate"><span class="pre">Pagination</span></code></a><ul>
+<li><a class="reference internal" href="#django_oasis.pagination.Pagination._get_request_parameter"><code class="docutils literal notranslate"><span class="pre">Pagination._get_request_parameter()</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.pagination.Pagination._get_response"><code class="docutils literal notranslate"><span class="pre">Pagination._get_response()</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.pagination.Pagination._get_response_schema"><code class="docutils literal notranslate"><span class="pre">Pagination._get_response_schema()</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.pagination.Pagination.paginate"><code class="docutils literal notranslate"><span class="pre">Pagination.paginate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#auth">Auth</a><ul>
+<li><a class="reference internal" href="#django_oasis.auth.BaseAuth"><code class="docutils literal notranslate"><span class="pre">BaseAuth</span></code></a><ul>
+<li><a class="reference internal" href="#django_oasis.auth.BaseAuth.check_auth"><code class="docutils literal notranslate"><span class="pre">BaseAuth.check_auth()</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.auth.BaseAuth.declare_responses"><code class="docutils literal notranslate"><span class="pre">BaseAuth.declare_responses</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.auth.BaseAuth.declare_security"><code class="docutils literal notranslate"><span class="pre">BaseAuth.declare_security</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#django_oasis.auth.IsAuthenticated"><code class="docutils literal notranslate"><span class="pre">IsAuthenticated</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.auth.IsAdministrator"><code class="docutils literal notranslate"><span class="pre">IsAdministrator</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.auth.IsSuperuser"><code class="docutils literal notranslate"><span class="pre">IsSuperuser</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.auth.HasPermission"><code class="docutils literal notranslate"><span class="pre">HasPermission</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-django_oasis.schema">Schema</a><ul>
 <li><a class="reference internal" href="#django_oasis.schema.Any"><code class="docutils literal notranslate"><span class="pre">Any</span></code></a></li>
 <li><a class="reference internal" href="#django_oasis.schema.AnyOf"><code class="docutils literal notranslate"><span class="pre">AnyOf</span></code></a></li>
@@ -1016,7 +1186,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=86766ca1"></script>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=1a85e7f6"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="分页" href="../pagination/index.html" /><link rel="prev" title="请求体" href="../request_body/index.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="分页" href="../pagination.html" /><link rel="prev" title="请求体" href="../request_body/index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
-        <title>上传文件 - Django-Oasis0.1.dev20240522083439</title>
+        <title>上传文件 - Django-Oasis0.1.dev20240523120102</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -179,7 +179,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240522083439</span></div></a>
+      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240523120102</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +206,7 @@
     <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240522083439</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240523120102</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -221,8 +221,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../request_path/index.html">路径参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../request_body/index.html">请求体</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">上传文件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pagination/index.html">分页</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../auth/index.html">用户认证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pagination.html">分页</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../auth.html">用户认证</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../schema/index.html">Schema</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../schema/model.html">Model Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../schema/validation.html">验证数据</a></li>
@@ -233,7 +233,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">示例</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../examples/restful.html">RESTful 风格</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/restful.html">RESTful</a></li>
 </ul>
 
 </div>
@@ -299,101 +299,14 @@
 </div>
 </div>
 <p>接收到的 <code class="docutils literal notranslate"><span class="pre">data['file']</span></code> 值为一个 <a class="reference external" href="https://docs.djangoproject.com/zh-hans/5.0/ref/files/uploads/#django.core.files.uploadedfile.InMemoryUploadedFile">InMemoryUploadedFile</a> 对象。</p>
-
-            <div style="border: 1px solid var(--color-background-border);">
-                <div class="code-block-caption">
-                    <span class="caption-text">由 <a href="#id-4550b9de">uploadfile.py</a> 解析获得</span>
-                </div>
-                <iframe id="id_41c30877" srcdoc="
-&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;/&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;/&gt;
-    &lt;meta name=&quot;description&quot; content=&quot;SwaggerUI&quot;/&gt;
-    &lt;title&gt;Swagger UI&lt;/title&gt;
-    &lt;style&gt;
-        body {
-            margin: 0;
-        }
-        body::before, body::after {
-            content: &quot;&quot;;
-            display: table;
-        }
-        .footer {
-            margin-bottom: 25px;
-            color: #cccccc;
-            font-size: 12px;
-            display: flex;
-        }
-        .footer .powered-by {
-            float: right;
-        }
-    &lt;/style&gt;
-    
-    
-                &lt;script src=&quot;../_static/iframeResizer.contentWindow.min.js&quot;&gt;&lt;/script&gt;
-                &lt;script src=&quot;../_static/swagger-ui-bundle.js&quot;&gt;&lt;/script&gt;
-                &lt;link rel=&quot;stylesheet&quot; href=&quot;../_static/swagger-ui.css&quot; /&gt;
-                
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
-&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;Upload File&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/upload&quot;: {&quot;post&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;multipart/form-data&quot;: {&quot;schema&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;file&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;format&quot;: &quot;binary&quot;}}, &quot;required&quot;: [&quot;file&quot;]}}}}}}}}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
-&lt;script&gt;
-    var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
-
-    // 设置默认配置
-    Object.assign(config, {
-        dom_id: &#x27;#swagger-ui&#x27;,
-        deepLinking: true,
-        onComplete: onComplete,
-        defaultModelRendering: &quot;model&quot;,
-        defaultModelExpandDepth: 2,
-    });
-
-    function onComplete() {
-        var title = ui.specSelectors.info().toJS().title;
-        document.title = title.concat(&#x27; | Swagger UI&#x27;);
-    }
-&lt;/script&gt;
-
-&lt;script&gt;
-    // 在 Sphinx 内使用时拦截请求
-    Object.assign(config, {
-        requestInterceptor: function (request) {
-            return request;
-        },
-        responseInterceptor: function (response) {
-            response.text = &quot;该文档示例并不具备发起真实请求的能力，请自行拷贝代码进行测试。&quot;;
-            return response;
-        }
-    });
-&lt;/script&gt;
-
-
-    &lt;script&gt;
-        window.onload = function () {
-            window.ui = SwaggerUIBundle(Object.assign({}, config));
-        };
-    &lt;/script&gt;
-
-
-&lt;/body&gt;
-&lt;/html&gt;" frameborder="0" style="min-width: 100%; display: block;"></iframe>
-            </div>
-            <script src="../_static/iframeResizer.min.js"></script>
-            <script>
-                iFrameResize({checkOrigin: false}, '#id_41c30877')
-            </script>
-            </section>
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../pagination/index.html">
+          <a class="next-page" href="../pagination.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
@@ -437,7 +350,7 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=86766ca1"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=1a85e7f6"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
