@@ -12,7 +12,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.auth",
     "django.contrib.sessions",
-    *[f"_examples.{app}" for app in _get_app_dirnames()],
+    *[f"examples.{app}" for app in _get_app_dirnames()],
 ]
 DATABASES = {
     "default": {

@@ -43,7 +43,7 @@ class OasisDirective(SphinxDirective):
     def module_path(self, module_name):
         return os.path.join(
             os.path.dirname(__file__),
-            "_examples",
+            "examples",
             self.rootname,
             module_name,
         )
@@ -146,7 +146,10 @@ class OasisSwaggerUI(OasisDirective):
 
 
 def import_module_from_file(path):
-    name = os.path.splitext(os.path.relpath(path, os.getcwd()))[0].replace("/", ".")
+    name = os.path.splitext(os.path.relpath(path, os.path.dirname(__file__)))[
+        0
+    ].replace("/", ".")
+
     spec = importlib.util.spec_from_file_location(name, path)
     module = importlib.util.module_from_spec(spec)
 
@@ -166,7 +169,7 @@ class OasisLiteralInclude(LiteralInclude, OasisDirective):
     def run(self):
         root = self.arguments[0]
         relfile = self.arguments[1]
-        self.arguments = [f"/_examples/{root}/{relfile}"]
+        self.arguments = [f"/../examples/{root}/{relfile}"]
         self.options["caption"] = f"{relfile} {self.alias}"
         return super().run()
 

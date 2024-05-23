@@ -9,7 +9,7 @@ BASE_DIR = pathlib.Path(__file__).resolve().parent
 sys.path.extend(
     [
         str((BASE_DIR).resolve()),
-        str((BASE_DIR / "../..").resolve()),
+        str((BASE_DIR / "..").resolve()),
         str((BASE_DIR / "../../src").resolve()),
     ]
 )
@@ -22,7 +22,7 @@ release = __import__("django_oasis").__version__
 extensions = [
     "_ext.directives",
     "_ext.openapiview",
-    "_exts",
+    "extension",
     "sphinx.ext.intersphinx",
     "sphinx.ext.autodoc",
     "sphinx.ext.doctest",
