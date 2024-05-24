@@ -207,3 +207,18 @@ def test_serialization_with_unrequired_field():
         field = schema.String(required=False)
 
     assert Schema().serialize({}) == {}
+
+
+def test_model_field_copy():
+    class A(schema.Model):
+        id = schema.Integer(read_only=True)
+
+    class B(schema.Model):
+        id = A.fields["id"].copy(read_only=False)
+
+    A().deserialize({})
+    with pytest.raises(
+        schema.ValidationError,
+        match=re.escape("[{'msgs': ['This field is required.'], 'loc': ['id']}]"),
+    ):
+        B().deserialize({})

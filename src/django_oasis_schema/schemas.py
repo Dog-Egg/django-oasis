@@ -215,6 +215,18 @@ class Schema(Field, metaclass=SchemaMeta):
         #: 声明 `OAS Data Type Format <https://spec.openapis.org/oas/v3.0.3#dataTypeFormat>`_，自动被子类延用。
         data_format: t.Optional[str]
 
+    def __new__(cls, *args, **kwargs):
+        self = super().__new__(cls)
+        self.__args = args
+        self.__kwargs = kwargs
+        return self
+
+    def copy(self, **kwargs):
+        """复制一个 Schema 对象。可以修改其初始化的关键字参数。"""
+        _kwargs = self.__kwargs.copy()
+        _kwargs.update(kwargs)
+        return self.__class__(*self.__args, **_kwargs)
+
     def __init__(
         self,
         *,
@@ -397,6 +409,10 @@ class ModelMeta(SchemaMeta):
         attrs["_fields"] = FieldMapping(**fields)
         return super().__new__(mcs, classname, bases, attrs)
 
+    @property
+    def fields(self):
+        return self._fields
+
 
 INCLUDE = "include"
 EXCLUDE = "exclude"
@@ -475,6 +491,9 @@ class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
         data_type = "object"
 
     _fields: FieldMapping
+
+    #: Model 的字段映射表
+    fields: Mapping[str, Schema]
 
     def __init__(
         self,
