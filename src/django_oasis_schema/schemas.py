@@ -858,7 +858,7 @@ class List(Schema):
         self.__min_items = min_items
         self.__max_items = max_items
         self.__unique_items = unique_items
-        self.__item: Schema = make_instance(item or Any)
+        self._item: Schema = make_instance(item or Any)
         if max_items is not None or min_items is not None:
             self._validators.append(_validators.LengthValidator(min_items, max_items))
         if unique_items:
@@ -870,7 +870,7 @@ class List(Schema):
 
         for index, item in enumerate(value):
             try:
-                rv.append(self.__item.deserialize(item))
+                rv.append(self._item.deserialize(item))
             except ValidationError as exc:
                 error.setitem_error(index, exc)
 
@@ -881,13 +881,13 @@ class List(Schema):
     def _serialize(self, value):
         rv = []
         for item in value:
-            rv.append(self.__item.serialize(item))
+            rv.append(self._item.serialize(item))
         return rv
 
     def __openapispec__(self, spec):
         result = super().__openapispec__(spec)
         result.update(
-            items=spec.parse(self.__item),
+            items=spec.parse(self._item),
             maxItems=self.__max_items,
             minItems=self.__min_items,
             uniqueItems=default_as_none(self.__unique_items, False),

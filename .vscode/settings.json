@@ -31,7 +31,9 @@
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.testing.pytestArgs": [
-        "-vv"
+        "-vv",
+        "-c",
+        "pytest-doc.ini"
     ],
     "todo-tree.tree.scanMode": "workspace only",
     "python.analysis.exclude": [

@@ -3,7 +3,7 @@ from django_oasis.core import Resource
 from django_oasis.parameter import FormData
 
 
-@Resource("/upload")
+@Resource("/upload/single")
 class UploadAPI:
     def post(
         self,
@@ -12,10 +12,11 @@ class UploadAPI:
                 "file": schema.File(),
             }
         ),
-    ): ...
+    ):
+        ...
 
+        from django.core.files.uploadedfile import InMemoryUploadedFile
 
-from django_oasis.core import OpenAPI
-
-openapi = OpenAPI(title="Upload File")
-openapi.add_resource(UploadAPI)
+        file = data["file"]
+        assert file.__class__ is InMemoryUploadedFile, file.__class__
+        return file.read()

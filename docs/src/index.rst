@@ -52,7 +52,7 @@ Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地�
     request_parameters/index
     request_path/index
     request_body/index
-    upload_files/index
+    upload_file
     pagination
     auth
     schema/index

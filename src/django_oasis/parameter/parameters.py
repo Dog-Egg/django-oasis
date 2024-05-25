@@ -361,7 +361,10 @@ class FormData(RequestBodyContent):
     @cached_property
     def content_type(self):
         for field in self._schema._fields.values():
-            if isinstance(field, _schema.File):
+            if isinstance(field, _schema.File) or (
+                isinstance(field, _schema.List)
+                and isinstance(field._item, _schema.File)
+            ):
                 return "multipart/form-data"
         return "application/x-www-form-urlencoded"
 
@@ -370,12 +373,19 @@ class FormData(RequestBodyContent):
         target: MultiValueDict
         for field in self._schema._fields.values():
             k = field._alias
-            if isinstance(field, _schema.File):
+            if isinstance(field, _schema.File) or (
+                isinstance(field, _schema.List)
+                and isinstance(field._item, _schema.File)
+            ):
                 target = request.FILES
             else:
                 target = request.POST
+
             if k in target:
-                data[k] = target[k]
+                if isinstance(field, _schema.List):
+                    data[k] = target.getlist(k)
+                else:
+                    data[k] = target[k]
         return self._schema.deserialize(data)
 
 
