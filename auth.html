@@ -1,12 +1,12 @@
 <!doctype html>
-<html class="no-js" lang="zh-CN" data-content_root="">
+<html class="no-js" lang="zh-CN" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="Schema" href="schema/index.html" /><link rel="prev" title="分页" href="pagination.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
-        <title>用户认证 - Django-Oasis0.1.dev20240524070512</title>
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>用户认证 - Django-Oasis0.1.dev20240526012731</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -179,7 +179,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240524070512</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +206,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240524070512</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -220,7 +220,7 @@
 <li class="toctree-l1"><a class="reference internal" href="request_parameters/index.html">请求参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="request_path/index.html">路径参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="request_body/index.html">请求体</a></li>
-<li class="toctree-l1"><a class="reference internal" href="upload_files/index.html">上传文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upload_file.html">上传文件</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pagination.html">分页</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">用户认证</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="schema/index.html">Schema</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -275,11 +275,11 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="id1">
-<h1>用户认证<a class="headerlink" href="#id1" title="此标题的永久链接">¶</a></h1>
+<h1>用户认证<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <p>仅需在 <a class="reference internal" href="api.html#django_oasis.core.Operation" title="django_oasis.core.Operation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Operation</span></code></a> 上设置 auth 参数即可实现认证。</p>
 <p>以下示例代码定义了两个接口，GET 仅需要用户登录，POST 则需要用户具有管理员权限。若用户未登录，将返回 HTTP 401 响应；若用户非管理员，将返回 HTTP 403 响应。</p>
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">views.py [示例1]</span><a class="headerlink" href="#id4" title="此代码块的永久链接">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例1]</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.auth</span> <span class="kn">import</span> <span class="n">IsAdministrator</span><span class="p">,</span> <span class="n">IsAuthenticated</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Resource</span>
 
@@ -299,7 +299,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">SwaggerUI [示例1]</span>
                 </div>
-                <iframe id="id_4c92ac69" srcdoc="
+                <iframe id="id_f03fff3a" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -379,16 +379,16 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_4c92ac69')
+                iFrameResize({checkOrigin: false}, '#id_f03fff3a')
             </script>
             <section id="custom-auth">
-<span id="id2"></span><h2>自定义认证<a class="headerlink" href="#custom-auth" title="此标题的永久链接">¶</a></h2>
+<span id="id2"></span><h2>自定义认证<a class="headerlink" href="#custom-auth" title="Link to this heading">¶</a></h2>
 <p>继承 <a class="reference internal" href="api.html#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.auth.BaseAuth</span></code></a> 抽象类，并实现其抽象方法。</p>
 <section id="id3">
-<h3>示例1<a class="headerlink" href="#id3" title="此标题的永久链接">¶</a></h3>
+<h3>示例1<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <p>假设项目使用了 django.contrib.auth 作为用户认证系统，并且改用 HTTP Basic 作为认证方式。你需要自行实现认证类：</p>
 <div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">views.py [示例2]</span><a class="headerlink" href="#id5" title="此代码块的永久链接">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例2]</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.auth</span> <span class="kn">import</span> <span class="n">BaseAuth</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.exceptions</span> <span class="kn">import</span> <span class="n">UnauthorizedError</span>
@@ -425,7 +425,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">SwaggerUI [示例2]</span>
                 </div>
-                <iframe id="id_f502df8a" srcdoc="
+                <iframe id="id_f9693895" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -505,7 +505,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_f502df8a')
+                iFrameResize({checkOrigin: false}, '#id_f9693895')
             </script>
             </section>
 </section>
@@ -582,9 +582,9 @@
       
     </aside>
   </div>
-</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=de31c54a"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+</div><script src="_static/documentation_options.js?v=a599f5fb"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>
     <script src="_static/translations.js?v=beaddf03"></script>
     </body>

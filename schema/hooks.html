@@ -1,12 +1,12 @@
 <!doctype html>
-<html class="no-js" lang="zh-CN" data-content_root="">
+<html class="no-js" lang="zh-CN" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="API 参考" href="../api.html" /><link rel="prev" title="验证数据" href="validation.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
-        <title>Hooks - Django-Oasis0.1.dev20240524070512</title>
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>Hooks - Django-Oasis0.1.dev20240526012731</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -179,7 +179,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240524070512</span></div></a>
+      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +206,7 @@
     <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240524070512</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -220,7 +220,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../request_parameters/index.html">请求参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../request_path/index.html">路径参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../request_body/index.html">请求体</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../upload_files/index.html">上传文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upload_file.html">上传文件</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pagination.html">分页</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../auth.html">用户认证</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Schema</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
@@ -275,7 +275,7 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="hooks">
-<h1>Hooks<a class="headerlink" href="#hooks" title="此标题的永久链接">¶</a></h1>
+<h1>Hooks<a class="headerlink" href="#hooks" title="Link to this heading">¶</a></h1>
 <p>Hook 可以让 Schema 更加灵活好用，虽然它并不是实现的核心。它最初的目的是为了让 class 类和一些紧密相关的函数(不是指 method)以更加美观的方式组织在一起。</p>
 <p>如下例所示，<code class="docutils literal notranslate"><span class="pre">validate_age</span></code> 是与 <code class="docutils literal notranslate"><span class="pre">User</span></code> 相关的验证函数，但它却被定义在了全局域上，虽然毫无问题，但是代码结构并不好看。就好像只属于我的物品却被放在了公共展示柜里。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">validate_age</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
@@ -300,17 +300,17 @@
 </div>
 <p>由于 hook 被设计的很简单，所以它非常灵活，以致于可以代替实现很多 Schema 的功能。</p>
 <section id="id1">
-<h2>使用用法<a class="headerlink" href="#id1" title="此标题的永久链接">¶</a></h2>
+<h2>使用用法<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>hook 是以装饰器的形式定义在 Schema 类的方法上的。</p>
 </section>
 <section id="hook">
-<h2>可用的 Hook<a class="headerlink" href="#hook" title="此标题的永久链接">¶</a></h2>
+<h2>可用的 Hook<a class="headerlink" href="#hook" title="Link to this heading">¶</a></h2>
 <p>关于 <a class="reference internal" href="../api.html#django_oasis.schema.as_validator" title="django_oasis.schema.as_validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validator</span></code></a> 的使用可在 <a class="reference internal" href="validation.html"><span class="doc">验证数据</span></a> 一章中查看。</p>
 </section>
 <section id="id2">
-<h2>Hook 的特点<a class="headerlink" href="#id2" title="此标题的永久链接">¶</a></h2>
+<h2>Hook 的特点<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <section id="id3">
-<h3>不可调用<a class="headerlink" href="#id3" title="此标题的永久链接">¶</a></h3>
+<h3>不可调用<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <p>虽然 hook 修饰的是类的方法，但是该方法并不像普通方法一样可以被调用。即无法使用 <code class="docutils literal notranslate"><span class="pre">&lt;class_name&gt;.&lt;method_name&gt;</span></code> 的方式进行调用。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MySchema</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Schema</span><span class="p">):</span>
 
@@ -328,11 +328,11 @@
 <p>这样做的目的是为了避免同名污染，你可以放心地为你的 hook 函数取任何函数名，它不会覆盖掉已有的同名方法。</p>
 </section>
 <section id="id4">
-<h3>不可重写<a class="headerlink" href="#id4" title="此标题的永久链接">¶</a></h3>
+<h3>不可重写<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <p>hook 函数虽然是方法，但是它并不能在子类中被重写。</p>
 </section>
 <section id="id5">
-<h3>可继承<a class="headerlink" href="#id5" title="此标题的永久链接">¶</a></h3>
+<h3>可继承<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>父类的 hook 会继承给子类。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">firstname</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">write_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -430,9 +430,9 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=de31c54a"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+</div><script src="../_static/documentation_options.js?v=a599f5fb"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
     <script src="../_static/translations.js?v=beaddf03"></script>
     </body>

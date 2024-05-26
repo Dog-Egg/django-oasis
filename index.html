@@ -1,12 +1,12 @@
 <!doctype html>
-<html class="no-js" lang="zh-CN" data-content_root="">
+<html class="no-js" lang="zh-CN" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="快速入门" href="quickstart.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
-        <title>Django-Oasis0.1.dev20240524070512</title>
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>Django-Oasis0.1.dev20240526012731</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -179,7 +179,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240524070512</span></div></a>
+      <a href="#"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +206,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240524070512</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -220,7 +220,7 @@
 <li class="toctree-l1"><a class="reference internal" href="request_parameters/index.html">请求参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="request_path/index.html">路径参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="request_body/index.html">请求体</a></li>
-<li class="toctree-l1"><a class="reference internal" href="upload_files/index.html">上传文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upload_file.html">上传文件</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pagination.html">分页</a></li>
 <li class="toctree-l1"><a class="reference internal" href="auth.html">用户认证</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="schema/index.html">Schema</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -275,14 +275,14 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="id1">
-<h1>介绍<a class="headerlink" href="#id1" title="此标题的永久链接">¶</a></h1>
+<h1>介绍<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <p>Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地编写 HTTP API。</p>
 <section id="id2">
-<h2>简单示例<a class="headerlink" href="#id2" title="此标题的永久链接">¶</a></h2>
+<h2>简单示例<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>以下是一个简单的示例，可以快速了解 Oasis 能做什么？</p>
 <p>这里定义了一个 <code class="docutils literal notranslate"><span class="pre">Book</span></code> 模型:</p>
 <div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">models.py [示例4]</span><a class="headerlink" href="#id6" title="此代码块的永久链接">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">models.py [示例4]</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 
 
@@ -294,7 +294,7 @@
 </div>
 <p>并使用 Oasis 编写两个接口，为其实现 “查” 和 “增” 的功能:</p>
 <div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text">views.py [示例4]</span><a class="headerlink" href="#id7" title="此代码块的永久链接">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例4]</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.common</span> <span class="kn">import</span> <span class="n">model2schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.pagination</span> <span class="kn">import</span> <span class="n">PagePagination</span>
@@ -330,7 +330,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">SwaggerUI [示例4]</span>
                 </div>
-                <iframe id="id_69edfed4" srcdoc="
+                <iframe id="id_16ba79f4" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -410,11 +410,11 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_69edfed4')
+                iFrameResize({checkOrigin: false}, '#id_16ba79f4')
             </script>
             </section>
 <section id="id3">
-<h2>前提<a class="headerlink" href="#id3" title="此标题的永久链接">¶</a></h2>
+<h2>前提<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>该项目基于 Django 框架，并使用 OpenAPI-Specification v3.0.3 定义接口。在开始之前，需要了解 Django 和 OpenAPI 规范的相关内容，因为本文档中并未对涉及它们的概念和功能做详细的说明。</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.djangoproject.com">Django</a>: Django 是一个高级 Python Web 框架，鼓励快速开发和简洁、务实的设计。它由经验丰富的开发人员构建，解决了 Web 开发的大部分麻烦，因此您可以专注于编写应用程序，而无需重新发明轮子。</p></li>
@@ -422,7 +422,7 @@
 </ul>
 </section>
 <section id="id4">
-<h2>功能说明<a class="headerlink" href="#id4" title="此标题的永久链接">¶</a></h2>
+<h2>功能说明<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Oasis 使用自有的规则来编写接口代码，而不是使用 Django 的视图函数。</p></li>
 <li><p>Oasis 并不是生成文档，而是生成 OAS，OAS 可以用来做 API 文档和自动化测试使用。而且在整个开发过程中，几乎不需要手写 OAS。</p></li>
@@ -431,7 +431,7 @@
 </ul>
 </section>
 <section id="id5">
-<h2>目录<a class="headerlink" href="#id5" title="此标题的永久链接">¶</a></h2>
+<h2>目录<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速入门</a><ul>
@@ -464,7 +464,11 @@
 <li class="toctree-l2"><a class="reference internal" href="request_body/index.html#body">Body</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="upload_files/index.html">上传文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upload_file.html">上传文件</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="upload_file.html#id2">单文件上传</a></li>
+<li class="toctree-l2"><a class="reference internal" href="upload_file.html#id3">多文件上传</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="pagination.html">分页</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pagination.html#id2">内置分页器</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pagination.html#id3">自定义分页器</a></li>
@@ -563,9 +567,9 @@
       
     </aside>
   </div>
-</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=de31c54a"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+</div><script src="_static/documentation_options.js?v=a599f5fb"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>
     <script src="_static/translations.js?v=beaddf03"></script>
     </body>

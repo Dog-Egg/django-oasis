@@ -1,12 +1,12 @@
 <!doctype html>
-<html class="no-js" lang="zh-CN" data-content_root="">
+<html class="no-js" lang="zh-CN" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="验证数据" href="validation.html" /><link rel="prev" title="Schema" href="index.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
-        <title>Model Schema - Django-Oasis0.1.dev20240524070512</title>
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>Model Schema - Django-Oasis0.1.dev20240526012731</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -179,7 +179,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240524070512</span></div></a>
+      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +206,7 @@
     <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240524070512</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -220,7 +220,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../request_parameters/index.html">请求参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../request_path/index.html">路径参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../request_body/index.html">请求体</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../upload_files/index.html">上传文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upload_file.html">上传文件</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pagination.html">分页</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../auth.html">用户认证</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Schema</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
@@ -275,7 +275,7 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="model-schema">
-<h1>Model Schema<a class="headerlink" href="#model-schema" title="此标题的永久链接">¶</a></h1>
+<h1>Model Schema<a class="headerlink" href="#model-schema" title="Link to this heading">¶</a></h1>
 <p>Model 是一个包含 <strong>字段</strong> 的特殊 Schema，它用于声明具有属性的对象，<strong>字段</strong> 是以类属性的方式定义在 <a class="reference internal" href="../api.html#django_oasis.schema.Model" title="django_oasis.schema.Model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schema.Model</span></code></a> 子类中。Model 的用法如下：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
 
@@ -284,7 +284,7 @@
 </pre></div>
 </div>
 <section id="model">
-<h2>Model 嵌套<a class="headerlink" href="#model" title="此标题的永久链接">¶</a></h2>
+<h2>Model 嵌套<a class="headerlink" href="#model" title="Link to this heading">¶</a></h2>
 <p>将一个 Model 作为字段嵌套在其它 Model 中很简单。因为字段是一个 Schema，而 Model 本身也是 Schema，所以直接嵌套即可。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Author</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
@@ -302,10 +302,10 @@
 </div>
 </section>
 <section id="id1">
-<h2>字段<a class="headerlink" href="#id1" title="此标题的永久链接">¶</a></h2>
+<h2>字段<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>字段实际上也是一个 Schema 对象，只是当 Schema 对象作为 Model 的字段时，它便具备了字段的特性。下面将介绍字段的各种特性。</p>
 <section id="id2">
-<h3>字段继承<a class="headerlink" href="#id2" title="此标题的永久链接">¶</a></h3>
+<h3>字段继承<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <p>如同 Python 的类属性继承，Model 的字段同样也可以继承给子 Model。</p>
 <p>单继承示例: B Model 继承于 A Model。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
@@ -364,7 +364,7 @@
 </div>
 </section>
 <section id="id3">
-<h3>字段命名要求<a class="headerlink" href="#id3" title="此标题的永久链接">¶</a></h3>
+<h3>字段命名要求<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <p>你可能会想到如果字段名和父类的某个方法名或者属性同名时可能会导致错误的发生。</p>
 <p>实际上并不会，虽然字段是以类属性的方式定义的，但字段并不会成为类属性，也就意味着无法通过 <code class="docutils literal notranslate"><span class="pre">&lt;model_name&gt;.&lt;field_name&gt;</span></code> 的形式访问到字段。</p>
 <p>这样做的好处，就是不会出现同名污染，你可以为你的字段取任何名称，即便字段名为 “deserialize” 也不会发生错误。</p>
@@ -377,7 +377,7 @@
 </div>
 </section>
 <section id="alias-attr">
-<h3>alias 和 attr<a class="headerlink" href="#alias-attr" title="此标题的永久链接">¶</a></h3>
+<h3>alias 和 attr<a class="headerlink" href="#alias-attr" title="Link to this heading">¶</a></h3>
 <p>你可以用 alias 和 attr 参数为序列化和反序列化的两端指定不同的字段名映射。如果不指定，它们默认等于字段名。</p>
 <p>它们之间的关系如下：</p>
 <p><code class="docutils literal notranslate"><span class="pre">attr</span></code> — <em>serialize()</em> —&gt; <code class="docutils literal notranslate"><span class="pre">alias</span></code></p>
@@ -395,7 +395,7 @@
 </div>
 </section>
 <section id="clear-value">
-<h3>clear_value<a class="headerlink" href="#clear-value" title="此标题的永久链接">¶</a></h3>
+<h3>clear_value<a class="headerlink" href="#clear-value" title="Link to this heading">¶</a></h3>
 <p>用于反序列化时，清除无意义的字段值。</p>
 <p>默认定义了空白字符串为无意义值。如下所示: 字段 a 为必需，虽然反序列化时为其提供了一个空字符，但空字符串默认是无意义的，所以会在处理时被清除。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
@@ -516,9 +516,9 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=de31c54a"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+</div><script src="../_static/documentation_options.js?v=a599f5fb"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
     <script src="../_static/translations.js?v=beaddf03"></script>
     </body>

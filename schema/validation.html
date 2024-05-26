@@ -1,12 +1,12 @@
 <!doctype html>
-<html class="no-js" lang="zh-CN" data-content_root="">
+<html class="no-js" lang="zh-CN" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Hooks" href="hooks.html" /><link rel="prev" title="Model Schema" href="model.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2024.05.06 -->
-        <title>验证数据 - Django-Oasis0.1.dev20240524070512</title>
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>验证数据 - Django-Oasis0.1.dev20240526012731</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -179,7 +179,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240524070512</span></div></a>
+      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +206,7 @@
     <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240524070512</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -220,7 +220,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../request_parameters/index.html">请求参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../request_path/index.html">路径参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../request_body/index.html">请求体</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../upload_files/index.html">上传文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upload_file.html">上传文件</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pagination.html">分页</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../auth.html">用户认证</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Schema</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
@@ -275,10 +275,10 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="id1">
-<h1>验证数据<a class="headerlink" href="#id1" title="此标题的永久链接">¶</a></h1>
+<h1>验证数据<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <p>Schema 提供能多种验证方式。以下将以 “验证一个数是否为正整数” 为例，逐一介绍各个验证方式。</p>
 <section id="use-validators">
-<span id="id2"></span><h2>使用参数<a class="headerlink" href="#use-validators" title="此标题的永久链接">¶</a></h2>
+<span id="id2"></span><h2>使用参数<a class="headerlink" href="#use-validators" title="Link to this heading">¶</a></h2>
 <p>这是最简单的验证方式。只需定义验证函数，并以参数的形式传递给 Schema 对象。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
 
@@ -300,7 +300,7 @@ django_oasis_schema.exceptions.ValidationError: [{&#39;msgs&#39;: [&#39;这不�
 </div>
 </section>
 <section id="hook">
-<h2>使用 Hook<a class="headerlink" href="#hook" title="此标题的永久链接">¶</a></h2>
+<h2>使用 Hook<a class="headerlink" href="#hook" title="Link to this heading">¶</a></h2>
 <p><a class="reference internal" href="../api.html#django_oasis.schema.as_validator" title="django_oasis.schema.as_validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schema.as_validator</span></code></a> 是一个专门挂载验证函数的 hook。</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
@@ -358,7 +358,7 @@ django_oasis_schema.exceptions.ValidationError: [{&#39;msgs&#39;: [&#39;不是�
 </div>
 </section>
 <section id="model">
-<h2>Model 验证<a class="headerlink" href="#model" title="此标题的永久链接">¶</a></h2>
+<h2>Model 验证<a class="headerlink" href="#model" title="Link to this heading">¶</a></h2>
 <p>Model 是有字段的，除了要验证 Model 本身外，还必须有能力验证其字段。当然，可以像 <a class="reference internal" href="#use-validators"><span class="std std-ref">使用参数</span></a> 给字段传入验证函数，这很简单，就不再介绍了。</p>
 <p>这里任然要介绍 <a class="reference internal" href="../api.html#django_oasis.schema.as_validator" title="django_oasis.schema.as_validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schema.as_validator</span></code></a> 这个 hook。它不仅能验证 Model 本身外，还能验证字段。只需要将字段传给这个 hook，它就会将其验证函数应用于该字段的验证。</p>
 <p>举个例子，以下 Student 类的 <code class="docutils literal notranslate"><span class="pre">age</span></code> 字段需要验证其大于或等于 0。</p>
@@ -453,9 +453,9 @@ django_oasis_schema.exceptions.ValidationError: [{&#39;msgs&#39;: [&#39;年龄�
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=de31c54a"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+</div><script src="../_static/documentation_options.js?v=a599f5fb"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
     <script src="../_static/translations.js?v=beaddf03"></script>
     </body>
