@@ -493,7 +493,7 @@ class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
     _fields: FieldMapping
 
     #: Model 的字段映射表
-    fields: Mapping[str, Schema]
+    fields: t.Mapping[str, Schema]
 
     def __init__(
         self,
