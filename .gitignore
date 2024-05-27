@@ -144,3 +144,5 @@ tmp/
 
 # pyenv local
 .python-version
+
+.vscode/
