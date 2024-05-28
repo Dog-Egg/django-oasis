@@ -199,7 +199,7 @@ class Header(RequestParameter):
     location = "header"
 
     def _parse_request(self, request: HttpRequest):
-        return self._schema.deserialize((request.headers))
+        return self._schema.deserialize(self._handle_style(request.headers))
 
 
 class MediaType:

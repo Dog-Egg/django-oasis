@@ -1,6 +1,7 @@
 import typing as t
 
 from django.http import QueryDict
+from django.http.request import HttpHeaders
 from django.utils.functional import cached_property
 
 from django_oasis import schema as _schema
@@ -101,6 +102,11 @@ class StyleHandler:
                 rv[f._alias] = data[k]
         return rv
 
+    def _header_simple_array(self, data: HttpHeaders):
+        assert isinstance(self.schema, _schema.List)
+        alias = self.schema._alias
+        return data.get(alias).split(",")
+
     handlers: t.Dict[t.Tuple, t.Callable] = {
         ("query", "form", True, "primitive"): _f1,
         ("query", "form", False, "primitive"): _f1,
@@ -120,6 +126,7 @@ class StyleHandler:
         ("path", "simple", False, "object"): _split_by_comma_object,
         ("path", "simple", True, "object"): _split_by_comma_object2,
         ("header", "simple", False, "primitive"): _unchange,
+        ("header", "simple", False, "array"): _header_simple_array,
     }
 
 

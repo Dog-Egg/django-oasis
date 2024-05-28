@@ -298,7 +298,7 @@ class Resource:
             rv = b""
         if isinstance(rv, (str, bytes)):
             return HttpResponse(rv, status=status)
-        return JsonResponse(rv, status=status)
+        return JsonResponse(rv, status=status, safe=False)
 
     def __view(self, request, **kwargs) -> t.Tuple[t.Any, int]:
         kwargs = self._path.parse_kwargs(kwargs)

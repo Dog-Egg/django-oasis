@@ -10,7 +10,7 @@ sys.path.extend(
     [
         str((BASE_DIR).resolve()),
         str((BASE_DIR / "..").resolve()),
-        str((BASE_DIR / "../..").resolve()),  # 与 openapiview 扩展一同删除
+        str((BASE_DIR / "../..").resolve()),  # TODO 与 openapiview 扩展一同删除
         str((BASE_DIR / "../../src").resolve()),
     ]
 )
@@ -51,6 +51,7 @@ html_static_path = [
     "_static",
     str((BASE_DIR / "../../src/django_oasis/templates/_static").resolve()),
 ]
+html_css_files = ["custom.css"]
 
 
 # internationalization

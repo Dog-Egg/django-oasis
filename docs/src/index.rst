@@ -3,10 +3,19 @@
 
 Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地编写 HTTP API。
 
-简单示例
+
+使用前提
 --------
 
-以下是一个简单的示例，可以快速了解 Oasis 能做什么？
+.. role:: color-necessary
+.. role:: color-optional
+
+* :color-necessary:`[必要]` 该项目基于 `Django <https://www.djangoproject.com>`_ 框架，所有在使用前需要对 Django 有基本的开发能力。
+* :color-optional:`[可选]` 项目还使用了 `OpenAPI 规范 <https://spec.openapis.org/oas/v3.0.3>`_ (OAS) 来描述接口。它可以创建交互式接口文档，实现测试用例自动化，还能用于生成客户端代码等等。但不了解 OAS 也并不影响开发使用。
+
+
+简单的示例
+----------
 
 这里定义了一个 ``Book`` 模型:
 
@@ -21,15 +30,6 @@ Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地�
 这是由上面示例生成的 Swagger 文档：
 
 .. oasis-swaggerui:: demo
-
-
-前提
-----
-
-该项目基于 Django 框架，并使用 OpenAPI-Specification v3.0.3 定义接口。在开始之前，需要了解 Django 和 OpenAPI 规范的相关内容，因为本文档中并未对涉及它们的概念和功能做详细的说明。
-
-* `Django <https://www.djangoproject.com>`_: Django 是一个高级 Python Web 框架，鼓励快速开发和简洁、务实的设计。它由经验丰富的开发人员构建，解决了 Web 开发的大部分麻烦，因此您可以专注于编写应用程序，而无需重新发明轮子。
-* `OpenAPI 规范 <https://spec.openapis.org/oas/v3.0.3>`_: OpenAPI 规范 (OAS) 定义了一个与语言无关的标准 HTTP API 接口，允许人类和计算机发现和理解服务的功能，而无需访问源代码、文档或通过网络流量检查。
 
 
 功能说明
@@ -49,7 +49,9 @@ Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地�
 
     quickstart
     operations
-    request_parameters/index
+    parameter_query
+    parameter_header
+    parameter_cookie
     request_path/index
     request_body/index
     upload_file
