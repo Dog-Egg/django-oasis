@@ -2,10 +2,12 @@
 <html class="no-js" lang="zh-CN" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="#" /><link rel="search" title="搜索" href="search.html" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="请求 cookie 参数 (Cookie)" href="parameter_cookie.html" /><link rel="prev" title="查询参数 (Query)" href="parameter_query.html" />
 
-    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 --><title>索引 - Django-Oasis0.1.dev20240528063330</title>
-<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>请求头参数 (Header) - Django-Oasis0.1.dev20240528063330</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=664094ad" />
@@ -190,7 +192,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -213,11 +215,11 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operations.html">请求操作</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_query.html">查询参数 (Query)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parameter_header.html">请求头参数 (Header)</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">请求头参数 (Header)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="request_path/index.html">路径参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="request_body/index.html">请求体</a></li>
@@ -254,7 +256,13 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/parameter_header.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
@@ -263,352 +271,158 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          
-<section class="genindex-section">
-  <h1 id="index">索引</h1>
-  <div class="genindex-jumpbox"><a href="#_"><strong>_</strong></a> | <a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#J"><strong>J</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#Q"><strong>Q</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a></div>
+          <section id="header">
+<h1>请求头参数 (Header)<a class="headerlink" href="#header" title="Link to this heading">¶</a></h1>
+<p>声明和获取请求头参数可直接参考 <a class="reference internal" href="parameter_query.html"><span class="doc">查询参数 (Query)</span></a> 章节。他们的实现方式是一样的（参数样式有差异），仅仅是获取参数的位置不同，所以使用以下类同理替换即可。</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="api.html#django_oasis.parameter.Header" title="django_oasis.parameter.Header"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.Header</span></code></a></p></li>
+<li><p><a class="reference internal" href="api.html#django_oasis.parameter.HeaderItem" title="django_oasis.parameter.HeaderItem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.HeaderItem</span></code></a></p></li>
+</ul>
+<section id="id1">
+<h2>参数样式查询表<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="id2">
+<h3>数组样式<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>以下示例的参数结果 <code class="docutils literal notranslate"><span class="pre">color</span> <span class="pre">=</span> <span class="pre">[&quot;blue&quot;,</span> <span class="pre">&quot;black&quot;,</span> <span class="pre">&quot;brown&quot;]</span></code></p>
+<section id="color-blue-black-brown-default">
+<h4>color: blue,black,brown (default)<a class="headerlink" href="#color-blue-black-brown-default" title="Link to this heading">¶</a></h4>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">views.py [示例11]</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/array/simple/false&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ArraySimpleFalseAPI</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">HeaderItem</span><span class="p">(</span>
+            <span class="n">schema</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">()),</span>
+            <span class="n">Style</span><span class="p">(</span><span class="s2">&quot;simple&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+        <span class="p">),</span>
+    <span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+
+            <div style="border: 1px solid var(--color-background-border);">
+                <div class="code-block-caption">
+                    <span class="caption-text">SwaggerUI [示例11]</span>
+                </div>
+                <iframe id="id_8243af3c" srcdoc="
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;/&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;/&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;SwaggerUI&quot;/&gt;
+    &lt;title&gt;Swagger UI&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            margin: 0;
+        }
+        body::before, body::after {
+            content: &quot;&quot;;
+            display: table;
+        }
+        .footer {
+            margin-bottom: 25px;
+            color: #cccccc;
+            font-size: 12px;
+            display: flex;
+        }
+        .footer .powered-by {
+            float: right;
+        }
+    &lt;/style&gt;
+    
+    
+                &lt;script src=&quot;./_static/iframeResizer.contentWindow.min.js&quot;&gt;&lt;/script&gt;
+                &lt;script src=&quot;./_static/swagger-ui-bundle.js&quot;&gt;&lt;/script&gt;
+                &lt;link rel=&quot;stylesheet&quot; href=&quot;./_static/swagger-ui.css&quot; /&gt;
+                
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/array/simple/false&quot;: {&quot;get&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;color&quot;, &quot;in&quot;: &quot;header&quot;, &quot;required&quot;: true, &quot;schema&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;items&quot;: {&quot;type&quot;: &quot;string&quot;}}, &quot;style&quot;: &quot;simple&quot;, &quot;explode&quot;: false}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}}}}}}&lt;/script&gt;
+&lt;script&gt;
+    var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
+
+    // 设置默认配置
+    Object.assign(config, {
+        dom_id: &#x27;#swagger-ui&#x27;,
+        deepLinking: true,
+        onComplete: onComplete,
+        defaultModelRendering: &quot;model&quot;,
+        defaultModelExpandDepth: 2,
+    });
+
+    function onComplete() {
+        var title = ui.specSelectors.info().toJS().title;
+        document.title = title.concat(&#x27; | Swagger UI&#x27;);
+    }
+&lt;/script&gt;
+
+&lt;script&gt;
+    // 在 Sphinx 内使用时拦截请求
+    Object.assign(config, {
+        requestInterceptor: function (request) {
+            return request;
+        },
+        responseInterceptor: function (response) {
+            response.text = &quot;该文档示例并不具备发起真实请求的能力，请自行拷贝代码进行测试。&quot;;
+            return response;
+        }
+    });
+&lt;/script&gt;
+
+
+    &lt;script&gt;
+        window.onload = function () {
+            window.ui = SwaggerUIBundle(Object.assign({}, config));
+        };
+    &lt;/script&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;" frameborder="0" style="min-width: 100%; display: block;"></iframe>
+            </div>
+            <script src="./_static/iframeResizer.min.js"></script>
+            <script>
+                iFrameResize({checkOrigin: false}, '#id_8243af3c')
+            </script>
+            </section>
 </section>
-<section id="_" class="genindex-section">
-  <h2>_</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.pagination.Pagination._get_request_parameter">_get_request_parameter() （django_oasis.pagination.Pagination 方法）</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.pagination.Pagination._get_response">_get_response() （django_oasis.pagination.Pagination 方法）</a>
-</li>
-        <li><a href="api.html#django_oasis.pagination.Pagination._get_response_schema">_get_response_schema() （django_oasis.pagination.Pagination 方法）</a>
-</li>
-    </ul></td>
-  </tr></table>
 </section>
-
-<section id="A" class="genindex-section">
-  <h2>A</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.core.OpenAPI.add_resources">add_resources() （django_oasis.core.OpenAPI 方法）</a>
-</li>
-        <li><a href="api.html#django_oasis.schema.AnyOf">AnyOf（django_oasis.schema 中的类）</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.schema.Any">Any（django_oasis.schema 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.schema.as_getter">as_getter()（在 django_oasis.schema 模块中）</a>
-</li>
-        <li><a href="api.html#django_oasis.schema.as_validator">as_validator()（在 django_oasis.schema 模块中）</a>
-</li>
-    </ul></td>
-  </tr></table>
 </section>
-
-<section id="B" class="genindex-section">
-  <h2>B</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.auth.BaseAuth">BaseAuth（django_oasis.auth 中的类）</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.parameter.Body">Body（django_oasis.parameter 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.schema.Boolean">Boolean（django_oasis.schema 中的类）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="C" class="genindex-section">
-  <h2>C</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.auth.BaseAuth.check_auth">check_auth() （django_oasis.auth.BaseAuth 方法）</a>
-</li>
-        <li><a href="api.html#django_oasis.parameter.CookieItem">CookieItem（django_oasis.parameter 中的类）</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.parameter.Cookie">Cookie（django_oasis.parameter 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.schema.Schema.copy">copy() （django_oasis.schema.Schema 方法）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="D" class="genindex-section">
-  <h2>D</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.schema.Datetime">Datetime（django_oasis.schema 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.schema.Date">Date（django_oasis.schema 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.auth.BaseAuth.declare_responses">declare_responses（django_oasis.auth.BaseAuth 属性）</a>
-</li>
-        <li><a href="api.html#django_oasis.auth.BaseAuth.declare_security">declare_security（django_oasis.auth.BaseAuth 属性）</a>
-</li>
-        <li><a href="api.html#django_oasis.schema.Schema.deserialize">deserialize() （django_oasis.schema.Schema 方法）</a>
-</li>
-        <li><a href="api.html#django_oasis.schema.Dict">Dict（django_oasis.schema 中的类）</a>
-</li>
-        <li>
-    django_oasis.core
-
-        <ul>
-          <li><a href="api.html#module-django_oasis.core">module</a>
-</li>
-        </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li>
-    django_oasis.pagination
-
-        <ul>
-          <li><a href="api.html#module-django_oasis.pagination">module</a>
-</li>
-        </ul></li>
-        <li>
-    django_oasis.parameter
-
-        <ul>
-          <li><a href="api.html#module-django_oasis.parameter">module</a>
-</li>
-        </ul></li>
-        <li>
-    django_oasis.schema
-
-        <ul>
-          <li><a href="api.html#module-django_oasis.schema">module</a>
-</li>
-        </ul></li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="E" class="genindex-section">
-  <h2>E</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.parameter.Style.explode">explode（django_oasis.parameter.Style 属性）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="F" class="genindex-section">
-  <h2>F</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.schema.Model.fields">fields（django_oasis.schema.Model 属性）</a>
-</li>
-        <li><a href="api.html#django_oasis.schema.File">File（django_oasis.schema 中的类）</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.schema.Float">Float（django_oasis.schema 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.parameter.FormData">FormData（django_oasis.parameter 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.schema.Model.from_dict">from_dict()（django_oasis.schema.Model 静态方法）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="H" class="genindex-section">
-  <h2>H</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.auth.HasPermission">HasPermission（django_oasis.auth 中的类）</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.parameter.HeaderItem">HeaderItem（django_oasis.parameter 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.parameter.Header">Header（django_oasis.parameter 中的类）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="I" class="genindex-section">
-  <h2>I</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.schema.Integer">Integer（django_oasis.schema 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.auth.IsAdministrator">IsAdministrator（django_oasis.auth 中的类）</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.auth.IsAuthenticated">IsAuthenticated（django_oasis.auth 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.auth.IsSuperuser">IsSuperuser（django_oasis.auth 中的类）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="J" class="genindex-section">
-  <h2>J</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.parameter.JsonData">JsonData（django_oasis.parameter 中的类）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="L" class="genindex-section">
-  <h2>L</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.schema.List">List（django_oasis.schema 中的类）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="M" class="genindex-section">
-  <h2>M</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.schema.Model">Model（django_oasis.schema 中的类）</a>
-</li>
-        <li>
-    module
-
-        <ul>
-          <li><a href="api.html#module-django_oasis.core">django_oasis.core</a>
-</li>
-          <li><a href="api.html#module-django_oasis.pagination">django_oasis.pagination</a>
-</li>
-          <li><a href="api.html#module-django_oasis.parameter">django_oasis.parameter</a>
-</li>
-          <li><a href="api.html#module-django_oasis.schema">django_oasis.schema</a>
-</li>
-        </ul></li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="O" class="genindex-section">
-  <h2>O</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.pagination.OffsetPagination">OffsetPagination（django_oasis.pagination 中的类）</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.core.OpenAPI">OpenAPI（django_oasis.core 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.core.Operation">Operation（django_oasis.core 中的类）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="P" class="genindex-section">
-  <h2>P</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.pagination.PagePagination">PagePagination（django_oasis.pagination 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.pagination.Pagination.paginate">paginate() （django_oasis.pagination.Pagination 方法）</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.pagination.Pagination">Pagination（django_oasis.pagination 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.schema.Password">Password（django_oasis.schema 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.schema.Path">Path（django_oasis.schema 中的类）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="Q" class="genindex-section">
-  <h2>Q</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.parameter.QueryItem">QueryItem（django_oasis.parameter 中的类）</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.parameter.Query">Query（django_oasis.parameter 中的类）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="R" class="genindex-section">
-  <h2>R</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.core.Resource">Resource（django_oasis.core 中的类）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="S" class="genindex-section">
-  <h2>S</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.schema.Schema">Schema（django_oasis.schema 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.schema.Schema.serialize">serialize() （django_oasis.schema.Schema 方法）</a>
-</li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.schema.String">String（django_oasis.schema 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.parameter.Style">Style（django_oasis.parameter 中的类）</a>
-</li>
-        <li><a href="api.html#django_oasis.parameter.Style.style">style（django_oasis.parameter.Style 属性）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="U" class="genindex-section">
-  <h2>U</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.schema.Url">Url（django_oasis.schema 中的类）</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
-<section id="V" class="genindex-section">
-  <h2>V</h2>
-  <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api.html#django_oasis.schema.ValidationError">ValidationError</a>
-</li>
-    </ul></td>
-  </tr></table>
-</section>
-
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="parameter_cookie.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">请求 cookie 参数 (Cookie)</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="parameter_query.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">查询参数 (Query)</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -627,8 +441,33 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">请求头参数 (Header)</a><ul>
+<li><a class="reference internal" href="#id1">参数样式查询表</a><ul>
+<li><a class="reference internal" href="#id2">数组样式</a><ul>
+<li><a class="reference internal" href="#color-blue-black-brown-default">color: blue,black,brown (default)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

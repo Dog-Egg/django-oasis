@@ -6,10 +6,11 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="请求操作" href="operations.html" /><link rel="prev" title="介绍" href="index.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>快速入门 - Django-Oasis0.1.dev20240526012731</title>
+        <title>快速入门 - Django-Oasis0.1.dev20240528063330</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=664094ad" />
     
     
 
@@ -179,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240528063330</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +207,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240528063330</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -217,7 +218,9 @@
   <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">快速入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operations.html">请求操作</a></li>
-<li class="toctree-l1"><a class="reference internal" href="request_parameters/index.html">请求参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_query.html">查询参数 (Query)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_header.html">请求头参数 (Header)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="request_path/index.html">路径参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="request_body/index.html">请求体</a></li>
 <li class="toctree-l1"><a class="reference internal" href="upload_file.html">上传文件</a></li>
@@ -287,7 +290,7 @@
 <h2>使用<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>Oasis 是作为 Django 路由的一部分运行的，所以它可以很轻松地在已有的 Django 项目中被添加。如果还有没有项目，可以查看 <a class="reference external" href="https://docs.djangoproject.com/zh-hans/4.2/intro/tutorial01/#creating-a-project">官方文档</a> 进行创建。</p>
 <section id="id5">
-<h3>设置应用<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<h3>1. 设置应用<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <p>将 <code class="docutils literal notranslate"><span class="pre">django_oasis</span></code> 添加到 <code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code> 列表中。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;django.contrib.admin&quot;</span><span class="p">,</span>
@@ -302,10 +305,10 @@
 </div>
 </section>
 <section id="api">
-<h3>编写 API<a class="headerlink" href="#api" title="Link to this heading">¶</a></h3>
+<h3>2. 编写 API<a class="headerlink" href="#api" title="Link to this heading">¶</a></h3>
 <p>编写如下 API，它像 Django 的视图函数一样，负责处理请求并返回响应。 (按照 Django 的项目结构，可以将 API 代码放置在 <code class="docutils literal notranslate"><span class="pre">views.py</span></code> 文件中。)</p>
 <div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-text">views.py [示例10]</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例16]</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 
 
@@ -323,10 +326,10 @@
 </ul>
 </section>
 <section id="id6">
-<h3>添加路由<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<h3>3. 添加路由<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <p>最后将 API 添加到 <a class="reference internal" href="api.html#django_oasis.core.OpenAPI" title="django_oasis.core.OpenAPI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpenAPI</span></code></a> 实例中，并将 OpenAPI 实例的路由添加到 Django 路由配置中。</p>
 <div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">urls.py [示例10]</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">urls.py [示例16]</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">include</span><span class="p">,</span> <span class="n">path</span>
 
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">OpenAPI</span>
@@ -339,14 +342,14 @@
 </span>
 <span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
 <span class="hll">    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;myapi/&quot;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="n">openapi</span><span class="o">.</span><span class="n">urls</span><span class="p">)),</span>  <span class="c1"># 注意这里需要用 `include` 函数</span>
-</span>    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;docs/&quot;</span><span class="p">,</span> <span class="n">swagger_ui</span><span class="p">(</span><span class="n">openapi</span><span class="p">)),</span>  <span class="c1"># 该路由用于查看 API 文档</span>
-<span class="p">]</span>
+</span><span class="hll">    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;docs/&quot;</span><span class="p">,</span> <span class="n">swagger_ui</span><span class="p">(</span><span class="n">openapi</span><span class="p">)),</span>  <span class="c1"># 该路由用于查看 API 文档</span>
+</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </section>
 <section id="id7">
-<h3>查看文档<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<h3>4. 查看文档<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <p>运行 Django 开发服务</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>manage.py<span class="w"> </span>runserver
 </pre></div>
@@ -355,9 +358,9 @@
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
-                    <span class="caption-text">SwaggerUI [示例10]</span>
+                    <span class="caption-text">SwaggerUI [示例16]</span>
                 </div>
-                <iframe id="id_8d50055f" srcdoc="
+                <iframe id="id_67d50ada" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -437,7 +440,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_8d50055f')
+                iFrameResize({checkOrigin: false}, '#id_67d50ada')
             </script>
             </section>
 </section>
@@ -501,10 +504,10 @@
 <li><a class="reference internal" href="#">快速入门</a><ul>
 <li><a class="reference internal" href="#id2">安装</a></li>
 <li><a class="reference internal" href="#id3">使用</a><ul>
-<li><a class="reference internal" href="#id5">设置应用</a></li>
-<li><a class="reference internal" href="#api">编写 API</a></li>
-<li><a class="reference internal" href="#id6">添加路由</a></li>
-<li><a class="reference internal" href="#id7">查看文档</a></li>
+<li><a class="reference internal" href="#id5">1. 设置应用</a></li>
+<li><a class="reference internal" href="#api">2. 编写 API</a></li>
+<li><a class="reference internal" href="#id6">3. 添加路由</a></li>
+<li><a class="reference internal" href="#id7">4. 查看文档</a></li>
 </ul>
 </li>
 </ul>
@@ -518,7 +521,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=a599f5fb"></script>
+</div><script src="_static/documentation_options.js?v=1bc7d918"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>

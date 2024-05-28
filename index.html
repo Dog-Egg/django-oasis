@@ -6,10 +6,11 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="快速入门" href="quickstart.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Django-Oasis0.1.dev20240526012731</title>
+        <title>Django-Oasis0.1.dev20240528063330</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=664094ad" />
     
     
 
@@ -179,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></div></a>
+      <a href="#"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240528063330</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -206,7 +207,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240526012731</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240528063330</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -217,7 +218,9 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operations.html">请求操作</a></li>
-<li class="toctree-l1"><a class="reference internal" href="request_parameters/index.html">请求参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_query.html">查询参数 (Query)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_header.html">请求头参数 (Header)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="request_path/index.html">路径参数</a></li>
 <li class="toctree-l1"><a class="reference internal" href="request_body/index.html">请求体</a></li>
 <li class="toctree-l1"><a class="reference internal" href="upload_file.html">上传文件</a></li>
@@ -278,8 +281,14 @@
 <h1>介绍<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <p>Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地编写 HTTP API。</p>
 <section id="id2">
-<h2>简单示例<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p>以下是一个简单的示例，可以快速了解 Oasis 能做什么？</p>
+<h2>使用前提<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><span class="color-necessary">[必要]</span> 该项目基于 <a class="reference external" href="https://www.djangoproject.com">Django</a> 框架，所有在使用前需要对 Django 有基本的开发能力。</p></li>
+<li><p><span class="color-optional">[可选]</span> 项目还使用了 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3">OpenAPI 规范</a> (OAS) 来描述接口。它可以创建交互式接口文档，实现测试用例自动化，还能用于生成客户端代码等等。但不了解 OAS 也并不影响开发使用。</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>简单的示例<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>这里定义了一个 <code class="docutils literal notranslate"><span class="pre">Book</span></code> 模型:</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">models.py [示例4]</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
@@ -330,7 +339,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">SwaggerUI [示例4]</span>
                 </div>
-                <iframe id="id_16ba79f4" srcdoc="
+                <iframe id="id_01abdcbd" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -410,17 +419,9 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_16ba79f4')
+                iFrameResize({checkOrigin: false}, '#id_01abdcbd')
             </script>
             </section>
-<section id="id3">
-<h2>前提<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
-<p>该项目基于 Django 框架，并使用 OpenAPI-Specification v3.0.3 定义接口。在开始之前，需要了解 Django 和 OpenAPI 规范的相关内容，因为本文档中并未对涉及它们的概念和功能做详细的说明。</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://www.djangoproject.com">Django</a>: Django 是一个高级 Python Web 框架，鼓励快速开发和简洁、务实的设计。它由经验丰富的开发人员构建，解决了 Web 开发的大部分麻烦，因此您可以专注于编写应用程序，而无需重新发明轮子。</p></li>
-<li><p><a class="reference external" href="https://spec.openapis.org/oas/v3.0.3">OpenAPI 规范</a>: OpenAPI 规范 (OAS) 定义了一个与语言无关的标准 HTTP API 接口，允许人类和计算机发现和理解服务的功能，而无需访问源代码、文档或通过网络流量检查。</p></li>
-</ul>
-</section>
 <section id="id4">
 <h2>功能说明<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <ul class="simple">
@@ -444,12 +445,19 @@
 <li class="toctree-l2"><a class="reference internal" href="operations.html#operation">Operation 装饰类</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="request_parameters/index.html">请求参数</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="request_parameters/index.html#id2">参数声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="request_parameters/index.html#id3">简单写法</a></li>
-<li class="toctree-l2"><a class="reference internal" href="request_parameters/index.html#id4">分组声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="request_parameters/index.html#id5">参数样式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="request_parameters/index.html#id8">声明单个参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_query.html">查询参数 (Query)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="parameter_query.html#id1">简洁写法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_query.html#id2">分组声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_query.html#id3">声明单个参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_query.html#id4">参数样式查询表</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_header.html">请求头参数 (Header)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="parameter_header.html#id1">参数样式查询表</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="parameter_cookie.html#id1">参数样式查询表</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="request_path/index.html">路径参数</a><ul>
@@ -550,8 +558,8 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">介绍</a><ul>
-<li><a class="reference internal" href="#id2">简单示例</a></li>
-<li><a class="reference internal" href="#id3">前提</a></li>
+<li><a class="reference internal" href="#id2">使用前提</a></li>
+<li><a class="reference internal" href="#id3">简单的示例</a></li>
 <li><a class="reference internal" href="#id4">功能说明</a></li>
 <li><a class="reference internal" href="#id5">目录</a><ul>
 </ul>
@@ -567,7 +575,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=a599f5fb"></script>
+</div><script src="_static/documentation_options.js?v=1bc7d918"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>
