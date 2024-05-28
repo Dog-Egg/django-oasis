@@ -6,8 +6,6 @@ from django.utils.functional import cached_property
 
 from django_oasis import schema as _schema
 
-_empty = object()
-
 
 def _unchange(value):
     return value
@@ -35,7 +33,7 @@ def _split_by_comma_object2(value):
 
 
 class StyleHandler:
-    empty = _empty
+    empty = object()
 
     def __init__(self, style: "Style", schema: _schema.Schema, location) -> None:
         self.schema = schema
@@ -60,7 +58,7 @@ class StyleHandler:
         return fn(data)
 
     def _f1(self, data: QueryDict):
-        return data.get(self.schema._alias, _empty)
+        return data.get(self.schema._alias, self.empty)
 
     def _f2(self, data: QueryDict):
         return data.getlist(self.schema._alias)
@@ -75,22 +73,22 @@ class StyleHandler:
 
     def _f4(self, data):
         if self.schema._alias not in data:
-            return _empty
+            return self.empty
         return data[self.schema._alias].split(",")
 
     def _f5(self, data: QueryDict):
         if self.schema._alias not in data:
-            return _empty
+            return self.empty
         return _split_by_comma_object(data[self.schema._alias])
 
     def _f6(self, data):
         if self.schema._alias not in data:
-            return _empty
+            return self.empty
         return data[self.schema._alias].split(" ")
 
     def _f7(self, data):
         if self.schema._alias not in data:
-            return _empty
+            return self.empty
         return data[self.schema._alias].split("|")
 
     def _f8(self, data: QueryDict):
@@ -105,7 +103,10 @@ class StyleHandler:
     def _header_simple_array(self, data: HttpHeaders):
         assert isinstance(self.schema, _schema.List)
         alias = self.schema._alias
-        return data.get(alias).split(",")
+        value = data.get(alias)
+        if value is None:
+            return self.empty
+        return value.split(",")
 
     handlers: t.Dict[t.Tuple, t.Callable] = {
         ("query", "form", True, "primitive"): _f1,
