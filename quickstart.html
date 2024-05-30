@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="请求操作" href="operations.html" /><link rel="prev" title="介绍" href="index.html" />
+<link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="请求操作" href="operations.html" /><link rel="prev" title="Django-Oasis" href="index.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>快速入门 - Django-Oasis0.1.dev20240528063330</title>
+        <title>快速入门 - Django-Oasis0.1.dev20240530060534</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240528063330</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240530060534</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -207,7 +207,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240528063330</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240530060534</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -221,7 +221,7 @@
 <li class="toctree-l1"><a class="reference internal" href="parameter_query.html">查询参数 (Query)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_header.html">请求头参数 (Header)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="request_path/index.html">路径参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_path.html">路径参数 (Path)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="request_body/index.html">请求体</a></li>
 <li class="toctree-l1"><a class="reference internal" href="upload_file.html">上传文件</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pagination.html">分页</a></li>
@@ -308,7 +308,7 @@
 <h3>2. 编写 API<a class="headerlink" href="#api" title="Link to this heading">¶</a></h3>
 <p>编写如下 API，它像 Django 的视图函数一样，负责处理请求并返回响应。 (按照 Django 的项目结构，可以将 API 代码放置在 <code class="docutils literal notranslate"><span class="pre">views.py</span></code> 文件中。)</p>
 <div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-text">views.py [示例16]</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例20]</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 
 
@@ -329,7 +329,7 @@
 <h3>3. 添加路由<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <p>最后将 API 添加到 <a class="reference internal" href="api.html#django_oasis.core.OpenAPI" title="django_oasis.core.OpenAPI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpenAPI</span></code></a> 实例中，并将 OpenAPI 实例的路由添加到 Django 路由配置中。</p>
 <div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">urls.py [示例16]</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">urls.py [示例20]</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">include</span><span class="p">,</span> <span class="n">path</span>
 
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">OpenAPI</span>
@@ -358,9 +358,9 @@
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
-                    <span class="caption-text">SwaggerUI [示例16]</span>
+                    <span class="caption-text">SwaggerUI [示例20]</span>
                 </div>
-                <iframe id="id_67d50ada" srcdoc="
+                <iframe id="id_7f087300" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -440,7 +440,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_67d50ada')
+                iFrameResize({checkOrigin: false}, '#id_7f087300')
             </script>
             </section>
 </section>
@@ -521,7 +521,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=1bc7d918"></script>
+</div><script src="_static/documentation_options.js?v=32cd11b3"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>

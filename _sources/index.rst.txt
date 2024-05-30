@@ -1,5 +1,5 @@
-介绍
-====
+Django-Oasis
+============
 
 Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地编写 HTTP API。
 
@@ -52,7 +52,7 @@ Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地�
     parameter_query
     parameter_header
     parameter_cookie
-    request_path/index
+    parameter_path
     request_body/index
     upload_file
     pagination

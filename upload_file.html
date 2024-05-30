@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="分页" href="pagination.html" /><link rel="prev" title="请求体" href="request_body/index.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>上传文件 - Django-Oasis0.1.dev20240528063330</title>
+        <title>上传文件 - Django-Oasis0.1.dev20240530060534</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240528063330</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240530060534</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -207,7 +207,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240528063330</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240530060534</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -221,7 +221,7 @@
 <li class="toctree-l1"><a class="reference internal" href="parameter_query.html">查询参数 (Query)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_header.html">请求头参数 (Header)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="request_path/index.html">路径参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_path.html">路径参数 (Path)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="request_body/index.html">请求体</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">上传文件</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pagination.html">分页</a></li>
@@ -287,7 +287,7 @@
 <section id="id2">
 <h2>单文件上传<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">single_file.py [示例17]</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">single_file.py [示例21]</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormData</span>
@@ -313,7 +313,7 @@
 <h2>多文件上传<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>可以使用 <a class="reference internal" href="api.html#django_oasis.schema.List" title="django_oasis.schema.List"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.schema.List</span></code></a> 来声明一个文件列表。</p>
 <div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">multiple_files.py [示例17]</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">multiple_files.py [示例21]</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormData</span>
@@ -339,9 +339,9 @@
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
-                    <span class="caption-text">SwaggerUI [示例17]</span>
+                    <span class="caption-text">SwaggerUI [示例21]</span>
                 </div>
-                <iframe id="id_eec4ff77" srcdoc="
+                <iframe id="id_3e03b816" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -421,7 +421,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_eec4ff77')
+                iFrameResize({checkOrigin: false}, '#id_3e03b816')
             </script>
             </section>
 </section>
@@ -495,7 +495,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=1bc7d918"></script>
+</div><script src="_static/documentation_options.js?v=32cd11b3"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>

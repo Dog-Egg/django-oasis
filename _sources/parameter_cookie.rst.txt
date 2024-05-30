@@ -13,7 +13,7 @@
 数组样式
 ~~~~~~~~
 
-以下示例的参数结果 ``color = ["blue", "black", "brown"]``
+以下示例的参数结果示例 ``color = ["blue", "black", "brown"]``
 
 color=blue,black,brown (default)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
