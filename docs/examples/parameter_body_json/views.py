@@ -13,9 +13,3 @@ class API:
             }
         ),
     ): ...
-
-
-from django_oasis.core import OpenAPI
-
-openapi = OpenAPI(title="JsonData")
-openapi.add_resource(API)

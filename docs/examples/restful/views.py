@@ -2,7 +2,7 @@ from django_oasis.common import model2schema
 from django_oasis.core import Operation, Resource
 from django_oasis.exceptions import NotFoundError
 from django_oasis.pagination import PagePagination
-from django_oasis.parameter import Body
+from django_oasis.parameter import JsonData
 
 from .models import Book
 
@@ -23,7 +23,7 @@ class BookListAPI:
         response_schema=BookSchema,
         status_code=201,
     )
-    def post(self, body=Body(BookSchema)):
+    def post(self, body=JsonData(BookSchema)):
         return Book.objects.create(**body)
 
 
@@ -48,14 +48,14 @@ class BookItemAPI:
     @Operation(response_schema=BookSchema)
     def put(
         self,
-        body=Body(BookSchema(required_fields="__all__")),
+        body=JsonData(BookSchema(required_fields="__all__")),
     ):
         return self.update(**body)
 
     @Operation(response_schema=BookSchema)
     def patch(
         self,
-        body=Body(BookSchema(required_fields=[])),
+        body=JsonData(BookSchema(required_fields=[])),
     ):
         return self.update(**body)
 

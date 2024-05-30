@@ -53,7 +53,7 @@ Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地�
     parameter_header
     parameter_cookie
     parameter_path
-    request_body/index
+    parameter_body
     upload_file
     pagination
     auth

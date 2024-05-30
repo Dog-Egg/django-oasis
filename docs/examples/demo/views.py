@@ -1,7 +1,7 @@
 from django_oasis.common import model2schema
 from django_oasis.core import Operation, Resource
 from django_oasis.pagination import PagePagination
-from django_oasis.parameter import Body
+from django_oasis.parameter import JsonData
 
 from .models import Book
 
@@ -21,5 +21,5 @@ class BookListAPI:
 
     # post 方法负责处理 POST 请求，用于新增 Book
     @Operation(response_schema=BookSchema)
-    def post(self, data=Body(BookSchema)):
+    def post(self, data=JsonData(BookSchema)):
         return Book.objects.create(**data)

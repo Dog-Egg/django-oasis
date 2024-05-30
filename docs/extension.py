@@ -16,6 +16,7 @@ import docutils
 import docutils.nodes
 import sphinx
 from django.apps import apps
+from django.conf import settings
 from docutils.parsers.rst import directives
 from sphinx.directives.code import LiteralInclude
 from sphinx.util.docutils import SphinxDirective
@@ -172,6 +173,23 @@ class OasisLiteralInclude(LiteralInclude, OasisDirective):
         self.arguments = [f"/../examples/{root}/{relfile}"]
         self.options["caption"] = f"{relfile} {self.alias}"
         return super().run()
+
+
+settings.configure(
+    TEMPLATES=[
+        {
+            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "DIRS": ["templates"],
+            "APP_DIRS": True,
+            "OPTIONS": {
+                "context_processors": [
+                    "django.template.context_processors.debug",
+                ],
+            },
+        },
+    ],
+    USE_TZ=False,  # django 5.0 之后该值默认为 True
+)
 
 
 def setup(app):

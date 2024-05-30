@@ -254,6 +254,12 @@ class Body(RequestData):
         description: str = "",
         # required: bool = True,
     ):
+        warnings.warn(
+            "Body is deprecated, use JsonData or FormData instead.",
+            DeprecationWarning,
+            2,
+        )
+
         schema = make_schema(schema)
 
         if isinstance(content_type, str):

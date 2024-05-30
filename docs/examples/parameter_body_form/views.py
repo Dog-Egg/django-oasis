@@ -13,11 +13,3 @@ class API:
             }
         ),
     ): ...
-
-
-from django_oasis.core import OpenAPI
-
-openapi = OpenAPI(
-    title="FormData",
-)
-openapi.add_resource(API)

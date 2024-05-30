@@ -10,7 +10,6 @@ sys.path.extend(
     [
         str((BASE_DIR).resolve()),
         str((BASE_DIR / "..").resolve()),
-        str((BASE_DIR / "../..").resolve()),  # TODO 与 openapiview 扩展一同删除
         str((BASE_DIR / "../../src").resolve()),
     ]
 )
@@ -21,8 +20,6 @@ release = __import__("django_oasis").__version__
 
 # General configuration
 extensions = [
-    "_ext.directives",
-    "_ext.openapiview",
     "extension",
     "sphinx.ext.intersphinx",
     "sphinx.ext.autodoc",
