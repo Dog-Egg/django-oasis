@@ -44,7 +44,7 @@
 分组声明
 --------
 
-请求参数支持分组声明，这可以实现对参数的分组获取。
+如果需要对参数获取进行分组处理，可以使用分组声明的方式。
 
 .. oasis-literalinclude:: parameter_query2 views.py
     :emphasize-lines: 10-11
@@ -57,7 +57,7 @@
     :doc-expansion: full
 
 
-声明单个参数
+单参数项声明
 ------------
 
 如果仅需要对单个参数项进行声明，使用 `django_oasis.parameter.QueryItem` 。
@@ -75,6 +75,9 @@
                 "a": schema.Integer(),
                 "b": schema.Integer(default=0),
             })): ...
+
+.. oasis-swaggerui:: parameter_query3
+    :doc-expansion: full
 
 
 参数样式查询表

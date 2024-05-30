@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="请求头参数 (Header)" href="parameter_header.html" /><link rel="prev" title="请求操作" href="operations.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>查询参数 (Query) - Django-Oasis0.1.dev20240530060534</title>
+        <title>查询参数 (Query) - Django-Oasis0.1.dev20240530064036</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240530060534</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240530064036</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -207,7 +207,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240530060534</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240530064036</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -222,7 +222,7 @@
 <li class="toctree-l1"><a class="reference internal" href="parameter_header.html">请求头参数 (Header)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_path.html">路径参数 (Path)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="request_body/index.html">请求体</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter_body.html">请求体 (Body)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="upload_file.html">上传文件</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pagination.html">分页</a></li>
 <li class="toctree-l1"><a class="reference internal" href="auth.html">用户认证</a></li>
@@ -281,7 +281,7 @@
 <h1>查询参数 (Query)<a class="headerlink" href="#query" title="Link to this heading">¶</a></h1>
 <p>声明和获取查询参数需要使用 <a class="reference internal" href="api.html#django_oasis.parameter.Query" title="django_oasis.parameter.Query"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.Query</span></code></a>，它的使用方法如下:</p>
 <div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">views.py [示例16]</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例18]</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">Query</span>
@@ -313,9 +313,9 @@
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
-                    <span class="caption-text">SwaggerUI [示例16]</span>
+                    <span class="caption-text">SwaggerUI [示例18]</span>
                 </div>
-                <iframe id="id_b212e631" srcdoc="
+                <iframe id="id_c6727795" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -395,7 +395,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_b212e631')
+                iFrameResize({checkOrigin: false}, '#id_c6727795')
             </script>
             <section id="id1">
 <h2>简洁写法<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
@@ -418,9 +418,9 @@
 </section>
 <section id="id2">
 <h2>分组声明<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p>请求参数支持分组声明，这可以实现对参数的分组获取。</p>
+<p>如果需要对参数获取进行分组处理，可以使用分组声明的方式。</p>
 <div class="literal-block-wrapper docutils container" id="id10">
-<div class="code-block-caption"><span class="caption-text">views.py [示例17]</span><a class="headerlink" href="#id10" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例19]</span><a class="headerlink" href="#id10" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">Query</span>
@@ -441,9 +441,9 @@
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
-                    <span class="caption-text">SwaggerUI [示例17]</span>
+                    <span class="caption-text">SwaggerUI [示例19]</span>
                 </div>
-                <iframe id="id_d6ee04e3" srcdoc="
+                <iframe id="id_38d89e93" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -523,14 +523,14 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_d6ee04e3')
+                iFrameResize({checkOrigin: false}, '#id_38d89e93')
             </script>
             </section>
 <section id="id3">
-<h2>声明单个参数<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<h2>单参数项声明<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>如果仅需要对单个参数项进行声明，使用 <a class="reference internal" href="api.html#django_oasis.parameter.QueryItem" title="django_oasis.parameter.QueryItem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.QueryItem</span></code></a> 。</p>
 <div class="literal-block-wrapper docutils container" id="id11">
-<div class="code-block-caption"><span class="caption-text">views.py [示例18]</span><a class="headerlink" href="#id11" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例20]</span><a class="headerlink" href="#id11" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">QueryItem</span>
@@ -558,7 +558,94 @@
 </pre></div>
 </div>
 </div>
-</section>
+
+            <div style="border: 1px solid var(--color-background-border);">
+                <div class="code-block-caption">
+                    <span class="caption-text">SwaggerUI [示例20]</span>
+                </div>
+                <iframe id="id_0022a4be" srcdoc="
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;/&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;/&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;SwaggerUI&quot;/&gt;
+    &lt;title&gt;Swagger UI&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            margin: 0;
+        }
+        body::before, body::after {
+            content: &quot;&quot;;
+            display: table;
+        }
+        .footer {
+            margin-bottom: 25px;
+            color: #cccccc;
+            font-size: 12px;
+            display: flex;
+        }
+        .footer .powered-by {
+            float: right;
+        }
+    &lt;/style&gt;
+    
+    
+                &lt;script src=&quot;./_static/iframeResizer.contentWindow.min.js&quot;&gt;&lt;/script&gt;
+                &lt;script src=&quot;./_static/swagger-ui-bundle.js&quot;&gt;&lt;/script&gt;
+                &lt;link rel=&quot;stylesheet&quot; href=&quot;./_static/swagger-ui.css&quot; /&gt;
+                
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/to/path&quot;: {&quot;get&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;a&quot;, &quot;in&quot;: &quot;query&quot;, &quot;required&quot;: true, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}, {&quot;name&quot;: &quot;b&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 0}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}}}}}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
+&lt;script&gt;
+    var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
+
+    // 设置默认配置
+    Object.assign(config, {
+        dom_id: &#x27;#swagger-ui&#x27;,
+        deepLinking: true,
+        onComplete: onComplete,
+        defaultModelRendering: &quot;model&quot;,
+        defaultModelExpandDepth: 2,
+    });
+
+    function onComplete() {
+        var title = ui.specSelectors.info().toJS().title;
+        document.title = title.concat(&#x27; | Swagger UI&#x27;);
+    }
+&lt;/script&gt;
+
+&lt;script&gt;
+    // 在 Sphinx 内使用时拦截请求
+    Object.assign(config, {
+        requestInterceptor: function (request) {
+            return request;
+        },
+        responseInterceptor: function (response) {
+            response.text = &quot;该文档示例并不具备发起真实请求的能力，请自行拷贝代码进行测试。&quot;;
+            return response;
+        }
+    });
+&lt;/script&gt;
+
+
+    &lt;script&gt;
+        window.onload = function () {
+            window.ui = SwaggerUIBundle(Object.assign({}, config));
+        };
+    &lt;/script&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;" frameborder="0" style="min-width: 100%; display: block;"></iframe>
+            </div>
+            <script src="./_static/iframeResizer.min.js"></script>
+            <script>
+                iFrameResize({checkOrigin: false}, '#id_0022a4be')
+            </script>
+            </section>
 <section id="id4">
 <h2>参数样式查询表<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <section id="id5">
@@ -567,7 +654,7 @@
 <section id="color-blue-color-black-color-brown-default">
 <h4>color=blue&amp;color=black&amp;color=brown (default)<a class="headerlink" href="#color-blue-color-black-color-brown-default" title="Link to this heading">¶</a></h4>
 <div class="literal-block-wrapper docutils container" id="id12">
-<div class="code-block-caption"><span class="caption-text">views.py [示例19]</span><a class="headerlink" href="#id12" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例21]</span><a class="headerlink" href="#id12" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/array/form/true&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ArrayFormTrueAPI</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
@@ -585,7 +672,7 @@
 <section id="color-blue-black-brown">
 <h4>color=blue,black,brown<a class="headerlink" href="#color-blue-black-brown" title="Link to this heading">¶</a></h4>
 <div class="literal-block-wrapper docutils container" id="id13">
-<div class="code-block-caption"><span class="caption-text">views.py [示例19]</span><a class="headerlink" href="#id13" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例21]</span><a class="headerlink" href="#id13" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/array/form/false&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ArrayFormFalseAPI</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
@@ -603,7 +690,7 @@
 <section id="id6">
 <h4>color=blue black brown<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
 <div class="literal-block-wrapper docutils container" id="id14">
-<div class="code-block-caption"><span class="caption-text">views.py [示例19]</span><a class="headerlink" href="#id14" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例21]</span><a class="headerlink" href="#id14" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/array/spaceDelimited/false&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ArraySpaceDelimitedFalseAPI</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
@@ -621,7 +708,7 @@
 <section id="id7">
 <h4>color=blue|black|brown<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
 <div class="literal-block-wrapper docutils container" id="id15">
-<div class="code-block-caption"><span class="caption-text">views.py [示例19]</span><a class="headerlink" href="#id15" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例21]</span><a class="headerlink" href="#id15" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/array/pipeDelimited/false&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ArrayPipeDelimitedFalseAPI</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
@@ -643,7 +730,7 @@
 <section id="r-100-g-200-b-150-default">
 <h4>R=100&amp;G=200&amp;B=150 (default)<a class="headerlink" href="#r-100-g-200-b-150-default" title="Link to this heading">¶</a></h4>
 <div class="literal-block-wrapper docutils container" id="id16">
-<div class="code-block-caption"><span class="caption-text">views.py [示例19]</span><a class="headerlink" href="#id16" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例21]</span><a class="headerlink" href="#id16" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/object/form/true&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ObjectFormTrueAPI</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
@@ -667,7 +754,7 @@
 <section id="color-r-100-g-200-b-150">
 <h4>color=R,100,G,200,B,150<a class="headerlink" href="#color-r-100-g-200-b-150" title="Link to this heading">¶</a></h4>
 <div class="literal-block-wrapper docutils container" id="id17">
-<div class="code-block-caption"><span class="caption-text">views.py [示例19]</span><a class="headerlink" href="#id17" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例21]</span><a class="headerlink" href="#id17" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/object/form/false&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ObjectFormFalseAPI</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
@@ -691,7 +778,7 @@
 <section id="color-r-100-color-g-200-color-b-150">
 <h4>color[R]=100&amp;color[G]=200&amp;color[B]=150<a class="headerlink" href="#color-r-100-color-g-200-color-b-150" title="Link to this heading">¶</a></h4>
 <div class="literal-block-wrapper docutils container" id="id18">
-<div class="code-block-caption"><span class="caption-text">views.py [示例19]</span><a class="headerlink" href="#id18" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例21]</span><a class="headerlink" href="#id18" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/object/deepObject/true&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ObjectDeepObjectTrueAPI</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
@@ -714,9 +801,9 @@
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
-                    <span class="caption-text">SwaggerUI [示例19]</span>
+                    <span class="caption-text">SwaggerUI [示例21]</span>
                 </div>
-                <iframe id="id_0970e66e" srcdoc="
+                <iframe id="id_981c92c1" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -796,7 +883,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_0970e66e')
+                iFrameResize({checkOrigin: false}, '#id_981c92c1')
             </script>
             </section>
 </section>
@@ -861,7 +948,7 @@
 <li><a class="reference internal" href="#">查询参数 (Query)</a><ul>
 <li><a class="reference internal" href="#id1">简洁写法</a></li>
 <li><a class="reference internal" href="#id2">分组声明</a></li>
-<li><a class="reference internal" href="#id3">声明单个参数</a></li>
+<li><a class="reference internal" href="#id3">单参数项声明</a></li>
 <li><a class="reference internal" href="#id4">参数样式查询表</a><ul>
 <li><a class="reference internal" href="#id5">数组样式</a><ul>
 <li><a class="reference internal" href="#color-blue-color-black-color-brown-default">color=blue&amp;color=black&amp;color=brown (default)</a></li>
@@ -889,7 +976,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=32cd11b3"></script>
+</div><script src="_static/documentation_options.js?v=d98e468e"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>
