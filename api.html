@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="RESTful" href="examples/restful.html" /><link rel="prev" title="Hooks" href="schema/hooks.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>API 参考 - Django-Oasis0.1.dev20240530064036</title>
+        <title>API 参考 - Django-Oasis0.1.dev20240531073004</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240530064036</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240531073004</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -207,7 +207,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240530064036</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240531073004</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -223,10 +223,15 @@
 <li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_path.html">路径参数 (Path)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_body.html">请求体 (Body)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="parameter_advanced/index.html">请求参数进阶</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求参数进阶</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/default.html">参数默认值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/required.html">必需参数</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="upload_file.html">上传文件</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pagination.html">分页</a></li>
 <li class="toctree-l1"><a class="reference internal" href="auth.html">用户认证</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="schema/index.html">Schema</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="schema/index.html">Schema</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Schema</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="schema/model.html">Model Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="schema/validation.html">验证数据</a></li>
 <li class="toctree-l2"><a class="reference internal" href="schema/hooks.html">Hooks</a></li>
@@ -723,43 +728,7 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>required_fields</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="（在 Python v3.12）"><em>Iterable</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em> | </em><em>None</em>) – <p>覆盖原有的必需字段的配置。设为空列表则所有字段为非必需，也可设为 <code class="docutils literal notranslate"><span class="pre">&quot;__all__&quot;</span></code> 指定所有字段为必需。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">username</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span>
-<span class="gp">... </span>    <span class="n">address</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">设为 [] 指定所有字段为非必需</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">(</span><span class="n">required_fields</span><span class="o">=</span><span class="p">[])</span><span class="o">.</span><span class="n">deserialize</span><span class="p">({})</span>
-<span class="go">{}</span>
-</pre></div>
-</div>
-</div>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">设为 “__all__” 指定所有字段为必需</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pprint</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">User</span><span class="p">(</span><span class="n">required_fields</span><span class="o">=</span><span class="s1">&#39;__all__&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">deserialize</span><span class="p">({})</span>
-<span class="gp">... </span><span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">format_errors</span><span class="p">())</span>
-<span class="go">[{&#39;loc&#39;: [&#39;username&#39;], &#39;msgs&#39;: [&#39;This field is required.&#39;]},</span>
-<span class="go"> {&#39;loc&#39;: [&#39;address&#39;], &#39;msgs&#39;: [&#39;This field is required.&#39;]}]</span>
-</pre></div>
-</div>
-</div>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">指定部分字段为必需</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">User</span><span class="p">(</span><span class="n">required_fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">deserialize</span><span class="p">({})</span>
-<span class="gp">... </span><span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">format_errors</span><span class="p">())</span>
-<span class="go">[{&#39;loc&#39;: [&#39;address&#39;], &#39;msgs&#39;: [&#39;This field is required.&#39;]}]</span>
-</pre></div>
-</div>
-</div>
-</p></li>
+<li><p><strong>required_fields</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="（在 Python v3.12）"><em>Iterable</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em> | </em><em>None</em>) – 覆盖原有的字段必需条件配置。设为空列表则所有字段为非必需，也可设为 <code class="docutils literal notranslate"><span class="pre">&quot;__all__&quot;</span></code> 指定所有字段为必需。</p></li>
 <li><p><strong>unknown_fields</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – <p>该参数决定了在反序列化时如何处理未知字段。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">name</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span>
@@ -768,22 +737,22 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;张三&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">&#39;北京&#39;</span><span class="p">}</span>
 </pre></div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">exclude (默认)</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">exclude (默认)</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">()</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="go">{&#39;name&#39;: &#39;张三&#39;, &#39;age&#39;: 24}</span>
 </pre></div>
 </div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">include</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">include</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">(</span><span class="n">unknown_fields</span><span class="o">=</span><span class="s1">&#39;include&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="go">{&#39;name&#39;: &#39;张三&#39;, &#39;age&#39;: 24, &#39;address&#39;: &#39;北京&#39;}</span>
 </pre></div>
 </div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">error</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">error</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">(</span><span class="n">unknown_fields</span><span class="o">=</span><span class="s1">&#39;error&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="w">    </span><span class="o">...</span>
@@ -833,30 +802,8 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>required</strong> – <p><strong>*仅作为字段时有效*</strong> 在反序列化时，判断字段是否必需提供。默认必需，可设为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a> 或设置 <code class="docutils literal notranslate"><span class="pre">default</span></code> 参数使其变为非必需。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">username</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span>
-<span class="gp">... </span>    <span class="n">address</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">()</span><span class="o">.</span><span class="n">deserialize</span><span class="p">({})</span>
-<span class="gt">Traceback (most recent call last):</span>
-<span class="w">    </span><span class="o">...</span>
-<span class="gr">django_oasis_schema.exceptions.ValidationError</span>: <span class="n">[{&#39;msgs&#39;: [&#39;This field is required.&#39;], &#39;loc&#39;: [&#39;username&#39;]}]</span>
-</pre></div>
-</div>
-</p></li>
-<li><p><strong>default</strong> – <p><strong>*仅作为字段时有效*</strong> 如果字段非必需，且设置了默认值，那么反序列化时如未提供该字段数据，则使用该默认值填充。该参数可设为一个无参函数，默认值将使用该函数的结果。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">username</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;未命名用户&#39;</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="n">address</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="s1">&#39;未提供&#39;</span><span class="p">)</span>  <span class="c1"># 使用函数设置默认值</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">User</span><span class="p">()</span><span class="o">.</span><span class="n">deserialize</span><span class="p">({})</span>
-<span class="go">{&#39;username&#39;: &#39;未命名用户&#39;, &#39;address&#39;: &#39;未提供&#39;}</span>
-</pre></div>
-</div>
-</p></li>
+<li><p><strong>required</strong> – <strong>*仅作为字段时有效*</strong> 判断字段是否必需提供，默认必需。可设为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a> 或提供 <code class="docutils literal notranslate"><span class="pre">default</span></code> 参数使其变为非必需。</p></li>
+<li><p><strong>default</strong> – <strong>*仅作为字段时有效*</strong> 如果字段非必需，且设置了默认值，那么反序列化时如未提供该字段数据，则使用该默认值填充。该参数可设为一个无参函数，默认值将使用该函数的结果。</p></li>
 <li><p><strong>nullable</strong> – <p>执行验证时判断数据是否为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>。默认 <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>，表示不可以为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">String</span><span class="p">(</span><span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
 <span class="go">True</span>
@@ -1121,7 +1068,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=d98e468e"></script>
+</div><script src="_static/documentation_options.js?v=a7eccb6a"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>

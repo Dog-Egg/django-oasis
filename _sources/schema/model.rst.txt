@@ -37,6 +37,9 @@ Model 嵌套
 
     {'title': '三体', 'author': {'name': '刘慈欣', 'birthday': datetime.date(1963, 6, 23)}}
 
+
+.. _field:
+
 字段
 ----
 
