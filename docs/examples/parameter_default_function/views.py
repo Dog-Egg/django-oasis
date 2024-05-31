@@ -10,7 +10,7 @@ class API:
     def get(
         date=QueryItem(
             schema.Date(
-                default=date.today,
+                default=date.today,  # `date.today` is a function.
             )
         )
     ): ...

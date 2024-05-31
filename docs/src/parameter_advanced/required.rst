@@ -4,7 +4,10 @@
 请求参数默认都是必需的，可以通过将 ``required`` 设置为 `False`，或者提供一个默认值来取消参数的必需条件。
 
 .. oasis-literalinclude:: parameter_required schemas.py
+    :emphasize-lines: 6,7
+
 .. oasis-literalinclude:: parameter_required views.py
+
 .. oasis-swaggerui:: parameter_required
     :doc-expansion: full
 

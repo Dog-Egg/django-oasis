@@ -4,6 +4,7 @@ import inspect
 import operator
 import re
 import typing as t
+import warnings
 from collections.abc import Iterable, Mapping
 
 from dateutil.parser import isoparse
@@ -128,13 +129,13 @@ class Field:
         return self.__attr or self._name
 
 
-def default_clear_value(value):
+def default_erase(value):
     """
-    >>> default_clear_value('')
+    >>> default_erase('')
     True
-    >>> default_clear_value(' ')
+    >>> default_erase(' ')
     True
-    >>> default_clear_value(' a ')
+    >>> default_erase(' a ')
     False
     """
     return isinstance(value, str) and not value.strip()
@@ -145,20 +146,8 @@ class Schema(Field, metaclass=SchemaMeta):
     :param required: |AsField| 判断字段是否必需提供，默认必需。可设为 `False` 或提供 ``default`` 参数使其变为非必需。
     :param default: |AsField| 如果字段非必需，且设置了默认值，那么反序列化时如未提供该字段数据，则使用该默认值填充。该参数可设为一个无参函数，默认值将使用该函数的结果。
     :param nullable: 执行验证时判断数据是否为 `None`。默认 `False`，表示不可以为 `None`。
-
-        .. code-block::
-
-            >>> String(nullable=True).deserialize(None) is None
-            True
-
-        .. code-block::
-
-            >>> String().deserialize(None)
-            Traceback (most recent call last):
-                ...
-            django_oasis_schema.exceptions.ValidationError: [{'msgs': ['The value cannot be null.']}]
-
-    :param description: 在 |OAS| 中提供描述内容。
+    :param description: 为 |OAS| 提供描述内容。
+    :param erase: |AsField| 提供一个在反序列化时使用的函数，接受反序列化前的字段值。如函数返回 `True`，则该字段值将视为未定义。默认将空字符串或仅包含空白字符的字符串视为未定义。
     :param validators: 用于设置反序列化验证函数。
 
         .. code-block::
@@ -203,7 +192,8 @@ class Schema(Field, metaclass=SchemaMeta):
         validators: t.Optional[t.List[t.Callable[[t.Any], t.Any]]] = None,
         choices: t.Optional[t.Iterable] = None,
         description: str = "",
-        clear_value: t.Optional[t.Callable[[t.Any], bool]] = default_clear_value,
+        clear_value: t.Optional[t.Callable[[t.Any], bool]] = default_erase,
+        erase: t.Optional[t.Callable[[t.Any], bool]] = default_erase,
         error_messages: t.Optional[dict] = None,
         after_deserialization: t.Optional[t.Callable] = None,
         **kwargs,
@@ -215,7 +205,17 @@ class Schema(Field, metaclass=SchemaMeta):
         self.__nullable = nullable
         self.__choices = choices
         self.__error_messages = error_messages or {}
-        self._clear_value = clear_value
+
+        if clear_value is not default_erase:
+            warnings.warn(
+                "The `clear_value` argument is deprecated, use `erase` argument instead.",
+                DeprecationWarning,
+                3,
+            )
+            self._erase = clear_value
+        else:
+            self._erase = erase
+
         self.__after_deserialization = after_deserialization
 
         self._validators = validators or []
@@ -499,7 +499,7 @@ class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
             except KeyError:
                 val = undefined
             else:
-                if field._clear_value is not None and field._clear_value(val):
+                if field._erase is not None and field._erase(val):
                     val = undefined
 
             if val is undefined:
@@ -894,7 +894,7 @@ class AnyOf(Schema):
 
 class Password(String):
     def __init__(self, **kwargs):
-        kwargs.setdefault("clear_value", lambda v: isinstance(v, str) and v == "")
+        kwargs.setdefault("erase", lambda v: isinstance(v, str) and v == "")
         super().__init__(**kwargs)
 
     class Meta:
