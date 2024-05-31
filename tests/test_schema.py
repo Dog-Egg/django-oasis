@@ -2,6 +2,7 @@ import re
 from datetime import datetime, timedelta, timezone
 
 import pytest
+from django.forms import ValidationError
 
 import django_oasis_schema as schema
 
@@ -222,3 +223,53 @@ def test_model_field_copy():
         match=re.escape("[{'msgs': ['This field is required.'], 'loc': ['id']}]"),
     ):
         B().deserialize({})
+
+
+def test_model_field_required():
+    class User(schema.Model):
+        username = schema.String()
+        address = schema.String(required=False)
+
+    with pytest.raises(schema.ValidationError):
+        try:
+            User().deserialize({})
+        except schema.ValidationError as e:
+            assert e.format_errors() == [
+                {"msgs": ["This field is required."], "loc": ["username"]}
+            ]
+            raise
+
+
+def test_model_required_fields():
+    class User(schema.Model):
+        username = schema.String()
+        address = schema.String(required=False)
+
+    assert User(required_fields=[]).deserialize({}) == {}
+
+    with pytest.raises(schema.ValidationError):
+        try:
+            User(required_fields="__all__").deserialize({})
+        except schema.ValidationError as e:
+            assert e.format_errors() == [
+                {"loc": ["username"], "msgs": ["This field is required."]},
+                {"loc": ["address"], "msgs": ["This field is required."]},
+            ]
+            raise
+
+    with pytest.raises(schema.ValidationError):
+        try:
+            User(required_fields=["address"]).deserialize({})
+        except schema.ValidationError as e:
+            assert e.format_errors() == [
+                {"loc": ["address"], "msgs": ["This field is required."]}
+            ]
+            raise
+
+
+def test_model_field_default():
+    class User(schema.Model):
+        username = schema.String(default="未命名用户")
+        address = schema.String(default=lambda: "未提供")  # 使用函数设置默认值
+
+    assert User().deserialize({}) == {"username": "未命名用户", "address": "未提供"}

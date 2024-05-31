@@ -54,6 +54,7 @@ Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地�
     parameter_cookie
     parameter_path
     parameter_body
+    parameter_advanced/index
     upload_file
     pagination
     auth

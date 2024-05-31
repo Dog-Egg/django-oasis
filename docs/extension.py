@@ -71,26 +71,28 @@ def print_exc(fn):
 class OasisSwaggerUI(OasisDirective):
     option_spec = {
         "doc-expansion": directives.unchanged,
+        "django-settings-module": directives.unchanged,
     }
 
-    def get_urlconf(self):
+    def get_default_settings(self):
         from django.urls import include, path
 
         try:
-            return import_module_from_file(self.module_path("urls.py"))
+            urls_module = import_module_from_file(self.module_path("urls.py"))
         except FileNotFoundError:
             openapi = OpenAPI()
             openapi.add_resources(import_module_from_file(self.module_path("views.py")))
-            module = type(
+            urlpatterns = [
+                path("", include(openapi.urls)),
+            ]
+            urls_module = type(
                 "module",
                 (),
                 {
-                    "urlpatterns": [
-                        path("", include(openapi.urls)),
-                    ]
+                    "urlpatterns": urlpatterns,
                 },
             )
-            return module
+        return dict(ROOT_URLCONF=urls_module)
 
     @print_exc
     def run(self):
@@ -99,7 +101,18 @@ class OasisSwaggerUI(OasisDirective):
 
         client = Client()
 
-        with override_settings(ROOT_URLCONF=self.get_urlconf()):
+        if "django-settings-module" in self.options:
+            module = import_module_from_file(
+                self.module_path(self.options["django-settings-module"])
+            )
+            module_settings = {}
+            for k, v in vars(module).items():
+                if k.isupper():
+                    module_settings[k] = v
+        else:
+            module_settings = self.get_default_settings()
+
+        with override_settings(**module_settings):
             resolver = get_resolver()
             for view in resolver.reverse_dict.keys():
                 if (

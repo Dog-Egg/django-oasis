@@ -86,16 +86,7 @@ class SchemaMeta(HookClassMeta):
 
 
 class Field:
-    """定义 `Model <xschema.schemas.Model>` 的字段。这是个抽象类，已被 `Schema` 继承。
-
-    :param required: 设置字段在反序列化时是否为必需。
-
-        如果为 `None`，其值由 ``default`` 参数决定，设置 ``default`` 则这该字段为非必须。
-
-    :param default: 在反序列化时，如果字段为非必须，则可以通过设置该参数来提供默认值。
-
-        可以指定为一个函数，函数返回值将作为默认值使用。
-
+    """
     :param attr: 指定序列化/反序列化时，字段对应的外部数据键。如果为 None，将使用字段名。
     :param alias: 指定序列化/反序列化时，字段对应的内部数据键/属性。如果为 None，将使用字段名。
 
@@ -151,32 +142,8 @@ def default_clear_value(value):
 
 class Schema(Field, metaclass=SchemaMeta):
     """
-    :param required: |AsField| 在反序列化时，判断字段是否必需提供。默认必需，可设为 `False` 或设置 ``default`` 参数使其变为非必需。
-
-        .. code-block::
-
-            >>> class User(Model):
-            ...     username = String()
-            ...     address = String(required=False)
-
-            >>> User().deserialize({})
-            Traceback (most recent call last):
-                ...
-            django_oasis_schema.exceptions.ValidationError: [{'msgs': ['This field is required.'], 'loc': ['username']}]
-
+    :param required: |AsField| 判断字段是否必需提供，默认必需。可设为 `False` 或提供 ``default`` 参数使其变为非必需。
     :param default: |AsField| 如果字段非必需，且设置了默认值，那么反序列化时如未提供该字段数据，则使用该默认值填充。该参数可设为一个无参函数，默认值将使用该函数的结果。
-
-        .. code-block::
-
-            >>> from datetime import date
-
-            >>> class User(Model):
-            ...     username = String(default='未命名用户')
-            ...     address = String(default=lambda: '未提供')  # 使用函数设置默认值
-
-            >>> User().deserialize({})
-            {'username': '未命名用户', 'address': '未提供'}
-
     :param nullable: 执行验证时判断数据是否为 `None`。默认 `False`，表示不可以为 `None`。
 
         .. code-block::
@@ -421,41 +388,7 @@ ERROR = "error"
 
 class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
     """
-    :param required_fields: 覆盖原有的必需字段的配置。设为空列表则所有字段为非必需，也可设为 ``"__all__"`` 指定所有字段为必需。
-
-        .. code-block::
-
-            >>> class User(Model):
-            ...     username = String()
-            ...     address = String(required=False)
-
-        .. code-block::
-            :caption: 设为 [] 指定所有字段为非必需
-
-            >>> User(required_fields=[]).deserialize({})
-            {}
-
-        .. code-block::
-            :caption: 设为 "__all__" 指定所有字段为必需
-
-            >>> import pprint
-
-            >>> try:
-            ...     User(required_fields='__all__').deserialize({})
-            ... except ValidationError as exc:
-            ...     pprint.pprint(exc.format_errors())
-            [{'loc': ['username'], 'msgs': ['This field is required.']},
-             {'loc': ['address'], 'msgs': ['This field is required.']}]
-
-        .. code-block::
-            :caption: 指定部分字段为必需
-
-            >>> try:
-            ...     User(required_fields=['address']).deserialize({})
-            ... except ValidationError as exc:
-            ...     pprint.pprint(exc.format_errors())
-            [{'loc': ['address'], 'msgs': ['This field is required.']}]
-
+    :param required_fields: 覆盖原有的字段必需条件配置。设为空列表则所有字段为非必需，也可设为 ``"__all__"`` 指定所有字段为必需。
     :param unknown_fields: 该参数决定了在反序列化时如何处理未知字段。
 
         .. code-block::
