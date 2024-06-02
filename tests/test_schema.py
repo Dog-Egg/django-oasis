@@ -273,3 +273,17 @@ def test_model_field_default():
         address = schema.String(default=lambda: "未提供")  # 使用函数设置默认值
 
     assert User().deserialize({}) == {"username": "未命名用户", "address": "未提供"}
+
+
+def test_field_parameter_warning(recwarn):
+    """测试非字段 Schema 设置字段参数警告"""
+
+    schema.String(required=True, attr="a").deserialize("")
+    assert len(recwarn) == 1
+    warning = recwarn[0]
+    assert warning.category == UserWarning
+    assert warning.filename == __file__
+    assert (
+        warning.message.args[0]
+        == "'attr', 'required' are field parameters, but this schema isn't a field."
+    )

@@ -1,5 +1,6 @@
 import copy
 import datetime
+import functools
 import inspect
 import operator
 import re
@@ -141,6 +142,40 @@ def default_erase(value):
     return isinstance(value, str) and not value.strip()
 
 
+# 字段参数
+_FIELD_PARAMETERS = {
+    "required",
+    "default",
+    "erase",
+    "attr",
+    "alise",
+    "read_only",
+    "write_only",
+}
+
+
+def _check():
+    """检查是否在构建非字段 Schema 时使用了字段参数"""
+
+    def decorator(method):
+        @functools.wraps(method)
+        def wrapper(self: "Schema", *args, **kwargs):
+            if not self._is_field and hasattr(self, "_check_info"):
+                field_parameters, stact = self._check_info
+                frameinfo = stact[1]
+                warnings.warn_explicit(
+                    message=f"{', '.join(repr(x) for x in sorted(field_parameters))} are field parameters, but this schema isn't a field.",
+                    category=UserWarning,
+                    filename=frameinfo.filename,
+                    lineno=frameinfo.lineno,
+                )
+            return method(self, *args, **kwargs)
+
+        return wrapper
+
+    return decorator
+
+
 class Schema(Field, metaclass=SchemaMeta):
     """
     :param required: |AsField| 判断字段是否必需提供，默认必需。可设为 `False` 或提供 ``default`` 参数使其变为非必需。
@@ -175,6 +210,12 @@ class Schema(Field, metaclass=SchemaMeta):
         self = super().__new__(cls)
         self.__args = args
         self.__kwargs = kwargs
+
+        # 检查是否在构建非字段 Schema 时使用了字段参数
+        received_field_parameters = set(kwargs) & _FIELD_PARAMETERS
+        if received_field_parameters:
+            self._check_info = (received_field_parameters, inspect.stack())
+
         return self
 
     def copy(self, **kwargs):
@@ -241,6 +282,7 @@ class Schema(Field, metaclass=SchemaMeta):
         obj.update_error_message(self.__error_messages)
         return obj
 
+    @_check()
     def deserialize(self, value):
         """对数据进行反序列化操作。"""
         if value is None:
@@ -299,12 +341,13 @@ class Schema(Field, metaclass=SchemaMeta):
             return undefined
 
     @property
-    def __is_field(self):
+    def _is_field(self):
         return self._model is not None
 
     def _deserialize(self, value):
         return value
 
+    @_check()
     def serialize(self, value):
         """对数据进行序列化操作。"""
         try:
@@ -312,7 +355,7 @@ class Schema(Field, metaclass=SchemaMeta):
                 if self.__nullable:
                     return value
                 else:
-                    if self.__is_field:
+                    if self._is_field:
                         raise ValueError(f"The field {self._name!r} cannot be {value}.")
                     raise ValueError(f"The value cannot be {value}.")
             return self._serialize(value)
