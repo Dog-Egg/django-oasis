@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="可为 null 的参数" href="nullable.html" /><link rel="prev" title="参数默认值" href="default.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>擦除无意义的参数 - Django-Oasis0.1.dev20240602024216</title>
+        <title>擦除无意义的参数 - Django-Oasis0.1.dev20240602025455</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602024216</span></div></a>
+      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -192,7 +192,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -207,7 +207,7 @@
     <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602024216</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -278,7 +278,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -286,11 +286,11 @@
         <article role="main" id="furo-main-content">
           <section id="id1">
 <h1>擦除无意义的参数<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<p>这是个通用功能，但是对于查询参数来说可能非常有用。</p>
+<p>这是 <a class="reference internal" href="../api.html#django_oasis.schema.Model" title="django_oasis.schema.Model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.schema.Model</span></code></a> 的功能，但是对于查询参数来说可能非常有用。</p>
 <p>客户端在请求时经常会发送像这样的查询参数：<code class="docutils literal notranslate"><span class="pre">?a=&amp;b=1</span></code>。在这个请求中，客户端发送的参数 <code class="docutils literal notranslate"><span class="pre">a</span></code> 是一个空字符串，但并不表示服务端应该接收这样的空字符串，服务端更希望不要传递这样的参数。</p>
 <p>所以 <a class="reference internal" href="../api.html#django_oasis.schema.Model" title="django_oasis.schema.Model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.schema.Model</span></code></a> 提供了 “擦除”(erase) 字段的功能。默认将空字符串或仅包含空白字符的字符串擦除。</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">views.py [示例12]</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">views.py [示例12]</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">Query</span>
@@ -312,9 +312,11 @@
 </div>
 </div>
 <p>当查询参数如 <code class="docutils literal notranslate"><span class="pre">?a=&amp;b=1</span></code> 时，得到的结果 <code class="docutils literal notranslate"><span class="pre">query</span> <span class="pre">=</span> <span class="pre">{'b':</span> <span class="pre">'1'}</span></code>。</p>
-<p>如果需要接收空字符串参数，可以将 <code class="docutils literal notranslate"><span class="pre">erase</span></code> 设置 <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>。</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">views.py [示例13]</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
+<section id="id2">
+<h2>取消擦除<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>如果需要接收空字符串参数，可以将 <code class="docutils literal notranslate"><span class="pre">erase</span></code> 设置 <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> 来取消擦除功能。</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">views.py [示例13]</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">Query</span>
@@ -339,6 +341,7 @@
 </div>
 </div>
 <p>当查询参数如 <code class="docutils literal notranslate"><span class="pre">?a=&amp;b=1</span></code> 时，得到的结果 <code class="docutils literal notranslate"><span class="pre">query</span> <span class="pre">=</span> <span class="pre">{'a':</span> <span class="pre">'',</span> <span class="pre">'b':</span> <span class="pre">'1'}</span></code>。</p>
+</section>
 </section>
 
         </article>
@@ -384,13 +387,32 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">擦除无意义的参数</a><ul>
+<li><a class="reference internal" href="#id2">取消擦除</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=6f6638af"></script>
+</div><script src="../_static/documentation_options.js?v=fe26c20b"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
