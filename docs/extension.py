@@ -9,6 +9,7 @@ import os
 import traceback
 import types
 import uuid
+from collections import defaultdict
 from html import escape
 
 import django
@@ -29,23 +30,25 @@ class OasisDirective(SphinxDirective):
     has_content = False
     required_arguments = 1
 
-    __rootname2alias = {}
+    __docname_to_samples = defaultdict(list)  # 用于将同一文档中的 sample 进行分组编号
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.rootname = self.arguments[0]
+        self.samplename = self.arguments[0]
 
-        if self.rootname not in self.__rootname2alias:
-            self.__rootname2alias[self.rootname] = (
-                f"[示例{len(self.__rootname2alias) + 1}]"
-            )
-        self.alias = self.__rootname2alias[self.rootname]
+        docname = self.env.docname
+        try:
+            index = self.__docname_to_samples[docname].index(self.samplename)
+        except ValueError:
+            self.__docname_to_samples[docname].append(self.samplename)
+            index = len(self.__docname_to_samples[docname]) - 1
+        self.alias = f"[示例{index + 1}]"
 
     def module_path(self, module_name):
         return os.path.join(
             os.path.dirname(__file__),
-            "examples",
-            self.rootname,
+            "samples",
+            self.samplename,
             module_name,
         )
 
@@ -183,7 +186,7 @@ class OasisLiteralInclude(LiteralInclude, OasisDirective):
     def run(self):
         root = self.arguments[0]
         relfile = self.arguments[1]
-        self.arguments = [f"/../examples/{root}/{relfile}"]
+        self.arguments = [f"/../samples/{root}/{relfile}"]
         self.options["caption"] = f"{relfile} {self.alias}"
         return super().run()
 

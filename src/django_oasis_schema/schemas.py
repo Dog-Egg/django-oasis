@@ -87,49 +87,6 @@ class SchemaMeta(HookClassMeta):
         cls.meta = MetaOptions(cls)
 
 
-class Field:
-    """
-    :param attr: 指定序列化/反序列化时，字段对应的外部数据键。如果为 None，将使用字段名。
-    :param alias: 指定序列化/反序列化时，字段对应的内部数据键/属性。如果为 None，将使用字段名。
-
-    :param read_only: 如果为 `True`，则字段在反序列化时不会被使用，默认为 `False`。
-    :param write_only: 如果为 `True`，则字段在序列化时不会被使用，默认为 `False`。
-    """
-
-    def __init__(
-        self,
-        *,
-        attr: t.Optional[str] = None,
-        alias: t.Optional[str] = None,
-        read_only: bool = False,
-        write_only: bool = False,
-    ):
-        self._model: t.Optional[Model] = None
-        self.__name = None
-        self.__attr = attr
-        self.__alias = alias
-        self.read_only = read_only
-        self.write_only = write_only
-
-    @property
-    def _name(self) -> str:
-        assert self.__name is not None, f"{self!r} is not a field."
-        return self.__name
-
-    @_name.setter
-    def _name(self, value):
-        assert self.__name is None, self.__name
-        self.__name = value
-
-    @property
-    def _alias(self) -> str:
-        return self.__alias or self._name
-
-    @property
-    def _attr(self) -> str:
-        return self.__attr or self._name
-
-
 def default_erase(value):
     """
     >>> default_erase('')
@@ -176,13 +133,17 @@ def _check():
     return decorator
 
 
-class Schema(Field, metaclass=SchemaMeta):
+class Schema(metaclass=SchemaMeta):
     """
+    :param attr: |AsField| 设置序列化输入和反序列化输出的字段映射名，默认等于字段名。
+    :param alias: |AsField| 设置序列化输出和反序列化输入的字段映射名，默认等于字段名。
+    :param read_only: |AsField| 如果为 `True`，则字段在反序列化时不会被使用，默认为 `False`。
+    :param write_only: |AsField| 如果为 `True`，则字段在序列化时不会被使用，默认为 `False`。
     :param required: |AsField| 判断字段是否必需提供，默认必需。可设为 `False` 或提供 ``default`` 参数使其变为非必需。
     :param default: |AsField| 如果字段非必需，且设置了默认值，那么反序列化时如未提供该字段数据，则使用该默认值填充。该参数可设为一个无参函数，默认值将使用该函数的结果。
-    :param nullable: 执行验证时判断数据是否为 `None`。默认 `False`，表示不可以为 `None`。
-    :param description: 为 |OAS| 提供描述内容。
     :param erase: |AsField| 提供一个在反序列化时使用的函数，接受反序列化前的字段值。如函数返回 `True`，则该字段值将视为未定义。默认将空字符串或仅包含空白字符的字符串视为未定义。
+    :param nullable: 执行验证时判断数据是否为 `None`。默认 `False`，表示不可以为 `None`。
+    :param description: 为 OAS 提供描述内容。
     :param validators: 用于设置反序列化验证函数。
 
         .. code-block::
@@ -227,6 +188,10 @@ class Schema(Field, metaclass=SchemaMeta):
     def __init__(
         self,
         *,
+        attr: t.Optional[str] = None,
+        alias: t.Optional[str] = None,
+        read_only: bool = False,
+        write_only: bool = False,
         required: t.Optional[bool] = None,
         default: t.Union[t.Any, t.Callable[[], t.Any]] = undefined,
         nullable: bool = False,
@@ -237,9 +202,14 @@ class Schema(Field, metaclass=SchemaMeta):
         erase: t.Optional[t.Callable[[t.Any], bool]] = default_erase,
         error_messages: t.Optional[dict] = None,
         after_deserialization: t.Optional[t.Callable] = None,
-        **kwargs,
     ):
-        super().__init__(**kwargs)
+        self._model: t.Optional[Model] = None
+        self.__name = None
+        self.__attr = attr
+        self.__alias = alias
+        self.read_only = read_only
+        self.write_only = write_only
+
         self.__required = required
         self._default = default
         self._description = description
@@ -262,6 +232,24 @@ class Schema(Field, metaclass=SchemaMeta):
         self._validators = validators or []
         if choices is not None:
             self._validators.append(_validators.OneOf((choices)))
+
+    @property
+    def _name(self) -> str:
+        assert self.__name is not None, f"{self!r} is not a field."
+        return self.__name
+
+    @_name.setter
+    def _name(self, value):
+        assert self.__name is None, self.__name
+        self.__name = value
+
+    @property
+    def _alias(self) -> str:
+        return self.__alias or self._name
+
+    @property
+    def _attr(self) -> str:
+        return self.__attr or self._name
 
     @property
     def _required(self) -> bool:
@@ -403,7 +391,7 @@ class ModelMeta(SchemaMeta):
     _fields: FieldMapping
 
     def __new__(mcs, classname, bases, attrs: dict):
-        fields: t.Dict[str, Field] = {}
+        fields: t.Dict[str, Schema] = {}
 
         # inherit fields
         for base in bases:
@@ -412,7 +400,7 @@ class ModelMeta(SchemaMeta):
                     fields.setdefault(field._name, field)  # type: ignore
 
         for name, value in attrs.copy().items():
-            if isinstance(value, Field):
+            if isinstance(value, Schema):
                 value._name = name
                 fields[name] = value
                 del attrs[name]
@@ -517,14 +505,14 @@ class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
     @staticmethod
     def from_dict(fields: t.Dict[str, Schema]) -> t.Type["Model"]:
         """使用由字段组成的字典生成一个 `Model` 类。"""
-        attrs: dict = {k: v for k, v in fields.items() if isinstance(v, Field)}
+        attrs: dict = {k: v for k, v in fields.items() if isinstance(v, Schema)}
         klass = type("GeneratedSchema", (Model,), attrs)
 
-        class Schema(klass):  # type: ignore
+        class InnerSchema(klass):  # type: ignore
             def __repr__(self):
                 return repr(fields)
 
-        return Schema
+        return InnerSchema
 
     def _deserialize(self, value: dict):
         data = copy.copy(value)

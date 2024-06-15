@@ -50,4 +50,4 @@ Schema
     :members:
     :imported-members:
 
-.. |AsField| replace:: **\*仅作为字段时有效\***
+.. |AsField| replace:: *[ 作为字段时有效 ]*

@@ -176,7 +176,7 @@ class OpenAPI:
 class Resource:
     """
     :param path: 资源 URL，必须以 "/" 开头。
-    :param include_in_spec: 是否将当前资源解析到 |OAS| 中，默认为 `True`。
+    :param include_in_spec: 是否将当前资源解析到 OAS 中，默认为 `True`。
     :param default_auth: 为所属的 Operation 提供默认的 auth。
     """
 
@@ -330,10 +330,11 @@ class Resource:
 
 class Operation:
     """
-    :param include_in_spec: 是否将当前操作解析到 |OAS| 中，默认为 `True`。
-    :param summary: 用于设置 |OAS| 操作对象摘要。
+    :param include_in_spec: 是否将当前操作解析到 OAS 中，默认为 `True`。
+    :param summary: 用于设置 OAS 操作对象摘要。
     :param auth: 设置操作请求认证。
     :param declare_responses: 声明可能的请求响应，用于构建 OAS。
+    :param response_schema: 用于序列化请求操作返回值，并为 OAS 提供响应描述。
     """
 
     def __init__(

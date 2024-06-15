@@ -1,7 +1,7 @@
 Django-Oasis
 ============
 
-Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地编写 HTTP API。
+Django-Oasis (后面简称 Oasis) 旨在更加高效地编写 HTTP API。
 
 
 使用前提
@@ -11,7 +11,7 @@ Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地�
 .. role:: color-optional
 
 * :color-necessary:`[必要]` 该项目基于 `Django <https://www.djangoproject.com>`_ 框架，所有在使用前需要对 Django 有基本的开发能力。
-* :color-optional:`[可选]` 项目还使用了 `OpenAPI 规范 <https://spec.openapis.org/oas/v3.0.3>`_ (OAS) 来描述接口。它可以创建交互式接口文档，实现测试用例自动化，还能用于生成客户端代码等等。但不了解 OAS 也并不影响开发使用。
+* :color-optional:`[可选]` 项目还使用了 `OpenAPI 规范 <https://spec.openapis.org/oas/v3.0.3>`_ (OAS) 来描述接口。它可以创建交互式接口文档，实现测试用例自动化，还能用于生成客户端代码等等。但不了解 OAS 也并不影响使用。
 
 
 简单的示例
@@ -37,7 +37,7 @@ Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地�
 
 * Oasis 使用自有的规则来编写接口代码，而不是使用 Django 的视图函数。
 * Oasis 并不是生成文档，而是生成 OAS，OAS 可以用来做 API 文档和自动化测试使用。而且在整个开发过程中，几乎不需要手写 OAS。
-* Oasis 内置了一个简单配置的 `swagger-ui <https://github.com/swagger-api/swagger-ui>`_，仅需几行代码即可查看自己的接口文档。而且 Oasis 是以 HTTP 接口的形式暴露 OAS 数据，所以也可以选择自己喜欢的 API 可视化工具，或者自动化测试工具。
+* Oasis 内置了一个简单配置的 `swagger-ui <https://github.com/swagger-api/swagger-ui>`_，仅需几行代码即可查看接口文档。而且 Oasis 是以 HTTP 接口的形式暴露 OAS 数据，所以也可以选择喜欢的 API 可视化工具，或者自动化测试工具。
 * Schema 是 Oasis 实现的核心，它负责定义数据结构，验证数据，并提供序列化及反序列化功能。
 
 
@@ -54,7 +54,8 @@ Django-Oasis (后面简称 Oasis) 旨在帮助开发者使用 Django 高效地�
     parameter_cookie
     parameter_path
     parameter_body
-    parameter_advanced/index
+    response
+    advanced/index
     upload_file
     pagination
     auth

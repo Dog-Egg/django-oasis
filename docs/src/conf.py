@@ -27,9 +27,6 @@ extensions = [
     # "sphinx.ext.graphviz",
 ]
 default_role = "py:obj"
-rst_epilog = """
-.. |OAS| replace:: `OpenAPI Specification <https://spec.openapis.org/oas/v3.0.3>`__
-"""
 nitpicky = True
 nitpick_ignore = [
     ("py:class", "re.Pattern"),
