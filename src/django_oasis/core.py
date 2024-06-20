@@ -5,6 +5,7 @@ import inspect
 import os
 import sys
 import typing as t
+import warnings
 from http import HTTPStatus
 
 import django.urls
@@ -335,6 +336,9 @@ class Operation:
     :param auth: 设置操作请求认证。
     :param declare_responses: 声明可能的请求响应，用于构建 OAS。
     :param response_schema: 用于序列化请求操作返回值，并为 OAS 提供响应描述。
+
+    .. deprecated:: 0.1
+        view_decorators 是一个设计错误的参数，勿用。
     """
 
     def __init__(
@@ -372,6 +376,12 @@ class Operation:
         self.__mountpoints: t.Dict[str, MountPoint] = {}
         self._resource: t.Optional[Resource] = None
         self._view_decorators = view_decorators or []
+
+        if view_decorators is not None:
+            warnings.warn(
+                "view_decorators is deprecated",
+                DeprecationWarning,
+            )
 
     @property
     def __auth(self):
