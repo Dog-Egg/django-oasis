@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="参数默认值" href="default.html" /><link rel="prev" title="请求体 (Body)" href="../parameter_body.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="必需参数" href="required.html" /><link rel="prev" title="可为 null 的参数" href="nullable.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>请求参数进阶 - Django-Oasis0.1.dev20240602025455</title>
+        <title>只读与只写 - Django-Oasis0.1.dev20240620124516</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></div></a>
+      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -207,7 +207,7 @@
     <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -223,10 +223,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../parameter_path.html">路径参数 (Path)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../parameter_body.html">请求体 (Body)</a></li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">请求参数进阶</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求参数进阶</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="../response.html">请求响应</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">请求与响应指南</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求与响应指南</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="attr_and_alias.html">属性名与别名</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default.html">参数默认值</a></li>
-<li class="toctree-l2"><a class="reference internal" href="erase.html">擦除无意义的参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="erase.html">擦除参数</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nullable.html">可为 null 的参数</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">只读与只写</a></li>
 <li class="toctree-l2"><a class="reference internal" href="required.html">必需参数</a></li>
 </ul>
 </li>
@@ -264,7 +267,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="../_sources/parameter_advanced/index.rst.txt" title="View this page">
+  <a class="muted-link" href="../_sources/advanced/readonly_and_writeonly.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -285,39 +288,143 @@
         </div>
         <article role="main" id="furo-main-content">
           <section id="id1">
-<h1>请求参数进阶<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="default.html">参数默认值</a></li>
-<li class="toctree-l1"><a class="reference internal" href="erase.html">擦除无意义的参数</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nullable.html">可为 null 的参数</a></li>
-<li class="toctree-l1"><a class="reference internal" href="required.html">必需参数</a></li>
-</ul>
+<h1>只读与只写<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>我们用同一个 Model 来声明请求的输入和输出。</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">views.py [示例1]</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
+<span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Resource</span>
+<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">JsonData</span>
+
+
+<span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># 字段 a 设置为 “只读”</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">write_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># 字段 b 设置为 “只写”</span>
+
+
+<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+    <span class="nd">@Operation</span><span class="p">(</span><span class="n">response_schema</span><span class="o">=</span><span class="n">MyModel</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">JsonData</span><span class="p">(</span><span class="n">MyModel</span><span class="p">),</span>
+    <span class="p">):</span> <span class="o">...</span>
+</pre></div>
 </div>
-</section>
+</div>
+<p>可以看到，由于字段 <code class="docutils literal notranslate"><span class="pre">a</span></code> 声明为“只读”。这意味着它可以作为响应的一部分发送，但不应作为请求的一部分发送；</p>
+<p>而字段 <code class="docutils literal notranslate"><span class="pre">b</span></code> 声明为“只写”。因此，它可以作为请求的一部分发送，但不应作为响应的一部分发送。</p>
+
+            <div style="border: 1px solid var(--color-background-border);">
+                <div class="code-block-caption">
+                    <span class="caption-text">SwaggerUI [示例1]</span>
+                </div>
+                <iframe id="id_066a65a5" srcdoc="
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;/&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;/&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;SwaggerUI&quot;/&gt;
+    &lt;title&gt;Swagger UI&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            margin: 0;
+        }
+        body::before, body::after {
+            content: &quot;&quot;;
+            display: table;
+        }
+        .footer {
+            margin-bottom: 25px;
+            color: #cccccc;
+            font-size: 12px;
+            display: flex;
+        }
+        .footer .powered-by {
+            float: right;
+        }
+    &lt;/style&gt;
+    
+    
+                &lt;script src=&quot;../_static/iframeResizer.contentWindow.min.js&quot;&gt;&lt;/script&gt;
+                &lt;script src=&quot;../_static/swagger-ui-bundle.js&quot;&gt;&lt;/script&gt;
+                &lt;link rel=&quot;stylesheet&quot; href=&quot;../_static/swagger-ui.css&quot; /&gt;
+                
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/api&quot;: {&quot;post&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;$ref&quot;: &quot;#/components/schemas/samples.readonly_and_writeonly.views.MyModel&quot;}, {&quot;required&quot;: [&quot;a&quot;, &quot;b&quot;]}]}}}}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;$ref&quot;: &quot;#/components/schemas/samples.readonly_and_writeonly.views.MyModel&quot;}, {&quot;required&quot;: [&quot;a&quot;, &quot;b&quot;]}]}}}}}}}, &quot;components&quot;: {&quot;schemas&quot;: {&quot;samples.readonly_and_writeonly.views.MyModel&quot;: {&quot;title&quot;: &quot;MyModel&quot;, &quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;a&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;readOnly&quot;: true}, &quot;b&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;writeOnly&quot;: true}}}}}}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
+&lt;script&gt;
+    var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
+
+    // 设置默认配置
+    Object.assign(config, {
+        dom_id: &#x27;#swagger-ui&#x27;,
+        deepLinking: true,
+        onComplete: onComplete,
+        defaultModelRendering: &quot;model&quot;,
+        defaultModelExpandDepth: 2,
+    });
+
+    function onComplete() {
+        var title = ui.specSelectors.info().toJS().title;
+        document.title = title.concat(&#x27; | Swagger UI&#x27;);
+    }
+&lt;/script&gt;
+
+&lt;script&gt;
+    // 在 Sphinx 内使用时拦截请求
+    Object.assign(config, {
+        requestInterceptor: function (request) {
+            return request;
+        },
+        responseInterceptor: function (response) {
+            response.text = &quot;该文档示例并不具备发起真实请求的能力，请自行拷贝代码进行测试。&quot;;
+            return response;
+        }
+    });
+&lt;/script&gt;
+
+
+    &lt;script&gt;
+        window.onload = function () {
+            window.ui = SwaggerUIBundle(Object.assign({}, config));
+        };
+    &lt;/script&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;" frameborder="0" style="min-width: 100%; display: block;"></iframe>
+            </div>
+            <script src="../_static/iframeResizer.min.js"></script>
+            <script>
+                iFrameResize({checkOrigin: false}, '#id_066a65a5')
+            </script>
+            </section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="default.html">
+          <a class="next-page" href="required.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">参数默认值</div>
+                <div class="title">必需参数</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../parameter_body.html">
+          <a class="prev-page" href="nullable.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">请求体 (Body)</div>
+                <div class="title">可为 null 的参数</div>
                 
               </div>
             </a>
@@ -345,7 +452,7 @@
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=fe26c20b"></script>
+</div><script src="../_static/documentation_options.js?v=efd5e6bf"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>

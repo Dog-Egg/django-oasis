@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="prev" title="API 参考" href="../api.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="擦除参数" href="erase.html" /><link rel="prev" title="属性名与别名" href="attr_and_alias.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>RESTful - Django-Oasis0.1.dev20240620124516</title>
+        <title>参数默认值 - Django-Oasis0.1.dev20240620124516</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -192,7 +192,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -215,7 +215,7 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">快速入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operations.html">请求操作</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../parameter_query.html">查询参数 (Query)</a></li>
@@ -224,13 +224,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../parameter_path.html">路径参数 (Path)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../parameter_body.html">请求体 (Body)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../response.html">请求响应</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced/index.html">请求与响应指南</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求与响应指南</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/attr_and_alias.html">属性名与别名</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/default.html">参数默认值</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/erase.html">擦除参数</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/nullable.html">可为 null 的参数</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/readonly_and_writeonly.html">只读与只写</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/required.html">必需参数</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">请求与响应指南</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求与响应指南</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="attr_and_alias.html">属性名与别名</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">参数默认值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="erase.html">擦除参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nullable.html">可为 null 的参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readonly_and_writeonly.html">只读与只写</a></li>
+<li class="toctree-l2"><a class="reference internal" href="required.html">必需参数</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../upload_file.html">上传文件</a></li>
@@ -245,8 +245,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API 参考</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">示例</span></p>
-<ul class="current">
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">RESTful</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/restful.html">RESTful</a></li>
 </ul>
 
 </div>
@@ -267,7 +267,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="../_sources/examples/restful.rst.txt" title="View this page">
+  <a class="muted-link" href="../_sources/advanced/default.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -281,91 +281,30 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="restful">
-<h1>RESTful<a class="headerlink" href="#restful" title="Link to this heading">¶</a></h1>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">models.py [示例1]</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+          <section id="id1">
+<h1>参数默认值<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">views.py [示例1]</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
+<span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
+<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">QueryItem</span>
 
 
-<span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;标题&quot;</span><span class="p">)</span>
-    <span class="n">author</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;作者&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">views.py [示例1]</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.common</span> <span class="kn">import</span> <span class="n">model2schema</span>
-<span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Resource</span>
-<span class="kn">from</span> <span class="nn">django_oasis.exceptions</span> <span class="kn">import</span> <span class="n">NotFoundError</span>
-<span class="kn">from</span> <span class="nn">django_oasis.pagination</span> <span class="kn">import</span> <span class="n">PagePagination</span>
-<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">JsonData</span>
-
-<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Book</span>
-
-
-<span class="k">class</span> <span class="nc">BookSchema</span><span class="p">(</span><span class="n">model2schema</span><span class="p">(</span><span class="n">Book</span><span class="p">)):</span>
-    <span class="k">pass</span>
-
-
-<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/books&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">BookListAPI</span><span class="p">:</span>
+<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">pagination</span><span class="o">=</span><span class="n">PagePagination</span><span class="p">(</span><span class="n">BookSchema</span><span class="p">),</span>
-    <span class="p">):</span>
-        <span class="k">return</span> <span class="n">pagination</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
-
-    <span class="nd">@Operation</span><span class="p">(</span>
-        <span class="n">response_schema</span><span class="o">=</span><span class="n">BookSchema</span><span class="p">,</span>
-        <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">JsonData</span><span class="p">(</span><span class="n">BookSchema</span><span class="p">)):</span>
-        <span class="k">return</span> <span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">**</span><span class="n">body</span><span class="p">)</span>
-
-
-<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/books/</span><span class="si">{book_id}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">BookItemAPI</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">book_id</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">book_id</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">Book</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NotFoundError</span>
-
-    <span class="nd">@Operation</span><span class="p">(</span><span class="n">response_schema</span><span class="o">=</span><span class="n">BookSchema</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">book</span>
-
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">book</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">book</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">book</span>
-
-    <span class="nd">@Operation</span><span class="p">(</span><span class="n">response_schema</span><span class="o">=</span><span class="n">BookSchema</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">body</span><span class="o">=</span><span class="n">JsonData</span><span class="p">(</span><span class="n">BookSchema</span><span class="p">(</span><span class="n">required_fields</span><span class="o">=</span><span class="s2">&quot;__all__&quot;</span><span class="p">)),</span>
-    <span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">body</span><span class="p">)</span>
-
-    <span class="nd">@Operation</span><span class="p">(</span><span class="n">response_schema</span><span class="o">=</span><span class="n">BookSchema</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">patch</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">body</span><span class="o">=</span><span class="n">JsonData</span><span class="p">(</span><span class="n">BookSchema</span><span class="p">(</span><span class="n">required_fields</span><span class="o">=</span><span class="p">[])),</span>
-    <span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">body</span><span class="p">)</span>
-
-    <span class="nd">@Operation</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">204</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">book</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="n">message</span><span class="o">=</span><span class="n">QueryItem</span><span class="p">(</span>
+            <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(</span>
+<span class="hll">                <span class="n">default</span><span class="o">=</span><span class="s2">&quot;Hi&quot;</span><span class="p">,</span>
+</span>            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">):</span> <span class="o">...</span>
 </pre></div>
 </div>
 </div>
@@ -374,7 +313,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">SwaggerUI [示例1]</span>
                 </div>
-                <iframe id="id_007954fe" srcdoc="
+                <iframe id="id_79bc06c6" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -409,7 +348,7 @@
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
-&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/books&quot;: {&quot;get&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;page&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 1, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}, {&quot;name&quot;: &quot;page_size&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 20, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;page&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;page_size&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;results&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;items&quot;: {&quot;allOf&quot;: [{&quot;$ref&quot;: &quot;#/components/schemas/samples.restful.views.BookSchema&quot;}, {&quot;required&quot;: [&quot;title&quot;, &quot;author&quot;]}]}}, &quot;count&quot;: {&quot;type&quot;: &quot;integer&quot;}}, &quot;required&quot;: [&quot;page&quot;, &quot;page_size&quot;, &quot;results&quot;, &quot;count&quot;]}}}}}}, &quot;post&quot;: {&quot;responses&quot;: {&quot;201&quot;: {&quot;description&quot;: &quot;Created&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;$ref&quot;: &quot;#/components/schemas/samples.restful.views.BookSchema&quot;}, {&quot;required&quot;: [&quot;title&quot;, &quot;author&quot;]}]}}}}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;$ref&quot;: &quot;#/components/schemas/samples.restful.views.BookSchema&quot;}, {&quot;required&quot;: [&quot;title&quot;, &quot;author&quot;]}]}}}}}}, &quot;/books/{book_id}&quot;: {&quot;get&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;book_id&quot;, &quot;in&quot;: &quot;path&quot;, &quot;required&quot;: true, &quot;schema&quot;: {&quot;type&quot;: &quot;string&quot;}, &quot;style&quot;: &quot;simple&quot;, &quot;explode&quot;: false}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;$ref&quot;: &quot;#/components/schemas/samples.restful.views.BookSchema&quot;}, {&quot;required&quot;: [&quot;title&quot;, &quot;author&quot;]}]}}}}}}, &quot;put&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;book_id&quot;, &quot;in&quot;: &quot;path&quot;, &quot;required&quot;: true, &quot;schema&quot;: {&quot;type&quot;: &quot;string&quot;}, &quot;style&quot;: &quot;simple&quot;, &quot;explode&quot;: false}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;$ref&quot;: &quot;#/components/schemas/samples.restful.views.BookSchema&quot;}, {&quot;required&quot;: [&quot;title&quot;, &quot;author&quot;]}]}}}}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;$ref&quot;: &quot;#/components/schemas/samples.restful.views.BookSchema&quot;}, {&quot;required&quot;: [&quot;id&quot;, &quot;title&quot;, &quot;author&quot;]}]}}}}}, &quot;patch&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;book_id&quot;, &quot;in&quot;: &quot;path&quot;, &quot;required&quot;: true, &quot;schema&quot;: {&quot;type&quot;: &quot;string&quot;}, &quot;style&quot;: &quot;simple&quot;, &quot;explode&quot;: false}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;$ref&quot;: &quot;#/components/schemas/samples.restful.views.BookSchema&quot;}, {&quot;required&quot;: [&quot;title&quot;, &quot;author&quot;]}]}}}}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;$ref&quot;: &quot;#/components/schemas/samples.restful.views.BookSchema&quot;}}}}}, &quot;delete&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;book_id&quot;, &quot;in&quot;: &quot;path&quot;, &quot;required&quot;: true, &quot;schema&quot;: {&quot;type&quot;: &quot;string&quot;}, &quot;style&quot;: &quot;simple&quot;, &quot;explode&quot;: false}], &quot;responses&quot;: {&quot;204&quot;: {&quot;description&quot;: &quot;No Content&quot;}}}}}, &quot;components&quot;: {&quot;schemas&quot;: {&quot;samples.restful.views.BookSchema&quot;: {&quot;title&quot;: &quot;BookSchema&quot;, &quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;id&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;ID&quot;, &quot;readOnly&quot;: true}, &quot;title&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u6807\u9898&quot;, &quot;maxLength&quot;: 50}, &quot;author&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4f5c\u8005&quot;, &quot;maxLength&quot;: 50}}}}}}}&lt;/script&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/api&quot;: {&quot;get&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;message&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;default&quot;: &quot;Hi&quot;}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}}}}}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
 &lt;script&gt;
     var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
 
@@ -454,24 +393,56 @@
             </div>
             <script src="../_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_007954fe')
+                iFrameResize({checkOrigin: false}, '#id_79bc06c6')
             </script>
-            </section>
+            <section id="id2">
+<h2>函数式默认值<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">views.py [示例2]</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+
+<span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
+<span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
+<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">QueryItem</span>
+
+
+<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
+        <span class="n">date</span><span class="o">=</span><span class="n">QueryItem</span><span class="p">(</span>
+            <span class="n">schema</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span>
+<span class="hll">                <span class="n">default</span><span class="o">=</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">,</span>  <span class="c1"># `date.today` is a function.</span>
+</span>            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">):</span> <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          
-          <a class="prev-page" href="../api.html">
+          <a class="next-page" href="erase.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">擦除参数</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="attr_and_alias.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">API 参考</div>
+                <div class="title">属性名与别名</div>
                 
               </div>
             </a>
@@ -493,8 +464,27 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">参数默认值</a><ul>
+<li><a class="reference internal" href="#id2">函数式默认值</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

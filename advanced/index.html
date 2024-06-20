@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="可为 null 的参数" href="nullable.html" /><link rel="prev" title="参数默认值" href="default.html" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="属性名与别名" href="attr_and_alias.html" /><link rel="prev" title="请求响应" href="../response.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>擦除无意义的参数 - Django-Oasis0.1.dev20240602025455</title>
+        <title>请求与响应指南 - Django-Oasis0.1.dev20240620124516</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></div></a>
+      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -192,7 +192,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -207,7 +207,7 @@
     <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -223,10 +223,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../parameter_path.html">路径参数 (Path)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../parameter_body.html">请求体 (Body)</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">请求参数进阶</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求参数进阶</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../response.html">请求响应</a></li>
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">请求与响应指南</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求与响应指南</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="attr_and_alias.html">属性名与别名</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default.html">参数默认值</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">擦除无意义的参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="erase.html">擦除参数</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nullable.html">可为 null 的参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readonly_and_writeonly.html">只读与只写</a></li>
 <li class="toctree-l2"><a class="reference internal" href="required.html">必需参数</a></li>
 </ul>
 </li>
@@ -264,7 +267,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="../_sources/parameter_advanced/erase.rst.txt" title="View this page">
+  <a class="muted-link" href="../_sources/advanced/index.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -278,70 +281,24 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
           <section id="id1">
-<h1>擦除无意义的参数<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<p>这是 <a class="reference internal" href="../api.html#django_oasis.schema.Model" title="django_oasis.schema.Model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.schema.Model</span></code></a> 的功能，但是对于查询参数来说可能非常有用。</p>
-<p>客户端在请求时经常会发送像这样的查询参数：<code class="docutils literal notranslate"><span class="pre">?a=&amp;b=1</span></code>。在这个请求中，客户端发送的参数 <code class="docutils literal notranslate"><span class="pre">a</span></code> 是一个空字符串，但并不表示服务端应该接收这样的空字符串，服务端更希望不要传递这样的参数。</p>
-<p>所以 <a class="reference internal" href="../api.html#django_oasis.schema.Model" title="django_oasis.schema.Model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.schema.Model</span></code></a> 提供了 “擦除”(erase) 字段的功能。默认将空字符串或仅包含空白字符的字符串擦除。</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">views.py [示例12]</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
-<span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
-<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">Query</span>
-
-
-<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">query</span><span class="o">=</span><span class="n">Query</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-                <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-            <span class="p">},</span>
-        <span class="p">),</span>
-    <span class="p">):</span>
-        <span class="o">...</span>
-</pre></div>
+<h1>请求与响应指南<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="attr_and_alias.html">属性名与别名</a></li>
+<li class="toctree-l1"><a class="reference internal" href="default.html">参数默认值</a></li>
+<li class="toctree-l1"><a class="reference internal" href="erase.html">擦除参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nullable.html">可为 null 的参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readonly_and_writeonly.html">只读与只写</a></li>
+<li class="toctree-l1"><a class="reference internal" href="required.html">必需参数</a></li>
+</ul>
 </div>
-</div>
-<p>当查询参数如 <code class="docutils literal notranslate"><span class="pre">?a=&amp;b=1</span></code> 时，得到的结果 <code class="docutils literal notranslate"><span class="pre">query</span> <span class="pre">=</span> <span class="pre">{'b':</span> <span class="pre">'1'}</span></code>。</p>
-<section id="id2">
-<h2>取消擦除<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p>如果需要接收空字符串参数，可以将 <code class="docutils literal notranslate"><span class="pre">erase</span></code> 设置 <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> 来取消擦除功能。</p>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">views.py [示例13]</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
-<span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
-<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">Query</span>
-
-
-<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">query</span><span class="o">=</span><span class="n">Query</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(</span>
-<span class="hll">                    <span class="n">erase</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-</span>                    <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                <span class="p">),</span>
-                <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-            <span class="p">},</span>
-        <span class="p">),</span>
-    <span class="p">):</span>
-        <span class="o">...</span>
-</pre></div>
-</div>
-</div>
-<p>当查询参数如 <code class="docutils literal notranslate"><span class="pre">?a=&amp;b=1</span></code> 时，得到的结果 <code class="docutils literal notranslate"><span class="pre">query</span> <span class="pre">=</span> <span class="pre">{'a':</span> <span class="pre">'',</span> <span class="pre">'b':</span> <span class="pre">'1'}</span></code>。</p>
-</section>
 </section>
 
         </article>
@@ -349,23 +306,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="nullable.html">
+          <a class="next-page" href="attr_and_alias.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">可为 null 的参数</div>
+                <div class="title">属性名与别名</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="default.html">
+          <a class="prev-page" href="../response.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">参数默认值</div>
+                <div class="title">请求响应</div>
                 
               </div>
             </a>
@@ -387,32 +344,13 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">擦除无意义的参数</a><ul>
-<li><a class="reference internal" href="#id2">取消擦除</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=fe26c20b"></script>
+</div><script src="../_static/documentation_options.js?v=efd5e6bf"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>

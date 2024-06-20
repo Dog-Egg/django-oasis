@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="请求参数进阶" href="parameter_advanced/index.html" /><link rel="prev" title="路径参数 (Path)" href="parameter_path.html" />
+<link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="请求响应" href="response.html" /><link rel="prev" title="路径参数 (Path)" href="parameter_path.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>请求体 (Body) - Django-Oasis0.1.dev20240602025455</title>
+        <title>请求体 (Body) - Django-Oasis0.1.dev20240620124516</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -207,7 +207,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -223,11 +223,14 @@
 <li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_path.html">路径参数 (Path)</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">请求体 (Body)</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="parameter_advanced/index.html">请求参数进阶</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求参数进阶</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/default.html">参数默认值</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/erase.html">擦除无意义的参数</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/nullable.html">可为 null 的参数</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/required.html">必需参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response.html">请求响应</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced/index.html">请求与响应指南</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求与响应指南</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced/attr_and_alias.html">属性名与别名</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/default.html">参数默认值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/erase.html">擦除参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/nullable.html">可为 null 的参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/readonly_and_writeonly.html">只读与只写</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/required.html">必需参数</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="upload_file.html">上传文件</a></li>
@@ -290,7 +293,7 @@
 <h2>JSON 格式<a class="headerlink" href="#json" title="Link to this heading">¶</a></h2>
 <p>使用 <a class="reference internal" href="api.html#django_oasis.parameter.JsonData" title="django_oasis.parameter.JsonData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.JsonData</span></code></a> 声明。</p>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">views.py [示例16]</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例1]</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">JsonData</span>
 
@@ -312,9 +315,9 @@
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
-                    <span class="caption-text">SwaggerUI [示例16]</span>
+                    <span class="caption-text">SwaggerUI [示例1]</span>
                 </div>
-                <iframe id="id_b7281924" srcdoc="
+                <iframe id="id_5a0521b7" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -394,14 +397,14 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_b7281924')
+                iFrameResize({checkOrigin: false}, '#id_5a0521b7')
             </script>
             </section>
 <section id="id1">
 <h2>表单格式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>使用 <a class="reference internal" href="api.html#django_oasis.parameter.FormData" title="django_oasis.parameter.FormData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.FormData</span></code></a> 声明。</p>
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">views.py [示例17]</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例2]</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormData</span>
 
@@ -423,9 +426,9 @@
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
-                    <span class="caption-text">SwaggerUI [示例17]</span>
+                    <span class="caption-text">SwaggerUI [示例2]</span>
                 </div>
-                <iframe id="id_d0ce77a5" srcdoc="
+                <iframe id="id_69d093e1" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -505,7 +508,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_d0ce77a5')
+                iFrameResize({checkOrigin: false}, '#id_69d093e1')
             </script>
             </section>
 </section>
@@ -515,12 +518,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="parameter_advanced/index.html">
+          <a class="next-page" href="response.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">请求参数进阶</div>
+                <div class="title">请求响应</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -579,7 +582,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=fe26c20b"></script>
+</div><script src="_static/documentation_options.js?v=efd5e6bf"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>

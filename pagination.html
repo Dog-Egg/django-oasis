@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="用户认证" href="auth.html" /><link rel="prev" title="上传文件" href="upload_file.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>分页 - Django-Oasis0.1.dev20240602025455</title>
+        <title>分页 - Django-Oasis0.1.dev20240620124516</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -207,7 +207,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -223,11 +223,14 @@
 <li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_path.html">路径参数 (Path)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_body.html">请求体 (Body)</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="parameter_advanced/index.html">请求参数进阶</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求参数进阶</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/default.html">参数默认值</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/erase.html">擦除无意义的参数</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/nullable.html">可为 null 的参数</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/required.html">必需参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response.html">请求响应</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced/index.html">请求与响应指南</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求与响应指南</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced/attr_and_alias.html">属性名与别名</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/default.html">参数默认值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/erase.html">擦除参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/nullable.html">可为 null 的参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/readonly_and_writeonly.html">只读与只写</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/required.html">必需参数</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="upload_file.html">上传文件</a></li>
@@ -291,7 +294,7 @@
 <h2>内置分页器<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p>下面的示例将对 <code class="docutils literal notranslate"><span class="pre">Book</span></code> 模型实现 2 种分页查询方式。</p>
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">models.py [示例8]</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">models.py [示例1]</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 
 
@@ -304,7 +307,7 @@
 <section id="pagepagination">
 <h3><a class="reference internal" href="api.html#django_oasis.pagination.PagePagination" title="django_oasis.pagination.PagePagination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PagePagination</span></code></a><a class="headerlink" href="#pagepagination" title="Link to this heading">¶</a></h3>
 <div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">page_pagination.py [示例8]</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">page_pagination.py [示例1]</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 
 <span class="kn">from</span> <span class="nn">django_oasis.common</span> <span class="kn">import</span> <span class="n">model2schema</span>
@@ -328,7 +331,7 @@
 <section id="offsetpagination">
 <h3><a class="reference internal" href="api.html#django_oasis.pagination.OffsetPagination" title="django_oasis.pagination.OffsetPagination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OffsetPagination</span></code></a><a class="headerlink" href="#offsetpagination" title="Link to this heading">¶</a></h3>
 <div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">offset_pagination.py [示例8]</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">offset_pagination.py [示例1]</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 
 <span class="kn">from</span> <span class="nn">django_oasis.common</span> <span class="kn">import</span> <span class="n">model2schema</span>
@@ -355,9 +358,9 @@
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
-                    <span class="caption-text">SwaggerUI [示例8]</span>
+                    <span class="caption-text">SwaggerUI [示例1]</span>
                 </div>
-                <iframe id="id_8c0298c0" srcdoc="
+                <iframe id="id_3d3c6579" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -437,7 +440,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_8c0298c0')
+                iFrameResize({checkOrigin: false}, '#id_3d3c6579')
             </script>
             </section>
 </section>
@@ -445,7 +448,7 @@
 <h2>自定义分页器<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p>分页器是高度可定制的，只需继承 <a class="reference internal" href="api.html#django_oasis.pagination.Pagination" title="django_oasis.pagination.Pagination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.pagination.Pagination</span></code></a> 抽象类，并实现其抽象方法。</p>
 <div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text">views.py [示例9]</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例2]</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 
 <span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
@@ -514,9 +517,9 @@
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
-                    <span class="caption-text">SwaggerUI [示例9]</span>
+                    <span class="caption-text">SwaggerUI [示例2]</span>
                 </div>
-                <iframe id="id_c2cbf1f2" srcdoc="
+                <iframe id="id_9772093c" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -596,7 +599,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_c2cbf1f2')
+                iFrameResize({checkOrigin: false}, '#id_9772093c')
             </script>
             </section>
 </section>
@@ -674,7 +677,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=fe26c20b"></script>
+</div><script src="_static/documentation_options.js?v=efd5e6bf"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>

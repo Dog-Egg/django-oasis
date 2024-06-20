@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="RESTful" href="examples/restful.html" /><link rel="prev" title="Hooks" href="schema/hooks.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>API 参考 - Django-Oasis0.1.dev20240602025455</title>
+        <title>API 参考 - Django-Oasis0.1.dev20240620124516</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -207,7 +207,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -223,11 +223,14 @@
 <li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_path.html">路径参数 (Path)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_body.html">请求体 (Body)</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="parameter_advanced/index.html">请求参数进阶</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求参数进阶</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/default.html">参数默认值</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/erase.html">擦除无意义的参数</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/nullable.html">可为 null 的参数</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/required.html">必需参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response.html">请求响应</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced/index.html">请求与响应指南</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求与响应指南</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced/attr_and_alias.html">属性名与别名</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/default.html">参数默认值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/erase.html">擦除参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/nullable.html">可为 null 的参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/readonly_and_writeonly.html">只读与只写</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/required.html">必需参数</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="upload_file.html">上传文件</a></li>
@@ -314,18 +317,21 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>include_in_spec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – 是否将当前操作解析到 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3">OpenAPI Specification</a> 中，默认为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>。</p></li>
-<li><p><strong>summary</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em> | </em><em>None</em>) – 用于设置 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3">OpenAPI Specification</a> 操作对象摘要。</p></li>
+<li><p><strong>include_in_spec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – 是否将当前操作解析到 OAS 中，默认为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>。</p></li>
+<li><p><strong>summary</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em> | </em><em>None</em>) – 用于设置 OAS 操作对象摘要。</p></li>
 <li><p><strong>auth</strong> (<a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em>] </em><em>| </em><em>None</em>) – 设置操作请求认证。</p></li>
 <li><p><strong>declare_responses</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.12）"><em>dict</em></a><em> | </em><em>None</em>) – 声明可能的请求响应，用于构建 OAS。</p></li>
+<li><p><strong>response_schema</strong> (<em>None</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Model" title="django_oasis_schema.schemas.Model"><em>Model</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>] </em><em>| </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a>) – 用于序列化请求操作返回值，并为 OAS 提供响应描述。</p></li>
 <li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em> | </em><em>None</em>)</p></li>
-<li><p><strong>response_schema</strong> (<em>None</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Model" title="django_oasis_schema.schemas.Model"><em>Model</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>] </em><em>| </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a>)</p></li>
 <li><p><strong>deprecated</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>)</p></li>
 <li><p><strong>status_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.12）"><em>int</em></a>)</p></li>
 <li><p><strong>view_decorators</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.12）"><em>list</em></a><em> | </em><em>None</em>)</p></li>
 </ul>
 </dd>
 </dl>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">自 0.1 版本弃用: </span>view_decorators 是一个设计错误的参数，勿用。</p>
+</div>
 </dd></dl>
 
 <dl class="py class">
@@ -335,7 +341,7 @@
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a>) – 资源 URL，必须以 “/” 开头。</p></li>
-<li><p><strong>include_in_spec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – 是否将当前资源解析到 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3">OpenAPI Specification</a> 中，默认为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>。</p></li>
+<li><p><strong>include_in_spec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.12）"><em>bool</em></a>) – 是否将当前资源解析到 OAS 中，默认为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>。</p></li>
 <li><p><strong>default_auth</strong> (<a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.12）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em>] </em><em>| </em><em>None</em>) – 为所属的 Operation 提供默认的 auth。</p></li>
 <li><p><strong>param_schemas</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.12）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.12）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>] </em><em>| </em><em>None</em>)</p></li>
 <li><p><strong>view_decorators</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.12）"><em>list</em></a><em> | </em><em>None</em>)</p></li>
@@ -804,11 +810,15 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>required</strong> – <strong>*仅作为字段时有效*</strong> 判断字段是否必需提供，默认必需。可设为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a> 或提供 <code class="docutils literal notranslate"><span class="pre">default</span></code> 参数使其变为非必需。</p></li>
-<li><p><strong>default</strong> – <strong>*仅作为字段时有效*</strong> 如果字段非必需，且设置了默认值，那么反序列化时如未提供该字段数据，则使用该默认值填充。该参数可设为一个无参函数，默认值将使用该函数的结果。</p></li>
+<li><p><strong>attr</strong> – <em>[ 作为字段时有效 ]</em> 设置序列化输入和反序列化输出的字段映射名，默认等于字段名。</p></li>
+<li><p><strong>alias</strong> – <em>[ 作为字段时有效 ]</em> 设置序列化输出和反序列化输入的字段映射名，默认等于字段名。</p></li>
+<li><p><strong>read_only</strong> – <em>[ 作为字段时有效 ]</em> 如果为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>，则字段在反序列化时不会被使用，默认为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>。</p></li>
+<li><p><strong>write_only</strong> – <em>[ 作为字段时有效 ]</em> 如果为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>，则字段在序列化时不会被使用，默认为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>。</p></li>
+<li><p><strong>required</strong> – <em>[ 作为字段时有效 ]</em> 判断字段是否必需提供，默认必需。可设为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a> 或提供 <code class="docutils literal notranslate"><span class="pre">default</span></code> 参数使其变为非必需。</p></li>
+<li><p><strong>default</strong> – <em>[ 作为字段时有效 ]</em> 如果字段非必需，且设置了默认值，那么反序列化时如未提供该字段数据，则使用该默认值填充。该参数可设为一个无参函数，默认值将使用该函数的结果。</p></li>
+<li><p><strong>erase</strong> – <em>[ 作为字段时有效 ]</em> 提供一个在反序列化时使用的函数，接受反序列化前的字段值。如函数返回 <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>，则该字段值将视为未定义。默认将空字符串或仅包含空白字符的字符串视为未定义。</p></li>
 <li><p><strong>nullable</strong> – 执行验证时判断数据是否为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>。默认 <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>，表示不可以为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>。</p></li>
-<li><p><strong>description</strong> – 为 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3">OpenAPI Specification</a> 提供描述内容。</p></li>
-<li><p><strong>erase</strong> – <strong>*仅作为字段时有效*</strong> 提供一个在反序列化时使用的函数，接受反序列化前的字段值。如函数返回 <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>，则该字段值将视为未定义。默认将空字符串或仅包含空白字符的字符串视为未定义。</p></li>
+<li><p><strong>description</strong> – 为 OAS 提供描述内容。</p></li>
 <li><p><strong>validators</strong> – <p>用于设置反序列化验证函数。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
@@ -1060,7 +1070,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=fe26c20b"></script>
+</div><script src="_static/documentation_options.js?v=efd5e6bf"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>

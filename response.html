@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="快速入门" href="quickstart.html" />
+<link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="请求与响应指南" href="advanced/index.html" /><link rel="prev" title="请求体 (Body)" href="parameter_body.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Django-Oasis0.1.dev20240620124516</title>
+        <title>请求响应 - Django-Oasis0.1.dev20240620124516</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -201,7 +201,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
@@ -215,7 +215,7 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operations.html">请求操作</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_query.html">查询参数 (Query)</a></li>
@@ -223,7 +223,7 @@
 <li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_path.html">路径参数 (Path)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_body.html">请求体 (Body)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="response.html">请求响应</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">请求响应</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="advanced/index.html">请求与响应指南</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求与响应指南</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="advanced/attr_and_alias.html">属性名与别名</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced/default.html">参数默认值</a></li>
@@ -267,7 +267,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
+  <a class="muted-link" href="_sources/response.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -287,69 +287,126 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="django-oasis">
-<h1>Django-Oasis<a class="headerlink" href="#django-oasis" title="Link to this heading">¶</a></h1>
-<p>Django-Oasis (后面简称 Oasis) 旨在更加高效地编写 HTTP API。</p>
-<section id="id1">
-<h2>使用前提<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><span class="color-necessary">[必要]</span> 该项目基于 <a class="reference external" href="https://www.djangoproject.com">Django</a> 框架，所有在使用前需要对 Django 有基本的开发能力。</p></li>
-<li><p><span class="color-optional">[可选]</span> 项目还使用了 <a class="reference external" href="https://spec.openapis.org/oas/v3.0.3">OpenAPI 规范</a> (OAS) 来描述接口。它可以创建交互式接口文档，实现测试用例自动化，还能用于生成客户端代码等等。但不了解 OAS 也并不影响使用。</p></li>
-</ul>
-</section>
+          <section id="id1">
+<h1>请求响应<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>Oasis 的请求操作可以如视图函数一样返回请求响应 (<a class="reference external" href="https://docs.djangoproject.com/zh-hans/5.0/ref/request-response/#httpresponsebase-class">HttpResponseBase</a> 对象)。</p>
+<p>但为了开发便利，请求操作也可以不必直接返回请求响应。</p>
 <section id="id2">
-<h2>简单的示例<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p>这里定义了一个 <code class="docutils literal notranslate"><span class="pre">Book</span></code> 模型:</p>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">models.py [示例1]</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
-
-
-<span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="s2">&quot;书名&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-    <span class="n">created_at</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="s2">&quot;创建时间&quot;</span><span class="p">,</span> <span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<h2>返回字符串<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Hello World&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>等同于</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>并使用 Oasis 编写两个接口，为其实现 “查” 和 “增” 的功能:</p>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">views.py [示例1]</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.common</span> <span class="kn">import</span> <span class="n">model2schema</span>
+</section>
+<section id="json">
+<h2>返回可被 JSON 编码的对象<a class="headerlink" href="#json" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>等同于</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="none">
+<h2>返回 <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="（在 Python v3.12）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a><a class="headerlink" href="#none" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>等同于</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="response-schema">
+<h2>Response Schema<a class="headerlink" href="#response-schema" title="Link to this heading">¶</a></h2>
+<p>当返回一个不可被正常编码的对象时，可以通过使用 <code class="docutils literal notranslate"><span class="pre">response_schema</span></code> 参数设置一个 <a class="reference internal" href="api.html#django_oasis.schema.Schema" title="django_oasis.schema.Schema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Schema</span></code></a>，它会在响应过程中对返回值进行序列化。</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">response_schema.py [示例1]</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Resource</span>
-<span class="kn">from</span> <span class="nn">django_oasis.pagination</span> <span class="kn">import</span> <span class="n">PagePagination</span>
-<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">JsonData</span>
-
-<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Book</span>
 
 
-<span class="c1"># Oasis 并不能直接理解 Django Model 中的定义，</span>
-<span class="c1"># 所以需要使用 `model2schema` 将 Book 模型转换成 Schema。</span>
-<span class="k">class</span> <span class="nc">BookSchema</span><span class="p">(</span><span class="n">model2schema</span><span class="p">(</span><span class="n">Book</span><span class="p">)):</span>
-    <span class="k">pass</span>
+<span class="c1"># 这里用 dataclass 来模拟创建对象</span>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Book</span><span class="p">:</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">created_at</span><span class="p">:</span> <span class="n">datetime</span>
 
 
-<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/books&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">BookListAPI</span><span class="p">:</span>
-    <span class="c1"># get 方法负责处理 GET 请求，用于查询 Book</span>
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pagination</span><span class="o">=</span><span class="n">PagePagination</span><span class="p">(</span><span class="n">BookSchema</span><span class="p">)):</span>
-        <span class="c1"># 这里使用了 Oasis 提供的分页功能</span>
-        <span class="k">return</span> <span class="n">pagination</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+<span class="k">class</span> <span class="nc">BookSchema</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Datetime</span><span class="p">()</span>
 
-    <span class="c1"># post 方法负责处理 POST 请求，用于新增 Book</span>
-    <span class="nd">@Operation</span><span class="p">(</span><span class="n">response_schema</span><span class="o">=</span><span class="n">BookSchema</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">JsonData</span><span class="p">(</span><span class="n">BookSchema</span><span class="p">)):</span>
-        <span class="k">return</span> <span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+
+<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+    <span class="nd">@Operation</span><span class="p">(</span>
+<span class="hll">        <span class="n">response_schema</span><span class="o">=</span><span class="n">BookSchema</span><span class="p">,</span>
+</span>    <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Book</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;The Book&quot;</span><span class="p">,</span>
+            <span class="n">created_at</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+        <span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>这些请求接口会被 Oasis 处理并转换为 Django 的视图函数和路由，这使其能够成为 Django 项目的一部分。并且还为接口生成了 OAS，将 OAS 导入文档生成工具 (如 SwaggerUI)，便可对外展示接口文档了。</p>
-<p>这是由上面示例生成的 Swagger 文档：</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>等同于</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;The Book&quot;</span><span class="p">,</span>
+            <span class="n">created_at</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+        <span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">BookSchema</span><span class="p">()</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>虽然结果一致，但是 response_schema 还会为 OAS 提供响应描述。</p>
+</div>
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
                     <span class="caption-text">SwaggerUI [示例1]</span>
                 </div>
-                <iframe id="id_c51c5456" srcdoc="
+                <iframe id="id_e32b586b" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -384,7 +441,7 @@
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
-&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/books&quot;: {&quot;get&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;page&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 1, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}, {&quot;name&quot;: &quot;page_size&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 20, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;page&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;page_size&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;results&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;items&quot;: {&quot;allOf&quot;: [{&quot;$ref&quot;: &quot;#/components/schemas/samples.demo.views.BookSchema&quot;}, {&quot;required&quot;: [&quot;title&quot;]}]}}, &quot;count&quot;: {&quot;type&quot;: &quot;integer&quot;}}, &quot;required&quot;: [&quot;page&quot;, &quot;page_size&quot;, &quot;results&quot;, &quot;count&quot;]}}}}}}, &quot;post&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;$ref&quot;: &quot;#/components/schemas/samples.demo.views.BookSchema&quot;}, {&quot;required&quot;: [&quot;title&quot;]}]}}}}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;$ref&quot;: &quot;#/components/schemas/samples.demo.views.BookSchema&quot;}, {&quot;required&quot;: [&quot;title&quot;]}]}}}}}}}, &quot;components&quot;: {&quot;schemas&quot;: {&quot;samples.demo.views.BookSchema&quot;: {&quot;title&quot;: &quot;BookSchema&quot;, &quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;id&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;ID&quot;, &quot;readOnly&quot;: true}, &quot;title&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4e66\u540d&quot;, &quot;maxLength&quot;: 20}, &quot;created_at&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u521b\u5efa\u65f6\u95f4&quot;, &quot;readOnly&quot;: true, &quot;format&quot;: &quot;date-time&quot;}}}}}}}&lt;/script&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/api&quot;: {&quot;get&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;title&quot;: {&quot;type&quot;: &quot;string&quot;}, &quot;created_at&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;format&quot;: &quot;date-time&quot;}}, &quot;required&quot;: [&quot;title&quot;, &quot;created_at&quot;]}}}}}}}}}}&lt;/script&gt;
 &lt;script&gt;
     var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
 
@@ -429,111 +486,9 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_c51c5456')
+                iFrameResize({checkOrigin: false}, '#id_e32b586b')
             </script>
             </section>
-<section id="id3">
-<h2>功能说明<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>Oasis 使用自有的规则来编写接口代码，而不是使用 Django 的视图函数。</p></li>
-<li><p>Oasis 并不是生成文档，而是生成 OAS，OAS 可以用来做 API 文档和自动化测试使用。而且在整个开发过程中，几乎不需要手写 OAS。</p></li>
-<li><p>Oasis 内置了一个简单配置的 <a class="reference external" href="https://github.com/swagger-api/swagger-ui">swagger-ui</a>，仅需几行代码即可查看接口文档。而且 Oasis 是以 HTTP 接口的形式暴露 OAS 数据，所以也可以选择喜欢的 API 可视化工具，或者自动化测试工具。</p></li>
-<li><p>Schema 是 Oasis 实现的核心，它负责定义数据结构，验证数据，并提供序列化及反序列化功能。</p></li>
-</ul>
-</section>
-<section id="id4">
-<h2>目录<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速入门</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id2">安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id3">使用</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="operations.html">请求操作</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="operations.html#request">Request 对象</a></li>
-<li class="toctree-l2"><a class="reference internal" href="operations.html#operation">Operation 装饰类</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="parameter_query.html">查询参数 (Query)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="parameter_query.html#id1">简洁写法</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_query.html#id2">分组声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_query.html#id3">单参数项声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_query.html#id4">参数样式查询表</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="parameter_header.html">请求头参数 (Header)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="parameter_header.html#id1">参数样式查询表</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="parameter_cookie.html#id1">参数样式查询表</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="parameter_path.html">路径参数 (Path)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="parameter_path.html#id2">参数类型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_path.html#id4">参数样式查询表</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="parameter_body.html">请求体 (Body)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="parameter_body.html#json">JSON 格式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_body.html#id1">表单格式</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="response.html">请求响应</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="response.html#id2">返回字符串</a></li>
-<li class="toctree-l2"><a class="reference internal" href="response.html#json">返回可被 JSON 编码的对象</a></li>
-<li class="toctree-l2"><a class="reference internal" href="response.html#none">返回 <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="response.html#response-schema">Response Schema</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="advanced/index.html">请求与响应指南</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="advanced/attr_and_alias.html">属性名与别名</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced/default.html">参数默认值</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced/erase.html">擦除参数</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced/nullable.html">可为 null 的参数</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced/readonly_and_writeonly.html">只读与只写</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced/required.html">必需参数</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="upload_file.html">上传文件</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="upload_file.html#id2">单文件上传</a></li>
-<li class="toctree-l2"><a class="reference internal" href="upload_file.html#id3">多文件上传</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pagination.html">分页</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pagination.html#id2">内置分页器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pagination.html#id3">自定义分页器</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="auth.html">用户认证</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="auth.html#custom-auth">自定义认证</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="schema/index.html">Schema</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="schema/index.html#id1">序列化</a></li>
-<li class="toctree-l2"><a class="reference internal" href="schema/index.html#id2">反序列化</a></li>
-<li class="toctree-l2"><a class="reference internal" href="schema/index.html#choices">choices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="schema/index.html#after-deserialization">after_deserialization</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API 参考</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#module-django_oasis.core">Core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#module-django_oasis.parameter">Parameter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#module-django_oasis.pagination">Pagination</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#auth">Auth</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#module-django_oasis.schema">Schema</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">示例</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="examples/restful.html">RESTful</a></li>
-</ul>
-</div>
-</section>
 </section>
 
         </article>
@@ -541,16 +496,26 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="quickstart.html">
+          <a class="next-page" href="advanced/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">快速入门</div>
+                <div class="title">请求与响应指南</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          
+          <a class="prev-page" href="parameter_body.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">请求体 (Body)</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -581,13 +546,11 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Django-Oasis</a><ul>
-<li><a class="reference internal" href="#id1">使用前提</a></li>
-<li><a class="reference internal" href="#id2">简单的示例</a></li>
-<li><a class="reference internal" href="#id3">功能说明</a></li>
-<li><a class="reference internal" href="#id4">目录</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#">请求响应</a><ul>
+<li><a class="reference internal" href="#id2">返回字符串</a></li>
+<li><a class="reference internal" href="#json">返回可被 JSON 编码的对象</a></li>
+<li><a class="reference internal" href="#none">返回 <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></li>
+<li><a class="reference internal" href="#response-schema">Response Schema</a></li>
 </ul>
 </li>
 </ul>

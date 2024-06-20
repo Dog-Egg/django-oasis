@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="查询参数 (Query)" href="parameter_query.html" /><link rel="prev" title="快速入门" href="quickstart.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>请求操作 - Django-Oasis0.1.dev20240602025455</title>
+        <title>请求操作 - Django-Oasis0.1.dev20240620124516</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -207,7 +207,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240602025455</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -223,11 +223,14 @@
 <li class="toctree-l1"><a class="reference internal" href="parameter_cookie.html">请求 cookie 参数 (Cookie)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_path.html">路径参数 (Path)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="parameter_body.html">请求体 (Body)</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="parameter_advanced/index.html">请求参数进阶</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求参数进阶</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/default.html">参数默认值</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/erase.html">擦除无意义的参数</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/nullable.html">可为 null 的参数</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parameter_advanced/required.html">必需参数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="response.html">请求响应</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced/index.html">请求与响应指南</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 请求与响应指南</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced/attr_and_alias.html">属性名与别名</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/default.html">参数默认值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/erase.html">擦除参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/nullable.html">可为 null 的参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/readonly_and_writeonly.html">只读与只写</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/required.html">必需参数</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="upload_file.html">上传文件</a></li>
@@ -288,7 +291,7 @@
 <h1>请求操作<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <p>下例定义了所有可被识别的请求操作。</p>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">views.py [示例5]</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例1]</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 
 
@@ -308,9 +311,9 @@
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
-                    <span class="caption-text">SwaggerUI [示例5]</span>
+                    <span class="caption-text">SwaggerUI [示例1]</span>
                 </div>
-                <iframe id="id_76b2ae49" srcdoc="
+                <iframe id="id_050f4831" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -390,14 +393,14 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_76b2ae49')
+                iFrameResize({checkOrigin: false}, '#id_050f4831')
             </script>
             <section id="request">
 <h2>Request 对象<a class="headerlink" href="#request" title="Link to this heading">¶</a></h2>
 <p>在使用 Oasis 开发时，很多时候都不需要直接使用到 Request 对象，所以请求操作并不像 Django 视图函数一样会收到 Request 对象。</p>
 <p>因此 Oasis 做了如下规定: 只有定义了 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 方法的 API 类才会收到 Request 对象，且 Request 对象会以第一个位置参数的形式传递给 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 方法。该 Request 对象为 Django 的 <a class="reference external" href="https://docs.djangoproject.com/en/4.2/ref/request-response/#httprequest-objects">HttpRequest</a> 对象。</p>
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">views.py [示例6]</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例2]</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
 
 
@@ -416,7 +419,7 @@
 <h2>Operation 装饰类<a class="headerlink" href="#operation" title="Link to this heading">¶</a></h2>
 <p><a class="reference internal" href="api.html#django_oasis.core.Operation" title="django_oasis.core.Operation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Operation</span></code></a> 赋予请求操作更丰富的能力。比如提供说明文档，定义响应结构等等。</p>
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">views.py [示例7]</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">views.py [示例3]</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">Resource</span>
 
@@ -439,9 +442,9 @@
 
             <div style="border: 1px solid var(--color-background-border);">
                 <div class="code-block-caption">
-                    <span class="caption-text">SwaggerUI [示例7]</span>
+                    <span class="caption-text">SwaggerUI [示例3]</span>
                 </div>
-                <iframe id="id_18b35d27" srcdoc="
+                <iframe id="id_7775c1d5" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -521,7 +524,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_18b35d27')
+                iFrameResize({checkOrigin: false}, '#id_7775c1d5')
             </script>
             </section>
 </section>
@@ -595,7 +598,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=fe26c20b"></script>
+</div><script src="_static/documentation_options.js?v=efd5e6bf"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>
