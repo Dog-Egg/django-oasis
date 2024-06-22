@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="API 参考" href="../api.html" /><link rel="prev" title="验证数据" href="validation.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Hooks - Django-Oasis0.1.dev20240620124516</title>
+        <title>Hooks - Django-Oasis0.1.dev20240622094426</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></div></a>
+      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240622094426</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -207,7 +207,7 @@
     <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240622094426</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -289,8 +289,8 @@
         <article role="main" id="furo-main-content">
           <section id="hooks">
 <h1>Hooks<a class="headerlink" href="#hooks" title="Link to this heading">¶</a></h1>
-<p>Hook 可以让 Schema 更加灵活好用，虽然它并不是实现的核心。它最初的目的是为了让 class 类和一些紧密相关的函数(不是指 method)以更加美观的方式组织在一起。</p>
-<p>如下例所示，<code class="docutils literal notranslate"><span class="pre">validate_age</span></code> 是与 <code class="docutils literal notranslate"><span class="pre">User</span></code> 相关的验证函数，但它却被定义在了全局域上，虽然毫无问题，但是代码结构并不好看。就好像只属于我的物品却被放在了公共展示柜里。</p>
+<p>Hook 可以更加容易的扩展 Schema 。它最初的目的是为了让 class 类和一些紧密相关的函数(不是指 method)以更加美观的方式组织在一起。</p>
+<p>如下例所示，<code class="docutils literal notranslate"><span class="pre">validate_age</span></code> 是与 <code class="docutils literal notranslate"><span class="pre">User</span></code> 相关的验证函数，但它却被定义在了全局域上，虽然毫无问题，但是代码结构并不好看。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">validate_age</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">schema</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;年龄不能小于0。&#39;</span><span class="p">)</span>
@@ -311,14 +311,16 @@
             <span class="k">raise</span> <span class="n">schema</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;年龄不能小于0。&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>由于 hook 被设计的很简单，所以它非常灵活，以致于可以代替实现很多 Schema 的功能。</p>
 <section id="id1">
 <h2>使用用法<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>hook 是以装饰器的形式定义在 Schema 类的方法上的。</p>
 </section>
 <section id="hook">
 <h2>可用的 Hook<a class="headerlink" href="#hook" title="Link to this heading">¶</a></h2>
-<p>关于 <a class="reference internal" href="../api.html#django_oasis.schema.as_validator" title="django_oasis.schema.as_validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validator</span></code></a> 的使用可在 <a class="reference internal" href="validation.html"><span class="doc">验证数据</span></a> 一章中查看。</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api.html#django_oasis.schema.as_validator" title="django_oasis.schema.as_validator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_validator</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.html#django_oasis.schema.as_getter" title="django_oasis.schema.as_getter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_getter</span></code></a></p></li>
+</ul>
 </section>
 <section id="id2">
 <h2>Hook 的特点<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
@@ -405,7 +407,14 @@
             
           </div>
           <div class="right-details">
-            
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/Dog-Egg/django-oasis" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
           </div>
         </div>
         
@@ -443,7 +452,7 @@
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=efd5e6bf"></script>
+</div><script src="../_static/documentation_options.js?v=cb9fa3e3"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>

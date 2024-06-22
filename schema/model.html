@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="验证数据" href="validation.html" /><link rel="prev" title="Schema" href="index.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Model Schema - Django-Oasis0.1.dev20240620124516</title>
+        <title>Model Schema - Django-Oasis0.1.dev20240622094426</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -180,7 +180,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></div></a>
+      <a href="../index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240622094426</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -207,7 +207,7 @@
     <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240620124516</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20240622094426</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -378,9 +378,9 @@
 </section>
 <section id="id3">
 <h3>字段命名要求<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
-<p>你可能会想到如果字段名和父类的某个方法名或者属性同名时可能会导致错误的发生。</p>
-<p>实际上并不会，虽然字段是以类属性的方式定义的，但字段并不会成为类属性，也就意味着无法通过 <code class="docutils literal notranslate"><span class="pre">&lt;model_name&gt;.&lt;field_name&gt;</span></code> 的形式访问到字段。</p>
-<p>这样做的好处，就是不会出现同名污染，你可以为你的字段取任何名称，即便字段名为 “deserialize” 也不会发生错误。</p>
+<p>你可以使用任何有效的字段名，即使字段名和父类的某个方法名或者属性同名也不会导致错误。</p>
+<p>虽然字段是以类属性的方式定义的，但字段并不会成为类属性，也就意味着无法通过 <code class="docutils literal notranslate"><span class="pre">&lt;model_name&gt;.&lt;field_name&gt;</span></code> 的形式访问到字段。</p>
+<p>这样做的好处，就是不会出现同名污染，如下例字段名为 “deserialize”，这和 <a class="reference internal" href="../api.html#django_oasis.schema.Schema.deserialize" title="django_oasis.schema.Schema.deserialize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Schema.deserialize</span></code></a> 方法同名，但这并不会有任何问题。</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">deserialize</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
 
@@ -391,11 +391,11 @@
 </section>
 <section id="alias-attr">
 <h3>alias 和 attr<a class="headerlink" href="#alias-attr" title="Link to this heading">¶</a></h3>
-<p>你可以用 alias 和 attr 参数为序列化和反序列化的两端指定不同的字段名映射。如果不指定，它们默认等于字段名。</p>
+<p>可以使用 alias 和 attr 参数为序列化和反序列化的两端指定不同的字段名映射。如果不指定，它们默认等于字段名。</p>
 <p>它们之间的关系如下：</p>
-<p><code class="docutils literal notranslate"><span class="pre">attr</span></code> — <em>serialize()</em> —&gt; <code class="docutils literal notranslate"><span class="pre">alias</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">alias</span></code> — <em>deserialize()</em> —&gt; <code class="docutils literal notranslate"><span class="pre">attr</span></code></p>
-<p>参考示例：</p>
+<p>attr — <em>serialize()</em> —&gt; alias</p>
+<p>alias — <em>deserialize()</em> —&gt; attr</p>
+<p>示例：</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">a</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">alias</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="s1">&#39;inside&#39;</span><span class="p">)</span>
 
@@ -447,7 +447,14 @@
             
           </div>
           <div class="right-details">
-            
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/Dog-Egg/django-oasis" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
           </div>
         </div>
         
@@ -484,7 +491,7 @@
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=efd5e6bf"></script>
+</div><script src="../_static/documentation_options.js?v=cb9fa3e3"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=4e2eecee"></script>

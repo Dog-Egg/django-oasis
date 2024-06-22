@@ -1,10 +1,10 @@
 Hooks
 =====
 
-Hook 可以让 Schema 更加灵活好用，虽然它并不是实现的核心。它最初的目的是为了让 class 类和一些紧密相关的函数(不是指 method)以更加美观的方式组织在一起。
+Hook 可以更加容易的扩展 Schema 。它最初的目的是为了让 class 类和一些紧密相关的函数(不是指 method)以更加美观的方式组织在一起。
 
 
-如下例所示，``validate_age`` 是与 ``User`` 相关的验证函数，但它却被定义在了全局域上，虽然毫无问题，但是代码结构并不好看。就好像只属于我的物品却被放在了公共展示柜里。
+如下例所示，``validate_age`` 是与 ``User`` 相关的验证函数，但它却被定义在了全局域上，虽然毫无问题，但是代码结构并不好看。
 
 .. code-block::
 
@@ -32,9 +32,6 @@ Hook 可以让 Schema 更加灵活好用，虽然它并不是实现的核心。�
                 raise schema.ValidationError('年龄不能小于0。')
 
 
-
-由于 hook 被设计的很简单，所以它非常灵活，以致于可以代替实现很多 Schema 的功能。
-
 使用用法
 --------
 
@@ -48,7 +45,8 @@ hook 是以装饰器的形式定义在 Schema 类的方法上的。
 可用的 Hook
 -----------
 
-关于 `validator <django_oasis.schema.as_validator>` 的使用可在 :doc:`validation` 一章中查看。
+- `as_validator <django_oasis.schema.as_validator>`
+- `as_getter <django_oasis.schema.as_getter>`
 
 
 Hook 的特点
