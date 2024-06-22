@@ -209,6 +209,8 @@ class Schema(metaclass=SchemaMeta):
         self.__alias = alias
         self.read_only = read_only
         self.write_only = write_only
+        if read_only and write_only:
+            raise ValueError("read_only and write_only cannot both be True.")
 
         self.__required = required
         self._default = default
