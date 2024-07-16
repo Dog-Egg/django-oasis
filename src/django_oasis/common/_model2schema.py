@@ -151,6 +151,7 @@ MODEL_FIELD_PARSERS = {
     models.BooleanField: Parser(schema.Boolean),
     models.CharField: CharParser(),
     models.IntegerField: Parser(schema.Integer),
+    models.FloatField: Parser(schema.Float),
     models.DateField: Parser(schema.Date),
     models.DateTimeField: Parser(schema.Datetime),
     models.FileField: FileParser(),

@@ -104,3 +104,15 @@ def test_DecimalField():
 
     a = FooSchema().serialize({"a": 1.1, "id": 1})["a"]
     assert a == 1.1 and isinstance(a, float)
+
+
+class ModelWithFloatField(models.Model):
+    float = models.FloatField()
+
+
+@pytest.mark.django_db
+def test_FloatField():
+    Schema = model2schema(ModelWithFloatField)
+    ModelWithFloatField.objects.create(**Schema().deserialize({"float": 1.2}))
+    obj = ModelWithFloatField.objects.get()
+    assert Schema().serialize(obj) == {"float": 1.2, "id": 1}
