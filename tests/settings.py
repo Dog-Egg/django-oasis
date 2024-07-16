@@ -13,6 +13,14 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.sessions",
     "tests",
+    "django_oasis",
+]
+
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "APP_DIRS": True,
+    },
 ]
 
 USE_TZ = True

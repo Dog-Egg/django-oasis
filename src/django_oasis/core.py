@@ -31,7 +31,7 @@ from django_oasis_schema.utils import make_instance, make_model_schema, make_sch
 __all__ = ("OpenAPI", "Resource", "Operation")
 
 
-def get_openapi_name():
+def _get_openapi_instance_id():
     frame = inspect.getframeinfo(sys._getframe(2))
     rv = "%s:%s" % (os.path.relpath(frame.filename), frame.lineno)
     return hashlib.md5(rv.encode()).hexdigest()[:8]
@@ -81,8 +81,10 @@ class OpenAPI:
         )
         self.__description = description
         self.__urls: t.List[django.urls.URLPattern] = []
-        self.__spec_endpoint = "/apispec_%s" % (name or get_openapi_name())
-        self.__append_url(self.__spec_endpoint, self.spec_view)
+
+        id = _get_openapi_instance_id()
+        self.__spec_endpoint = "/apispec_%s" % (name or id)
+        self.__append_url(self.__spec_endpoint, self.spec_view, name=id)
         self.__error_handlers: t.Dict[t.Type[Exception], t.Callable] = (
             DEFAULT_ERROR_HANDLERS.copy()
         )

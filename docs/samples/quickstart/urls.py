@@ -10,5 +10,5 @@ openapi.add_resource(views.GreetingAPI)
 
 urlpatterns = [
     path("myapi/", include(openapi.urls)),  # 注意这里需要用 `include` 函数
-    path("docs/", swagger_ui(openapi)),  # 该路由用于查看 API 文档
+    path("docs/", swagger_ui()),  # 该路由用于查看 API 文档
 ]
