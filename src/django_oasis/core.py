@@ -124,7 +124,9 @@ class OpenAPI:
         resource._handle_error = handle_error
 
         django_path, openapi_path = resource._path._resolve()
-        self.__append_url(prefix + django_path, resource.view_func)
+        self.__append_url(
+            prefix + django_path, resource.view_func, name=resource.url_name
+        )
         self.__spec.add_path(
             prefix + openapi_path, self.__spec.parse(resource, tags=tags)
         )
@@ -181,6 +183,7 @@ class Resource:
     :param path: 资源 URL，必须以 "/" 开头。
     :param include_in_spec: 是否将当前资源解析到 OAS 中，默认为 `True`。
     :param default_auth: 为所属的 Operation 提供默认的 auth。
+    :param url_name: 为 Django 提供 URL 命名。参考: `命名 URL 模式 <https://docs.djangoproject.com/en/5.0/topics/http/urls/#naming-url-patterns>`_
     """
 
     HTTP_METHODS = [
@@ -204,12 +207,14 @@ class Resource:
         param_styles=None,
         tags=None,
         view_decorators: t.Optional[list] = None,
+        url_name: t.Optional[str] = None,
         include_in_spec: bool = True,
         default_auth: t.Union[BaseAuth, t.Type[BaseAuth], None] = None,
     ):
         self._path: Path = Path(
             path, param_schemas=param_schemas, param_styles=param_styles
         )
+        self.__url_name = url_name
         self.__operations: t.Dict[str, Operation] = {}
         self._tags: t.List = tags or []
         self.__view_decorators = view_decorators or []
@@ -217,6 +222,10 @@ class Resource:
         self._default_auth: t.Optional[BaseAuth] = (
             None if default_auth is None else make_instance(default_auth)
         )
+
+    @property
+    def url_name(self):
+        return self.__url_name
 
     def __get_view_decorators(self):
         for d in self.__view_decorators:

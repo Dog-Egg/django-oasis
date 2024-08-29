@@ -1,7 +1,6 @@
 import pytest
 from django.test import override_settings
-
-from django_oasis.urls import reverse
+from django.urls import reverse
 
 from . import views
 
@@ -11,7 +10,7 @@ def test_response_serialize_error_message(client):
         ValueError,
         match="{'a': 'a'} cannot be serialized by {'a': <django_oasis_schema.schemas.Integer object at .*?>}.",
     ):
-        client.get(reverse(views.API))
+        client.get(reverse("api1"))
 
 
 @override_settings(ROOT_URLCONF="tests.app.urls2")
