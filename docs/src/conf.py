@@ -37,7 +37,7 @@ nitpick_ignore = [
 
 # HTML output
 html_theme = "furo"
-html_logo = "../../logo.png"
+html_favicon = html_logo = "../../logo.png"
 html_title = (
     f'<div>{project}</div><span style="font-size: 14px; color: gray;">{release}</span>'
 )
