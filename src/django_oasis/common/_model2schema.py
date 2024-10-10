@@ -150,6 +150,7 @@ class Decimal(schema.Schema):
 MODEL_FIELD_PARSERS = {
     models.BooleanField: Parser(schema.Boolean),
     models.CharField: CharParser(),
+    models.TextField: Parser(schema.String),
     models.IntegerField: Parser(schema.Integer),
     models.FloatField: Parser(schema.Float),
     models.DateField: Parser(schema.Date),

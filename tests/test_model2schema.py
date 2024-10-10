@@ -15,6 +15,7 @@ class A(models.Model):
     DecimalField = models.DecimalField(decimal_places=2, max_digits=5)
     JSONField = models.JSONField()
     FileField = models.FileField()
+    TextField = models.TextField()
 
 
 def assert_parse_model_id(value, other):
@@ -41,6 +42,7 @@ def test_A():
     assert_parse_model_id(result["SmallIntegerField"], {})
     assert result["JSONField"] == (schema.Any, {})
     assert result["FileField"] == (schema.File, {})
+    assert result["TextField"] == (schema.String, {})
 
 
 class B(models.Model):
