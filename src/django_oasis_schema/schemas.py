@@ -880,8 +880,8 @@ class Dict(Schema):
         **kwargs,
     ):
         super().__init__(**kwargs)
-        self.__max_properties = (max_properties,)
-        self.__min_properties = (min_properties,)
+        self.__max_properties = max_properties
+        self.__min_properties = min_properties
         self.__value: Schema = make_instance(value or Any)
 
         if min_properties is not None or max_properties is not None:
