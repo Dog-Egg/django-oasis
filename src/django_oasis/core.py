@@ -145,11 +145,10 @@ class OpenAPI:
     def spec_view(self, request: HttpRequest):
         oas = self.get_spec()
         if self.__description and request:
-            description = (
-                self.__description(request)
-                if inspect.isfunction(self.__description)
-                else self.__description
-            )
+            if isinstance(self.__description, str):
+                description = self.__description
+            else:
+                description = self.__description(request)
             oas["info"]["description"] = clean_commonmark(description)
 
         script_name = request.path[: -len(request.path_info)]

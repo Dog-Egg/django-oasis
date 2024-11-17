@@ -4,17 +4,10 @@ dynamic = ["version"]
 authors = [{ name = "Lee", email = "294622946@qq.com" }]
 dependencies = ["python-dateutil"]
 
-
-[project.optional-dependencies]
-test = ["pytest", "pytest-django", "django"]
-doctest = ["sphinx", "django"]
-docbuild = ["furo", "sphinx", "django"]
-
 [project.urls]
 Homepage = "https://dog-egg.github.io/django-oasis/"
 Repository = "https://github.com/Dog-Egg/django-oasis"
 Documentation = "https://dog-egg.github.io/django-oasis/"
-
 
 [tool.setuptools]
 include-package-data = true
@@ -22,7 +15,6 @@ include-package-data = true
 [tool.setuptools.dynamic]
 version = { attr = "django_oasis.__version__" }
 readme = { file = ["README.md"] }
-
 
 [tool.setuptools.packages.find]
 where = ["src"]
