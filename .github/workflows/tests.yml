@@ -1,11 +1,7 @@
 name: Tests
 
 on:
-  push:
-    paths:
-      - ".github/workflows/tests.yml"
-      - "src/**"
-      - "docs/**"
+  pull_request:
 
 jobs:
   tests:
