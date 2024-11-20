@@ -192,6 +192,8 @@ class OasisLiteralInclude(LiteralInclude, OasisDirective):
 
 
 settings.configure(
+    DEBUG=True,
+    SECRET_KEY="docs",
     TEMPLATES=[
         {
             "BACKEND": "django.template.backends.django.DjangoTemplates",

@@ -1,6 +1,5 @@
 from django_oasis.auth import BaseAuth
 from django_oasis.core import OpenAPI, Operation, Resource, schema
-from django_oasis_schema.spectools.objects import OpenAPISpec
 
 
 def test_auth_openapispec():
@@ -45,10 +44,10 @@ def test_auth_openapispec():
     }
     assert spec["paths"]["/"]["get"] == {
         "responses": {
-            200: {
+            "200": {
                 "description": "OK",
             },
-            401: {
+            "401": {
                 "description": "未登录",
             },
         },
@@ -81,10 +80,10 @@ def test_django_auth_openapispec():
     assert spec["paths"]["/"] == {
         "get": {
             "responses": {
-                200: {
+                "200": {
                     "description": "OK",
                 },
-                401: {
+                "401": {
                     "description": "Unauthorized",
                 },
             },
@@ -96,13 +95,13 @@ def test_django_auth_openapispec():
         },
         "post": {
             "responses": {
-                200: {
+                "200": {
                     "description": "OK",
                 },
-                401: {
+                "401": {
                     "description": "Unauthorized",
                 },
-                403: {
+                "403": {
                     "description": "Forbidden",
                 },
             },
@@ -131,12 +130,12 @@ def test_reference_object():
         @Operation(response_schema=FooSchema(description="描述", nullable=True))
         def post(self): ...
 
-    spec = OpenAPISpec(info={})
-    spec.add_path("/", spec.parse(Resource.checkout(API)))
+    openapi = OpenAPI()
+    openapi.add_resource(API)
 
     # 调用多次的结果应保持一致
     for _ in range(5):
-        assert spec.to_dict() == {
+        assert openapi.get_spec() == {
             "components": {
                 "schemas": {
                     "tests.test_openapispec.FooSchema": {
@@ -152,11 +151,15 @@ def test_reference_object():
                 },
             },
             "openapi": "3.0.3",
+            "info": {
+                "title": "API Document",
+                "version": "0.1.0",
+            },
             "paths": {
                 "/": {
                     "get": {
                         "responses": {
-                            200: {
+                            "200": {
                                 "content": {
                                     "application/json": {
                                         "schema": {
@@ -173,7 +176,7 @@ def test_reference_object():
                     },
                     "post": {
                         "responses": {
-                            200: {
+                            "200": {
                                 "content": {
                                     "application/json": {
                                         "schema": {
@@ -210,4 +213,5 @@ def test_openapi_func_description(rf):
             "version": "0.1.0",
             "description": "description",
         },
+        "paths": {},
     }

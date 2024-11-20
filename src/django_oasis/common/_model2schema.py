@@ -87,7 +87,7 @@ class Parser:
                 field.help_text,
                 "\n".join(
                     [
-                        f"- %s: %s" % (choice[0], choice[1])
+                        "- %s: %s" % (choice[0], choice[1])
                         for choice in field.choices or []
                     ]
                 ),
