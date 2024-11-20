@@ -1,5 +1,7 @@
 import os
 
+DEBUG = True
+
 
 def _get_app_dirnames():
     dir = os.path.dirname(__file__)

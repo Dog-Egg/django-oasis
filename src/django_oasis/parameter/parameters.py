@@ -16,8 +16,6 @@ from django_oasis.exceptions import (
     RequestValidationError,
     UnsupportedMediaTypeError,
 )
-from django_oasis.spec.utils import default_as_none
-from django_oasis_schema.spectools.utils import clean_commonmark
 from django_oasis_schema.utils import make_instance, make_model_schema, make_schema
 
 from .style import Style, StyleHandler
@@ -86,7 +84,7 @@ class Path:
                 raise NotFoundError
         return kwargs
 
-    def __openapispec__(self, spec):
+    def __openapispec__(self, oas):
         result = []
         for param, schema in self.__param_schemas.items():
             style = self.__param_style_handlers[param].style
@@ -95,7 +93,7 @@ class Path:
                     "name": param,
                     "in": "path",
                     "required": True,
-                    "schema": spec.parse(schema),
+                    "schema": schema.__openapispec__(oas),
                     "style": style.style,
                     "explode": style.explode,
                 }
@@ -110,6 +108,9 @@ class MountPoint(abc.ABC):
     @abc.abstractmethod
     def parse_request(self, request: HttpRequest):
         pass
+
+    def __openapispec__(self, oas) -> dict:
+        raise NotImplementedError
 
 
 class RequestData(MountPoint, abc.ABC):
@@ -161,24 +162,24 @@ class RequestParameter(RequestData, abc.ABC):
                 rv[field._alias] = v
         return rv
 
-    def __openapispec__(self, spec):
-        result = []
+    def __openapispec__(self, oas):
+        parameters = []
         for field in self._schema._fields.values():
             style = self.__get_style(field)
-            result.append(
-                {
-                    "name": field._alias,
-                    "in": self.location,
-                    "required": default_as_none(field._required, False),
-                    "description": field._description or None,
-                    "schema": spec.parse(field),
-                    "style": style.style,
-                    "explode": style.explode,
-                    # "allowEmptyValue": default_as_none(field.allow_blank, False),
-                    # "examples": field.examples,
-                }
+            parameters.append(
+                oas.ParameterObject(
+                    {
+                        "name": field._alias,
+                        "in": self.location,
+                        "required": field._required,
+                        "description": oas.non_empty(field._description),
+                        "schema": field.__openapispec__(oas),
+                        "style": style.style,
+                        "explode": style.explode,
+                    }
+                )
             )
-        return dict(parameters=result)
+        return dict(parameters=parameters)
 
 
 class Query(RequestParameter):
@@ -272,7 +273,7 @@ class Body(RequestData):
         }
 
         self.__required = True
-        self.__description = clean_commonmark(description)
+        self.__description = description
 
     def __openapispec__(self, spec):
         return {
@@ -307,13 +308,13 @@ class RequestBodyContent(RequestData):
     def __init__(self, schema) -> None:
         self._schema = make_schema(schema)
 
-    def __openapispec__(self, spec):
+    def __openapispec__(self, oas):
         return {
             "requestBody": {
                 "required": True,
                 "content": {
                     self.content_type: {
-                        "schema": spec.parse(self._schema),
+                        "schema": self._schema.__openapispec__(oas),
                     }
                 },
             }
@@ -403,8 +404,8 @@ class BaseItem(MountPoint):
         result: dict = self._paramobj.parse_request(request)
         return result.popitem()[1] if result else _schema.undefined
 
-    def __openapispec__(self, spec):
-        return spec.parse(self._paramobj)
+    def __openapispec__(self, oas):
+        return self._paramobj.__openapispec__(oas)
 
     def setitemname(self, name: str):
         self._paramobj = self._make_param_instance(name)

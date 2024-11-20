@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import copy
 import datetime
 import functools
@@ -13,8 +15,6 @@ from dateutil.parser import isoparse
 from . import _validators
 from .constants import undefined
 from .exceptions import ValidationError
-from .spectools.objects import ReferenceFlag
-from .spectools.utils import default_as_none
 from .utils import make_instance
 from .utils.hook import HookClassMeta, get_hook, iter_hooks
 
@@ -197,7 +197,7 @@ class Schema(metaclass=SchemaMeta):
         nullable: bool = False,
         validators: t.Optional[t.List[t.Callable[[t.Any], t.Any]]] = None,
         choices: t.Optional[t.Iterable] = None,
-        description: str = "",
+        description: str | None = None,
         clear_value: t.Optional[t.Callable[[t.Any], bool]] = default_erase,
         erase: t.Optional[t.Callable[[t.Any], bool]] = default_erase,
         error_messages: t.Optional[dict] = None,
@@ -355,23 +355,25 @@ class Schema(metaclass=SchemaMeta):
     def _serialize(self, value):
         return value
 
-    def __openapispec__(self, spec):
-        return dict(
-            type=self.meta["data_type"],
-            default=(
-                None
-                if (self._default is undefined or callable(self._default))
-                else self._default
-            ),
-            # # # example=None if self.example is EMPTY else _spec.Skip(
-            # # #     self.example() if callable(self.example) else self.example),
-            description=self._description or None,
-            readOnly=default_as_none(self.read_only, False),
-            writeOnly=default_as_none(self.write_only, False),
-            enum=self.__choices,
-            nullable=default_as_none(self.__nullable, False),
-            format=self.meta["data_format"],
-            # deprecated=_spec.default_as_none(self.deprecated, False),
+    def __openapispec__(self, oas, **kwargs):
+        return oas.SchemaObject(
+            dict(
+                dict(
+                    type=self.meta["data_type"],
+                    default=(
+                        oas.empty
+                        if (self._default is undefined or callable(self._default))
+                        else self._default
+                    ),
+                    description=oas.non_empty(self._description),
+                    readOnly=self.read_only,
+                    writeOnly=self.write_only,
+                    enum=oas.non_empty(self.__choices),
+                    nullable=self.__nullable,
+                    format=oas.non_empty(self.meta["data_format"]),
+                ),
+                **kwargs,
+            )
         )
 
 
@@ -419,7 +421,7 @@ EXCLUDE = "exclude"
 ERROR = "error"
 
 
-class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
+class Model(Schema, metaclass=ModelMeta):
     """
     :param required_fields: 覆盖原有的字段必需条件配置。设为空列表则所有字段为非必需，也可设为 ``"__all__"`` 指定所有字段为必需。
     :param unknown_fields: 该参数决定了在反序列化时如何处理未知字段。
@@ -581,25 +583,37 @@ class Model(ReferenceFlag, Schema, metaclass=ModelMeta):
 
         return rv
 
-    def __openapispec__(self, spec):
-        def get_required_list():
-            required = []
-            for field in self._fields.values():
-                if field._required:
-                    required.append(field._alias)
-            return required
-
-        result = super().__openapispec__(spec)
-        properties = {}
+    def __openapispec__(self, oas, **_):
+        required = []
         for field in self._fields.values():
-            properties[field._alias] = spec.parse(field)
-        result.update(
-            {
-                "properties": properties,
-                "required": get_required_list(),
-            }
-        )
-        return result
+            if field._required:
+                required.append(field._alias)
+
+        attr = "$schemaobject"
+        if not hasattr(self.__class__, attr):
+            properties = {}
+            for field in self._fields.values():
+                properties[field._alias] = field.__openapispec__(oas)
+            setattr(
+                self.__class__,
+                attr,
+                oas.SchemaObject(
+                    {
+                        "type": "object",
+                        "title": self.__class__.__name__,
+                        "description": oas.non_empty(self.__doc__),
+                        "properties": properties,
+                    },
+                    key=self.__class__.__module__ + "." + self.__class__.__qualname__,
+                ),
+            )
+        schemaobject = getattr(self.__class__, attr)
+
+        if required:
+            return super().__openapispec__(
+                oas, type=oas.empty, **{"allOf": [schemaobject, {"required": required}]}
+            )
+        return schemaobject
 
 
 class String(Schema):
@@ -642,14 +656,14 @@ class String(Schema):
     def _serialize(self, value) -> str:
         return str(value)
 
-    def __openapispec__(self, spec):
-        result = super().__openapispec__(spec)
-        result.update(
-            pattern=self.__pattern,
-            minLength=self.__min_length,
-            maxLength=self.__max_length,
+    def __openapispec__(self, oas, **kwargs):
+        return super().__openapispec__(
+            oas,
+            pattern=oas.non_empty(self.__pattern),
+            minLength=oas.non_empty(self.__min_length),
+            maxLength=oas.non_empty(self.__max_length),
+            **kwargs,
         )
-        return result
 
 
 class Number(Schema):
@@ -683,16 +697,15 @@ class Number(Schema):
         if multiple_of is not None:
             self._validators.append(_validators.MultipleOfValidator(self._multiple_of))
 
-    def __openapispec__(self, spec, **kwargs):
-        result = super().__openapispec__(spec, **kwargs)
-        result.update(
-            maximum=self.__maximum,
-            exclusiveMaximum=default_as_none(self.__exclusive_maximum, False),
-            minimum=self.__minimum,
-            exclusiveMinimum=default_as_none(self.__exclusive_minimum, False),
-            multipleOf=self._multiple_of,
+    def __openapispec__(self, oas, **_):
+        return super().__openapispec__(
+            oas,
+            maximum=oas.non_empty(self.__maximum),
+            exclusiveMaximum=self.__exclusive_maximum,
+            minimum=oas.non_empty(self.__minimum),
+            exclusiveMinimum=self.__exclusive_minimum,
+            multipleOf=oas.non_empty(self._multiple_of),
         )
-        return result
 
 
 class Integer(Number):
@@ -850,15 +863,14 @@ class List(Schema):
             rv.append(self._item.serialize(item))
         return rv
 
-    def __openapispec__(self, spec):
-        result = super().__openapispec__(spec)
-        result.update(
-            items=spec.parse(self._item),
-            maxItems=self.__max_items,
-            minItems=self.__min_items,
-            uniqueItems=default_as_none(self.__unique_items, False),
+    def __openapispec__(self, oas, **_):
+        return super().__openapispec__(
+            oas,
+            items=self._item.__openapispec__(oas),
+            maxItems=oas.non_empty(self.__max_items),
+            minItems=oas.non_empty(self.__min_items),
+            uniqueItems=self.__unique_items,
         )
-        return result
 
 
 class Dict(Schema):
@@ -909,14 +921,13 @@ class Dict(Schema):
     def _serialize(self, obj):
         return {key: self.__value.serialize(val) for key, val in obj.items()}
 
-    def __openapispec__(self, spec) -> dict:
-        result = super().__openapispec__(spec)
-        result.update(
-            additionalProperties=spec.parse(self.__value),
+    def __openapispec__(self, oas, **_) -> dict:
+        return super().__openapispec__(
+            oas,
+            additionalProperties=(self.__value.__openapispec__(oas)),
             maxProperties=self.__max_properties,
             minProperties=self.__min_properties,
         )
-        return result
 
 
 class AnyOf(Schema):

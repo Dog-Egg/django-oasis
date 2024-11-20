@@ -27,14 +27,17 @@ class BaseAuth:
         :param request: Django `HttpRequest <https://docs.djangoproject.com/zh-hans/5.0/ref/request-response/#httprequest-objects>`_ 对象。
         """
 
-    def __openapispec__(self, spec, **kwargs):
+    def __openapispec__(self, oas):
         if hasattr(self, "declare_security"):
             # 遍历类的所有父类，找到第一个有 `declare_security` 属性的类。
             for cls in self.__class__.__mro__:
                 if "declare_security" in cls.__dict__:
-                    security_name = cls.__name__
-                    spec._set_security_scheme(security_name, self.declare_security)
-                    return [{security_name: []}]
+                    return oas.SecurityRequirementObject(
+                        scheme=oas.SecuritySchemeObject(
+                            self.declare_security,
+                            key=cls.__name__,
+                        ),
+                    )
 
 
 def _get_django_auth_secrity_apikey_name():

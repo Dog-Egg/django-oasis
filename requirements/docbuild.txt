@@ -1,3 +1,4 @@
+-r _deps.txt
+
 furo
 sphinx
-django

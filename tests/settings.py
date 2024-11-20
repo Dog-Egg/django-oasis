@@ -1,3 +1,5 @@
+DEBUG = True
+
 SECRET_KEY = "testing"
 ROOT_URLCONF = "tests.app.urls"
 

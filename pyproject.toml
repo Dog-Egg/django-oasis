@@ -2,7 +2,10 @@
 name = "django-oasis"
 dynamic = ["version"]
 authors = [{ name = "Lee", email = "294622946@qq.com" }]
-dependencies = ["python-dateutil"]
+dependencies = [
+    "python-dateutil",
+    "build_openapispec @ git+https://github.com/Dog-Egg/build_openapispec.git",
+]
 
 [project.urls]
 Homepage = "https://dog-egg.github.io/django-oasis/"

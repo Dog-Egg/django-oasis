@@ -19,8 +19,8 @@ class Pagination(MountPoint, metaclass=abc.ABCMeta):
     def __parameter(self):
         return self._get_request_parameter()
 
-    def __openapispec__(self, spec):
-        return spec.parse(self.__parameter)
+    def __openapispec__(self, oas):
+        return self.__parameter.__openapispec__(oas)
 
     def setup(self, operation):
         if operation.response_schema is None:

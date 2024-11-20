@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import copy
 import functools
 import hashlib
@@ -9,6 +11,7 @@ import warnings
 from http import HTTPStatus
 
 import django.urls
+from build_openapispec import openapispec
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from django.http.response import HttpResponseBase, JsonResponse
@@ -23,9 +26,6 @@ from django_oasis.exceptions import (
     RequestValidationError,
 )
 from django_oasis.parameter.parameters import BaseItem, MountPoint, Path
-from django_oasis.spec import utils as _spec
-from django_oasis_schema.spectools.objects import OpenAPISpec
-from django_oasis_schema.spectools.utils import clean_commonmark
 from django_oasis_schema.utils import make_instance, make_model_schema, make_schema
 
 __all__ = ("OpenAPI", "Resource", "Operation")
@@ -60,6 +60,23 @@ DEFAULT_ERROR_HANDLERS: t.Dict[t.Type[Exception], t.Callable] = {
 }
 
 
+def _validate_oas(fn):
+    def wrapper(*args, **kwargs):
+        spec = fn(*args, **kwargs)
+
+        if settings.DEBUG:
+            try:
+                from openapi_spec_validator import validate
+            except ImportError:
+                pass
+            else:
+                validate(spec)
+
+        return spec
+
+    return wrapper
+
+
 class OpenAPI:
     """
     :param name: 如果需要对外分享 OAS 数据，建议设置该名称，它将作为 OAS 数据地址的一部分，而不是使用计算出的名称。
@@ -73,12 +90,7 @@ class OpenAPI:
         name: t.Optional[str] = None,
         description: t.Union[str, t.Callable[[HttpRequest], str]] = "",
     ):
-        self.__spec = OpenAPISpec(
-            info={
-                "title": title,
-                "version": "0.1.0",
-            }
-        )
+        self.__title = title
         self.__description = description
         self.__urls: t.List[django.urls.URLPattern] = []
 
@@ -88,10 +100,11 @@ class OpenAPI:
         self.__error_handlers: t.Dict[t.Type[Exception], t.Callable] = (
             DEFAULT_ERROR_HANDLERS.copy()
         )
+        self.__path_dict: dict[str, tuple[Resource, list[str]]] = {}
 
     @property
     def title(self):
-        return self.__spec.title
+        return self.__title
 
     def add_resources(self, module, **kwargs):
         """从模块中查找资源并添加。"""
@@ -100,7 +113,7 @@ class OpenAPI:
         for res in find_resources(module):
             self.add_resource(res, **kwargs)
 
-    def add_resource(self, obj, *, prefix="", tags=None):
+    def add_resource(self, obj, *, prefix="", tags: list[str] | None = None):
         if prefix:
             if not prefix.startswith("/") or prefix.endswith("/"):
                 raise ValueError(
@@ -110,9 +123,10 @@ class OpenAPI:
         if isinstance(obj, Resource):
             resource = obj
         else:
-            resource = Resource.checkout(obj)
-            if resource is None:
+            r = Resource.checkout(obj)
+            if r is None:
                 raise ValueError("%s is not marked by %s." % (obj, Resource.__name__))
+            resource = r
 
         def handle_error(exc, *args, **kwargs):
             for cls in inspect.getmro(exc.__class__):
@@ -127,9 +141,7 @@ class OpenAPI:
         self.__append_url(
             prefix + django_path, resource.view_func, name=resource.url_name
         )
-        self.__spec.add_path(
-            prefix + openapi_path, self.__spec.parse(resource, tags=tags)
-        )
+        self.__path_dict[prefix + openapi_path] = (resource, tags or [])
 
     def __append_url(self, path, *args, **kwargs):
         path = path.lstrip("/")
@@ -139,31 +151,60 @@ class OpenAPI:
     def urls(self):
         return self.__urls
 
-    def get_spec(self) -> dict:
-        return self.__spec.to_dict()
+    @_validate_oas
+    def get_spec(self, request: HttpRequest | None = None):
+        oas = openapispec("3.0.3")
 
-    def spec_view(self, request: HttpRequest):
-        oas = self.get_spec()
-        if self.__description and request:
+        if self.__description:
             if isinstance(self.__description, str):
                 description = self.__description
-            else:
+            elif request:
                 description = self.__description(request)
-            oas["info"]["description"] = clean_commonmark(description)
+            else:
+                description = oas.empty
+        else:
+            description = oas.empty
 
-        script_name = request.path[: -len(request.path_info)]
-        if script_name:
-            oas["servers"] = [{"url": script_name}]
+        if request:
+            script_name = request.path[: -len(request.path_info)]
+            if script_name:
+                server = [{"url": script_name}]
+            else:
+                server = oas.empty
+        else:
+            server = oas.empty
 
-        prefix = request.path_info[: -len(self.__spec_endpoint)]
-        if prefix:
-            paths = oas.get("paths", {})
-            for path in list(paths.keys()):
-                paths[prefix + path] = paths[path]
-                del paths[path]
+        prefix = (
+            request.path_info[: -len(self.__spec_endpoint)]
+            if request is not None
+            else ""
+        )
 
+        spec = oas.build(
+            oas.OpenAPIObject(
+                {
+                    "info": oas.InfoObject(
+                        {
+                            "title": self.__title,
+                            "version": "0.1.0",
+                            "description": description,
+                        }
+                    ),
+                    "paths": {
+                        prefix + k: oas.PathItemObject(r.__openapispec__(oas, ts))
+                        for k, (r, ts) in self.__path_dict.items()
+                    },
+                    "server": server,
+                }
+            )
+        )
+
+        return spec
+
+    def spec_view(self, request: HttpRequest):
+        spec = self.get_spec(request)
         json_dumps_params = dict(indent=2, ensure_ascii=False) if settings.DEBUG else {}
-        return JsonResponse(oas, json_dumps_params=json_dumps_params)
+        return JsonResponse(spec, json_dumps_params=json_dumps_params)
 
     def register_schema(self, schema):
         schema = make_model_schema(schema)
@@ -328,15 +369,18 @@ class Resource:
         operation = self.__operations[method]
         return operation._wrapped_invoke(handler, request)
 
-    def __openapispec__(self, spec: OpenAPISpec, **kwargs):
+    def __openapispec__(self, oas, tags: list[str] | None = None) -> dict:
         if not self.__include_in_spec:
-            return
-        result = {}
+            return {}
+
+        operations = {}
+        path_params = self._path.__openapispec__(oas)
         for method, operation in self.__operations.items():
-            result[method] = _spec.merge(
-                {"parameters": spec.parse(self._path)}, spec.parse(operation, **kwargs)
-            )
-        return result
+            operation_kwargs = operation.__openapispec__(oas, tags or [])
+            if path_params:
+                operation_kwargs.setdefault("parameters", []).extend(path_params)
+            operations[method] = oas.OperationObject(operation_kwargs)
+        return operations
 
 
 class Operation:
@@ -369,7 +413,7 @@ class Operation:
     ):
         self.__tags = tags or []
         self.__summary = summary
-        self.__description = _spec.clean_commonmark(description)
+        self.__description = description
 
         self.response_schema: t.Optional[schema.Schema] = None
         if response_schema is not None:
@@ -440,9 +484,9 @@ class Operation:
                 ) from e
         return rv, self.__status_code
 
-    def __openapispec__(self, spec: OpenAPISpec, tags=None):
+    def __openapispec__(self, oas, tags: list[str]) -> dict:
         if not self.__include_in_spec:
-            return
+            return {}
 
         other_responses = {}
         if self.__auth and hasattr(self.__auth, "declare_responses"):
@@ -451,32 +495,38 @@ class Operation:
         if self.__declare_responses:
             other_responses.update(self.__declare_responses)
 
-        return functools.reduce(
-            _spec.merge,
-            [
-                {
-                    "summary": self.__summary,
-                    "description": self.__description,
-                    "tags": [
-                        *(self._resource._tags if self._resource else []),
-                        *self.__tags,
-                        *(tags or []),
-                    ],
-                    "deprecated": _spec.default_as_none(self.__deprecated, False),
-                    "responses": {
-                        self.__status_code: {
-                            "description": self.__response_description,
-                            "content": {
-                                "application/json": {
-                                    "schema": self.response_schema
-                                    and spec.parse(self.response_schema)
-                                }
-                            },
-                        },
-                        **other_responses,
-                    },
-                    "security": self.__auth and spec.Skip(spec.parse(self.__auth)),
-                },
-                *(spec.parse(p) for p in self.__mountpoints.values()),
-            ],
-        )
+        if self.response_schema is not None:
+            content = {
+                "application/json": {
+                    "schema": self.response_schema.__openapispec__(oas)
+                }
+            }
+        else:
+            content = oas.empty
+
+        rv = {
+            "summary": oas.non_empty(self.__summary),
+            "description": oas.non_empty(self.__description),
+            "tags": [
+                *(self._resource._tags if self._resource else []),
+                *self.__tags,
+                *(tags or []),
+            ]
+            or oas.empty,
+            "deprecated": self.__deprecated,
+            "responses": {
+                str(self.__status_code): oas.ResponseObject(
+                    {
+                        "description": self.__response_description,
+                        "content": content,
+                    }
+                ),
+                **{str(k): v for k, v in other_responses.items()},
+            },
+            "security": (
+                [self.__auth.__openapispec__(oas)] if self.__auth else oas.empty
+            ),
+        }
+        for p in self.__mountpoints.values():
+            rv.update(p.__openapispec__(oas))
+        return rv
