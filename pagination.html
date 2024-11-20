@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="用户认证" href="auth.html" /><link rel="prev" title="上传文件" href="upload_file.html" />
 
     <link rel="shortcut icon" href="_static/logo.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>分页 - Django-Oasis0.1.dev20241117123648</title>
+        <title>分页 - Django-Oasis0.1.dev20241120051650</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241117123648</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241120051650</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -194,7 +194,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241117123648</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241120051650</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -347,7 +347,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">SwaggerUI [示例1]</span>
                 </div>
-                <iframe id="id_b18400a3" srcdoc="
+                <iframe id="id_6184ee60" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -382,7 +382,7 @@
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
-&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/books/page&quot;: {&quot;get&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;page&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 1, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}, {&quot;name&quot;: &quot;page_size&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 20, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;page&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;page_size&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;results&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;items&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;id&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;ID&quot;, &quot;readOnly&quot;: true}, &quot;title&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4e66\u540d&quot;, &quot;maxLength&quot;: 10}, &quot;author&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4f5c\u8005&quot;, &quot;maxLength&quot;: 20}}, &quot;required&quot;: [&quot;title&quot;, &quot;author&quot;]}}, &quot;count&quot;: {&quot;type&quot;: &quot;integer&quot;}}, &quot;required&quot;: [&quot;page&quot;, &quot;page_size&quot;, &quot;results&quot;, &quot;count&quot;]}}}}}}}, &quot;/books/offset&quot;: {&quot;get&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;offset&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 0, &quot;minimum&quot;: 0}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}, {&quot;name&quot;: &quot;limit&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 20, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;offset&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;limit&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;results&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;items&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;id&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;ID&quot;, &quot;readOnly&quot;: true}, &quot;title&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4e66\u540d&quot;, &quot;maxLength&quot;: 10}, &quot;author&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4f5c\u8005&quot;, &quot;maxLength&quot;: 20}}, &quot;required&quot;: [&quot;title&quot;, &quot;author&quot;]}}, &quot;count&quot;: {&quot;type&quot;: &quot;integer&quot;}}, &quot;required&quot;: [&quot;offset&quot;, &quot;limit&quot;, &quot;results&quot;, &quot;count&quot;]}}}}}}}}}}&lt;/script&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/books/page&quot;: {&quot;get&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;type&quot;: &quot;object&quot;, &quot;title&quot;: &quot;InnerSchema&quot;, &quot;properties&quot;: {&quot;page&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;page_size&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;results&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;items&quot;: {&quot;allOf&quot;: [{&quot;type&quot;: &quot;object&quot;, &quot;title&quot;: &quot;InnerSchema&quot;, &quot;properties&quot;: {&quot;id&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;ID&quot;, &quot;readOnly&quot;: true}, &quot;title&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4e66\u540d&quot;, &quot;maxLength&quot;: 10}, &quot;author&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4f5c\u8005&quot;, &quot;maxLength&quot;: 20}}}, {&quot;required&quot;: [&quot;title&quot;, &quot;author&quot;]}]}}, &quot;count&quot;: {&quot;type&quot;: &quot;integer&quot;}}}, {&quot;required&quot;: [&quot;page&quot;, &quot;page_size&quot;, &quot;results&quot;, &quot;count&quot;]}]}}}}}, &quot;parameters&quot;: [{&quot;name&quot;: &quot;page&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 1, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}, {&quot;name&quot;: &quot;page_size&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 20, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}]}}, &quot;/books/offset&quot;: {&quot;get&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;type&quot;: &quot;object&quot;, &quot;title&quot;: &quot;InnerSchema&quot;, &quot;properties&quot;: {&quot;offset&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;limit&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;results&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;items&quot;: {&quot;allOf&quot;: [{&quot;type&quot;: &quot;object&quot;, &quot;title&quot;: &quot;InnerSchema&quot;, &quot;properties&quot;: {&quot;id&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;ID&quot;, &quot;readOnly&quot;: true}, &quot;title&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4e66\u540d&quot;, &quot;maxLength&quot;: 10}, &quot;author&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4f5c\u8005&quot;, &quot;maxLength&quot;: 20}}}, {&quot;required&quot;: [&quot;title&quot;, &quot;author&quot;]}]}}, &quot;count&quot;: {&quot;type&quot;: &quot;integer&quot;}}}, {&quot;required&quot;: [&quot;offset&quot;, &quot;limit&quot;, &quot;results&quot;, &quot;count&quot;]}]}}}}}, &quot;parameters&quot;: [{&quot;name&quot;: &quot;offset&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 0, &quot;minimum&quot;: 0}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}, {&quot;name&quot;: &quot;limit&quot;, &quot;in&quot;: &quot;query&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 20, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}]}}}, &quot;openapi&quot;: &quot;3.0.3&quot;}}&lt;/script&gt;
 &lt;script&gt;
     var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
 
@@ -427,7 +427,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_b18400a3')
+                iFrameResize({checkOrigin: false}, '#id_6184ee60')
             </script>
             </section>
 </section>
@@ -506,7 +506,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">SwaggerUI [示例2]</span>
                 </div>
-                <iframe id="id_9c032ba1" srcdoc="
+                <iframe id="id_29b925cf" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -541,7 +541,7 @@
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
-&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/books&quot;: {&quot;get&quot;: {&quot;parameters&quot;: [{&quot;name&quot;: &quot;p&quot;, &quot;in&quot;: &quot;query&quot;, &quot;description&quot;: &quot;\u9875\u7801&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 1, &quot;description&quot;: &quot;\u9875\u7801&quot;, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}, {&quot;name&quot;: &quot;size&quot;, &quot;in&quot;: &quot;query&quot;, &quot;description&quot;: &quot;\u9875\u9762\u5927\u5c0f&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 20, &quot;description&quot;: &quot;\u9875\u9762\u5927\u5c0f&quot;, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}], &quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;data&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;description&quot;: &quot;\u6570\u636e\u5217\u8868&quot;, &quot;items&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: {&quot;id&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;ID&quot;, &quot;readOnly&quot;: true}, &quot;title&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4e66\u540d&quot;, &quot;maxLength&quot;: 10}, &quot;author&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4f5c\u8005&quot;, &quot;maxLength&quot;: 20}}, &quot;required&quot;: [&quot;title&quot;, &quot;author&quot;]}}, &quot;total&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;\u6570\u636e\u603b\u6570&quot;}}, &quot;required&quot;: [&quot;data&quot;, &quot;total&quot;]}}}}}}}}}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/books&quot;: {&quot;get&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;type&quot;: &quot;object&quot;, &quot;title&quot;: &quot;ResponseSchema&quot;, &quot;properties&quot;: {&quot;data&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;description&quot;: &quot;\u6570\u636e\u5217\u8868&quot;, &quot;items&quot;: {&quot;allOf&quot;: [{&quot;type&quot;: &quot;object&quot;, &quot;title&quot;: &quot;BookSchema&quot;, &quot;properties&quot;: {&quot;id&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;ID&quot;, &quot;readOnly&quot;: true}, &quot;title&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4e66\u540d&quot;, &quot;maxLength&quot;: 10}, &quot;author&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;\u4f5c\u8005&quot;, &quot;maxLength&quot;: 20}}}, {&quot;required&quot;: [&quot;title&quot;, &quot;author&quot;]}]}}, &quot;total&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;description&quot;: &quot;\u6570\u636e\u603b\u6570&quot;}}}, {&quot;required&quot;: [&quot;data&quot;, &quot;total&quot;]}]}}}}}, &quot;parameters&quot;: [{&quot;name&quot;: &quot;p&quot;, &quot;in&quot;: &quot;query&quot;, &quot;description&quot;: &quot;\u9875\u7801&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 1, &quot;description&quot;: &quot;\u9875\u7801&quot;, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}, {&quot;name&quot;: &quot;size&quot;, &quot;in&quot;: &quot;query&quot;, &quot;description&quot;: &quot;\u9875\u9762\u5927\u5c0f&quot;, &quot;schema&quot;: {&quot;type&quot;: &quot;integer&quot;, &quot;default&quot;: 20, &quot;description&quot;: &quot;\u9875\u9762\u5927\u5c0f&quot;, &quot;minimum&quot;: 1}, &quot;style&quot;: &quot;form&quot;, &quot;explode&quot;: true}]}}}, &quot;openapi&quot;: &quot;3.0.3&quot;}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
 &lt;script&gt;
     var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
 
@@ -586,7 +586,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_9c032ba1')
+                iFrameResize({checkOrigin: false}, '#id_29b925cf')
             </script>
             </section>
 </section>
@@ -671,7 +671,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=9ae1498e"></script>
+</div><script src="_static/documentation_options.js?v=751a7d80"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>

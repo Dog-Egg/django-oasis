@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="RESTful" href="examples/restful.html" /><link rel="prev" title="Hooks" href="schema/hooks.html" />
 
     <link rel="shortcut icon" href="_static/logo.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>API 参考 - Django-Oasis0.1.dev20241117123648</title>
+        <title>API 参考 - Django-Oasis0.1.dev20241120051650</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241117123648</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241120051650</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -194,7 +194,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241117123648</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241120051650</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -284,9 +284,9 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em> | </em><em>None</em>) – 如果需要对外分享 OAS 数据，建议设置该名称，它将作为 OAS 数据地址的一部分，而不是使用计算出的名称。</p></li>
+<li><p><strong>name</strong> (<em>t.Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>]</em>) – 如果需要对外分享 OAS 数据，建议设置该名称，它将作为 OAS 数据地址的一部分，而不是使用计算出的名称。</p></li>
 <li><p><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>)</p></li>
-<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="（在 Python v3.13）"><em>Callable</em></a><em>[</em><em>[</em><em>HttpRequest</em><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>]</em>)</p></li>
+<li><p><strong>description</strong> (<em>t.Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><em>t.Callable</em><em>[</em><em>[</em><em>HttpRequest</em><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>]</em><em>]</em>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -305,14 +305,14 @@
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>include_in_spec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.13）"><em>bool</em></a>) – 是否将当前操作解析到 OAS 中，默认为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="（在 Python v3.13）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>。</p></li>
-<li><p><strong>summary</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em> | </em><em>None</em>) – 用于设置 OAS 操作对象摘要。</p></li>
-<li><p><strong>auth</strong> (<a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.13）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em>] </em><em>| </em><em>None</em>) – 设置操作请求认证。</p></li>
-<li><p><strong>declare_responses</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.13）"><em>dict</em></a><em> | </em><em>None</em>) – 声明可能的请求响应，用于构建 OAS。</p></li>
-<li><p><strong>response_schema</strong> (<em>None</em><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.13）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Model" title="django_oasis_schema.schemas.Model"><em>Model</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.13）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>] </em><em>| </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a>) – 用于序列化请求操作返回值，并为 OAS 提供响应描述。</p></li>
-<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>summary</strong> (<em>t.Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>]</em>) – 用于设置 OAS 操作对象摘要。</p></li>
+<li><p><strong>auth</strong> (<em>t.Union</em><em>[</em><a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em>, </em><em>t.Type</em><em>[</em><a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em>]</em><em>, </em><em>None</em><em>]</em>) – 设置操作请求认证。</p></li>
+<li><p><strong>declare_responses</strong> (<em>t.Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.13）"><em>dict</em></a><em>]</em>) – 声明可能的请求响应，用于构建 OAS。</p></li>
+<li><p><strong>response_schema</strong> (<em>t.Union</em><em>[</em><em>None</em><em>, </em><em>t.Type</em><em>[</em><a class="reference internal" href="#django_oasis.schema.Model" title="django_oasis.schema.Model"><em>schema.Model</em></a><em>]</em><em>, </em><em>t.Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis.schema.Schema"><em>schema.Schema</em></a><em>]</em><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis.schema.Schema"><em>schema.Schema</em></a><em>]</em>) – 用于序列化请求操作返回值，并为 OAS 提供响应描述。</p></li>
+<li><p><strong>description</strong> (<em>t.Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>]</em>)</p></li>
 <li><p><strong>deprecated</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.13）"><em>bool</em></a>)</p></li>
 <li><p><strong>status_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a>)</p></li>
-<li><p><strong>view_decorators</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.13）"><em>list</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>view_decorators</strong> (<em>t.Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.13）"><em>list</em></a><em>]</em>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -329,10 +329,10 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) – 资源 URL，必须以 “/” 开头。</p></li>
 <li><p><strong>include_in_spec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.13）"><em>bool</em></a>) – 是否将当前资源解析到 OAS 中，默认为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="（在 Python v3.13）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>。</p></li>
-<li><p><strong>default_auth</strong> (<a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.13）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em>] </em><em>| </em><em>None</em>) – 为所属的 Operation 提供默认的 auth。</p></li>
-<li><p><strong>url_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em> | </em><em>None</em>) – 为 Django 提供 URL 命名。参考: <a class="reference external" href="https://docs.djangoproject.com/en/5.0/topics/http/urls/#naming-url-patterns">命名 URL 模式</a></p></li>
-<li><p><strong>param_schemas</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.13）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>] </em><em>| </em><em>None</em>)</p></li>
-<li><p><strong>view_decorators</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.13）"><em>list</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>default_auth</strong> (<em>t.Union</em><em>[</em><a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em>, </em><em>t.Type</em><em>[</em><a class="reference internal" href="#django_oasis.auth.BaseAuth" title="django_oasis.auth.BaseAuth"><em>BaseAuth</em></a><em>]</em><em>, </em><em>None</em><em>]</em>) – 为所属的 Operation 提供默认的 auth。</p></li>
+<li><p><strong>url_name</strong> (<em>t.Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>]</em>) – 为 Django 提供 URL 命名。参考: <a class="reference external" href="https://docs.djangoproject.com/en/5.0/topics/http/urls/#naming-url-patterns">命名 URL 模式</a></p></li>
+<li><p><strong>param_schemas</strong> (<em>t.Optional</em><em>[</em><em>t.Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis.schema.Schema"><em>schema.Schema</em></a><em>]</em><em>]</em>)</p></li>
+<li><p><strong>view_decorators</strong> (<em>t.Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="（在 Python v3.13）"><em>list</em></a><em>]</em>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -638,7 +638,7 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.schema.</span></span><span class="sig-name descname"><span class="pre">AnyOf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.schema.AnyOf" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>schemas</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="（在 Python v3.13）"><em>List</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>)</p>
+<dd class="field-odd"><p><strong>schemas</strong> (<em>t.List</em><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis.schema.Schema"><em>Schema</em></a><em>]</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -664,9 +664,9 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>value</strong> (<a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.13）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>] </em><em>| </em><em>None</em>) – 定义值类型，默认为 <a class="reference internal" href="#django_oasis.schema.Any" title="django_oasis.schema.Any"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>。</p></li>
-<li><p><strong>min_properties</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a><em> | </em><em>None</em>) – 如果设置，则反序列化字典长度必须大于等于最小长度。</p></li>
-<li><p><strong>max_properties</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a><em> | </em><em>None</em>) – 如果设置，则反序列化字典长度必须小于等于最大长度。</p></li>
+<li><p><strong>value</strong> (<em>t.Union</em><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis.schema.Schema"><em>Schema</em></a><em>, </em><em>t.Type</em><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis.schema.Schema"><em>Schema</em></a><em>]</em><em>, </em><em>None</em><em>]</em>) – 定义值类型，默认为 <a class="reference internal" href="#django_oasis.schema.Any" title="django_oasis.schema.Any"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>。</p></li>
+<li><p><strong>min_properties</strong> (<em>t.Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a><em>]</em>) – 如果设置，则反序列化字典长度必须大于等于最小长度。</p></li>
+<li><p><strong>max_properties</strong> (<em>t.Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a><em>]</em>) – 如果设置，则反序列化字典长度必须小于等于最大长度。</p></li>
 </ul>
 </dd>
 </dl>
@@ -693,9 +693,9 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>item</strong> (<a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.13）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>] </em><em>| </em><em>None</em>) – 定义元素类型，默认为 <a class="reference internal" href="#django_oasis.schema.Any" title="django_oasis.schema.Any"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>。</p></li>
-<li><p><strong>min_items</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a><em> | </em><em>None</em>) – 如果设置，则反序列化列表长度必须大于等于最小长度。</p></li>
-<li><p><strong>max_items</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a><em> | </em><em>None</em>) – 如果设置，则反序列化列表长度必须小于等于最大长度。</p></li>
+<li><p><strong>item</strong> (<em>t.Union</em><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis.schema.Schema"><em>Schema</em></a><em>, </em><em>t.Type</em><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis.schema.Schema"><em>Schema</em></a><em>]</em><em>, </em><em>None</em><em>]</em>) – 定义元素类型，默认为 <a class="reference internal" href="#django_oasis.schema.Any" title="django_oasis.schema.Any"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>。</p></li>
+<li><p><strong>min_items</strong> (<em>t.Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a><em>]</em>) – 如果设置，则反序列化列表长度必须大于等于最小长度。</p></li>
+<li><p><strong>max_items</strong> (<em>t.Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a><em>]</em>) – 如果设置，则反序列化列表长度必须小于等于最大长度。</p></li>
 <li><p><strong>unique_items</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="（在 Python v3.13）"><em>bool</em></a>) – 如果为 <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="（在 Python v3.13）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>，则反序列化的所有元素必须唯一，默认 <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="（在 Python v3.13）"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>。</p></li>
 </ul>
 </dd>
@@ -724,7 +724,7 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>required_fields</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="（在 Python v3.13）"><em>Iterable</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em> | </em><em>None</em>) – 覆盖原有的字段必需条件配置。设为空列表则所有字段为非必需，也可设为 <code class="docutils literal notranslate"><span class="pre">&quot;__all__&quot;</span></code> 指定所有字段为必需。</p></li>
+<li><p><strong>required_fields</strong> (<em>t.Union</em><em>[</em><em>t.Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><em>None</em><em>]</em>) – 覆盖原有的字段必需条件配置。设为空列表则所有字段为非必需，也可设为 <code class="docutils literal notranslate"><span class="pre">&quot;__all__&quot;</span></code> 指定所有字段为必需。</p></li>
 <li><p><strong>unknown_fields</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>) – <p>该参数决定了在反序列化时如何处理未知字段。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">name</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span>
@@ -848,9 +848,9 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/re.html#re.Pattern" title="（在 Python v3.13）"><em>Pattern</em></a><em> | </em><em>None</em>) – 如果设置，则反序列化字符串必需匹配正则表达式。</p></li>
-<li><p><strong>min_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a><em> | </em><em>None</em>) – 如果设置，则反序列化字符串必须大于等于最小长度。</p></li>
-<li><p><strong>max_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a><em> | </em><em>None</em>) – 设置设置，则反序列化字符串必须小于等于最大长度。</p></li>
+<li><p><strong>pattern</strong> (<em>t.Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/re.html#re.Pattern" title="（在 Python v3.13）"><em>re.Pattern</em></a><em>, </em><em>None</em><em>]</em>) – 如果设置，则反序列化字符串必需匹配正则表达式。</p></li>
+<li><p><strong>min_length</strong> (<em>t.Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a><em>]</em>) – 如果设置，则反序列化字符串必须大于等于最小长度。</p></li>
+<li><p><strong>max_length</strong> (<em>t.Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="（在 Python v3.13）"><em>int</em></a><em>]</em>) – 设置设置，则反序列化字符串必须小于等于最大长度。</p></li>
 </ul>
 </dd>
 </dl>
@@ -1065,7 +1065,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=9ae1498e"></script>
+</div><script src="_static/documentation_options.js?v=751a7d80"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>
