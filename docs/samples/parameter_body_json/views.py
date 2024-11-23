@@ -1,9 +1,9 @@
 from django_oasis.core import Resource, schema
-from django_oasis.parameter import JsonData
+from django_oasis.parameter import JsonData, JsonItem
 
 
-@Resource("/to/path")
-class API:
+@Resource("/api1")
+class API1:
     def post(
         self,
         data=JsonData(
@@ -12,4 +12,14 @@ class API:
                 "b": schema.String(),
             }
         ),
+    ): ...
+
+
+# 与 API1 声明结果等效
+@Resource("/api2")
+class API2:
+    def post(
+        self,
+        a=JsonItem(schema.Integer()),
+        b=JsonItem(schema.String()),
     ): ...

@@ -1,22 +1,23 @@
-import abc
-import contextlib
+from __future__ import annotations
+
 import json
 import re
 import typing as t
-import warnings
+import uuid
+from collections import defaultdict
 
 from django.http import HttpRequest
-from django.utils.datastructures import MultiValueDict
 from django.utils.functional import cached_property
 
 from django_oasis import schema as _schema
+from django_oasis import schema as s
 from django_oasis.exceptions import (
     BadRequestError,
     NotFoundError,
     RequestValidationError,
     UnsupportedMediaTypeError,
 )
-from django_oasis_schema.utils import make_instance, make_model_schema, make_schema
+from django_oasis_schema.utils import make_model_schema, make_schema
 
 from .style import Style, StyleHandler
 
@@ -101,59 +102,84 @@ class Path:
         return result
 
 
-class MountPoint(abc.ABC):
+class MountPoint:
     def setup(self, operation):
         pass
 
-    @abc.abstractmethod
     def parse_request(self, request: HttpRequest):
-        pass
+        raise NotImplementedError
 
-    def __openapispec__(self, oas) -> dict:
+    def __openapispec__(self, oas):
         raise NotImplementedError
 
 
-class RequestData(MountPoint, abc.ABC):
+class RequestParameter(MountPoint):
     location: str
 
-    def parse_request(self, request: HttpRequest) -> t.Any:
+    def __init__(self, schema, /) -> None:
+        self._schema = schema
+
+    def parse_request(self, request: HttpRequest):
         try:
-            return self._parse_request(request)
-        except _schema.ValidationError as exc:
-            raise RequestValidationError(exc, self.location)
+            return self._schema.deserialize(self._process_request(request))
+        except s.ValidationError as e:
+            raise RequestValidationError(e, self.location)
 
-    @abc.abstractmethod
-    def _parse_request(self, request):
-        pass
+    def _process_request(self, request: HttpRequest):
+        raise NotImplementedError
 
 
-class RequestParameter(RequestData, abc.ABC):
-    def __init__(
-        self,
-        schema: t.Union[_schema.Model, t.Dict[str, _schema.Schema]],
-        styles: t.Optional[t.Dict[str, Style]] = None,
-    ):
-        self._schema = make_model_schema(schema)
+U = t.TypeVar("U")
+
+
+class MountPointSet:
+    def __init__(self, mountpints: dict[str, MountPoint]):
+        self.__mountpints = mountpints
+
+    def parse_request(self, request: HttpRequest):
+        rv = {}
+        for name, p in self.__mountpints.items():
+            rv[name] = p.parse_request(request)
+        return rv
+
+    def __openapispec__(self, oas):
+        rv = {}
+        parameters = []
+        for p in self.__mountpints.values():
+            part = p.__openapispec__(oas)
+            if isinstance(part, list):
+                parameters.extend(part)
+            else:
+                rv.update(part)
+        if parameters:
+            rv.update(parameters=parameters)
+        return rv
+
+
+class RequestParameterWithStyle(RequestParameter):
+    default_style: Style
+
+    def __init__(self, schema, styles: dict[str, Style] | None = None) -> None:
+        super().__init__(make_model_schema(schema))
 
         self.__styles = styles or {}
-        self.__style_handlers: t.Dict[_schema.Schema, StyleHandler] = {}
+        self.__style_handlers: dict[s.Schema, StyleHandler] = {}
         for field in self._schema._fields.values():
             style = self.__get_style(field)
             self.__style_handlers[field] = StyleHandler(style, field, self.location)
 
-    def __get_style(self, field: _schema.Schema) -> Style:
+    def __get_style(self, field: s.Schema) -> Style:
         if field._name in self.__styles:
             return self.__styles[field._name]
+        return self.default_style
 
-        if self.location == "query":
-            return Style("form", True)
-        elif self.location == "cookie":
-            return Style("form", False)
-        elif self.location == "header":
-            return Style("simple", False)
-        raise NotImplementedError(self.location)
+    def _process_request(self, request: HttpRequest):
+        return self._process_style(self._get_request_data(request))
 
-    def _handle_style(self, data):
+    def _get_request_data(self, request: HttpRequest):
+        raise NotImplementedError
+
+    def _process_style(self, data):
         rv = {}
         for field in self._schema._fields.values():
             handler = self.__style_handlers[field]
@@ -179,134 +205,47 @@ class RequestParameter(RequestData, abc.ABC):
                     }
                 )
             )
-        return dict(parameters=parameters)
+        return parameters
 
 
-class Query(RequestParameter):
+class Query(RequestParameterWithStyle):
+    """用于声明请求 query 的整体或是一部分。"""
+
     location = "query"
+    default_style = Style("form", True)
 
-    def _parse_request(self, request: HttpRequest):
-        return self._schema.deserialize(self._handle_style(request.GET))
+    def _get_request_data(self, request):
+        return request.GET
 
 
-class Cookie(RequestParameter):
+class Cookie(RequestParameterWithStyle):
+    """用于声明请求 cookie 的整体或是一部分。"""
+
     location = "cookie"
+    default_style = Style("form", False)
 
-    def _parse_request(self, request: HttpRequest):
-        return self._schema.deserialize(self._handle_style(request.COOKIES))
+    def _get_request_data(self, request):
+        return request.COOKIES
 
 
-class Header(RequestParameter):
+class Header(RequestParameterWithStyle):
+    """用于声明请求 header 的整体或是一部分。"""
+
     location = "header"
+    default_style = Style("simple", False)
 
-    def _parse_request(self, request: HttpRequest):
-        return self._schema.deserialize(self._handle_style(request.headers))
-
-
-class MediaType:
-    def __init__(self, schema) -> None:
-        self.__schema = make_schema(schema)
-
-    def __openapispec__(self, spec):
-        return {
-            "schema": spec.parse(self.__schema),
-        }
-
-    def parse_request(self, request: HttpRequest):
-        if request.content_type == "application/json":
-            try:
-                data = json.loads(request.body)
-            except (json.JSONDecodeError, TypeError):
-                raise BadRequestError("Invalid Data")
-        else:
-            combine: MultiValueDict = MultiValueDict()
-            combine.update(request.POST)
-            combine.update(request.FILES)
-            if isinstance(self.__schema, _schema.Model):
-                data = {}
-                for field in self.__schema._fields.values():
-                    k = field._alias
-                    if k in combine:
-                        data[k] = (
-                            combine.getlist(k)
-                            if isinstance(field, _schema.List)
-                            else combine[k]
-                        )
-            else:
-                data = dict(combine.items())
-        return self.__schema.deserialize(data)
+    def _get_request_data(self, request):
+        return request.headers
 
 
-class Body(RequestData):
-    """
-    声明 HTTP 请求体数据，默认数据格式类型为 JSON。
-
-    :param content_type: 请求体内容类型，默认是: application/json。也可以设置为列表，以支持多种请求体类型。
-    """
-
-    location = "body"
-
-    def __init__(
-        self,
-        schema,
-        *,
-        # content: t.Optional[t.Dict[str, MediaType]] = None,
-        content_type: t.Union[str, t.List[str]] = "application/json",
-        description: str = "",
-        # required: bool = True,
-    ):
-        warnings.warn(
-            "Body is deprecated, use JsonData or FormData instead.",
-            DeprecationWarning,
-            2,
-        )
-
-        schema = make_schema(schema)
-
-        if isinstance(content_type, str):
-            content_type_list = [content_type]
-        else:
-            content_type_list = content_type
-
-        self.__content: t.Dict[str, MediaType] = {
-            item: MediaType(schema) for item in content_type_list
-        }
-
-        self.__required = True
-        self.__description = description
-
-    def __openapispec__(self, spec):
-        return {
-            "requestBody": {
-                "required": self.__required,
-                "description": self.__description,
-                "content": {c: spec.parse(m) for c, m in self.__content.items()},
-            }
-        }
-
-    def _parse_request(self, request: HttpRequest):
-        if request.content_type not in self.__content:
-            raise UnsupportedMediaTypeError
-        return self.__content[request.content_type].parse_request(request)
-
-
-@contextlib.contextmanager
-def _like_post_request(request):
-    # 因为 django 不处理 POST 以外的表单数据，所以这个修改一下方法名
-    method = request.method
-    try:
-        request.method = "POST"
-        yield request
-    finally:
-        request.method = method
-
-
-class RequestBodyContent(RequestData):
+class RequestBodyParameter(RequestParameter):
     location = "body"
     content_type: str
 
-    def __init__(self, schema) -> None:
-        self._schema = make_schema(schema)
+    def parse_request(self, request):
+        if request.content_type != self.content_type:
+            raise UnsupportedMediaTypeError
+        return super().parse_request(request)
 
     def __openapispec__(self, oas):
         return {
@@ -320,124 +259,207 @@ class RequestBodyContent(RequestData):
             }
         }
 
-    def parse_request(self, request: HttpRequest):
-        if request.content_type != self.content_type:
-            raise UnsupportedMediaTypeError
-        return super().parse_request(request)
 
+class FormData(RequestBodyParameter):
+    """用于声明表单请求的数据整体。"""
 
-class JsonData(RequestBodyContent):
-    """声明请求体数据，要求以 JSON 格式提交。"""
-
-    content_type = "application/json"
-
-    def __init__(
-        self,
-        schema: t.Union[
-            _schema.Schema,
-            t.Type[_schema.Schema],
-            t.Dict[str, _schema.Schema],
-        ],
-    ) -> None:
-        super().__init__(schema)
-
-    def _parse_request(self, request):
-        try:
-            data = json.loads(request.body)
-        except (json.JSONDecodeError, TypeError):
-            raise BadRequestError("Invalid JSON data.")
-        return self._schema.deserialize(data)
-
-
-class FormData(RequestBodyContent):
-    """声明请求体数据，要求以表单格式提交。"""
-
-    def __init__(
-        self,
-        schema: t.Union[
-            _schema.Model,
-            t.Type[_schema.Model],
-            t.Dict[str, _schema.Schema],
-        ],
-        /,
-    ) -> None:
-        super().__init__(schema)
-        assert isinstance(self._schema, _schema.Model)
-        self._schema: _schema.Model
+    def __init__(self, schema, /) -> None:
+        super().__init__(make_model_schema(schema))
 
     @cached_property
     def content_type(self):
         for field in self._schema._fields.values():
-            if isinstance(field, _schema.File) or (
-                isinstance(field, _schema.List)
-                and isinstance(field._item, _schema.File)
+            if isinstance(field, s.File) or (
+                isinstance(field, s.List) and isinstance(field._item, s.File)
             ):
                 return "multipart/form-data"
         return "application/x-www-form-urlencoded"
 
-    def _parse_request(self, request: HttpRequest):
+    def _process_request(self, request):
         data = {}
-        target: MultiValueDict
         for field in self._schema._fields.values():
             k = field._alias
-            if isinstance(field, _schema.File) or (
-                isinstance(field, _schema.List)
-                and isinstance(field._item, _schema.File)
+            if isinstance(field, s.File) or (
+                isinstance(field, s.List) and isinstance(field._item, s.File)
             ):
                 target = request.FILES
             else:
                 target = request.POST
 
             if k in target:
-                if isinstance(field, _schema.List):
+                if isinstance(field, s.List):
                     data[k] = target.getlist(k)
                 else:
                     data[k] = target[k]
-        return self._schema.deserialize(data)
+        return data
 
 
-class BaseItem(MountPoint):
-    def __init__(self, schema: t.Union[_schema.Schema, t.Type[_schema.Schema]]) -> None:
-        self._schema = make_instance(schema)
+class JsonData(RequestBodyParameter):
+    """用于声明 JSON 请求的数据整体。"""
 
-    def parse_request(self, request: HttpRequest):
-        result: dict = self._paramobj.parse_request(request)
-        return result.popitem()[1] if result else _schema.undefined
+    content_type = "application/json"
 
-    def __openapispec__(self, oas):
-        return self._paramobj.__openapispec__(oas)
+    def __init__(self, schema, /) -> None:
+        super().__init__(make_schema(schema))
 
-    def setitemname(self, name: str):
-        self._paramobj = self._make_param_instance(name)
+    def _process_request(self, request):
+        try:
+            return json.loads(request.body)
+        except (json.JSONDecodeError, TypeError):
+            raise BadRequestError("Invalid JSON data.")
 
-    def _make_param_instance(self, name: str):
+
+## components
+
+
+class RequestParameterComponent:
+    @classmethod
+    def build_request_parameter(
+        cls: type[U], component_dict: dict[str, U]
+    ) -> RequestParameter:
         raise NotImplementedError
 
 
-class ParamItem(BaseItem):
-    _paramclass: t.Type[RequestParameter]
+class AssemblyWorker:
+    def __init__(self, data: dict[str, RequestParameterComponent]) -> None:
+        self.__components: dict[
+            type[RequestParameterComponent], dict[str, RequestParameterComponent]
+        ] = defaultdict(dict)
+        for name, obj in data.items():
+            self.__components[type(obj)][name] = obj
 
-    def __init__(
-        self,
-        schema: t.Union[_schema.Schema, t.Type[_schema.Schema]],
-        style: t.Optional[Style] = None,
-    ) -> None:
-        super().__init__(schema)
-        self.__style = style
+        self.__proxyname_and_namemap: list[tuple[str, list[tuple[str, str]]]] = []
+        self.request_parameters: dict[str, RequestParameter] = {}
+        for component_type, component_dict in self.__components.items():
+            parameter = component_type.build_request_parameter(component_dict)
+            proxy_name = f"${uuid.uuid4().hex}"
+            self.__proxyname_and_namemap.append(
+                (
+                    proxy_name,
+                    [
+                        (name, field._attr)
+                        for name, field in parameter._schema._fields.items()
+                    ],
+                )
+            )
+            self.request_parameters[proxy_name] = parameter
 
-    def _make_param_instance(self, name):
-        return self._paramclass(
-            {name: self._schema}, {name: self.__style} if self.__style else None
+    def split(self, data: dict):
+        data = data.copy()
+        for proxyname, namemap in self.__proxyname_and_namemap:
+            d = data.pop(proxyname)
+            new_d = {}
+            for n1, n2 in namemap:
+                new_d[n1] = d.get(n2, s.undefined)
+            data.update(new_d)
+        return data
+
+
+class RequestParameterComponentWithStyle(RequestParameterComponent):
+    __request_parameter_cls__: type[RequestParameterWithStyle]
+
+    def __init__(self, schema, style: Style | None = None):
+        self.schema = make_schema(schema)
+        self.style = style
+
+    @classmethod
+    def build_request_parameter(cls, component_dict):
+        fields, styles = {}, {}
+        for name, component in component_dict.items():
+            fields[name] = component.schema
+            if component.style is not None:
+                styles[name] = component.style
+        return cls.__request_parameter_cls__(fields, styles)
+
+
+class QueryItem(RequestParameterComponentWithStyle):
+    """用于声明请求 query 的单个字段。"""
+
+    __request_parameter_cls__ = Query
+
+
+class CookieItem(RequestParameterComponentWithStyle):
+    """用于声明请求 cookie 的单个字段。"""
+
+    __request_parameter_cls__ = Cookie
+
+
+class HeaderItem(RequestParameterComponentWithStyle):
+    """用于声明请求 header 的单个字段。"""
+
+    __request_parameter_cls__ = Header
+
+
+class RequestBodyParameterComponent(RequestParameterComponent):
+    __request_parameter_cls__: type[RequestBodyParameter]
+
+    def __init__(self, schema, /):
+        self.schema = make_schema(schema)
+
+    @classmethod
+    def build_request_parameter(cls, component_dict):
+        return cls.__request_parameter_cls__(
+            {name: component.schema for name, component in component_dict.items()}
         )
 
 
-class QueryItem(ParamItem):
-    _paramclass = Query
+class FormItem(RequestBodyParameterComponent):
+    """用于声明表单请求的单个字段。"""
+
+    __request_parameter_cls__ = FormData
 
 
-class HeaderItem(ParamItem):
-    _paramclass = Header
+class JsonItem(RequestBodyParameterComponent):
+    """用于声明 JSON 请求的单个字段。"""
+
+    __request_parameter_cls__ = JsonData
 
 
-class CookieItem(ParamItem):
-    _paramclass = Cookie
+class MountPointSetWrapper:
+    def __init__(self, data: dict[str, (MountPoint | RequestParameterComponent)]):
+        _check_mountpoints(data.values())
+
+        components = {}
+        mountpoints = {}
+        for name, obj in data.items():
+            if isinstance(obj, RequestParameterComponent):
+                components[name] = obj
+            else:
+                mountpoints[name] = obj
+        self.__worker = AssemblyWorker(components)
+        mountpoints.update(self.__worker.request_parameters)
+        self.__mountpointset = MountPointSet(mountpoints)
+
+    def parse_request(self, request: HttpRequest):
+        results = self.__mountpointset.parse_request(request)
+        return self.__worker.split(results)
+
+    def __openapispec__(self, oas):
+        return self.__mountpointset.__openapispec__(oas)
+
+
+def _check_mountpoints(values: t.Iterable[MountPoint | RequestParameterComponent]):
+    """
+    FormItem, FormData, JsonItem, JsonData 不可共同存在，
+    且 FormData 或 JsonData 只能存在一个。
+    """
+    unique_classes = {JsonData, FormData}
+    mutex_classes = {FormItem, JsonItem} | unique_classes
+
+    record = None
+    for value in values:
+        if value.__class__ not in mutex_classes:
+            continue
+
+        if record is None:
+            record = value
+            continue
+
+        if record.__class__ != value.__class__:
+            raise RuntimeError(
+                f"{record.__class__.__name__} and {value.__class__.__name__} cannot be used together"
+            )
+        if record.__class__ == value.__class__ and record.__class__ in unique_classes:
+            raise RuntimeError(
+                f"{record.__class__.__name__} cannot be used more than once"
+            )
