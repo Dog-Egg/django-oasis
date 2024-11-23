@@ -108,6 +108,9 @@ class StyleHandler:
             return self.empty
         return value.split(",")
 
+    def _header_simple_primitive(self, data: HttpHeaders):
+        return data[self.schema._alias]
+
     handlers: t.Dict[t.Tuple, t.Callable] = {
         ("query", "form", True, "primitive"): _f1,
         ("query", "form", False, "primitive"): _f1,
@@ -126,7 +129,7 @@ class StyleHandler:
         ("path", "simple", True, "array"): _split_by_comma,
         ("path", "simple", False, "object"): _split_by_comma_object,
         ("path", "simple", True, "object"): _split_by_comma_object2,
-        ("header", "simple", False, "primitive"): _unchange,
+        ("header", "simple", False, "primitive"): _header_simple_primitive,
         ("header", "simple", False, "array"): _header_simple_array,
     }
 

@@ -25,7 +25,12 @@ from django_oasis.exceptions import (
     MethodNotAllowedError,
     RequestValidationError,
 )
-from django_oasis.parameter.parameters import BaseItem, MountPoint, Path
+from django_oasis.parameter.parameters import (
+    MountPoint,
+    MountPointSetWrapper,
+    Path,
+    RequestParameterComponent,
+)
 from django_oasis_schema.utils import make_instance, make_model_schema, make_schema
 
 __all__ = ("OpenAPI", "Resource", "Operation")
@@ -427,7 +432,6 @@ class Operation:
         self.__self_auth: t.Optional[BaseAuth] = (
             None if auth is None else make_instance(auth)
         )
-        self.__mountpoints: t.Dict[str, MountPoint] = {}
         self._resource: t.Optional[Resource] = None
         self._view_decorators = view_decorators or []
 
@@ -437,6 +441,8 @@ class Operation:
                 DeprecationWarning,
             )
 
+    __mountpointset: MountPointSetWrapper
+
     @property
     def __auth(self):
         if self._resource and self._resource._default_auth:
@@ -444,20 +450,14 @@ class Operation:
         return self.__self_auth
 
     def __parse_parameters(self, handler):
+        ps: dict[str, MountPoint | RequestParameterComponent] = {}
         for name, parameter in inspect.signature(handler).parameters.items():
-            param = parameter.default
-            if isinstance(param, BaseItem):
-                param.setitemname(name)
-
-            if isinstance(param, MountPoint):
-                param.setup(self)
-                self.__mountpoints[name] = param
-
-    def __parse_request(self, request):
-        kwargs = {}
-        for name, param in self.__mountpoints.items():
-            kwargs[name] = param.parse_request(request)
-        return kwargs
+            obj = parameter.default
+            if isinstance(obj, (MountPoint, RequestParameterComponent)):
+                if isinstance(obj, MountPoint):
+                    obj.setup(self)
+                ps[name] = obj
+        self.__mountpointset = MountPointSetWrapper(ps)
 
     def __call__(self, handler):
         self.__parse_parameters(handler)
@@ -473,7 +473,7 @@ class Operation:
         if self.__auth:
             self.__auth.check_auth(request)
 
-        kwargs = self.__parse_request(request)
+        kwargs = self.__mountpointset.parse_request(request)
         rv = handler(**kwargs)
         if not isinstance(rv, HttpResponseBase) and self.response_schema:
             try:
@@ -527,6 +527,5 @@ class Operation:
                 [self.__auth.__openapispec__(oas)] if self.__auth else oas.empty
             ),
         }
-        for p in self.__mountpoints.values():
-            rv.update(p.__openapispec__(oas))
+        rv.update(self.__mountpointset.__openapispec__(oas))
         return rv
