@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="请求响应" href="response.html" /><link rel="prev" title="路径参数 (Path)" href="parameter_path.html" />
 
     <link rel="shortcut icon" href="_static/logo.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>请求体 (Body) - Django-Oasis0.1.dev20241120051650</title>
+        <title>请求体 (Body) - Django-Oasis0.1.dev20241123140717</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241120051650</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241123140717</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -194,7 +194,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241120051650</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241123140717</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -278,15 +278,15 @@
 <h1>请求体 (Body)<a class="headerlink" href="#body" title="Link to this heading">¶</a></h1>
 <section id="json">
 <h2>JSON 格式<a class="headerlink" href="#json" title="Link to this heading">¶</a></h2>
-<p>使用 <a class="reference internal" href="api.html#django_oasis.parameter.JsonData" title="django_oasis.parameter.JsonData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.JsonData</span></code></a> 声明。</p>
+<p>使用 <a class="reference internal" href="api.html#django_oasis.parameter.JsonData" title="django_oasis.parameter.JsonData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.JsonData</span></code></a> 或 <a class="reference internal" href="api.html#django_oasis.parameter.JsonItem" title="django_oasis.parameter.JsonItem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.JsonItem</span></code></a> 声明。</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">views.py [示例1]</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
-<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">JsonData</span>
+<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">JsonData</span><span class="p">,</span> <span class="n">JsonItem</span>
 
 
-<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/to/path&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api1&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API1</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">data</span><span class="o">=</span><span class="n">JsonData</span><span class="p">(</span>
@@ -296,6 +296,16 @@
             <span class="p">}</span>
         <span class="p">),</span>
     <span class="p">):</span> <span class="o">...</span>
+
+
+<span class="c1"># 与 API1 声明结果等效</span>
+<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api2&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API2</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">a</span><span class="o">=</span><span class="n">JsonItem</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">()),</span>
+        <span class="n">b</span><span class="o">=</span><span class="n">JsonItem</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">()),</span>
+    <span class="p">):</span> <span class="o">...</span>
 </pre></div>
 </div>
 </div>
@@ -304,7 +314,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">SwaggerUI [示例1]</span>
                 </div>
-                <iframe id="id_7e916049" srcdoc="
+                <iframe id="id_ca33d260" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -339,7 +349,7 @@
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
-&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/to/path&quot;: {&quot;post&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;type&quot;: &quot;object&quot;, &quot;title&quot;: &quot;InnerSchema&quot;, &quot;properties&quot;: {&quot;a&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;b&quot;: {&quot;type&quot;: &quot;string&quot;}}}, {&quot;required&quot;: [&quot;a&quot;, &quot;b&quot;]}]}}}}}}}, &quot;openapi&quot;: &quot;3.0.3&quot;}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/api1&quot;: {&quot;post&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;type&quot;: &quot;object&quot;, &quot;title&quot;: &quot;InnerSchema&quot;, &quot;properties&quot;: {&quot;a&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;b&quot;: {&quot;type&quot;: &quot;string&quot;}}}, {&quot;required&quot;: [&quot;a&quot;, &quot;b&quot;]}]}}}}}}, &quot;/api2&quot;: {&quot;post&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;application/json&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;type&quot;: &quot;object&quot;, &quot;title&quot;: &quot;InnerSchema&quot;, &quot;properties&quot;: {&quot;a&quot;: {&quot;type&quot;: &quot;integer&quot;}, &quot;b&quot;: {&quot;type&quot;: &quot;string&quot;}}}, {&quot;required&quot;: [&quot;a&quot;, &quot;b&quot;]}]}}}}}}}, &quot;openapi&quot;: &quot;3.0.3&quot;}}&lt;/script&gt;
 &lt;script&gt;
     var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
 
@@ -384,20 +394,20 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_7e916049')
+                iFrameResize({checkOrigin: false}, '#id_ca33d260')
             </script>
             </section>
 <section id="id1">
 <h2>表单格式<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
-<p>使用 <a class="reference internal" href="api.html#django_oasis.parameter.FormData" title="django_oasis.parameter.FormData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.FormData</span></code></a> 声明。</p>
+<p>使用 <a class="reference internal" href="api.html#django_oasis.parameter.FormData" title="django_oasis.parameter.FormData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.FormData</span></code></a> 或 <a class="reference internal" href="api.html#django_oasis.parameter.FormItem" title="django_oasis.parameter.FormItem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.FormItem</span></code></a> 声明。</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">views.py [示例2]</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">schema</span>
-<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormData</span>
+<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormData</span><span class="p">,</span> <span class="n">FormItem</span>
 
 
-<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/to/path&quot;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api1&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API1</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">form</span><span class="o">=</span><span class="n">FormData</span><span class="p">(</span>
@@ -407,6 +417,16 @@
             <span class="p">}</span>
         <span class="p">),</span>
     <span class="p">):</span> <span class="o">...</span>
+
+
+<span class="c1"># 与 API1 声明结果等效</span>
+<span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/api2&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">API2</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">a</span><span class="o">=</span><span class="n">FormItem</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">String</span><span class="p">()),</span>
+        <span class="n">b</span><span class="o">=</span><span class="n">FormItem</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">Integer</span><span class="p">()),</span>
+    <span class="p">):</span> <span class="o">...</span>
 </pre></div>
 </div>
 </div>
@@ -415,7 +435,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">SwaggerUI [示例2]</span>
                 </div>
-                <iframe id="id_0502d6f2" srcdoc="
+                <iframe id="id_c96203e6" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -450,7 +470,7 @@
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
-&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/to/path&quot;: {&quot;post&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;application/x-www-form-urlencoded&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;type&quot;: &quot;object&quot;, &quot;title&quot;: &quot;InnerSchema&quot;, &quot;properties&quot;: {&quot;a&quot;: {&quot;type&quot;: &quot;string&quot;}, &quot;b&quot;: {&quot;type&quot;: &quot;integer&quot;}}}, {&quot;required&quot;: [&quot;a&quot;, &quot;b&quot;]}]}}}}}}}, &quot;openapi&quot;: &quot;3.0.3&quot;}, &quot;docExpansion&quot;: &quot;full&quot;}&lt;/script&gt;
+&lt;script id=&quot;config-data&quot; type=&quot;application/json&quot;&gt;{&quot;spec&quot;: {&quot;info&quot;: {&quot;title&quot;: &quot;API Document&quot;, &quot;version&quot;: &quot;0.1.0&quot;}, &quot;paths&quot;: {&quot;/api1&quot;: {&quot;post&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;application/x-www-form-urlencoded&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;type&quot;: &quot;object&quot;, &quot;title&quot;: &quot;InnerSchema&quot;, &quot;properties&quot;: {&quot;a&quot;: {&quot;type&quot;: &quot;string&quot;}, &quot;b&quot;: {&quot;type&quot;: &quot;integer&quot;}}}, {&quot;required&quot;: [&quot;a&quot;, &quot;b&quot;]}]}}}}}}, &quot;/api2&quot;: {&quot;post&quot;: {&quot;responses&quot;: {&quot;200&quot;: {&quot;description&quot;: &quot;OK&quot;}}, &quot;requestBody&quot;: {&quot;required&quot;: true, &quot;content&quot;: {&quot;application/x-www-form-urlencoded&quot;: {&quot;schema&quot;: {&quot;allOf&quot;: [{&quot;type&quot;: &quot;object&quot;, &quot;title&quot;: &quot;InnerSchema&quot;, &quot;properties&quot;: {&quot;a&quot;: {&quot;type&quot;: &quot;string&quot;}, &quot;b&quot;: {&quot;type&quot;: &quot;integer&quot;}}}, {&quot;required&quot;: [&quot;a&quot;, &quot;b&quot;]}]}}}}}}}, &quot;openapi&quot;: &quot;3.0.3&quot;}}&lt;/script&gt;
 &lt;script&gt;
     var config = JSON.parse(document.getElementById(&#x27;config-data&#x27;).textContent);
 
@@ -495,7 +515,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_0502d6f2')
+                iFrameResize({checkOrigin: false}, '#id_c96203e6')
             </script>
             </section>
 </section>
@@ -576,7 +596,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=751a7d80"></script>
+</div><script src="_static/documentation_options.js?v=8182bd1f"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>

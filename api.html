@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="RESTful" href="examples/restful.html" /><link rel="prev" title="Hooks" href="schema/hooks.html" />
 
     <link rel="shortcut icon" href="_static/logo.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>API 参考 - Django-Oasis0.1.dev20241120051650</title>
+        <title>API 参考 - Django-Oasis0.1.dev20241123140717</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241120051650</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241123140717</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -194,7 +194,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241120051650</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241123140717</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -342,28 +342,12 @@
 <section id="module-django_oasis.parameter">
 <span id="parameter"></span><h2>Parameter<a class="headerlink" href="#module-django_oasis.parameter" title="Link to this heading">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="django_oasis.parameter.Body">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">Body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'application/json'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.Body" title="Link to this definition">¶</a></dt>
-<dd><p>声明 HTTP 请求体数据，默认数据格式类型为 JSON。</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>content_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="（在 Python v3.13）"><em>List</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>]</em>) – 请求体内容类型，默认是: application/json。也可以设置为列表，以支持多种请求体类型。</p></li>
-<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a>)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.parameter.Cookie">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">Cookie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">styles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.Cookie" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>用于声明请求 cookie 的整体或是一部分。</p>
+<dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>schema</strong> (<a class="reference internal" href="#django_oasis.schema.Model" title="django_oasis_schema.schemas.Model"><em>Model</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.13）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>)</p></li>
-<li><p><strong>styles</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.13）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.parameter.Style" title="django_oasis.parameter.style.Style"><em>Style</em></a><em>] </em><em>| </em><em>None</em>)</p></li>
-</ul>
+<dd class="field-odd"><p><strong>styles</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.13）"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.parameter.Style" title="django_oasis.parameter.Style"><em>Style</em></a><em>] </em><em>| </em><em>None</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -371,12 +355,10 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.parameter.CookieItem">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">CookieItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.CookieItem" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>用于声明请求 cookie 的单个字段。</p>
+<dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>schema</strong> (<a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.13）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>)</p></li>
-<li><p><strong>style</strong> (<a class="reference internal" href="#django_oasis.parameter.Style" title="django_oasis.parameter.style.Style"><em>Style</em></a><em> | </em><em>None</em>)</p></li>
-</ul>
+<dd class="field-odd"><p><strong>style</strong> (<a class="reference internal" href="#django_oasis.parameter.Style" title="django_oasis.parameter.Style"><em>Style</em></a><em> | </em><em>None</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -384,23 +366,24 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.parameter.FormData">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">FormData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.FormData" title="Link to this definition">¶</a></dt>
-<dd><p>声明请求体数据，要求以表单格式提交。</p>
+<dd><p>用于声明表单请求的数据整体。</p>
 <dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>schema</strong> (<a class="reference internal" href="#django_oasis.schema.Model" title="django_oasis_schema.schemas.Model"><em>Model</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.13）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Model" title="django_oasis_schema.schemas.Model"><em>Model</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.13）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>)</p>
-</dd>
 </dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.parameter.FormItem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">FormItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.FormItem" title="Link to this definition">¶</a></dt>
+<dd><p>用于声明表单请求的单个字段。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.parameter.Header">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">Header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">styles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.Header" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>用于声明请求 header 的整体或是一部分。</p>
+<dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>schema</strong> (<a class="reference internal" href="#django_oasis.schema.Model" title="django_oasis_schema.schemas.Model"><em>Model</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.13）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>)</p></li>
-<li><p><strong>styles</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.13）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.parameter.Style" title="django_oasis.parameter.style.Style"><em>Style</em></a><em>] </em><em>| </em><em>None</em>)</p></li>
-</ul>
+<dd class="field-odd"><p><strong>styles</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.13）"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.parameter.Style" title="django_oasis.parameter.Style"><em>Style</em></a><em>] </em><em>| </em><em>None</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -408,36 +391,35 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.parameter.HeaderItem">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">HeaderItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.HeaderItem" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>用于声明请求 header 的单个字段。</p>
+<dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>schema</strong> (<a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.13）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>)</p></li>
-<li><p><strong>style</strong> (<a class="reference internal" href="#django_oasis.parameter.Style" title="django_oasis.parameter.style.Style"><em>Style</em></a><em> | </em><em>None</em>)</p></li>
-</ul>
+<dd class="field-odd"><p><strong>style</strong> (<a class="reference internal" href="#django_oasis.parameter.Style" title="django_oasis.parameter.Style"><em>Style</em></a><em> | </em><em>None</em>)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.parameter.JsonData">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">JsonData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.JsonData" title="Link to this definition">¶</a></dt>
-<dd><p>声明请求体数据，要求以 JSON 格式提交。</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">JsonData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.JsonData" title="Link to this definition">¶</a></dt>
+<dd><p>用于声明 JSON 请求的数据整体。</p>
 <dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>schema</strong> (<a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.13）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>] </em><em>| </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.13）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>)</p>
-</dd>
 </dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="django_oasis.parameter.JsonItem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">JsonItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.JsonItem" title="Link to this definition">¶</a></dt>
+<dd><p>用于声明 JSON 请求的单个字段。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.parameter.Query">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">Query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">styles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.Query" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>用于声明请求 query 的整体或是一部分。</p>
+<dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>schema</strong> (<a class="reference internal" href="#django_oasis.schema.Model" title="django_oasis_schema.schemas.Model"><em>Model</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.13）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>)</p></li>
-<li><p><strong>styles</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="（在 Python v3.13）"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.parameter.Style" title="django_oasis.parameter.style.Style"><em>Style</em></a><em>] </em><em>| </em><em>None</em>)</p></li>
-</ul>
+<dd class="field-odd"><p><strong>styles</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="（在 Python v3.13）"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="（在 Python v3.13）"><em>str</em></a><em>, </em><a class="reference internal" href="#django_oasis.parameter.Style" title="django_oasis.parameter.Style"><em>Style</em></a><em>] </em><em>| </em><em>None</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -445,12 +427,10 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="django_oasis.parameter.QueryItem">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">django_oasis.parameter.</span></span><span class="sig-name descname"><span class="pre">QueryItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#django_oasis.parameter.QueryItem" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>用于声明请求 query 的单个字段。</p>
+<dl class="field-list simple">
 <dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>schema</strong> (<a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="（在 Python v3.13）"><em>Type</em></a><em>[</em><a class="reference internal" href="#django_oasis.schema.Schema" title="django_oasis_schema.schemas.Schema"><em>Schema</em></a><em>]</em>)</p></li>
-<li><p><strong>style</strong> (<a class="reference internal" href="#django_oasis.parameter.Style" title="django_oasis.parameter.style.Style"><em>Style</em></a><em> | </em><em>None</em>)</p></li>
-</ul>
+<dd class="field-odd"><p><strong>style</strong> (<a class="reference internal" href="#django_oasis.parameter.Style" title="django_oasis.parameter.Style"><em>Style</em></a><em> | </em><em>None</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -982,13 +962,14 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#module-django_oasis.parameter">Parameter</a><ul>
-<li><a class="reference internal" href="#django_oasis.parameter.Body"><code class="docutils literal notranslate"><span class="pre">Body</span></code></a></li>
 <li><a class="reference internal" href="#django_oasis.parameter.Cookie"><code class="docutils literal notranslate"><span class="pre">Cookie</span></code></a></li>
 <li><a class="reference internal" href="#django_oasis.parameter.CookieItem"><code class="docutils literal notranslate"><span class="pre">CookieItem</span></code></a></li>
 <li><a class="reference internal" href="#django_oasis.parameter.FormData"><code class="docutils literal notranslate"><span class="pre">FormData</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.parameter.FormItem"><code class="docutils literal notranslate"><span class="pre">FormItem</span></code></a></li>
 <li><a class="reference internal" href="#django_oasis.parameter.Header"><code class="docutils literal notranslate"><span class="pre">Header</span></code></a></li>
 <li><a class="reference internal" href="#django_oasis.parameter.HeaderItem"><code class="docutils literal notranslate"><span class="pre">HeaderItem</span></code></a></li>
 <li><a class="reference internal" href="#django_oasis.parameter.JsonData"><code class="docutils literal notranslate"><span class="pre">JsonData</span></code></a></li>
+<li><a class="reference internal" href="#django_oasis.parameter.JsonItem"><code class="docutils literal notranslate"><span class="pre">JsonItem</span></code></a></li>
 <li><a class="reference internal" href="#django_oasis.parameter.Query"><code class="docutils literal notranslate"><span class="pre">Query</span></code></a></li>
 <li><a class="reference internal" href="#django_oasis.parameter.QueryItem"><code class="docutils literal notranslate"><span class="pre">QueryItem</span></code></a></li>
 <li><a class="reference internal" href="#django_oasis.parameter.Style"><code class="docutils literal notranslate"><span class="pre">Style</span></code></a><ul>
@@ -1065,7 +1046,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=751a7d80"></script>
+</div><script src="_static/documentation_options.js?v=8182bd1f"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>
