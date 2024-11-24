@@ -2,7 +2,7 @@ import pytest
 
 
 def test_deprecated_import():
-    from django_oasis import core
+    from django_oasis import core, schema
 
     with pytest.warns(DeprecationWarning):
         from django_oasis import OpenAPI
@@ -25,6 +25,8 @@ def test_deprecated_import():
     with pytest.warns(DeprecationWarning):
         from django_oasis.schema import EMPTY
 
-    from django_oasis import schema
+    assert EMPTY is schema.empty
 
-    assert EMPTY is schema.undefined
+    with pytest.warns(DeprecationWarning):
+        from django_oasis.schema import undefined
+    assert undefined is schema.empty

@@ -13,7 +13,7 @@ from collections.abc import Iterable, Mapping
 from dateutil.parser import isoparse
 
 from . import _validators
-from .constants import undefined
+from .constants import empty
 from .exceptions import ValidationError
 from .utils import make_instance
 from .utils.hook import HookClassMeta, get_hook, iter_hooks
@@ -193,7 +193,7 @@ class Schema(metaclass=SchemaMeta):
         read_only: bool = False,
         write_only: bool = False,
         required: t.Optional[bool] = None,
-        default: t.Union[t.Any, t.Callable[[], t.Any]] = undefined,
+        default: t.Union[t.Any, t.Callable[[], t.Any]] = empty,
         nullable: bool = False,
         validators: t.Optional[t.List[t.Callable[[t.Any], t.Any]]] = None,
         choices: t.Optional[t.Iterable] = None,
@@ -263,7 +263,7 @@ class Schema(metaclass=SchemaMeta):
             required = self.__required
             if isinstance(required, bool):
                 return required
-            return self._default is undefined
+            return self._default is empty
 
         return self._name in self._model._required_fields  # type: ignore
 
@@ -328,7 +328,7 @@ class Schema(metaclass=SchemaMeta):
         except (KeyError, AttributeError):
             if self._required:
                 raise
-            return undefined
+            return empty
 
     @property
     def _is_field(self):
@@ -362,7 +362,7 @@ class Schema(metaclass=SchemaMeta):
                     type=self.meta["data_type"],
                     default=(
                         oas.empty
-                        if (self._default is undefined or callable(self._default))
+                        if (self._default is empty or callable(self._default))
                         else self._default
                     ),
                     description=oas.non_empty(self._description),
@@ -532,12 +532,12 @@ class Model(Schema, metaclass=ModelMeta):
             try:
                 val = data.pop(field._alias)
             except KeyError:
-                val = undefined
+                val = empty
             else:
                 if field._erase is not None and field._erase(val):
-                    val = undefined
+                    val = empty
 
-            if val is undefined:
+            if val is empty:
                 if field._required:
                     error.setitem_error(
                         field._alias,
@@ -545,7 +545,7 @@ class Model(Schema, metaclass=ModelMeta):
                     )
 
                 default = field._default
-                if default is not undefined:
+                if default is not empty:
                     rv[field._attr] = default() if callable(default) else default
 
                 continue
@@ -574,7 +574,7 @@ class Model(Schema, metaclass=ModelMeta):
             if field.write_only:
                 continue
             field_value = field._get_value(value)
-            if field_value is undefined:
+            if field_value is empty:
                 continue
             try:
                 rv[field._alias] = field.serialize(field_value)

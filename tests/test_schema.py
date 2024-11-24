@@ -192,13 +192,13 @@ def test_Password_erase():
             raise
 
 
-def test_as_getter_return_undefined():
+def test_as_getter_return_empty():
     class Schema(schema.Model):
         field = schema.String()
 
         @schema.as_getter(field)
         def get_field(self, obj):
-            return schema.undefined
+            return schema.empty
 
     assert Schema().serialize({}) == {}
 

@@ -350,7 +350,7 @@ class AssemblyWorker:
             d = data.pop(proxyname)
             new_d = {}
             for n1, n2 in namemap:
-                new_d[n1] = d.get(n2, s.undefined)
+                new_d[n1] = d.get(n2, s.empty)
             data.update(new_d)
         return data
 

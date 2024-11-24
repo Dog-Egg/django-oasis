@@ -1,11 +1,11 @@
 #: 空
 import warnings
 
-undefined = type(
-    "undefined",
+empty = type(
+    "empty",
     (),
     dict(
-        __repr__=lambda _: "undefined",
+        __repr__=lambda _: "empty",
         __bool__=lambda _: False,
     ),
 )()
@@ -18,5 +18,12 @@ def __getattr__(name):
             DeprecationWarning,
             stacklevel=2,
         )
-        return undefined
+        return empty
+    if name == "undefined":
+        warnings.warn(
+            "'undefined' is deprecated, use 'empty' instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return empty
     raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
