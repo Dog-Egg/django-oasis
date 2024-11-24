@@ -235,7 +235,7 @@ class TestComponentItem:
         assert worker.split(mps.parse_request(rf.get("/?q1=1&q2=1"))) == {
             "q1": "1",
             "q2": "1",
-            "q3": schema.undefined,
+            "q3": schema.empty,
         }
 
 

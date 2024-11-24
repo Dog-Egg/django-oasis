@@ -15,7 +15,7 @@ def filter_defaults(kwargs: dict):
     defaults = {
         "required": None,
         "read_only": False,
-        "default": schema.undefined,
+        "default": schema.empty,
         "choices": None,
         "validators": [],
         "description": "",
@@ -50,7 +50,7 @@ class Parser:
         required = None
 
         # default
-        default = schema.undefined
+        default = schema.empty
         if field.default is not models.NOT_PROVIDED:
             if not callable(field.default):
                 default = field.default
