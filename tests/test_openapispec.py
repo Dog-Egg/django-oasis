@@ -1,5 +1,15 @@
+import pytest
+
+from django_oasis import schema
 from django_oasis.auth import BaseAuth
-from django_oasis.core import OpenAPI, Operation, Resource, schema
+from django_oasis.core import OpenAPI, Operation, Resource
+
+
+@pytest.fixture
+def oas():
+    from build_openapispec import openapispec
+
+    return openapispec("3.0.3")
 
 
 def test_auth_openapispec():
@@ -214,4 +224,23 @@ def test_openapi_func_description(rf):
             "description": "description",
         },
         "paths": {},
+    }
+
+
+def test_anonymous_model_schema_openapispec(oas):
+    assert schema.Model.from_dict(
+        {
+            "id": schema.Integer(required=False),
+            "name": schema.String(required=False),
+        }
+    )().__openapispec__(oas) == {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "integer",
+            },
+            "name": {
+                "type": "string",
+            },
+        },
     }

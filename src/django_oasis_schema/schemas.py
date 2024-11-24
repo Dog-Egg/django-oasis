@@ -589,31 +589,42 @@ class Model(Schema, metaclass=ModelMeta):
             if field._required:
                 required.append(field._alias)
 
-        attr = "$schemaobject"
-        if not hasattr(self.__class__, attr):
-            properties = {}
-            for field in self._fields.values():
-                properties[field._alias] = field.__openapispec__(oas)
-            setattr(
-                self.__class__,
-                attr,
-                oas.SchemaObject(
-                    {
-                        "type": "object",
-                        "title": self.__class__.__name__,
-                        "description": oas.non_empty(self.__doc__),
-                        "properties": properties,
-                    },
-                    key=self.__class__.__module__ + "." + self.__class__.__qualname__,
-                ),
-            )
-        schemaobject = getattr(self.__class__, attr)
+        properties = {}
+        for field in self._fields.values():
+            properties[field._alias] = field.__openapispec__(oas)
 
-        if required:
-            return super().__openapispec__(
-                oas, type=oas.empty, **{"allOf": [schemaobject, {"required": required}]}
-            )
-        return schemaobject
+        if "<locals>" not in self.__class__.__qualname__:
+            attr = "$schemaobject"
+            if not hasattr(self.__class__, attr):
+                setattr(
+                    self.__class__,
+                    attr,
+                    oas.SchemaObject(
+                        {
+                            "type": "object",
+                            "title": self.__class__.__name__,
+                            "description": oas.non_empty(self.__doc__),
+                            "properties": properties,
+                        },
+                        key=self.__class__.__module__
+                        + "."
+                        + self.__class__.__qualname__,
+                    ),
+                )
+            schemaobject = getattr(self.__class__, attr)
+            if required:
+                return super().__openapispec__(
+                    oas,
+                    type=oas.empty,
+                    **{"allOf": [schemaobject, {"required": required}]},
+                )
+            return schemaobject
+
+        return super().__openapispec__(
+            oas,
+            properties=properties,
+            required=required or oas.empty,
+        )
 
 
 class String(Schema):
