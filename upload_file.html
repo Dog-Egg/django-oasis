@@ -6,7 +6,7 @@
 <link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="分页" href="pagination.html" /><link rel="prev" title="必需参数" href="advanced/required.html" />
 
     <link rel="shortcut icon" href="_static/logo.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>上传文件 - Django-Oasis0.1.dev20241123140717</title>
+        <title>上传文件 - Django-Oasis0.1.dev20241124074108</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241123140717</span></div></a>
+      <a href="index.html"><div class="brand"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241124074108</span></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -194,7 +194,7 @@
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241123140717</span></span>
+  <span class="sidebar-brand-text"><div>Django-Oasis</div><span style="font-size: 14px; color: gray;">0.1.dev20241124074108</span></span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
@@ -276,7 +276,7 @@
         <article role="main" id="furo-main-content">
           <section id="id1">
 <h1>上传文件<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<p>上传文件需要用到 <a class="reference internal" href="api.html#django_oasis.parameter.FormData" title="django_oasis.parameter.FormData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.FormData</span></code></a> 表单，并使用 <a class="reference internal" href="api.html#django_oasis.schema.File" title="django_oasis.schema.File"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.schema.File</span></code></a> 来声明文件字段。</p>
+<p>上传文件需要用到 <a class="reference internal" href="api.html#django_oasis.parameter.FormData" title="django_oasis.parameter.FormData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.FormData</span></code></a> 或是 <a class="reference internal" href="api.html#django_oasis.parameter.FormItem" title="django_oasis.parameter.FormItem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.parameter.FormItem</span></code></a> 表单，并使用 <a class="reference internal" href="api.html#django_oasis.schema.File" title="django_oasis.schema.File"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.schema.File</span></code></a> 来声明文件字段。</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>文件上传需要使用表单，而不能使用 JSON。与普通的表单提交不同，普通表单提交时 content-type 为 application/x-www-form-urlencoded，但是上传文件需要使用 multipart/form-data。不必手动填写 content-type，<code class="docutils literal notranslate"><span class="pre">FormData</span></code> 会自动判断使用哪种表单类型。</p>
@@ -287,19 +287,15 @@
 <div class="code-block-caption"><span class="caption-text">single_file.py [示例1]</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
-<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormData</span>
+<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormItem</span>
 
 
 <span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/upload/single&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">UploadAPI</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">data</span><span class="o">=</span><span class="n">FormData</span><span class="p">(</span>
-            <span class="p">{</span>
-<span class="hll">                <span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">File</span><span class="p">(),</span>
-</span>            <span class="p">}</span>
-        <span class="p">),</span>
-    <span class="p">):</span>
+<span class="hll">        <span class="n">file</span><span class="o">=</span><span class="n">FormItem</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">File</span><span class="p">()),</span>
+</span>    <span class="p">):</span>
         <span class="o">...</span>
 </pre></div>
 </div>
@@ -308,27 +304,25 @@
 </section>
 <section id="id3">
 <h2>多文件上传<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
-<p>可以使用 <a class="reference internal" href="api.html#django_oasis.schema.List" title="django_oasis.schema.List"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.schema.List</span></code></a> 来声明一个文件列表。</p>
+<p>使用 <a class="reference internal" href="api.html#django_oasis.schema.List" title="django_oasis.schema.List"><code class="xref py py-obj docutils literal notranslate"><span class="pre">django_oasis.schema.List</span></code></a> 来声明一个文件列表。</p>
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">multiple_files.py [示例1]</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django_oasis</span> <span class="kn">import</span> <span class="n">schema</span>
 <span class="kn">from</span> <span class="nn">django_oasis.core</span> <span class="kn">import</span> <span class="n">Resource</span>
-<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormData</span>
+<span class="kn">from</span> <span class="nn">django_oasis.parameter</span> <span class="kn">import</span> <span class="n">FormItem</span>
 
 
 <span class="nd">@Resource</span><span class="p">(</span><span class="s2">&quot;/upload/multiple&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">UploadAPI</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">data</span><span class="o">=</span><span class="n">FormData</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="o">.</span><span class="n">List</span><span class="p">(</span>
-                    <span class="n">schema</span><span class="o">.</span><span class="n">File</span><span class="p">(),</span>
-                    <span class="n">max_items</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># 限制最多上传 3 个文件</span>
-                <span class="p">),</span>
-            <span class="p">}</span>
-        <span class="p">),</span>
-    <span class="p">):</span>
+<span class="hll">        <span class="n">files</span><span class="o">=</span><span class="n">FormItem</span><span class="p">(</span>
+</span><span class="hll">            <span class="n">schema</span><span class="o">.</span><span class="n">List</span><span class="p">(</span>
+</span><span class="hll">                <span class="n">schema</span><span class="o">.</span><span class="n">File</span><span class="p">(),</span>
+</span><span class="hll">                <span class="n">max_items</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># 限制最多上传 3 个文件</span>
+</span><span class="hll">            <span class="p">),</span>
+</span><span class="hll">        <span class="p">),</span>
+</span>    <span class="p">):</span>
         <span class="o">...</span>
 </pre></div>
 </div>
@@ -338,7 +332,7 @@
                 <div class="code-block-caption">
                     <span class="caption-text">SwaggerUI [示例1]</span>
                 </div>
-                <iframe id="id_851127b1" srcdoc="
+                <iframe id="id_e188806d" srcdoc="
 &lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -418,7 +412,7 @@
             </div>
             <script src="./_static/iframeResizer.min.js"></script>
             <script>
-                iFrameResize({checkOrigin: false}, '#id_851127b1')
+                iFrameResize({checkOrigin: false}, '#id_e188806d')
             </script>
             </section>
 </section>
@@ -499,7 +493,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=8182bd1f"></script>
+</div><script src="_static/documentation_options.js?v=da6ffe1b"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>
