@@ -1,0 +1,1 @@
+{"info": {"title": "API Document", "version": "0.1.0"}, "paths": {"/array/simple/false": {"get": {"responses": {"200": {"description": "OK"}}, "parameters": [{"name": "color", "in": "header", "required": true, "schema": {"type": "array", "items": {"type": "string"}}, "style": "simple", "explode": false}]}}}, "openapi": "3.0.3"}
