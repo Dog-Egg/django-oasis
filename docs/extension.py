@@ -54,12 +54,6 @@ class OasisDirective(SphinxDirective):
             module_name,
         )
 
-    def _rel_src(self, filename):
-        relpath = os.path.relpath(
-            self.env.srcdir, os.path.dirname(self.get_source_info()[0])
-        )
-        return os.path.join(relpath, filename)
-
 
 def print_exc(fn):
     @functools.wraps(fn)
@@ -143,9 +137,9 @@ class OasisSwaggerUI(OasisDirective):
                 **extra_config,
             },
             insert_head=f"""
-                <script src="{self._rel_src('_static/iframeResizer.contentWindow.min.js')}"></script>
-                <script src="{self._rel_src('_static/swagger-ui-bundle.js')}"></script>
-                <link rel="stylesheet" href="{self._rel_src('_static/swagger-ui.css')}" />
+                <script src="{self.get_full_url('_static/iframeResizer.contentWindow.min.js')}"></script>
+                <script src="{self.get_full_url('_static/swagger-ui-bundle.js')}"></script>
+                <link rel="stylesheet" href="{self.get_full_url('_static/swagger-ui.css')}" />
                 """,
             env="sphinx",
         )
@@ -158,7 +152,7 @@ class OasisSwaggerUI(OasisDirective):
                 </div>
                 <iframe id="{iframe_id}" srcdoc="{escape(html)}" frameborder="0" style="min-width: 100%; display: block;"></iframe>
             </div>
-            <script src="{self._rel_src('_static/iframeResizer.min.js')}"></script>
+            <script src="{self.get_full_url('_static/iframeResizer.min.js')}"></script>
             <script>
                 iFrameResize({{checkOrigin: false}}, '#{iframe_id}')
             </script>
@@ -172,7 +166,15 @@ class OasisSwaggerUI(OasisDirective):
         os.makedirs(dirpath, exist_ok=True)
         with open(os.path.join(dirpath, filename), "w") as fp:
             fp.write(data)
-        return f"/{dirname}/{filename}"
+        return self.get_full_url(f"{dirname}/{filename}")
+
+    @property
+    def base_url(self):
+        return self.env.config.html_baseurl
+
+    def get_full_url(self, relative_path):
+        base_url = self.config.html_baseurl.rstrip("/")
+        return f"{base_url}/{relative_path.lstrip('/')}"
 
 
 def import_module_from_file(path):
