@@ -39,9 +39,9 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
-        run: python3 -m pip install -r requirements/docbuild.txt -e .
+        run: python3 -m pip install tox
 
-      - run: sphinx-build docs/src site
+      - run: tox -e docbuild -- -D html_baseurl="/${{ github.event.repository.name }}/"
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
