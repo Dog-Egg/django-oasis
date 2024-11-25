@@ -50,20 +50,6 @@
         document.title = title.concat(' | Swagger UI');
     }
 </script>
-{% if env == 'sphinx' %}
-<script>
-    // 在 Sphinx 内使用时拦截请求
-    Object.assign(config, {
-        requestInterceptor: function (request) {
-            return request;
-        },
-        responseInterceptor: function (response) {
-            response.text = "该文档示例并不具备发起真实请求的能力，请自行拷贝代码进行测试。";
-            return response;
-        }
-    });
-</script>
-{% endif %}
 {% if 'urls' in config %}
     <script>{% include "_static/swagger-ui-standalone-preset.js" %}</script>
     <script>
