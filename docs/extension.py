@@ -3,8 +3,10 @@
 """
 
 import functools
+import hashlib
 import importlib
 import importlib.util
+import json
 import os
 import traceback
 import types
@@ -134,7 +136,10 @@ class OasisSwaggerUI(OasisDirective):
 
         html = _get_swagger_ui_html(
             {
-                "spec": response.json(),
+                "url": self.add_spec_file(
+                    hashlib.md5(url.encode()).hexdigest()[:8] + ".json",
+                    json.dumps(response.json()),
+                ),
                 **extra_config,
             },
             insert_head=f"""
@@ -160,6 +165,14 @@ class OasisSwaggerUI(OasisDirective):
             """
 
         return [docutils.nodes.raw(text=iframe, format="html")]
+
+    def add_spec_file(self, filename: str, data: str):
+        dirname = "_spec"
+        dirpath = os.path.join(self.env.app.outdir, dirname)
+        os.makedirs(dirpath, exist_ok=True)
+        with open(os.path.join(dirpath, filename), "w") as fp:
+            fp.write(data)
+        return f"/{dirname}/{filename}"
 
 
 def import_module_from_file(path):
