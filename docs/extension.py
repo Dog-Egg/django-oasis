@@ -128,20 +128,17 @@ class OasisSwaggerUI(OasisDirective):
         if "doc-expansion" in self.options:
             extra_config["docExpansion"] = self.options["doc-expansion"]
 
-        html = _get_swagger_ui_html(
+        html_url = self.add_swagger_html(
             {
                 "url": self.add_spec_file(
-                    hashlib.md5(url.encode()).hexdigest()[:8] + ".json",
+                    hashlib.md5(
+                        f"{self.env.docname}:{self.lineno}".encode()
+                    ).hexdigest()[:8]
+                    + ".json",
                     json.dumps(response.json()),
                 ),
                 **extra_config,
-            },
-            insert_head=f"""
-                <script src="{self.get_full_url('_static/iframeResizer.contentWindow.min.js')}"></script>
-                <script src="{self.get_full_url('_static/swagger-ui-bundle.js')}"></script>
-                <link rel="stylesheet" href="{self.get_full_url('_static/swagger-ui.css')}" />
-                """,
-            env="sphinx",
+            }
         )
 
         iframe_id = "id_" + uuid.uuid4().hex[:8]
@@ -150,7 +147,7 @@ class OasisSwaggerUI(OasisDirective):
                 <div class="code-block-caption">
                     <span class="caption-text">SwaggerUI {self.alias}</span>
                 </div>
-                <iframe id="{iframe_id}" srcdoc="{escape(html)}" frameborder="0" style="min-width: 100%; display: block;"></iframe>
+                <iframe id="{iframe_id}" src="{html_url}" loading="lazy" frameborder="0" style="min-width: 100%; display: block;"></iframe>
             </div>
             <script src="{self.get_full_url('_static/iframeResizer.min.js')}"></script>
             <script>
@@ -166,6 +163,30 @@ class OasisSwaggerUI(OasisDirective):
         os.makedirs(dirpath, exist_ok=True)
         with open(os.path.join(dirpath, filename), "w") as fp:
             fp.write(data)
+        return self.get_full_url(f"{dirname}/{filename}")
+
+    def add_swagger_html(self, config: dict):
+        html = _get_swagger_ui_html(
+            config,
+            insert_head=f"""
+                <script src="{self.get_full_url('_static/iframeResizer.contentWindow.min.js')}"></script>
+                <script src="{self.get_full_url('_static/swagger-ui-bundle.js')}"></script>
+                <link rel="stylesheet" href="{self.get_full_url('_static/swagger-ui.css')}" />
+                """,
+            env="sphinx",
+        )
+        dirname = "_swagger"
+        filename = (
+            hashlib.md5(f"{self.env.docname}:{self.lineno}".encode()).hexdigest()
+            + ".html"
+        )
+        dirpath = os.path.join(self.env.app.outdir, dirname)
+        os.makedirs(dirpath, exist_ok=True)
+        with open(
+            os.path.join(dirpath, filename),
+            "w",
+        ) as fp:
+            fp.write(html)
         return self.get_full_url(f"{dirname}/{filename}")
 
     @property
