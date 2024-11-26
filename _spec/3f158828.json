@@ -1,0 +1,1 @@
+{"info": {"title": "API Document", "version": "0.1.0"}, "paths": {"/api": {"get": {"responses": {"200": {"description": "OK"}}, "requestBody": {"required": true, "content": {"application/json": {"schema": {"type": "object", "properties": {"type": {"type": "integer", "nullable": true}}, "required": ["type"]}}}}}}}, "openapi": "3.0.3"}

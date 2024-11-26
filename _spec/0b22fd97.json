@@ -1,0 +1,1 @@
+{"info": {"title": "API Document", "version": "0.1.0"}, "paths": {"/to/path": {"get": {"responses": {"200": {"description": "OK"}, "401": {"description": "\u672a\u767b\u5f55"}}, "security": [{"IsOurUser": []}]}}}, "openapi": "3.0.3", "components": {"securitySchemes": {"IsOurUser": {"type": "http", "scheme": "basic"}}}}

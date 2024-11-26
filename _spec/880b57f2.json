@@ -1,0 +1,1 @@
+{"info": {"title": "API Document", "version": "0.1.0"}, "paths": {"/greeting": {"get": {"summary": "\u6253\u4e2a\u62db\u547c", "responses": {"200": {"description": "OK", "content": {"application/json": {"schema": {"type": "object", "properties": {"msg": {"type": "string"}}, "required": ["msg"]}}}}}}}}, "openapi": "3.0.3"}

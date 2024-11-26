@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="SwaggerUI"/>
+    <title>Swagger UI</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        body::before, body::after {
+            content: "";
+            display: table;
+        }
+        .footer {
+            margin-bottom: 25px;
+            color: #cccccc;
+            font-size: 12px;
+            display: flex;
+        }
+        .footer .powered-by {
+            float: right;
+        }
+    </style>
+    
+    
+                <script src="/django-oasis/_static/iframeResizer.contentWindow.min.js"></script>
+                <script src="/django-oasis/_static/swagger-ui-bundle.js"></script>
+                <link rel="stylesheet" href="/django-oasis/_static/swagger-ui.css" />
+                
+</head>
+<body>
+<div id="swagger-ui"></div>
+<script id="config-data" type="application/json">{"url": "/django-oasis/_spec/de47eb47.json"}</script>
+<script>
+    var config = JSON.parse(document.getElementById('config-data').textContent);
+
+    // 设置默认配置
+    Object.assign(config, {
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        onComplete: onComplete,
+        defaultModelRendering: "model",
+        defaultModelExpandDepth: 2,
+    });
+
+    function onComplete() {
+        var title = ui.specSelectors.info().toJS().title;
+        document.title = title.concat(' | Swagger UI');
+    }
+</script>
+
+    <script>
+        window.onload = function () {
+            window.ui = SwaggerUIBundle(Object.assign({}, config));
+        };
+    </script>
+
+
+</body>
+</html>
