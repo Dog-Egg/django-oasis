@@ -59,6 +59,7 @@ Django-Oasis (后面简称 Oasis) 旨在更加高效地编写 HTTP API。
     upload_file
     pagination
     auth
+    layout/index
     schema/index
     api
 

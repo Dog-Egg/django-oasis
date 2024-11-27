@@ -1,0 +1,1 @@
+{"info": {"title": "Document 2", "version": "0.1.0"}, "paths": {"/app2/api": {"get": {"responses": {"200": {"description": "OK"}}}}}, "openapi": "3.0.3"}
