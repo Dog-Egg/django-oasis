@@ -9,10 +9,8 @@ import importlib.util
 import json
 import os
 import traceback
-import types
 import uuid
 from collections import defaultdict
-from html import escape
 
 import django
 import docutils
@@ -25,7 +23,7 @@ from sphinx.directives.code import LiteralInclude
 from sphinx.util.docutils import SphinxDirective
 
 from django_oasis.core import OpenAPI
-from django_oasis.docs import _get_swagger_ui_html
+from django_oasis.docs import _get_swagger_ui_html, _get_swagger_ui_urls
 
 
 class OasisDirective(SphinxDirective):
@@ -98,8 +96,6 @@ class OasisSwaggerUI(OasisDirective):
         from django.test import Client, override_settings
         from django.urls import get_resolver, reverse
 
-        client = Client()
-
         if "django-settings-module" in self.options:
             module = import_module_from_file(
                 self.module_path(self.options["django-settings-module"])
@@ -112,34 +108,36 @@ class OasisSwaggerUI(OasisDirective):
             module_settings = self.get_default_settings()
 
         with override_settings(**module_settings):
-            resolver = get_resolver()
-            for view in resolver.reverse_dict.keys():
-                if (
-                    isinstance(view, types.MethodType)
-                    and view.__func__ is OpenAPI.spec_view
-                ):
-                    url = reverse(view)
-                    break
-            else:
+            client = Client()
+            urls = _get_swagger_ui_urls()
+            _get_swagger_ui_urls.cache_clear()
+            if not urls:
                 raise RuntimeError("Can't find OpenAPI spec view")
-            response = client.get(url)
 
-        extra_config = {}
+            urls = [
+                {
+                    "name": item["name"],
+                    "url": self.add_spec_file(
+                        hashlib.md5(
+                            f"{self.env.docname}:{self.lineno}:{index}".encode()
+                        ).hexdigest()[:8]
+                        + ".json",
+                        json.dumps(client.get(item["url"]).json()),
+                    ),
+                }
+                for index, item in enumerate(urls)
+            ]
+
+        config = {}
+        if len(urls) == 1:
+            config["url"] = urls[0]["url"]
+        else:
+            config["urls"] = urls
+
         if "doc-expansion" in self.options:
-            extra_config["docExpansion"] = self.options["doc-expansion"]
+            config["docExpansion"] = self.options["doc-expansion"]
 
-        html_url = self.add_swagger_html(
-            {
-                "url": self.add_spec_file(
-                    hashlib.md5(
-                        f"{self.env.docname}:{self.lineno}".encode()
-                    ).hexdigest()[:8]
-                    + ".json",
-                    json.dumps(response.json()),
-                ),
-                **extra_config,
-            }
-        )
+        html_url = self.add_swagger_html(config)
 
         iframe_id = "id_" + uuid.uuid4().hex[:8]
         iframe = f"""
