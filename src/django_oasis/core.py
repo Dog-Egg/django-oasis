@@ -65,23 +65,6 @@ DEFAULT_ERROR_HANDLERS: t.Dict[t.Type[Exception], t.Callable] = {
 }
 
 
-def _validate_oas(fn):
-    def wrapper(*args, **kwargs):
-        spec = fn(*args, **kwargs)
-
-        if settings.DEBUG:
-            try:
-                from openapi_spec_validator import validate
-            except ImportError:
-                pass
-            else:
-                validate(spec)
-
-        return spec
-
-    return wrapper
-
-
 class OpenAPI:
     """
     :param name: 如果需要对外分享 OAS 数据，建议设置该名称，它将作为 OAS 数据地址的一部分，而不是使用计算出的名称。
@@ -156,7 +139,6 @@ class OpenAPI:
     def urls(self):
         return self.__urls
 
-    @_validate_oas
     def get_spec(self, request: HttpRequest | None = None):
         oas = openapispec("3.0.3")
 
