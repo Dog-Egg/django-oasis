@@ -1,0 +1,4 @@
+[project]
+name = 'django-oasis'
+version = '0.1.0'
+dependencies = ['Django', 'Zangar @ git+https://github.com/Dog-Egg/Zangar.git']
