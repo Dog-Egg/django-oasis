@@ -7,7 +7,7 @@ from django.http import HttpRequest, JsonResponse
 from django.urls import path
 from django.views import View
 
-from .spec import as_path_item_spec
+from .spec import as_path_item_object
 
 with open(os.path.join(os.path.dirname(__file__), "oas_schemas/v3.0.json")) as f:
     OAS_SCHEMA = json.load(f)
@@ -43,7 +43,7 @@ class Router:
     def add_url(self, route: str, view: type[View]):
         assert route.startswith("/"), "Path must start with '/'"
         r = Route(route)
-        self.__openapi_paths[r.openapi_path()] = as_path_item_spec(view)
+        self.__openapi_paths[r.openapi_path()] = as_path_item_object(view)
         self.__urls.append(path(r.django_url(), view.as_view(), name=view.__name__))
 
     def spec(self):

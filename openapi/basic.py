@@ -11,12 +11,12 @@ from .spec import (
     ParameterObject,
     RequestBodyObject,
     ResponseObject,
-    specify,
+    define,
 )
 
 
 def response(*args, **kwargs):
-    return specify(ResponseObject(*args, **kwargs))
+    return define(ResponseObject(*args, **kwargs))
 
 
 class ThrowValue(Exception):
@@ -142,7 +142,7 @@ def create_decorator(kwname: str | None, /, parameter: Parameter):
                 wrapper
             )
         wrapper = response(parameter.PARAMETER_VALIDATION_ERROR_STATUS_CODE)(wrapper)
-        wrapper = specify(parameter.parameter_object)(wrapper)
+        wrapper = define(parameter.parameter_object)(wrapper)
 
         return wrapper
 
@@ -273,7 +273,7 @@ def body(kwname: str, /, content: dict[str, MediaTypeObject], required=True, **k
         new_func = catch_throw(new_func)
         new_func = response(400)(new_func)
         new_func = response(415)(new_func)
-        new_func = specify(request_body)(new_func)
+        new_func = define(request_body)(new_func)
         return new_func
 
     return decorator
