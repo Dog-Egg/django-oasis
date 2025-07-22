@@ -69,7 +69,7 @@ def as_path_item_object(obj, /) -> dict:
                 _set_dict(
                     rv,
                     [method],
-                    lambda x: {**x, **definition} if x is not None else x,  # type: ignore
+                    lambda x: {**x, **definition} if x is not None else definition,
                 )
 
     return rv
