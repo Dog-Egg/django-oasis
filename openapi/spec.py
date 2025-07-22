@@ -1,7 +1,6 @@
 from __future__ import annotations as _annotations
 
 import http as _http
-from itertools import chain
 import typing as _t
 from functools import partial
 
@@ -34,22 +33,13 @@ def _set_response_schema(method, new, old):
 def as_path_item_object(obj, /) -> dict:
     rv = {}
 
-    # shared entry:
-    shared_definitions = []
-    for definition in getattr(obj.dispatch, _OAS_DEFINITIONS, []):
-        if isinstance(definition, ParameterObject):
-            _set_dict(rv, ["parameters"], lambda x: (x or []) + [definition.spec])
-        else:
-            shared_definitions.append(definition)
-
-    # method entry
     for method in _HTTP_METHODS:
         if not hasattr(obj, method):
             continue
 
         method_handle = getattr(obj, method)
         method_definitions = getattr(method_handle, _OAS_DEFINITIONS, [])
-        for definition in chain(reversed(method_definitions), shared_definitions):
+        for definition in reversed(method_definitions):
             if isinstance(definition, ParameterObject):
                 _set_dict(
                     rv,

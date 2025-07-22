@@ -18,12 +18,3 @@ Signatures
 .. swaggerui::
 
     $router: samples.signatures.router
-
-Shared Entry
-------------
-
-.. literalinclude:: /_samples/samples/shared_entry.py
-
-.. swaggerui::
-
-    $router: samples.shared_entry.router
