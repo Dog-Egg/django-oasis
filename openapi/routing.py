@@ -1,10 +1,17 @@
+import json
+import os
 import re
 
+from django.conf import settings
 from django.http import HttpRequest, JsonResponse
 from django.urls import path
 from django.views import View
 
 from .spec import as_path_item_spec
+
+with open(os.path.join(os.path.dirname(__file__), "oas_schemas/v3.0.json")) as f:
+    OAS_SCHEMA = json.load(f)
+    del f
 
 
 class Route:
@@ -54,7 +61,12 @@ class Router:
         spec = self.spec()
         if prefix:
             spec.setdefault("servers", [{"url": prefix}])
-        spec.setdefault("paths", self.__openapi_paths)
+
+        if settings.DEBUG:
+            from jsonschema import validate
+
+            validate(spec, OAS_SCHEMA)
+
         return JsonResponse(spec)
 
     @property

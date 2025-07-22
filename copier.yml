@@ -1,1 +1,3 @@
 _subdirectory: openapi
+_tasks:
+  - "pip install -r requirements.txt"
