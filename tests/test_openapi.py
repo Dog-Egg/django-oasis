@@ -6,7 +6,7 @@ from django.test import RequestFactory
 
 class TestSignatureParameters:
     def test_py_default(self):
-        @openapi.parse_signature
+        @openapi.apply_signature
         def func(_, request, a=openapi.s_query(schema=z.to.int(), py_default=123)):
             return a
 

@@ -7,7 +7,7 @@ import zangar as z
 
 
 class FooAPI(View):
-    @openapi.parse_signature
+    @openapi.apply_signature
     def get(self, request, a=openapi.s_query(schema=z.int())):
         return JsonResponse({})
 
