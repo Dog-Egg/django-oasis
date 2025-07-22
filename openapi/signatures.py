@@ -2,8 +2,9 @@ import functools
 import inspect
 import typing
 
-from .basic import Parameter, Query, create_decorator
 import zangar as z
+
+from .basic import Parameter, Query, create_decorator
 
 T = typing.TypeVar("T")
 P = typing.TypeVar("P")

@@ -1,9 +1,9 @@
+import zangar as z
 from django.http import JsonResponse
 from django.views import View
+
 import openapi
 from openapi.routing import Router
-
-import zangar as z
 
 
 class FooAPI(View):

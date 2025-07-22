@@ -1,7 +1,7 @@
-import openapi
 import zangar as z
-
 from django.test import RequestFactory
+
+import openapi
 
 
 class TestSignatureParameters:
