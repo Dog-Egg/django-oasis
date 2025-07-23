@@ -58,8 +58,8 @@ class SParameter:
         self.py_default = py_default
 
     def create_parameter(self, name: str):
+        self.kwargs.setdefault("name", name)
         return self.cls(
-            name=name,
             schema=self.schema,
             **self.kwargs,
             required=self.py_default is _MISSING,
