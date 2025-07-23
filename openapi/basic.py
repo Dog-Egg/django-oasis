@@ -1,5 +1,6 @@
 import functools
 import json
+import typing
 from inspect import iscoroutinefunction
 
 import zangar as z
@@ -60,14 +61,18 @@ class Parameter:
 
     def __init__(
         self,
+        kwname: str | None,
         /,
         *,
-        name: str,
+        name: str | None = None,
         schema: z.Schema,
         required=True,
         **kwargs,
     ):
-        self.name: str = name
+        if kwname is None and name is None:
+            raise ValueError("name is required")
+        self.kwname = kwname
+        self.name = typing.cast(str, name or kwname)
         self.schema = schema
         self.required = required
         self.schema_object = _compile_schema(schema)
@@ -87,66 +92,60 @@ class Parameter:
     MISSING_REQUIRED_PARAMETER_STATUS_CODE = 400
     PARAMETER_VALIDATION_ERROR_STATUS_CODE = 400
 
-
-def create_decorator(kwname: str | None, /, parameter: Parameter):
-    def parse_request(request):
-        value = parameter.process_request(request)
-        if value is _MISSING:
-            if parameter.required:
+    def __call__(self, func):
+        def parse_request(request):
+            value = self.process_request(request)
+            if value is _MISSING:
+                if self.required:
+                    raise ThrowValue(
+                        JsonResponse(
+                            {
+                                "in": self.location,
+                                "name": self.name,
+                                "errors": "Missing required parameter",
+                            },
+                            status=self.MISSING_REQUIRED_PARAMETER_STATUS_CODE,
+                        )
+                    )
+                return value
+            try:
+                return self.schema.parse(value)
+            except z.ValidationError as e:
                 raise ThrowValue(
                     JsonResponse(
                         {
-                            "in": parameter.location,
-                            "name": parameter.name,
-                            "errors": "Missing required parameter",
+                            "in": self.location,
+                            "name": self.name,
+                            "errors": e.format_errors(),
                         },
-                        status=parameter.MISSING_REQUIRED_PARAMETER_STATUS_CODE,
+                        status=self.PARAMETER_VALIDATION_ERROR_STATUS_CODE,
                     )
                 )
-            return value
-        try:
-            return parameter.schema.parse(value)
-        except z.ValidationError as e:
-            raise ThrowValue(
-                JsonResponse(
-                    {
-                        "in": parameter.location,
-                        "name": parameter.name,
-                        "errors": e.format_errors(),
-                    },
-                    status=parameter.PARAMETER_VALIDATION_ERROR_STATUS_CODE,
-                )
-            )
 
-    def decorator(func):
         if iscoroutinefunction(func):
 
             async def wrapper(_, request, *args, **kwargs):  # type: ignore
-                if kwname is not None:
+                if self.kwname is not None:
                     if (value := parse_request(request)) is not _MISSING:
-                        kwargs[kwname] = value
+                        kwargs[self.kwname] = value
                 return await func(_, request, *args, **kwargs)
 
         else:
 
             def wrapper(_, request, *args, **kwargs):
-                if kwname is not None:
+                if self.kwname is not None:
                     if (value := parse_request(request)) is not _MISSING:
-                        kwargs[kwname] = value
+                        kwargs[self.kwname] = value
                 return func(_, request, *args, **kwargs)
 
         wrapper = functools.wraps(func)(wrapper)
         wrapper = catch_throw(wrapper)
-        if parameter.required:
-            wrapper = response(parameter.MISSING_REQUIRED_PARAMETER_STATUS_CODE)(
-                wrapper
-            )
-        wrapper = response(parameter.PARAMETER_VALIDATION_ERROR_STATUS_CODE)(wrapper)
-        wrapper = define(parameter.parameter_object)(wrapper)
+        if self.required:
+            wrapper = response(self.MISSING_REQUIRED_PARAMETER_STATUS_CODE)(wrapper)
+        wrapper = response(self.PARAMETER_VALIDATION_ERROR_STATUS_CODE)(wrapper)
+        wrapper = define(self.parameter_object)(wrapper)
 
         return wrapper
-
-    return decorator
 
 
 class Query(Parameter):
@@ -187,22 +186,16 @@ class Path(Parameter):
         return request.resolver_match.kwargs[self.name]
 
 
-def _decorator_factory(param_class: type[Parameter], kwname: str | None, /, **kwargs):
-    if kwargs is not None:
-        kwargs.setdefault("name", kwname)
-    return create_decorator(kwname, param_class(**kwargs))
-
-
 def query(*args, **kwargs):
-    return _decorator_factory(Query, *args, **kwargs)
+    return Query(*args, **kwargs)
 
 
 def header(*args, **kwargs):
-    return _decorator_factory(Header, *args, **kwargs)
+    return Header(*args, **kwargs)
 
 
 def path(*args, **kwargs):
-    return _decorator_factory(Path, *args, **kwargs, required=True)
+    return Path(*args, **kwargs, required=True)
 
 
 def body(kwname: str, /, content: dict[str, MediaTypeObject], required=True, **kwargs):

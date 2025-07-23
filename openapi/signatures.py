@@ -4,7 +4,7 @@ import typing
 
 import zangar as z
 
-from .basic import Parameter, Query, create_decorator
+from .basic import Parameter, Query
 
 T = typing.TypeVar("T")
 P = typing.TypeVar("P")
@@ -41,7 +41,7 @@ def apply_signature(func):
     for param in reversed(list(sign.parameters.values())):
         name = param.name
         if isinstance(param.default, SParameter):
-            decorator = create_decorator(name, param.default.create_parameter(name))
+            decorator = param.default.create_parameter(name)
             func = decorator(func)
             if param.default.py_default is not _MISSING:
                 func = _inject_keyword_default(name, param.default.py_default)(func)
@@ -59,8 +59,8 @@ class SParameter:
         self.py_default = py_default
 
     def create_parameter(self, name: str):
-        self.kwargs.setdefault("name", name)
         return self.cls(
+            name,
             schema=self.schema,
             **self.kwargs,
             required=self.py_default is _MISSING,
