@@ -38,7 +38,8 @@ def _inject_keyword_default(kwname: str, default):
 
 def apply_signature(func):
     sign = inspect.signature(func)
-    for name, param in sign.parameters.items():
+    for param in reversed(list(sign.parameters.values())):
+        name = param.name
         if isinstance(param.default, SParameter):
             decorator = create_decorator(name, param.default.create_parameter(name))
             func = decorator(func)
