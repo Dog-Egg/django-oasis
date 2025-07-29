@@ -1,0 +1,7 @@
+Recipes
+=======
+
+.. toctree::
+    :glob:
+    
+    *

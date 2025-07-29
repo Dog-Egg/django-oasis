@@ -1,6 +1,2 @@
-[project]
-name = 'django-oasis'
-version = '0.1.0'
-
 [tool.ruff.lint]
 extend-select = ["I"]

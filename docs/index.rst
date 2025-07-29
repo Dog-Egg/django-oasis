@@ -1,6 +1,11 @@
 Getting Started
 ===============
 
+.. toctree::
+    :hidden:
+
+    recipes/index
+
 Basic
 -----
 
