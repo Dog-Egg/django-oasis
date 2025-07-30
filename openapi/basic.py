@@ -56,6 +56,13 @@ class _MISSING:
     pass
 
 
+def _get_request(*args):
+    for arg in args:
+        if isinstance(arg, HttpRequest):
+            return arg
+    raise ValueError("No request found")
+
+
 class Parameter:
     location: str
 
@@ -124,19 +131,19 @@ class Parameter:
 
         if iscoroutinefunction(func):
 
-            async def wrapper(_, request, *args, **kwargs):  # type: ignore
+            async def wrapper(*args, **kwargs):  # type: ignore
                 if self.kwname is not None:
-                    if (value := parse_request(request)) is not _MISSING:
+                    if (value := parse_request(_get_request(*args))) is not _MISSING:
                         kwargs[self.kwname] = value
-                return await func(_, request, *args, **kwargs)
+                return await func(*args, **kwargs)
 
         else:
 
-            def wrapper(_, request, *args, **kwargs):
+            def wrapper(*args, **kwargs):
                 if self.kwname is not None:
-                    if (value := parse_request(request)) is not _MISSING:
+                    if (value := parse_request(_get_request(*args))) is not _MISSING:
                         kwargs[self.kwname] = value
-                return func(_, request, *args, **kwargs)
+                return func(*args, **kwargs)
 
         wrapper = functools.wraps(func)(wrapper)
         wrapper = catch_throw(wrapper)
@@ -252,15 +259,15 @@ def body(kwname: str, /, content: dict[str, MediaTypeObject], required=True, **k
     def decorator(func):
         if iscoroutinefunction(func):
 
-            async def wrapper(_, request, *args, **kwargs):  # type: ignore
-                kwargs[kwname] = process_request_body(request)
-                return await func(_, request, *args, **kwargs)
+            async def wrapper(*args, **kwargs):  # type: ignore
+                kwargs[kwname] = process_request_body(_get_request(*args))
+                return await func(*args, **kwargs)
 
         else:
 
-            def wrapper(_, request, *args, **kwargs):
-                kwargs[kwname] = process_request_body(request)
-                return func(_, request, *args, **kwargs)
+            def wrapper(*args, **kwargs):
+                kwargs[kwname] = process_request_body(_get_request(*args))
+                return func(*args, **kwargs)
 
         new_func = functools.wraps(func)(wrapper)
         new_func = catch_throw(new_func)

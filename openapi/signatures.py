@@ -4,7 +4,7 @@ import typing
 
 import zangar as z
 
-from .basic import Parameter, Query
+from .basic import Parameter, Path, Query
 
 T = typing.TypeVar("T")
 P = typing.TypeVar("P")
@@ -43,35 +43,42 @@ def apply_signature(func):
         if isinstance(param.default, SParameter):
             decorator = param.default.create_parameter(name)
             func = decorator(func)
-            if param.default.py_default is not _MISSING:
+            if (
+                isinstance(param.default, SParameterWithDefault)
+                and param.default.py_default is not _MISSING
+            ):
                 func = _inject_keyword_default(name, param.default.py_default)(func)
     return func
 
 
 class SParameter:
-    cls: type[Parameter]
-
-    def __init__(
-        self, py_default: typing.Any = _MISSING, *, schema: z.Schema, **kwargs
-    ):
-        self.schema = schema
+    def __init__(self, cls: type[Parameter], /, **kwargs):
+        self.cls = cls
         self.kwargs = kwargs
-        self.py_default = py_default
 
-    def create_parameter(self, name: str):
+    def create_parameter(self, kwname: str):
         return self.cls(
-            name,
-            schema=self.schema,
+            kwname,
             **self.kwargs,
-            required=self.py_default is _MISSING,
         )
 
 
-class SQuery(SParameter):
-    cls = Query
+class SParameterWithDefault(SParameter):
+    def __init__(self, cls: type[Parameter], py_default, /, **kwargs):
+        super().__init__(cls, **kwargs)
+        self.py_default = py_default
 
 
 def s_query(
     *, schema: z.Schema[T], py_default: P | type[_MISSING] = _MISSING, **kwargs
 ) -> T | P:
-    return typing.cast(T | P, SQuery(py_default, schema=schema, **kwargs))
+    return typing.cast(
+        T | P,
+        SParameterWithDefault(
+            Query, py_default, schema=schema, **kwargs, required=py_default is _MISSING
+        ),
+    )
+
+
+def s_path(*, schema: z.Schema[T], **kwargs) -> T:
+    return typing.cast(T, SParameter(Path, schema=schema, **kwargs, required=True))
