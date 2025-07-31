@@ -1,5 +1,3 @@
-from dataclasses import dataclass, field
-
 import zangar as z
 from django.http import JsonResponse
 from django.views import View
@@ -7,20 +5,12 @@ from django.views import View
 import openapi
 from openapi.routing import Router
 
-
-@dataclass
-class Paging:
-    page: int = field(default=1, metadata={"zangar": {"schema": z.to.int().gte(1)}})
-    page_size: int = field(
-        default=10, metadata={"zangar": {"schema": z.to.int().gte(1)}}
-    )
-
-    def paginate(self, items):
-        offset = (self.page - 1) * self.page_size
-        return items[offset : offset + self.page_size]
-
-
 bar_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n"]
+
+
+def paginate(items, page, page_size):
+    offset = (page - 1) * page_size
+    return items[offset : offset + page_size]
 
 
 class FooAPI(View):
@@ -40,17 +30,15 @@ class FooAPI(View):
     def get(
         self,
         request,
-        paging=openapi.s_query(
-            schema=z.dataclass(Paging),
-            py_default=Paging(),
-        ),
+        page=openapi.s_query(schema=z.to.int().gte(1), py_default=1),
+        page_size=openapi.s_query(schema=z.to.int().gte(1), py_default=10),
     ):
         return JsonResponse(
             self.get_response_schema.parse(
                 {
-                    "items": paging.paginate(bar_list),
-                    "current_size": paging.page,
-                    "current_page_size": paging.page_size,
+                    "items": paginate(bar_list, page, page_size),
+                    "current_size": page,
+                    "current_page_size": page_size,
                     "total": len(bar_list),
                 }
             )
