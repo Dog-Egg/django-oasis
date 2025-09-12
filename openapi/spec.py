@@ -15,7 +15,7 @@ _HTTP_METHODS = [
     "delete",
     "patch",
     "head",
-    # "options", # FIXME: django View 自带 options 方法，如果加入会出问题
+    "options",
     "trace",
 ]
 
