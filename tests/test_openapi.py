@@ -1,9 +1,11 @@
+import pytest
 import zangar as z
 from django.http import JsonResponse
 from django.test import override_settings
 from django.urls import path
 
 import openapi
+from openapi.transformation import as_django_path, as_oas_path
 
 
 class Namespace:
@@ -37,3 +39,18 @@ class TestSignatureParameters:
         ):
             response = client.get("/foo/123")
             assert response.json() == {"a": 123}
+
+
+class TestTransformation:
+    paths = [
+        ("/users/{user_id}", "/users/<user_id>", "/users/{user_id}"),
+        ("/users/{int:user_id}", "/users/<int:user_id>", "/users/{user_id}"),
+    ]
+
+    @pytest.mark.parametrize("path", paths)
+    def test_as_django_path(self, path):
+        assert as_django_path(path[0]) == path[1]
+
+    @pytest.mark.parametrize("path", paths)
+    def test_as_oas_path(self, path):
+        assert as_oas_path(path[0]) == path[2]

@@ -7,7 +7,7 @@ from django.http import HttpRequest, JsonResponse
 from django.urls import path
 from django.views import View
 
-from .spec import as_path_item_object
+from .transformation import as_path_item_object
 
 with open(os.path.join(os.path.dirname(__file__), "oas_schemas/v3.0.json")) as f:
     OAS_SCHEMA = json.load(f)
