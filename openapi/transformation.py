@@ -97,11 +97,13 @@ def as_path_item_object(obj, /) -> dict:
             elif isinstance(definition, RequestBodyObject):
                 _set_dict(rv, [method, "requestBody"], lambda _: definition.spec)
             else:
-                assert isinstance(definition, dict), definition
+                assert isinstance(definition, _t.Mapping), definition
                 _set_dict(
                     rv,
                     [method],
-                    lambda x: {**x, **definition} if x is not None else definition,
+                    lambda x: (
+                        {**x, **definition} if x is not None else definition.copy()
+                    ),
                 )
 
     return rv

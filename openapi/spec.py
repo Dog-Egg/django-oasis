@@ -1,6 +1,8 @@
 from __future__ import annotations as _annotations
 
 import http as _http
+from types import MappingProxyType
+from typing import Mapping
 
 import zangar as _z
 from zangar import compilation as _compilation
@@ -17,7 +19,7 @@ class _SpecificObject:
         return self.__fields
 
 
-def define(obj: _SpecificObject | dict, /):
+def define(obj: _SpecificObject | Mapping, /):
     def decorator(func):
         objs = getattr(func, OAS_DEFINITIONS, [])
         objs.append(obj)
@@ -29,7 +31,8 @@ def define(obj: _SpecificObject | dict, /):
 
 
 def declare(**kwargs):
-    return define(kwargs)
+    # 使用 MappingProxyType 防止其被意外修改
+    return define(MappingProxyType(kwargs))
 
 
 class ParameterObject(_SpecificObject):
