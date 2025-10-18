@@ -40,6 +40,23 @@ class TestSignatureParameters:
             response = client.get("/foo/123")
             assert response.json() == {"a": 123}
 
+    def test_s_body(self, rf):
+        @openapi.apply_signature
+        def view(
+            request,
+            body=openapi.s_body(
+                content={
+                    "application/json": openapi.MediaType(
+                        schema=z.struct({"code": z.to.int()})
+                    )
+                }
+            ),
+        ):
+            return body
+
+        response = view(rf.post("/", {"code": "123"}, content_type="application/json"))
+        assert response == {"code": 123}
+
 
 class TestTransformation:
     paths = [

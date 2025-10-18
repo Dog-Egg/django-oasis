@@ -4,7 +4,7 @@ import typing
 
 import zangar as z
 
-from .basic import Path, Query
+from .basic import Path, Query, body
 
 T = typing.TypeVar("T")
 P = typing.TypeVar("P")
@@ -74,4 +74,11 @@ def s_path(*, schema: z.Schema[T], **kwargs) -> T:
     return typing.cast(
         T,
         S(lambda name: Path(name, schema=schema, **kwargs), default=_MISSING),
+    )
+
+
+def s_body(**kwargs):
+    return typing.cast(
+        typing.Any,
+        S(lambda name: body(name, **kwargs), default=_MISSING),
     )
