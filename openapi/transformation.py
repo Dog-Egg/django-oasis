@@ -1,12 +1,7 @@
 import re
-import typing as _t
-from functools import partial
 
 from openapi.spec import (
-    OAS_DEFINITIONS,
-    ParameterObject,
-    RequestBodyObject,
-    ResponseObject,
+    DECLARED_PART_OAS,
 )
 
 
@@ -38,28 +33,6 @@ def as_django_path(path: str, /) -> str:
     return re.sub(pattern, replace_param, path)
 
 
-def _set_dict(
-    data: dict, path: list[_t.Hashable], setter: _t.Callable[[_t.Any], _t.Any]
-):
-    d = data
-    for index, key in enumerate(path):
-        if index == len(path) - 1:
-            d[key] = setter(d.get(key))
-        else:
-            d = d.setdefault(key, {})
-    return data
-
-
-def _set_response_schema(method, new, old):
-    """OAS 设置 response schema 可能会冲突。
-
-    这是个临时检查手段，后期考虑使用 merge 方式，如果遇到无法合并的问题再报错。
-    """
-    if old is not None and old != new:
-        raise RuntimeError(f"Conflicting response schema for {method}", old, new)
-    return new
-
-
 _HTTP_METHODS = [
     "get",
     "post",
@@ -80,30 +53,8 @@ def as_path_item_object(obj, /) -> dict:
             continue
 
         method_handle = getattr(obj, method)
-        method_definitions = getattr(method_handle, OAS_DEFINITIONS, [])
-        for definition in reversed(method_definitions):
-            if isinstance(definition, ParameterObject):
-                _set_dict(
-                    rv,
-                    [method, "parameters"],
-                    lambda x: (x or []) + [definition.spec],
-                )
-            elif isinstance(definition, ResponseObject):
-                _set_dict(
-                    rv,
-                    [method, "responses", str(definition.status_code)],
-                    partial(_set_response_schema, method_handle, definition.spec()),
-                )
-            elif isinstance(definition, RequestBodyObject):
-                _set_dict(rv, [method, "requestBody"], lambda _: definition.spec)
-            else:
-                assert isinstance(definition, _t.Mapping), definition
-                _set_dict(
-                    rv,
-                    [method],
-                    lambda x: (
-                        {**x, **definition} if x is not None else definition.copy()
-                    ),
-                )
+        if hasattr(method_handle, DECLARED_PART_OAS):
+            part = getattr(method_handle, DECLARED_PART_OAS)
+            rv[method] = part
 
     return rv

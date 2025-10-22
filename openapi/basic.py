@@ -1,4 +1,5 @@
 import functools
+import http
 import json
 import typing
 from inspect import iscoroutinefunction
@@ -7,17 +8,40 @@ import zangar as z
 from django.http import HttpRequest, JsonResponse
 from zangar.compilation import OpenAPI30Compiler
 
+from openapi.utils import set_dict
+
 from .spec import (
-    MediaTypeObject,
-    ParameterObject,
-    RequestBodyObject,
-    ResponseObject,
-    define,
+    MediaType,
+    declare,
 )
 
 
-def response(*args, **kwargs):
-    return define(ResponseObject(*args, **kwargs))
+def response(
+    status_code: int,
+    /,
+    *,
+    content: dict[str, MediaType] | None = None,
+    description: str | None = None,
+):
+    part: dict = {
+        "description": description or http.HTTPStatus(status_code).phrase,
+    }
+    if content:
+        part["content"] = {
+            content_type: content_object.spec()
+            for content_type, content_object in content.items()
+        }
+
+    def set_response(old_part):
+        if old_part is not None and old_part != part:
+            raise RuntimeError(
+                f"Conflicting response schema for {status_code}", old_part, part
+            )
+        return part
+
+    return declare(
+        lambda spec: set_dict(spec, ["responses", str(status_code)], set_response)
+    )
 
 
 class ThrowValue(Exception):
@@ -83,15 +107,14 @@ class Parameter:
         self.schema = schema
         self.required = required
         self.schema_object = _compile_schema(schema)
-        self.parameter_object = ParameterObject(
-            **{
-                "name": self.name,
-                "in": self.location,
-                "schema": self.schema_object,
-                "required": self.required,
-            },
-            **kwargs,
-        )
+
+        self.parameter_object = {
+            "name": self.name,
+            "in": self.location,
+            "schema": self.schema_object,
+            "required": self.required,
+        }
+        self.parameter_object.update(kwargs)
 
     def process_request(self, request: HttpRequest):
         raise NotImplementedError
@@ -150,7 +173,11 @@ class Parameter:
         if self.required:
             wrapper = response(self.MISSING_REQUIRED_PARAMETER_STATUS_CODE)(wrapper)
         wrapper = response(self.PARAMETER_VALIDATION_ERROR_STATUS_CODE)(wrapper)
-        wrapper = define(self.parameter_object)(wrapper)
+        wrapper = declare(
+            lambda spec: set_dict(
+                spec, ["parameters"], lambda x: [self.parameter_object] + (x or [])
+            )
+        )(wrapper)
 
         return wrapper
 
@@ -205,10 +232,12 @@ def path(*args, **kwargs):
     return Path(*args, **kwargs, required=True)
 
 
-def body(kwname: str, /, content: dict[str, MediaTypeObject], required=True, **kwargs):
-    request_body = RequestBodyObject(
+def body(kwname: str, /, content: dict[str, MediaType], required=True, **kwargs):
+    request_body = dict(
         **kwargs,
-        content=content,
+        content={
+            content_type: content.spec() for content_type, content in content.items()
+        },
         required=required,
     )
 
@@ -273,7 +302,9 @@ def body(kwname: str, /, content: dict[str, MediaTypeObject], required=True, **k
         new_func = catch_throw(new_func)
         new_func = response(400)(new_func)
         new_func = response(415)(new_func)
-        new_func = define(request_body)(new_func)
+        new_func = declare(
+            lambda spec: set_dict(spec, ["requestBody"], lambda _: request_body)
+        )(new_func)
         return new_func
 
     return decorator

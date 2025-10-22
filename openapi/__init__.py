@@ -1,7 +1,6 @@
 from .basic import body, header, path, query, response
 from .signatures import S, apply_signature, s_body, s_path, s_query
-from .spec import MediaTypeObject as MediaType
-from .spec import declare
+from .spec import MediaType, declare
 
 __all__ = [
     "response",
